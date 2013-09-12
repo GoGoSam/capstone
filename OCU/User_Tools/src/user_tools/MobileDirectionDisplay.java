@@ -1,32 +1,22 @@
 package user_tools;
 
-import java.util.logging.Level;
-
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.event.KeyEvent.*;
-import java.io.*;
-import java.io.IOException;
-
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-
-
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
 
 /**
  *
  * @author J. Robinson
  * @date September 10, 2013
  * 
+ * The purpose of this Class is to visual show the user when an arrow key on 
+ * the keyboard is pressed/held down. 
+ * 
+ * The display is constructed using image icons located in source directory with
+ * the directory 'resources.' The interface used to listen for key events is 
+ * simply the KeyListener class offered through JAVA's API. The functions used 
+ * within this interface is setEnabled(true or false)... which adds color when 
+ * set true; else, color is removed.
  * 
  */
 public class MobileDirectionDisplay extends JFrame
@@ -54,7 +44,7 @@ public class MobileDirectionDisplay extends JFrame
     /**
      * Creates new form Controls_Display
      */   
-    public MobileDirectionDisplay() throws LWJGLException {
+    public MobileDirectionDisplay() {
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
