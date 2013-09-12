@@ -4,3 +4,9 @@
 *.DS_Store
 *.swp
 *.out
+/OCU/UserTools/nbproject/private/
+/OCU/UserTools/build/
+/OCU/ClientEditor/nbproject/private/
+/OCU/ClientEditor/build/
+/OCU/User_Tools/nbproject/private/
+/OCU/User_Tools/build/
