@@ -1,106 +1,138 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package user_tools;
+
+import java.util.logging.Level;
 
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.event.KeyEvent.*;
 import java.io.*;
+import java.io.IOException;
+
+
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+
+
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
 
 /**
  *
- * @author jrob
+ * @author J. Robinson
+ * @date September 10, 2013
+ * 
+ * 
  */
 public class MobileDirectionDisplay extends JFrame
         implements KeyListener,
         ActionListener {
 
-    //private Controls_Display frame;
-    private static MobileDirectionDisplay frame;
-    // Variables declaration - do not modify                     
+                    
     private JLabel icon_down;
     private JLabel icon_left;
     private JLabel icon_right;
     private JLabel icon_up;
     private JPanel p_directionals;
+    
+    private boolean do_debug = true;
+    
+    private String dir_image_icons = "/user_tools/resources/";
+    
     // End of variables declaration   
 
+    //public static final int DISPLAY_HEIGHT = 480;
+    //public static final int DISPLAY_WIDTH = 640;
     
         
     // <editor-fold defaultstate="collapsed" desc="Constructors">   
     /**
      * Creates new form Controls_Display
      */   
-    public MobileDirectionDisplay() {
-
-        System.out.print("TEST");
-        //  frame = new Controls_Display();
+    public MobileDirectionDisplay() throws LWJGLException {
         initComponents();
-        // setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Set up the content pane.
-
-
-
-        //Display the window.
-        //  pack();
-        //    setVisible(true);
-
+     //   Display.setDisplayMode(new DisplayMode(DISPLAY_WIDTH,DISPLAY_HEIGHT));
+//Display.setFullscreen(false);
+//Display.setTitle("Hello LWJGL World!");
+//Display.create();
+        
+  //      Keyboard.create();
+//throw new RuntimeException("Compiled Code");
     }
 
     public MobileDirectionDisplay(String name) {
         super(name);
     }// </editor-fold> 
 
+    
     // <editor-fold defaultstate="collapsed" desc="Event Listeners">   
     /**
      * Handle the key typed event from the text field.
      */
     @Override
-    public void keyTyped(KeyEvent e) {
-        //      System.out.println("KEY TYPED: " + e.toString());
-    }
+    public void keyTyped(KeyEvent e) {}
 
     /**
      * Handle the key pressed event from the text field.
+     * The function checks if event was triggered via arrow keys on keypad. If 
+     * so, the corresponding arrow icon will be enabled, i.e., will display 
+     * its true color.
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        //    System.out.println("KEY PRESSED: " + e.toString());
-        //  displayInfo(e, "KEY RELEASED: ");
 
-//        if (icon_up.isEnabled())
-//                icon_up.setEnabwed(false);        
-//        else
-//            icon_up.setEnabled(true);
+        if (do_debug)
+            System.out.println("Key Press: " + e.toString());
+        
 
         int location = e.getKeyCode();
-
-        System.out.println(e.getKeyCode());
-        System.out.println(Integer.toString(location));
-        System.out.println(Integer.toString(KeyEvent.VK_LEFT));
-        System.out.println(Integer.toString(KeyEvent.VK_RIGHT));
-        System.out.println(Integer.toString(KeyEvent.VK_UP));
-        System.out.println(Integer.toString(KeyEvent.VK_DOWN));
+        
+        
         if (location == KeyEvent.VK_LEFT) {
             icon_left.setEnabled(true);
         } else if (location == KeyEvent.VK_RIGHT) {
             icon_right.setEnabled(true);
         } else if (location == KeyEvent.VK_UP) {
+            
             icon_up.setEnabled(true);
         } else if (location == KeyEvent.VK_DOWN) {
             icon_down.setEnabled(true);
         }
     }
 
+    
     /**
      * Handle the key released event from the text field.
+     * The function checks if event was triggered via arrow keys on keypad. If 
+     * so, the corresponding arrow icon will be disabled, i.e., will lose its 
+     * true color set when key was pressed.
      */
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) 
+    {             
+        if (do_debug)
+            System.out.println("Key Released: " + e.toString());
+                
+        int location = e.getKeyCode();
+        
+        if (location == KeyEvent.VK_LEFT) {
+            icon_left.setEnabled(false);
+        } else if (location == KeyEvent.VK_RIGHT) {
+            icon_right.setEnabled(false);
+        } else if (location == KeyEvent.VK_UP) {
+            
+            icon_up.setEnabled(false);
+        } else if (location == KeyEvent.VK_DOWN) {
+            icon_down.setEnabled(false);
+        }
+    }
     
     /**
      * Handle the button click.
@@ -109,13 +141,20 @@ public class MobileDirectionDisplay extends JFrame
     public void actionPerformed(ActionEvent e) {}
     // </editor-fold>  
     
+    public void processKeyboard() {
+    System.out.println("fjbdf");
+    
+    }
     
     // <editor-fold defaultstate="collapsed" desc="initComponents()">  
     /**
      * This method is called from within the constructor to initialize the form.
+     * It sets the components on the displayed panel; in addition, sets 
+     * appropriate event listeners.
      */    
     private void initComponents() {
 
+        // instantiate 
         p_directionals = new JPanel();
         icon_up = new JLabel();
         icon_right = new JLabel();
@@ -124,18 +163,22 @@ public class MobileDirectionDisplay extends JFrame
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        icon_up.setIcon(new ImageIcon(getClass().getResource("/user_tools/resources/Arrow_up.jpg"))); // NOI18N
+        // Get images to set as icons on label JComponents; 
+        // default state disabled
+        icon_up.setIcon(new ImageIcon
+                (getClass().getResource(dir_image_icons + "Arrow_up.jpg"))); 
         icon_up.setEnabled(false);
 
-        icon_right.setIcon(new ImageIcon(getClass().getResource("/user_tools/resources/Arrow_right.jpg"))); // NOI18N
+        icon_right.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_right.jpg"))); // NOI18N
         icon_right.setEnabled(false);
 
-        icon_left.setIcon(new ImageIcon(getClass().getResource("/user_tools/resources/Arrow_left.jpg"))); // NOI18N
+        icon_left.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_left.jpg"))); // NOI18N
         icon_left.setEnabled(false);
 
-        icon_down.setIcon(new ImageIcon(getClass().getResource("/user_tools/resources/Arrow_down.jpg"))); // NOI18N
+        icon_down.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_down.jpg"))); // NOI18N
         icon_down.setEnabled(false);
 
+        // Layour components
         org.jdesktop.layout.GroupLayout p_directionalsLayout = new org.jdesktop.layout.GroupLayout(p_directionals);
         p_directionals.setLayout(p_directionalsLayout);
         p_directionalsLayout.setHorizontalGroup(
@@ -182,30 +225,5 @@ public class MobileDirectionDisplay extends JFrame
                 
         addKeyListener(this);
         pack();
-    }// </editor-fold>                        
-
-    
-//    /**
-//     * Create the GUI and show it. For thread safety, this method should be
-//     * invoked from the event-dispatching thread.
-//     */
-//    private void createAndShowGUI() {
-//        //Create and set up the window.
-//        // frame = new ("KeyEventDemo");
-//
-//
-//
-//        frame.initComponents2();
-//        frame.setVisible(true);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//        //Set up the content pane.
-//
-//
-//
-//        //Display the window.
-//        frame.pack();
-//        frame.setVisible(true);
-//        frame.addKeyListener(this);
-//    }
+    }// </editor-fold>    
 } // end class

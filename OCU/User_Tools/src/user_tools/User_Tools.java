@@ -4,6 +4,10 @@
  */
 package user_tools;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.lwjgl.LWJGLException;
+
 /**
  *
  * @author jrob
@@ -16,7 +20,12 @@ public class User_Tools {
     public static void main(String[] args) {
         // TODO code application logic here
                 
-        MobileDirectionDisplay ff = new MobileDirectionDisplay();
+        MobileDirectionDisplay ff = null;
+        try {
+            ff = new MobileDirectionDisplay();
+        } catch (LWJGLException ex) {
+            Logger.getLogger(User_Tools.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ff.setVisible(true);
     }
 }
