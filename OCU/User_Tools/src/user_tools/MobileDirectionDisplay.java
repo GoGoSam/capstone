@@ -31,6 +31,8 @@ public class MobileDirectionDisplay extends JFrame
     private JPanel p_directionals;
     
     private boolean do_debug = true;
+    private boolean [] key_flag = new boolean [1];
+    
     
     private String dir_image_icons = "/user_tools/resources/";
     
@@ -78,6 +80,12 @@ public class MobileDirectionDisplay extends JFrame
     @Override
     public void keyPressed(KeyEvent e) {
 
+        if (key_flag[0])
+            return;
+        else
+            key_flag[0] = true;    
+
+                    
         if (do_debug)
             System.out.println("Key Press: " + e.toString());
         
@@ -106,7 +114,9 @@ public class MobileDirectionDisplay extends JFrame
      */
     @Override
     public void keyReleased(KeyEvent e) 
-    {             
+    {   
+        key_flag[0] = false;
+        
         if (do_debug)
             System.out.println("Key Released: " + e.toString());
                 
@@ -151,6 +161,10 @@ public class MobileDirectionDisplay extends JFrame
         icon_left = new JLabel();
         icon_down = new JLabel();
 
+        
+        // set flags
+        key_flag[0] = false;
+        
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         // Get images to set as icons on label JComponents; 

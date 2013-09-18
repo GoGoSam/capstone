@@ -21,11 +21,11 @@ public class User_Tools {
         // TODO code application logic here
                 
         MobileDirectionDisplay ff = null;
-        try {
+       // try {
             ff = new MobileDirectionDisplay();
-        } catch (LWJGLException ex) {
-            Logger.getLogger(User_Tools.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      //  } catch (LWJGLException ex) {
+        //    Logger.getLogger(User_Tools.class.getName()).log(Level.SEVERE, null, ex);
+        //}
         ff.setVisible(true);
     }
 }
