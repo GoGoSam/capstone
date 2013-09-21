@@ -9,23 +9,25 @@ public class client {
     private static BufferedReader in;
 
     public static void main(String[] args) {
-        setUpSocket();
+        setUpSocket(args[0]);
         MobileDirectionDisplay test = new MobileDirectionDisplay();
     }
 
-    public static boolean setUpSocket() {
+    public static boolean setUpSocket(String ipAddress) {
         try {
-            socket = new Socket("localhost", 9999);
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(ipAddress, 9999), 5000);
+            //socket = new Socket(ipAddress, 9999);
             out = new BufferedWriter(new OutputStreamWriter(
                                          socket.getOutputStream()), 1024);
             in = new BufferedReader(new InputStreamReader(
                                         socket.getInputStream()));
         } catch (UnknownHostException e) {
-            System.err.println("Don't know about host: localhost.");
+            System.err.println("Don't know about host: " + ipAddress);
             System.exit(1);
         } catch (IOException e) {
             System.err.println("Couldn't get I/O for "
-                               + "the connection to: localhost.");
+                               + "the connection to: " + ipAddress);
             System.exit(1);
         }
 

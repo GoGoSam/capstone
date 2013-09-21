@@ -1,6 +1,7 @@
 package host;
 
 import java.awt.event.*;
+import java.awt.AWTException;
 import javax.swing.*;
 import java.awt.event.KeyEvent.*;
 
@@ -30,6 +31,7 @@ public class MobileDirectionDisplay extends JFrame
     private JLabel icon_up;
     private JPanel p_directionals;
     private boolean debug = false;
+    private boolean keyPressed = false;
     private String dir_image_icons = "/host/resources/";
 
     /**
@@ -54,24 +56,33 @@ public class MobileDirectionDisplay extends JFrame
      */
     @Override
     public void keyPressed(KeyEvent e) {
+
         if (debug)
             System.out.println("Key Press: " + e.toString());
+
+        if (keyPressed)
+            return;
 
         int location = e.getKeyCode();
 
         if (location == KeyEvent.VK_LEFT) {
             client.writeToSocket("L");
             icon_left.setEnabled(true);
+            keyPressed = true;
         } else if (location == KeyEvent.VK_RIGHT) {
             client.writeToSocket("R");
             icon_right.setEnabled(true);
+            keyPressed = true;
         } else if (location == KeyEvent.VK_UP) {
-            client.writeToSocket("U");
+            client.writeToSocket("F");
             icon_up.setEnabled(true);
+            keyPressed = true;
         } else if (location == KeyEvent.VK_DOWN) {
-            client.writeToSocket("D");
+            client.writeToSocket("B");
             icon_down.setEnabled(true);
+            keyPressed = true;
         }
+
     }
 
     /**
@@ -91,15 +102,19 @@ public class MobileDirectionDisplay extends JFrame
         if (location == KeyEvent.VK_LEFT) {
             client.writeToSocket("S");
             icon_left.setEnabled(false);
+            keyPressed = false;
         } else if (location == KeyEvent.VK_RIGHT) {
             client.writeToSocket("S");
             icon_right.setEnabled(false);
+            keyPressed = false;
         } else if (location == KeyEvent.VK_UP) {
             client.writeToSocket("S");
             icon_up.setEnabled(false);
+            keyPressed = false;
         } else if (location == KeyEvent.VK_DOWN) {
             client.writeToSocket("S");
             icon_down.setEnabled(false);
+            keyPressed = false;
         }
     }
 
