@@ -22,14 +22,16 @@ public class User_Tools {
             
      //   XBox360_DirectionDisplay ff = null;
         MobileDirectionDisplay ff = null;
-<<<<<<< Updated upstream
-        try {
+
+
+
+       // try {
+
             ff = new MobileDirectionDisplay();
-        } catch (LWJGLException ex) {
-            Logger.getLogger(User_Tools.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      //  } catch (LWJGLException ex) {
+        //    Logger.getLogger(User_Tools.class.getName()).log(Level.SEVERE, null, ex);
+        //}
         ff.setVisible(true);
-=======
        // try {
       //  ff = new XBox360_DirectionDisplay();
             ff = new MobileDirectionDisplay();
@@ -39,6 +41,6 @@ public class User_Tools {
         //}
 //        ff.setVisible(true);
     ff.setVisible(true);
->>>>>>> Stashed changes
+
     }
 }
