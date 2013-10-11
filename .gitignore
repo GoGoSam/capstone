@@ -13,10 +13,10 @@
 .idea/
 *.iml
 *.iws
+out/
 
 ## Netbeans
-core
-nbproject/*
+nbproject/
 !nbproject/project.properties
 !nbproject/project.xml
 build/
