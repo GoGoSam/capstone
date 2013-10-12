@@ -1,10 +1,10 @@
-package user_tools;
+package swordfish;
 
 /**
  *
  * @author Sam Coe and Joe Robinson
  */
-public class User_Tools {
+public class Swordfish {
 
     /**
      * @param args the command line arguments

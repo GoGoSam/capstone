@@ -1,4 +1,4 @@
-package user_tools;
+package swordfish;
 
 import java.awt.event.*;
 import javax.swing.*;
@@ -30,7 +30,7 @@ public class MobileDirectionDisplay extends JFrame
     private JPanel p_directionals;
     private boolean debug = false;
     private boolean keyPressed = false;
-    private String dir_image_icons = "/user_tools/resources/";
+    private String dir_image_icons = "/swordfish/resources/";
 
     /**
      * Creates new form Controls_Display
