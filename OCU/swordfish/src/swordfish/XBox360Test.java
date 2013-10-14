@@ -3,6 +3,12 @@ package swordfish;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 import net.java.games.input.Version;
+import net.java.games.input.Event;
+import net.java.games.input.EventQueue;
+import net.java.games.input.Component;
+import net.java.games.input.Component.Identifier;
+
+import java.awt.*;
 
 /**
  * User: Sam Coe
@@ -23,16 +29,9 @@ public class XBox360Test {
             System.out.println(i + ". " + cs[i].getName() + ", " + cs[i].getType() );
         }
 
-        /*
-        ControllerEnvironment ce =
-                ControllerEnvironment.getDefaultEnvironment();
-
-        // retrieve the available controllers
-        Controller[] controllers = ce.getControllers();
-
         //fetch gamepad controller
         Controller gamePadContr = null;
-        for(Controller c : controllers){
+        for(Controller c : cs){
             if(c.getType() == Controller.Type.GAMEPAD) {
                 gamePadContr = c;
                 break;
@@ -44,14 +43,34 @@ public class XBox360Test {
             throw new NullPointerException("No gamepad found");
         }
 
-        Component buttonComponent = gamePadContr.getComponent(Identifier.Axis.POV);
+        while(true) {
+            gamePadContr.poll();
+            Component[] components = gamePadContr.getComponents();
+            StringBuffer buffer = new StringBuffer();
+            for(int i=0;i<components.length;i++) {
+                if(i>0) {
+                    buffer.append(", ");
+                }
+                buffer.append(components[i].getName());
+                buffer.append(": ");
+                if(components[i].isAnalog()) {
+                    buffer.append(components[i].getPollData());
+                } else {
+                    if(components[i].getPollData()==1.0f) {
+                        buffer.append("On");
+                    } else {
+                        buffer.append("Off");
+                    }
+                }
+            }
+            System.out.println(buffer.toString());
 
-        float prevData = 0;
-        while(gamePadContr.poll()){
-            float data = buttonComponent.getPollData();
-            if(data != prevData)
-                System.out.println(data);
+            try {
+                Thread.sleep(2);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
-        */
     }
 }
