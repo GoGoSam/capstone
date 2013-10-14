@@ -7,8 +7,8 @@ import net.java.games.input.Event;
 import net.java.games.input.EventQueue;
 import net.java.games.input.Component;
 import net.java.games.input.Component.Identifier;
-
-import java.awt.*;
+import swordfish.controller.input.XboxController;
+import swordfish.controller.input.JInputXboxController;
 
 /**
  * User: Sam Coe
@@ -22,6 +22,9 @@ public class XBox360Test {
     }
 
     public static void main(String args[]){
+        JInputXboxController test = (JInputXboxController) XboxController.getAll().get(0);
+
+        /*
         System.out.println("JInput version: " + Version.getVersion());
         ControllerEnvironment ce = ControllerEnvironment.getDefaultEnvironment();
         Controller[] cs = ce.getControllers();
@@ -72,5 +75,6 @@ public class XBox360Test {
                 e.printStackTrace();
             }
         }
+        */
     }
 }
