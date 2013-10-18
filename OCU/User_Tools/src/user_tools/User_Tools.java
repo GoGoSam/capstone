@@ -14,5 +14,10 @@ public class User_Tools {
         MobileDirectionDisplay mdd = null;
         mdd = new MobileDirectionDisplay();
         mdd.setVisible(true);
+        
+        
+        MainMenu user_tool_ui = null;
+        user_tool_ui = new MainMenu();
+        user_tool_ui.setVisible(true);
     }
 }
