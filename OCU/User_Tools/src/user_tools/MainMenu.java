@@ -49,64 +49,57 @@ implements KeyListener
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        p_live_streaming = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jToolBar1 = new javax.swing.JToolBar();
-        b_help = new javax.swing.JButton();
-        b_about = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        p_file_handling = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         canvas2 = new java.awt.Canvas();
         p_directional = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
+        p_inspect_tools = new javax.swing.JPanel();
+        slide_contrast = new javax.swing.JSlider();
+        l_brightness = new javax.swing.JLabel();
+        l_brightness1 = new javax.swing.JLabel();
+        slide_brightness = new javax.swing.JSlider();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menu_file = new javax.swing.JMenu();
+        menu_edit = new javax.swing.JMenu();
+        menu_tools = new javax.swing.JMenu();
+        menu_help = new javax.swing.JMenu();
+        menu_about = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Robotic Vision");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Live Streaming"));
+        p_live_streaming.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Live Streaming", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+        p_live_streaming.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        p_live_streaming.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setText("<Media Player>");
 
-        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(200, 200, 200)
+        org.jdesktop.layout.GroupLayout p_live_streamingLayout = new org.jdesktop.layout.GroupLayout(p_live_streaming);
+        p_live_streaming.setLayout(p_live_streamingLayout);
+        p_live_streamingLayout.setHorizontalGroup(
+            p_live_streamingLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(p_live_streamingLayout.createSequentialGroup()
+                .add(152, 152, 152)
                 .add(jLabel3)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel1Layout.createSequentialGroup()
-                .add(130, 130, 130)
+        p_live_streamingLayout.setVerticalGroup(
+            p_live_streamingLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(p_live_streamingLayout.createSequentialGroup()
+                .add(125, 125, 125)
                 .add(jLabel3)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
-        jToolBar1.setFloatable(false);
-        jToolBar1.setRollover(true);
-
-        b_help.setText("Help");
-        b_help.setFocusable(false);
-        b_help.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        b_help.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(b_help);
-
-        b_about.setText("About");
-        b_about.setFocusable(false);
-        b_about.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        b_about.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        b_about.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_aboutActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(b_about);
+        jPanel3.setFont(new java.awt.Font("Arial", 3, 13)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -117,23 +110,22 @@ implements KeyListener
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
-                .add(0, 315, Short.MAX_VALUE)
-                .add(jLabel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 187, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(148, 148, 148)
-                .add(jToolBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 105, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .add(jLabel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jToolBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .add(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .add(jLabel1)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .add(0, 9, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("File Handling"));
+        p_file_handling.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "File Handling", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         jButton1.setText("Load");
+        jButton1.setMaximumSize(new java.awt.Dimension(45, 29));
+        jButton1.setMinimumSize(new java.awt.Dimension(45, 29));
+        jButton1.setPreferredSize(new java.awt.Dimension(45, 29));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -147,28 +139,31 @@ implements KeyListener
             }
         });
 
-        org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
-                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 27, Short.MAX_VALUE)
-                .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 109, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        org.jdesktop.layout.GroupLayout p_file_handlingLayout = new org.jdesktop.layout.GroupLayout(p_file_handling);
+        p_file_handling.setLayout(p_file_handlingLayout);
+        p_file_handlingLayout.setHorizontalGroup(
+            p_file_handlingLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(p_file_handlingLayout.createSequentialGroup()
+                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 77, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
+                .add(jButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 82, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
+
+        p_file_handlingLayout.linkSize(new java.awt.Component[] {jButton1, jButton2}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+
+        p_file_handlingLayout.setVerticalGroup(
+            p_file_handlingLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(p_file_handlingLayout.createSequentialGroup()
                 .add(15, 15, 15)
-                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton1)
+                .add(p_file_handlingLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButton2))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton1.getAccessibleContext().setAccessibleName("b_load");
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Captured Moment"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Captured Moment", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -177,17 +172,17 @@ implements KeyListener
             .add(jPanel5Layout.createSequentialGroup()
                 .add(19, 19, 19)
                 .add(canvas2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(canvas2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
 
-        p_directional.setBorder(javax.swing.BorderFactory.createTitledBorder("Directionals"));
+        p_directional.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Directionals", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
 
         org.jdesktop.layout.GroupLayout p_directionalLayout = new org.jdesktop.layout.GroupLayout(p_directional);
         p_directional.setLayout(p_directionalLayout);
@@ -197,67 +192,129 @@ implements KeyListener
         );
         p_directionalLayout.setVerticalGroup(
             p_directionalLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 137, Short.MAX_VALUE)
-        );
-
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Inspection Tools"));
-
-        org.jdesktop.layout.GroupLayout jPanel8Layout = new org.jdesktop.layout.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(0, 0, Short.MAX_VALUE)
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 137, Short.MAX_VALUE)
+
+        p_inspect_tools.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Inspection Tools", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+
+        l_brightness.setText("Brightness");
+
+        l_brightness1.setText("Contrast");
+
+        jRadioButton1.setText("Gray-Scale");
+        jRadioButton1.setToolTipText("");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton2.setText("RGB");
+        jRadioButton2.setToolTipText("");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout p_inspect_toolsLayout = new org.jdesktop.layout.GroupLayout(p_inspect_tools);
+        p_inspect_tools.setLayout(p_inspect_toolsLayout);
+        p_inspect_toolsLayout.setHorizontalGroup(
+            p_inspect_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(p_inspect_toolsLayout.createSequentialGroup()
+                .add(p_inspect_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(l_brightness1)
+                    .add(l_brightness))
+                .add(0, 0, Short.MAX_VALUE))
+            .add(p_inspect_toolsLayout.createSequentialGroup()
+                .add(p_inspect_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(p_inspect_toolsLayout.createSequentialGroup()
+                        .add(28, 28, 28)
+                        .add(p_inspect_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(slide_brightness, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(slide_contrast, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(p_inspect_toolsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jRadioButton1)
+                        .add(18, 18, 18)
+                        .add(jRadioButton2)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
+        p_inspect_toolsLayout.setVerticalGroup(
+            p_inspect_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(p_inspect_toolsLayout.createSequentialGroup()
+                .add(p_inspect_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jRadioButton1)
+                    .add(jRadioButton2))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(l_brightness)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(slide_brightness, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(l_brightness1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(slide_contrast, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        menu_file.setText("File");
+        jMenuBar1.add(menu_file);
+
+        menu_edit.setText("Edit");
+        jMenuBar1.add(menu_edit);
+
+        menu_tools.setLabel("Tools");
+        jMenuBar1.add(menu_tools);
+
+        menu_help.setText("Help");
+        jMenuBar1.add(menu_help);
+
+        menu_about.setText("About");
+        jMenuBar1.add(menu_about);
+
+        setJMenuBar(jMenuBar1);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
+                .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                            .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(p_directional, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jPanel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
-                                .add(19, 19, 19)
-                                .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(layout.createSequentialGroup()
-                                .add(18, 18, 18)
-                                .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                    .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                                .add(p_directional, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(p_file_handling, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(p_live_streaming, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(p_inspect_tools, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(new java.awt.Component[] {jPanel5, p_inspect_tools}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createSequentialGroup()
-                        .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(p_directional, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .add(jPanel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .add(layout.createSequentialGroup()
-                        .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(6, 6, 6)))
-                .addContainerGap())
+                    .add(p_live_streaming, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, p_directional, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, p_file_handling, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(p_inspect_tools, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        p_directional.getAccessibleContext().setAccessibleName("Directionals");
+        layout.linkSize(new java.awt.Component[] {jPanel5, p_live_streaming}, org.jdesktop.layout.GroupLayout.VERTICAL);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -337,10 +394,6 @@ implements KeyListener
 
         
     }
-    private void b_aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_aboutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_b_aboutActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -348,6 +401,14 @@ implements KeyListener
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
        @Override
     public void keyTyped(KeyEvent e) {}
@@ -443,20 +504,29 @@ implements KeyListener
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton b_about;
-    private javax.swing.JButton b_help;
     private java.awt.Canvas canvas2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel l_brightness;
+    private javax.swing.JLabel l_brightness1;
+    private javax.swing.JMenu menu_about;
+    private javax.swing.JMenu menu_edit;
+    private javax.swing.JMenu menu_file;
+    private javax.swing.JMenu menu_help;
+    private javax.swing.JMenu menu_tools;
     private javax.swing.JPanel p_directional;
+    private javax.swing.JPanel p_file_handling;
+    private javax.swing.JPanel p_inspect_tools;
+    private javax.swing.JPanel p_live_streaming;
+    private javax.swing.JSlider slide_brightness;
+    private javax.swing.JSlider slide_contrast;
     // End of variables declaration//GEN-END:variables
 
   //  @Override
