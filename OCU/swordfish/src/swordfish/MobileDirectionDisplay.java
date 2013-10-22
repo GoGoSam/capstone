@@ -30,7 +30,7 @@ public class MobileDirectionDisplay extends JFrame
     private JPanel p_directionals;
     private boolean debug = false;
     private boolean keyPressed = false;
-    private String dir_image_icons = "/swordfish/resources/";
+   // private String dir_image_icons = System.getProperty("user.dir") + "/resources/";
 
     /**
      * Creates new form Controls_Display
@@ -139,15 +139,16 @@ public class MobileDirectionDisplay extends JFrame
 
         // Get images to set as icons on label JComponents;
         // default state disabled
-        icon_up.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_up.jpg")));
+        /*
+        icon_up.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "/Arrow_up.jpg")));
         icon_up.setEnabled(false);
         icon_right.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_right.jpg")));
         icon_right.setEnabled(false);
-        icon_left.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_left.jpg")));
+        icon_left.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "/Arrow_left.jpg")));
         icon_left.setEnabled(false);
-        icon_down.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_down.jpg")));
+        icon_down.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "/Arrow_down.jpg")));
         icon_down.setEnabled(false);
-
+*/
         // Layout components
         javax.swing.GroupLayout p_directionalsLayout = new javax.swing.GroupLayout(p_directionals);
         p_directionals.setLayout(p_directionalsLayout);

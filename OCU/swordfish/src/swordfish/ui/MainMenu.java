@@ -3,14 +3,14 @@
  * and open the template in the editor.
  */
 package swordfish.ui;
-
+import swordfish.*;
 import java.awt.event.KeyListener;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Container.*;
 import java.awt.event.KeyEvent.*;
 
-
+import java.io.*;
 /** 
  *
  * @author jrob
@@ -31,7 +31,7 @@ implements KeyListener
 
     private boolean do_debug = true;
     
-    private String dir_image_icons = "../resources/";
+//    private String dir_image_icons = "/resources/";
     // globals 
 
     public MainMenu() {
@@ -329,10 +329,10 @@ implements KeyListener
         icon_down = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+       // System.out.println(System.getProperty("user.dir"));
         // Get images to set as icons on label JComponents; 
         // default state disabled
-        icon_up.setIcon(new ImageIcon
+   /*     icon_up.setIcon(new ImageIcon
                 (getClass().getResource(dir_image_icons + "Arrow_up.jpg"))); 
         icon_up.setEnabled(false);
 
@@ -344,7 +344,7 @@ implements KeyListener
 
         icon_down.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_down.jpg"))); // NOI18N
         icon_down.setEnabled(false);
-
+*/
         // Layour components
         org.jdesktop.layout.GroupLayout p_directionalsLayout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(p_directionalsLayout);
@@ -498,8 +498,10 @@ implements KeyListener
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainMenu().setVisible(true);
+                new MobileDirectionDisplay().setVisible(true);
             }
         });
     }
@@ -537,6 +539,10 @@ implements KeyListener
 
         
 //    }
+
+    private void println(String property) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
 
