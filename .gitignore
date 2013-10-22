@@ -1,14 +1,23 @@
-## generic files to ignore
+## Generic Files
 *~
 *.lock
 *.DS_Store
 *.swp
 *.out
-/OCU/UserTools/nbproject/private/
-/OCU/UserTools/build/
-/OCU/ClientEditor/nbproject/private/
-/OCU/ClientEditor/build/
-/OCU/User_Tools/nbproject/private/
-/OCU/User_Tools/build/
-/OCU/JavaApplication3/nbproject/private/
-/OCU/JavaApplication3/build/
+*.log
+
+## Java
+*.class
+
+## Intellij
+.idea/
+*.iml
+*.iws
+out/
+
+## Netbeans
+nbproject/
+!nbproject/project.properties
+!nbproject/project.xml
+build/
+dist/
