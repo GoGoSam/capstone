@@ -30,7 +30,7 @@ public class MobileDirectionDisplay extends JFrame
     private JPanel p_directionals;
     private boolean debug = false;
     private boolean keyPressed = false;
-    private String dir_image_icons = "/swordfish/resources/";
+    private String dir_image_icons = ".../resources/";
 
     /**
      * Creates new form Controls_Display
