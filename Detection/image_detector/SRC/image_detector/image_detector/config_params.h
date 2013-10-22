@@ -43,6 +43,13 @@ extern string rd_inp_folder;
 extern string rd_det_folder;
 
 
+////////////////////////////////////////////////
+/// Object Detector Configuration Parameters ///
+////////////////////////////////////////////////
+extern string od_inp_folder;
+extern string od_det_folder;
+
+
 /////////////////
 /// Functions ///
 /////////////////

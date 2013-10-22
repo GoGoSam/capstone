@@ -30,6 +30,13 @@ Mat gradientXY(
 	int ddepth
 	);
 
+Mat hessian(
+	Mat image,
+	int scale,
+	int delta,
+	int ddepth,
+	int gsmooth_n
+	);
 
 Mat invertImage(
 	Mat image

@@ -128,6 +128,87 @@ Mat gradientXY(
 	return grad;
 }
 
+Mat hessian(
+	Mat image,
+	int scale,
+	int delta,
+	int ddepth,
+	int gsmooth_n
+	) {
+	//int scale = 1;
+	//int delta = 0;
+	//int ddepth = CV_16S;
+	/// Generate grad_x and grad_y
+	Mat grad_x, grad_y, grad_xy;
+	Mat m1, m2;
+	Mat det, trace;
+	Mat abs_grad_x, abs_grad_y, abs_grad_xy;
+	Mat grad;
+
+	/// Ix
+	Sobel( image, grad_x, ddepth, 1, 0, 3, scale, delta, BORDER_DEFAULT );
+	//convertScaleAbs( grad_x, abs_grad_x );
+
+	/// Ixx
+	Sobel( grad_x, grad_x, ddepth, 1, 0, 3, scale, delta, BORDER_DEFAULT );
+	//convertScaleAbs( grad_x, abs_grad_x );
+
+	/// Lxx
+	GaussianBlur( grad_x, grad_x, Size(gsmooth_n,gsmooth_n), 0, 0, BORDER_DEFAULT );
+
+	/// Iy
+	Sobel( image, grad_y, ddepth, 0, 1, 3, scale, delta, BORDER_DEFAULT );
+	//convertScaleAbs( grad_y, abs_grad_y );
+
+	/// Iyy
+	Sobel( grad_y, grad_y, ddepth, 0, 1, 3, scale, delta, BORDER_DEFAULT );
+	//convertScaleAbs( grad_y, abs_grad_y );
+
+	/// Lyy
+	GaussianBlur( grad_y, grad_y, Size(gsmooth_n,gsmooth_n), 0, 0, BORDER_DEFAULT );
+
+	/// Ixy
+	Sobel( grad_x, grad_xy, ddepth, 0, 1, 3, scale, delta, BORDER_DEFAULT );
+	//convertScaleAbs( grad_xy, abs_grad_xy );
+
+	/// Lxy
+	GaussianBlur( grad_xy, grad_xy, Size(gsmooth_n,gsmooth_n), 0, 0, BORDER_DEFAULT );
+
+	/// Det
+	multiply(grad_x, grad_y, m1);
+	multiply(grad_xy, grad_xy, m2);
+	subtract(m1, m2, det);
+
+	/// Trace
+	add(grad_x, grad_y, trace);
+
+	/// Total Gradient (approximate)
+	//addWeighted( abs_grad_x, 0.5, abs_grad_y, 0.5, 0, grad );
+	
+
+	
+	convertScaleAbs( trace, trace );
+	convertScaleAbs( det, det );
+	convertScaleAbs( grad_x, grad_x );
+	convertScaleAbs( grad_y, grad_y );
+	convertScaleAbs( grad_xy, grad_xy );
+
+	imshow("det", det);
+	imshow("trace",trace);
+	imshow("grad_x", grad_x);
+	imshow("grad_y", grad_y);
+	imshow("grad_xy", grad_xy);
+    waitKey(0);
+
+	// calculate lambda2 >> lambda1
+	// lambda2/lambda1 -> infinity
+	// det = sigma^2(lxx*lyy - lyx^2) = lambda1*lambda2
+	// trace = sigma*(lxx+lyy) = lambda1 + lambda2
+	// lambda1 = sigma*lxx
+	// lambda2 = sigma*lyy
+	// lambda2/lambda1 = lyy/lxx
+	return trace;
+}
 
 Mat invertImage(
 	Mat image

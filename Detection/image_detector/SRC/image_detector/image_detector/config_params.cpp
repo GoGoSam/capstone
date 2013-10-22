@@ -41,6 +41,12 @@ int cd_aspect_ratio_threshold;
 string rd_inp_folder;
 string rd_det_folder;
 
+////////////////////////////////////////////////
+/// Object Detector Configuration Parameters ///
+////////////////////////////////////////////////
+string od_inp_folder;
+string od_det_folder;
+
 /////////////////
 /// Functions ///
 /////////////////
@@ -52,7 +58,8 @@ void store_line(
 	cout << key << "= " << value_in << endl;
 	//const char*  key = key_in.c_str();
 	const char*  value = value_in.c_str();
-		/// System Parameters
+
+	/// System Parameters
 	if ( "cd_disp_terminal" == key) {cd_disp_terminal = atoi(value);}
 	else if ( "cd_disp_images" == key) {cd_disp_images = atoi(value);}
 	else if ( "cd_disp_histograms" == key) {cd_disp_histograms = atoi(value);}
@@ -60,6 +67,7 @@ void store_line(
 	else if ( "cd_save_det_log" == key) {cd_save_det_log = atoi(value);}
 	else if ( "cd_det_folder" == key) {cd_det_folder = value;}
 	else if ( "cd_inp_folder" == key) {cd_inp_folder = value;}
+
 	/// Crack Detector Parameters
 	else if ( "cd_msmooth_n" == key) {cd_msmooth_n = atoi(value);}
 	else if ( "cd_msmooth_av" == key) {cd_msmooth_av = atoi(value);}
@@ -72,7 +80,14 @@ void store_line(
 	else if ( "cd_circularity_threshold" == key) {cd_circularity_threshold = atof(value);}
 	else if ( "cd_perimeter_threshold" == key) {cd_perimeter_threshold = atoi(value);}
 	else if ( "cd_aspect_ratio_threshold" == key) {cd_aspect_ratio_threshold = atoi(value);}
-		/// Object Detector Parameters
+
+	/// Rust Detector Parameters
+	else if ( "rd_det_folder" == key) {rd_det_folder = value;}
+	else if ( "rd_inp_folder" == key) {rd_inp_folder = value;}
+
+	/// Object Detector Parameters
+	else if ( "od_det_folder" == key) {od_det_folder = value;}
+	else if ( "od_inp_folder" == key) {od_inp_folder = value;}
 	
 }
 

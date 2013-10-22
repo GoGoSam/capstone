@@ -4,7 +4,6 @@
 #include <sstream>
 #include <iomanip>
 #include <cstdlib>
-
 #include <config_params.h>
 #include <det_utils.h>
 
@@ -36,6 +35,10 @@ int crack_det(
 	cout << "Calculating differential image... ";
 	Mat image_f = difImage(image, cd_msmooth_n, cd_msmooth_av);
 	cout << "Done!" << endl;
+
+	image_f = hessian(image_f, 1, 0, CV_16S, 21);
+
+
 
 	/// Dilate cracks
 	cout << "Calculating dilated image... ";
@@ -249,8 +252,39 @@ int rust_det(
 	imshow( "image: original", image );
 }
 
+int obj_det(
+	string filename
+	) {
+	
+	char datestr[14];
+	get_timestamp(datestr);
 
+	string inp_filename = od_inp_folder + filename + ".jpg";
+	string det_filename = od_det_folder + "IMG/" + filename + "." + datestr + ".det.jpg";
+	string log_filename = od_det_folder + "CSV/" + filename + "." + datestr + ".det.csv";
+	string prm_filename = od_det_folder + "PRM/" + filename + "." + datestr + ".det.prm.csv";
+	cout << od_inp_folder << endl;
+	cout << od_det_folder << endl;
+	const char* inp_filename_ptr = inp_filename.data();
+	const char* det_filename_ptr = det_filename.data();
 
+	// Load the image
+	cout << "Loading image " << filename << "...";
+	Mat image = loadImageMat(inp_filename_ptr, 0);
+	cout << "Done!" << endl;
+
+	/// Create a smoothed image and find the difference image
+	cout << "Calculating differential image... ";
+	Mat image_f = difImage(image, 41, 177);
+	cout << "Done!" << endl;
+
+	//image_f = hessian(image_f, 1, 0, CV_16S, 21);
+
+	imshow( "image: original", image );
+	imshow( "image: differential", image_f);
+    waitKey(0);
+	return 0;
+}
 
 
 //int main( int argc, char** argv )
@@ -263,7 +297,7 @@ int main()
     // return -1;
     //}
 
-	if (1) {
+	if (0) {
 		const char *args[] = {"cracks1", "cracks2", "cracks3", "cracks4", "cracks5", "paper1"};
 		vector<string> inp_fname(args, end(args));
 
@@ -278,5 +312,13 @@ int main()
 		for (int i = 0; i < inp_fname.size(); i++) {
 			rust_det(inp_fname[i]);
 		}
+	}
+	if (1) {
+		const char *args[] = {"anchor1", "anchor2", "anchor3", "anchor4", "anchor5", "anchor6"};
+		vector<string> inp_fname(args, end(args));
+
+		//for (int i = 0; i < inp_fname.size(); i++) {
+			obj_det(inp_fname[2]);
+		//}
 	}
 }
