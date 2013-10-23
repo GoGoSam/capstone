@@ -28,15 +28,26 @@ import swordfish.MobileDirectionDisplay;
 import java.sql.Time.*;
 import ij.*;
 import ij.gui.*;
-
+import ij.io.FileInfo;
+import ij.process.ImageProcessor;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import static java.lang.Thread.MIN_PRIORITY;
+import java.util.zip.GZIPInputStream;
 
 // </editor-fold>
 
 /** 
 /**
+* This Class is the GUI display for the live media (robot vision) and image 
+* (moment captured from video) processing/analysis.
 * 
-* 
-* 
+*  rev 1 October 22, 2013
+*       - Created Document
+*       - Compressed much of the code to reduce length
+*       - Added functionality to display image in the appropriate panel
 * 
  * 
  * @since  October 22, 2013
@@ -45,24 +56,31 @@ import ij.gui.*;
 public class FunctioningMainMenu extends JFrame 
 implements KeyListener{
     
-    private JLabel icon_down;
-    private JLabel icon_left;
-    private JLabel icon_right;
-    private JLabel icon_up;
-    ImagePlus kk;
-//    private JPanel p_directionals;
-    private boolean do_debug = true;
-    private  JLabel jLabel2;
-    private ImageIcon cur_moment_view;
-//    jLabel2 = new javax.swing.JLabel();
-//    private String dir_image_icons = "/resources/";
+    JLabel icon_down;
+    JLabel icon_left;
+    JLabel icon_right;
+    JLabel icon_up;
+    ImagePlus im_plus;
 
+    
+     
+    JLabel jLabel2;
+    ImageIcon cur_moment_view;
+        
+    int DarkColor = 110;// 64 (correct)
+     int BrightColor = 138;
+     
+    boolean do_debug = true;
+    
+//    jLabel2 = new javax.swing.JLabel();
+//    String dir_image_icons = "/resources/";
+//    JPanel p_directionals;
     
     public FunctioningMainMenu() {
          
       //  init();
         buildGui();
-      
+   
     }
     
     /**
@@ -106,7 +124,7 @@ implements KeyListener{
         menu_tools = new JMenu();
         menu_help = new JMenu();
         menu_about = new JMenu();
-        kk = new ImagePlus();
+        im_plus = new ImagePlus();
         // </editor-fold> 
         
     
@@ -490,11 +508,27 @@ implements KeyListener{
 
     private void b_saveActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+        String image_name = "/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg";
         
-        cur_moment_view = 
-                new ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg");
-        ImagePlus jj = new ImagePlus("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg");
-        kk.setImage(jj);
+File file=new File(image_name);
+        im_plus = IJ.createImage 
+		       	("Test",  "RGB black", 258,338,1);
+        
+
+         FileInfo fi = getHeaderInfo(image_name);
+            
+         int COL = fi.width;
+     
+             
+         int ROW = fi.height;
+                 new FileLoaderSynf("aaa","test", im_plus,COL,ROW,
+			    1, DarkColor, BrightColor); 
+		  // cur_moment_view.setImage(im_plus.getImage());
+       im_plus.show();
+       // cur_moment_view = 
+         //       new ImageIcon();
+        //ImagePlus jj = new ImagePlus("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg");
+        //kk.setImage(jj);
 //        cur_moment_view.
               // jLabel2.setIcon(kk.clone());//cur_moment_view); 
 
@@ -566,6 +600,107 @@ implements KeyListener{
         }
     }
     
+    FileInfo getHeaderInfo(String name_to_read) //throws IOException
+ {
+     int anUnsignedShort = 0;
+     int magicNumber = 0;
+     int nim = 0;
+    
+     int firstByte = 0;
+     int secondByte = 0;
+
+     byte bb;
+
+     FileInfo fi = null;
+
+     int col=0;
+     int row=0;
+
+     try
+     {                
+	 DataInputStream ins_head;
+                    
+	 if (name_to_read.toLowerCase().endsWith("jpg") )
+	 {
+	     ins_head = 
+		 new DataInputStream
+		 (new BufferedInputStream
+		  (new GZIPInputStream
+		   (new FileInputStream(name_to_read))));
+	 }
+	 else
+         {
+	     ins_head = 
+		 new DataInputStream
+		 (new BufferedInputStream
+		  (new FileInputStream
+		   (name_to_read)));
+	 }           
+                    
+	 for (int k=0;k<300;k++)
+         {
+	     bb = ins_head.readByte();
+	     firstByte = (0x000000FF & ((int)bb));
+	     bb = ins_head.readByte();
+	     secondByte = (0x000000FF & ((int)bb));
+	     anUnsignedShort  = (int) (secondByte | firstByte << 8);
+       
+	     /*                 
+	     if(do_debug==1) 
+		 IJ.log(" " + Integer.toString(firstByte) + " " + Integer.toString(secondByte));
+                        
+	     if(do_debug==1) 
+	     	 IJ.log("read header " + Integer.toString(anUnsignedShort));
+	     */
+	     if (k==0)
+                magicNumber = anUnsignedShort;
+
+	     if (k==1)
+                nim = anUnsignedShort;
+
+	     if (k==296)
+                col = anUnsignedShort;
+
+	     if (k==297)
+                row = anUnsignedShort;
+	 }            
+     }
+     catch (Throwable e1)
+     {
+	 //	 IJ.showStatus("");
+//	 	 IJ.showMessage("CTL_viewer", ""+e1);
+	 // label_flag[0] = true;
+//	 if(do_debug == 1)
+//	     IJ.log("Problem header info " + e1.getMessage());
+	 return fi;
+     }
+
+     if (magicNumber!=12431)
+     {
+	 IJ.showStatus("NOT MI:"+name_to_read);
+	 IJ.showMessage("NOT MI:"+name_to_read);
+//	 if(do_debug ==1)
+//	     IJ.log("NOT MI:"+name_to_read);
+
+//	 b_open_state[0] = true;
+//	 set_button_states();
+        
+	 return fi;        
+     }
+
+     //     if(do_debug==1) IJ.log("READ MAGIC: "+Integer.toString(magicNumber));
+     //    if(do_debug==1) IJ.log("READ N: "+Integer.toString(nim));
+        	
+     fi = new FileInfo();
+     fi.width = col;
+     fi.height = row;
+     fi.nImages = nim;
+    
+	return fi;
+
+ }
+    
+
     /**
      * @param args the command line arguments
      */
@@ -648,3 +783,322 @@ implements KeyListener{
 }
 
 
+
+
+class FileLoader {
+	String command;
+        String fname;
+	ImagePlus im_plus;
+        int COL;
+        int ROW;
+        int nImages;
+        int ROW_SKIP;
+        int[] is_loaded_flag;
+
+ FileLoader(String command, String fname,ImagePlus im_plus,
+	     int col,int row, int nImages,int row_skip,
+	     int[] is_loaded_flag)
+ {
+     // super(command);
+     this.command = command;
+     this.fname = fname;
+     this.im_plus = im_plus;
+     this.COL = col;
+     this.ROW = row;
+     this.ROW_SKIP = row_skip;
+     this.nImages = nImages;
+     this.is_loaded_flag = is_loaded_flag;
+
+     /*   
+     setPriority(Math.max(getPriority()-2, MIN_PRIORITY));
+     start();*/
+ }
+//*************************************************************************************************************
+// This function runs the plugin, what is implemented here is what the plugin actually does.
+//************************************************************************************************************* 
+ public void run() 
+ {
+     DataInputStream ins;
+         
+     int seglab = 0;
+                   
+     int firstByte = 0;
+     int secondByte = 0;
+     int anUnsignedShort = 0;
+ 
+
+     float maxbyte = (float)256.0;
+     float maxbyte2 = (float)128.0;
+           
+     byte bb;
+
+     short[] pixels_n;
+
+     int padd;
+     int s = COL*ROW*2;    //total area of 1 image 
+     int c = 0; //counter
+     
+     while(s >= c)
+	 c += 512;
+     
+ IJ.log("read1.0");
+
+     if ((c - s) == 512)
+	 padd = 0;
+     else
+	 padd = -(s-c);    
+ 
+     try{                        
+	 if (fname.toLowerCase().endsWith(".mi.gz") ) 
+	 {	
+	     ins = 
+		 new DataInputStream
+		 (new BufferedInputStream
+		  (new GZIPInputStream
+		   (new FileInputStream(fname))));                                                      
+	 }
+	 else
+	 {                                          
+	     ins = 
+		 new DataInputStream
+		 (new BufferedInputStream
+		  (new FileInputStream(fname)));                          
+	 }
+         
+	 int unit;               
+                         
+	 ins.skipBytes(512);            
+                IJ.log("read1.1");         
+	 for (int k=0;k<nImages;k++)
+         {    
+	     ins.skipBytes(512);
+	     
+	     if (k>0)
+		 ins.skipBytes(padd);
+	     
+	     im_plus.setPosition(1,k+1,1);
+             
+	     ImageProcessor im = im_plus.getProcessor();  //Reference to image's ImageProcessor.
+                             
+	     pixels_n = (short[])im.getPixels(); //Get pixel array of image.
+
+	     ins.skipBytes(ROW_SKIP*COL*2);
+                            
+	     for (int i=ROW_SKIP*COL;i<COL*ROW;i++)
+	     {	                                                                    
+		 bb = ins.readByte();
+		 firstByte = (0x000000FF & ((int)bb));
+		 bb = ins.readByte();
+		 secondByte = (0x000000FF & ((int)bb));
+
+		 anUnsignedShort  = (int) (secondByte  | firstByte << 8 );                                
+                                
+//                    val = ((float)anUnsignedShort
+//                           - level - offset)/window*maxbyte + maxbyte2;
+
+		 anUnsignedShort = (anUnsignedShort<0)?0:anUnsignedShort;
+		 anUnsignedShort = (anUnsignedShort>32767)?32767:anUnsignedShort;
+                                
+//                    val = (val<0)?0:val;
+//                    val = (val>255)?255:val;                                
+//                    anUnsignedShort = (int)val;
+		 
+		 if (i>=ROW_SKIP*COL)
+		     pixels_n[i-ROW_SKIP*COL] = (short)anUnsignedShort;                                
+	     }
+	 }                                            
+     }
+     catch (Exception e2)
+     {
+	 //	 IJ.showStatus("error reading files ");
+	 //	 IJ.log("Error 1");
+	 is_loaded_flag[3] = 1;
+	 IJ.log("read1.3  " + e2.getMessage());
+	 return;
+     }
+     // IJ.log("read1.4");
+     im_plus.updateAndDraw();   //Pixel array read and image display updated.
+     im_plus.unlock();         //Unlocks the image (NOTE: multithreading?).
+     //	 IJ.log("Error 2");
+	 //    IJ.showMessage("dd","hhh");
+     is_loaded_flag[0] = 1;
+     //  IJ.log("read1.5");
+ }
+}
+
+//*************************************************************************************************************
+//************************************************************************************************************* 
+//************************************************************************************************************* 
+class FileLoaderSynf extends Thread 
+{
+    private String command;
+    private String fname;
+    private ImagePlus im_plus;
+    private int COL;
+    private int ROW;
+    private int nImages;
+    private int DarkColor;
+    private int BrightColor;
+    
+    // determine/set no synf flag (image icon)
+
+ FileLoaderSynf(String command, String fname,ImagePlus im_plus,int col,int row,
+		  int nImages, int DarkColor, int BrightColor){
+
+     super(command);
+     this.command = command;
+     this.fname = fname;
+     this.im_plus = im_plus;
+     this.COL = col;
+     this.ROW = row;
+     this.nImages = nImages;
+     this.DarkColor = DarkColor;
+     this.BrightColor = BrightColor;
+
+     setPriority(Math.max(getPriority()-2, MIN_PRIORITY));
+     start();
+ }
+
+//************************************************************************************************************* 
+// This function runs the plugin, what is implemented here is what the plugin actually does.
+//*************************************************************************************************************    
+ public void run() 
+ {
+     DataInputStream ins;
+           
+     int seglab = 0;
+                     
+     int firstByte = 0;
+     int secondByte = 0;
+     int anUnsignedShort = 0;
+
+     float maxbyte = (float)256.0;
+     float maxbyte2 = (float)128.0;
+             
+     byte bb;
+
+     int pixelval;
+
+     int[] pixels_n;
+
+     int[] collist = new int[16];            
+            
+     collist[1]  = 255 << 16;
+     collist[2]  = 255 << 8;
+     collist[3]  = 255;
+     collist[4]  = 255 << 8 | 255 << 16;
+     collist[5]  = 255 << 16 | 255;
+     collist[6]  = 255 << 8 | 255;
+     collist[7]  = 255 << 16 | BrightColor << 8 | BrightColor;
+     collist[8]  = BrightColor << 16 | 255 << 8 | BrightColor;
+     collist[9]  = BrightColor << 16 | BrightColor << 8 | 255;
+     collist[10]  = 0 << 16 | DarkColor << 8 | BrightColor;
+     collist[11]  = BrightColor << 16 | 0 << 8 | DarkColor;
+     collist[12]  = DarkColor << 16 | BrightColor << 8 | 0;
+     collist[13]  = DarkColor << 16 | 0 << 8 | 0;
+     collist[14]  = 0 << 16 | DarkColor << 8 | 0;
+     collist[15]  = DarkColor;
+
+     int colorval;
+     try{
+	 
+	 if (fname.toLowerCase().endsWith(".mi.gz") ) 
+	 {                            
+	     ins = 
+		 new DataInputStream
+		 (new BufferedInputStream
+		  (new GZIPInputStream
+		   (new FileInputStream(fname))));                            
+	 }
+	 else
+         {                                                                      
+	     ins = 
+		 new DataInputStream
+		 (new BufferedInputStream
+		  (new FileInputStream(fname)));                
+	 }                        
+             
+	 int unit;
+                        
+	 float val;
+                        
+	 int count;
+
+	 int padd = 512*(int)java.lang.Math.ceil((double)COL*(double)nImages*(double)2/(double)512) - COL*nImages*2;
+    
+
+//            IJ.log(Integer.toString(padd));                                                 
+	 ins.skipBytes(512);
+                        
+	 for (int k=0;k<2;k++)
+	 {                                
+	     ins.skipBytes(512);
+
+                // padding
+	     if (k==1)
+		 ins.skipBytes(padd);
+                            
+                            
+//                im_plus.setPosition(1,k+1,1);
+                            
+	     ImageProcessor im = im_plus.getProcessor();  //Reference to image's ImageProcessor.
+                             
+	     pixels_n = (int[])im.getPixels();   //Reference to image's pixel array.
+
+	     if (k==0)
+		 count = COL;
+	     else
+		 count = ROW;
+                            
+	     for (int j=0;j<count;j++)            
+		 for (int i=0;i<nImages;i++)
+                 {
+		     bb = ins.readByte();
+		     firstByte = (0x000000FF & ((int)bb));
+		     bb = ins.readByte();
+		     secondByte = (0x000000FF & ((int)bb));
+//                        anUnsignedShort  = (int) (secondByte << 8 | firstByte);
+		     anUnsignedShort  = (int) (secondByte  | firstByte << 8 );
+                                
+//                        if(do_debug==1) IJ.log(Integer.toString(anUnsignedShort));
+
+		     if (anUnsignedShort-1024<=8000)
+                     {
+			 val = ((float)(anUnsignedShort-1024))/256*maxbyte + maxbyte2;
+                        
+			 val = (val<0)?0:val;
+			 val = (val>255)?255:val;
+			 anUnsignedShort = (int)val;
+
+			 pixelval =
+			     anUnsignedShort << 16 |
+			     anUnsignedShort << 8 |
+			     anUnsignedShort;
+		     }
+		     else
+                     {
+			 seglab  = anUnsignedShort - 8000 - 1024;
+
+			 colorval =
+			     (seglab<16)?collist[seglab]:collist[15];
+
+			 pixelval = colorval;
+		     }
+
+		     if(k==0)
+			 pixels_n[i + j*(nImages*2 + 5)] = pixelval;
+		     else
+			 pixels_n[i + j*(nImages*2 + 5) + nImages + 5] = pixelval;
+		 }
+	     
+	 }              
+     }
+     catch (Exception e2)
+     {
+	 IJ.showStatus("error reading files");
+	 return;
+     }
+     im_plus.updateAndDraw();      //Pixel array read and image display updated.
+     im_plus.unlock();            //Unlocks the image (NOTE: multithreading?).
+ }
+}
