@@ -1,4 +1,4 @@
-package swordfish.controller.device;
+package swordfish.models.device;
 
 import java.io.IOException;
 import java.util.ArrayList;

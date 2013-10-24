@@ -1,4 +1,4 @@
-package swordfish.controller.input;
+package swordfish.models.input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import net.java.games.input.Event;
 import net.java.games.input.EventQueue;
 import net.java.games.input.Component.Identifier;
 
-import swordfish.controller.device.Axis;
-import swordfish.controller.device.Button;
+import swordfish.models.device.Axis;
+import swordfish.models.device.Button;
 
 /**
  * Reads the state from an Xbox 360 controller using JInput. This works on all platforms. On Windows DirectInput will be used,

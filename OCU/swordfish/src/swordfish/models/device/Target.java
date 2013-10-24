@@ -1,4 +1,4 @@
-package swordfish.controller.device;
+package swordfish.models.device;
 
 /**
  * Represents a device {@link Button} or {@link Axis}.

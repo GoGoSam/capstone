@@ -1,4 +1,4 @@
-package swordfish.controller.input;
+package swordfish.models.input;
 
 import java.util.ArrayList;
 import java.util.List;

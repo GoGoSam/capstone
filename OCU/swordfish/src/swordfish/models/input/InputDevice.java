@@ -1,4 +1,4 @@
-package swordfish.controller.input;
+package swordfish.models.input;
 
 /**
  * Represents a device that receives input from the user. Eg, a keyboard, mouse, or joystick.
