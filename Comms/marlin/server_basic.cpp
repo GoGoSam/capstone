@@ -3,19 +3,20 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <boost/asio.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
+#include <boost/asio.hpp>
 
 using boost::asio::ip::tcp;
 
 class session : public boost::enable_shared_from_this<session>
 {
     public:
-        session(boost::asio::io_service& io_service)
-            : socket_(io_service)
-        {
+        typedef boost::shared_ptr<session> pointer;
+
+        static pointer create(boost::asio::io_service& io_service) {
+            return pointer(new session(io_service));
         }
 
         tcp::socket& socket()
@@ -25,22 +26,27 @@ class session : public boost::enable_shared_from_this<session>
 
         void start()
         {
-            //socket_.async_read_some(boost::asio::buffer(data_, max_length),
-            //        boost::bind(&session::handle_read, shared_from_this(),
-            //            boost::asio::placeholders::error,
-            //            boost::asio::placeholders::bytes_transferred));
+            socket_.async_read_some(boost::asio::buffer(data_, max_length),
+                    boost::bind(&session::handle_read, shared_from_this(),
+                        boost::asio::placeholders::error,
+                        boost::asio::placeholders::bytes_transferred));
         }
 
     private:
+        session(boost::asio::io_service& io_service)
+            : socket_(io_service)
+        {
+        }
+
         void handle_read(const boost::system::error_code& error,
                 size_t bytes_transferred)
         {
             if (!error)
             {
-                //boost::asio::async_write(socket_,
-                //        boost::asio::buffer(data_, bytes_transferred),
-                //        boost::bind(&session::handle_write, shared_from_this(),
-                //            boost::asio::placeholders::error));
+                boost::asio::async_write(socket_,
+                        boost::asio::buffer(data_, bytes_transferred),
+                        boost::bind(&session::handle_write, shared_from_this(),
+                            boost::asio::placeholders::error));
             }
         }
 
@@ -48,10 +54,10 @@ class session : public boost::enable_shared_from_this<session>
         {
             if (!error)
             {
-                //socket_.async_read_some(boost::asio::buffer(data_, max_length),
-                //        boost::bind(&session::handle_read, shared_from_this(),
-                //            boost::asio::placeholders::error,
-                //            boost::asio::placeholders::bytes_transferred));
+                socket_.async_read_some(boost::asio::buffer(data_, max_length),
+                        boost::bind(&session::handle_read, shared_from_this(),
+                            boost::asio::placeholders::error,
+                            boost::asio::placeholders::bytes_transferred));
             }
         }
 
@@ -73,13 +79,13 @@ class server
     private:
         void listen()
         {
-            //boost::shared_ptr<session> new_session(new session(io_service_));
-            //acceptor_.async_accept(new_session->socket(),
-            //        boost::bind(&server::accept, this, new_session,
-            //            boost::asio::placeholders::error));
+            session::pointer new_session = session::create(io_service_);
+            acceptor_.async_accept(new_session->socket(),
+                    boost::bind(&server::accept, this, new_session,
+                        boost::asio::placeholders::error));
         }
 
-        void accept(session* new_session,
+        void accept(session::pointer new_session,
                 const boost::system::error_code& error)
         {
             if (!error)
@@ -108,7 +114,6 @@ int main(int argc, const char* argv[])
         int port = std::atoi(argv[1]);
         std::cout << "Serving on port " << port << std::endl;
         server s(io_service, port);
-
         io_service.run();
     }
     catch (std::exception& e)
