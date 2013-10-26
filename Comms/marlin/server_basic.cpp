@@ -1,4 +1,4 @@
-//server.cpp
+//server_basic.cpp
 //Sam Coe
 
 #include <cstdlib>
@@ -100,7 +100,7 @@ class server
         tcp::acceptor acceptor_;
 };
 
-int main(int argc, const char* argv[])
+int main2(int argc, const char* argv[])
 {
     try
     {

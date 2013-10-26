@@ -3,22 +3,23 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <boost/asio.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
-#include "db_server.h"
-#include "packedmessage.h"
-#include "stringdb.pb.h"
+#include <boost/asio.hpp>
+
+//TODO: Move to header file
+#define HEADER_SIZE 4
 
 using boost::asio::ip::tcp;
 
 class session : public boost::enable_shared_from_this<session>
 {
     public:
-        session(boost::asio::io_service& io_service)
-            : socket_(io_service)
-        {
+        typedef boost::shared_ptr<session> pointer;
+
+        static pointer create(boost::asio::io_service& io_service) {
+            return pointer(new session(io_service));
         }
 
         tcp::socket& socket()
@@ -32,48 +33,35 @@ class session : public boost::enable_shared_from_this<session>
         }
 
     private:
+        session(boost::asio::io_service& io_service)
+            : socket_(io_service)
+        {
+        }
+
         void read_header() {
             data_.resize(HEADER_SIZE);
             boost::asio::async_read(socket_,
-                    asio::buffer(data_),
+                    boost::asio::buffer(data_),
                     boost::bind(&session::handle_read_header, shared_from_this(),
-                        asio::placeholders::error));
+                        boost::asio::placeholders::error));
         }
 
         void handle_read_header(const boost::system::error_code& error)
         {
             if (!error) {
                 //Received header
-                unsigned msg_len = m_packed_request.decode_header(m_readbuf);
+                //unsigned msg_len = m_packed_request.decode_header(data_);
+                unsigned msg_len = 0;
                 read_body(msg_len);
             }
         }
 
-        void handle_read(const boost::system::error_code& error,
-                size_t bytes_transferred)
+        void read_body(unsigned msg_len)
         {
-            if (!error)
-            {
-                boost::asio::async_write(socket_,
-                        boost::asio::buffer(data_, bytes_transferred),
-                        boost::bind(&session::handle_write, shared_from_this(),
-                            boost::asio::placeholders::error));
-            }
-        }
-
-        void handle_write(const boost::system::error_code& error)
-        {
-            if (!error)
-            {
-                socket_.async_read_some(boost::asio::buffer(data_, max_length),
-                        boost::bind(&session::handle_read, shared_from_this(),
-                            boost::asio::placeholders::error,
-                            boost::asio::placeholders::bytes_transferred));
-            }
         }
 
         tcp::socket socket_;
-        vector<uint8_t> data_;
+        std::vector<uint8_t> data_;
 };
 
 class server
@@ -89,13 +77,13 @@ class server
     private:
         void listen()
         {
-            boost::shared_ptr<session> new_session(new session(io_service_));
+            session::pointer new_session = session::create(io_service_);
             acceptor_.async_accept(new_session->socket(),
                     boost::bind(&server::accept, this, new_session,
                         boost::asio::placeholders::error));
         }
 
-        void accept(session* new_session,
+        void accept(session::pointer new_session,
                 const boost::system::error_code& error)
         {
             if (!error)
@@ -121,10 +109,9 @@ int main(int argc, const char* argv[])
         }
 
         boost::asio::io_service io_service;
-        port = std::atoi(argv[1]);
+        int port = std::atoi(argv[1]);
         std::cout << "Serving on port " << port << std::endl;
         server s(io_service, port);
-
         io_service.run();
     }
     catch (std::exception& e)

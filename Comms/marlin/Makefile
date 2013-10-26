@@ -1,19 +1,68 @@
+# Project Name (executable)
+PROJECT = marlin
+# Compiler
 CC = g++
 
-BASE_FLAGS = -Wall
+# Run Options
+COMMANDLINE_OPTIONS = /dev/ttyS0
 
-# INCLUDE BASE DIRECTORY AND BOOST DIRECTORY FOR HEADERS
-LDFLAGS = -I/usr/local/include/
+# Compiler options during compilation
+COMPILE_OPTIONS = -ansi -pedantic -Wall
 
-# INCLUDE BASE DIRECTORY AND BOOST DIRECTORY FOR LIB FILES
-LLIBFLAGS = -L/usr/local/lib
+#Header include directories
+HEADERS = -I/usr/local/include/
+#Libraries for linking
+LIBS = -lboost_system
 
-# SPECIFIY LINK OPTIONS
-LINKFLAGS = -lboost_system
+# Dependency options
+DEPENDENCY_OPTIONS = -MM
 
-# FINAL FLAGS -- TO BE USED THROUGHOUT
-FLAGS = $(BASE_FLAGS) $(LLIBFLAGS) $(LDFLAGS) $(LINKFLAGS)
+#-- Do not edit below this line --
 
-# NOTE FOR BOOST -- YOU ONLY NEED TO INCLUDE THE PATH BECAUSE IT ONLY INSTALLS HEADER FILES
-main: server_basic.cpp
-	$(CC) $(FLAGS) -o server_basic.out server_basic.cpp
+# Subdirs to search for additional source files
+SUBDIRS := $(shell ls -F | grep "\/" )
+DIRS := ./ $(SUBDIRS)
+SOURCE_FILES := $(foreach d, $(DIRS), $(wildcard $(d)*.cpp) )
+
+# Create an object file of every cpp file
+OBJECTS = $(patsubst %.cpp, %.o, $(SOURCE_FILES))
+
+# Dependencies
+DEPENDENCIES = $(patsubst %.cpp, %.d, $(SOURCE_FILES))
+
+# Create .d files
+%.d: %.cpp
+	$(CC) $(DEPENDENCY_OPTIONS) $< -MT "$*.o $*.d" -MF $*.d
+
+# Make $(PROJECT) the default target
+all: $(DEPENDENCIES) $(PROJECT)
+
+$(PROJECT): $(OBJECTS)
+	$(CC) -o $(PROJECT) $(OBJECTS) $(LIBS)
+
+# Include dependencies (if there are any)
+ifneq "$(strip $(DEPENDENCIES))" ""
+  include $(DEPENDENCIES)
+endif
+
+# Compile every cpp file to an object
+%.o: %.cpp
+	$(CC) -c $(COMPILE_OPTIONS) -o $@ $< $(HEADERS)
+
+# Build & Run Project
+run: $(PROJECT)
+	./$(PROJECT) $(COMMANDLINE_OPTIONS)
+
+# Clean & Debug
+.PHONY: makefile-debug
+makefile-debug:
+
+.PHONY: clean
+clean:
+	rm -f $(PROJECT) $(OBJECTS)
+
+.PHONY: depclean
+depclean:
+	rm -f $(DEPENDENCIES)
+
+clean-all: clean depclean
