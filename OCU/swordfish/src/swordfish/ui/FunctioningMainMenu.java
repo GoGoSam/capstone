@@ -35,6 +35,7 @@ import java.io.*;
 
 
 import ij.*;
+import ij.process.ByteProcessor;
 //import ij.plugin.*;
 //import ij.process.*;
 //import ij.io.*;
@@ -67,11 +68,14 @@ public class FunctioningMainMenu extends JFrame
     ImageJ dd;
     String imagej_app_fpath =
             "/Applications/ImageJ/ImageJ64.app/Contents/MacOS/JavaApplicationStub";
+    String image_name =
+            "/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg";
     Desktop ff = null;
     File ff_file = null;
 
     public FunctioningMainMenu() {
 
+        super("A Robots-eye View");
         //  init();
         buildGui();
         System.out.printf("About to try\n");
@@ -97,7 +101,7 @@ public class FunctioningMainMenu extends JFrame
 
 
         // <editor-fold defaultstate="collapsed" desc="Instantiate Components">
-        p_live_streaming = new JPanel();
+        p_live_streaming = p_title = new JPanel();
         p_title = new JPanel();
         p_file_handling = new JPanel();
         p_directional = new JPanel();
@@ -118,6 +122,8 @@ public class FunctioningMainMenu extends JFrame
         slide_contrast = new JSlider();
         slide_brightness = new JSlider();
 
+
+        gr_color_scale = new ButtonGroup();
         rb_gray_scale = new JRadioButton();
         rb_rgb = new JRadioButton();
 
@@ -405,13 +411,25 @@ public class FunctioningMainMenu extends JFrame
         // </editor-fold>
 
 
+        addKeyListener(IJ.getInstance());
+
+        setResizable(false);
         this.pack();
         addWindowListener(this);
         this.setVisible(true);
 
+
+
     }
 
     // </editor-fold>
+    /**
+     * Method called to set GUI components according to the flag values.
+     *
+     */
+    private void set_button_states() {
+    }
+
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
     @Override
     public void windowClosing(WindowEvent e) {
@@ -451,59 +469,51 @@ public class FunctioningMainMenu extends JFrame
     // </editor-fold>
     //<editor-fold defaultstate="expanded" desc="ComponentListeners">
     private void b_loadActionPerformed(ActionEvent evt) {
-        try {
 
-            ff = Desktop.getDesktop();
-            /* Runtime r=Runtime.getRuntime();
-             //    Process p=null;
-             String s="MyLineInInput.app";
-             try {
-             p = r.exec(s);
-             */
-            ff.open(new File(imagej_app_fpath));
-            ff_file = new File(imagej_app_fpath);
 
-            Class<?>[] tt = ff.getClass().getClasses();
+        new ImagePlus("My new image", new ByteProcessor(400, 400)).show();
+        ImagePlus imp = IJ.openImage(image_name);
+        imp.show();
+        /*  try {
 
-            for (int i = 0; i < tt.length; i++) {
-                System.out.println(Integer.toString(i) + ": " + tt[i].toString());
-            }
-        } catch (IOException ex) {
-            System.err.print(ex.getMessage());
-        } catch (IllegalArgumentException ee) {
-            System.err.printf(ee.getMessage());
-        }
+         ff = Desktop.getDesktop();
+         */ /* Runtime r=Runtime.getRuntime();
+         //    Process p=null;
+         String s="MyLineInInput.app";
+         try {
+         p = r.exec(s);
+         *//*
+         ff.open(new File(imagej_app_fpath));
+         ff_file = new File(imagej_app_fpath);
+
+         Class<?>[] tt = ff.getClass().getClasses();
+
+         for (int i = 0; i < tt.length; i++) {
+         System.out.println(Integer.toString(i) + ": " + tt[i].toString());
+         }
+         } catch (IOException ex) {
+         System.err.print(ex.getMessage());
+         } catch (IllegalArgumentException ee) {
+         System.err.printf(ee.getMessage());
+         }*/
     }
 
     private void b_saveActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
-        String image_name = "/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg";
+
 
         File file = new File(image_name);
         im_plus = IJ.createImage("Test", "RGB black", 258, 338, 1);
 
 
 
-
-        //    int COL = fi.width;
-
-
-// Analyze_Reader rr = new Analyze_Reader();
         // cur_moment_view.setImage(im_plus.getImage());im_plus
         IJ.newImage(image_name, image_name, WIDTH, WIDTH, WIDTH);
-        IJ.run("Open...");
-        IJ.log("TEST");
+//        IJ.run("Open...");
+//        IJ.log("TEST");
 
         IJ.open(image_name);
-        IJ.log("TEST");
 
-        //    im_plus.show();
-        // cur_moment_view =
-        //       new ImageIcon();
-        //ImagePlus jj = new ImagePlus("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg");
-        //kk.setImage(jj);
-//        cur_moment_view.
-        // jLabel2.setIcon(kk.clone());//cur_moment_view);
 
     }
 
@@ -570,12 +580,13 @@ public class FunctioningMainMenu extends JFrame
     }
     // </editor-fold>
     Canvas canvas2;
-    JButton b_loa, b_saved;
+    JButton b_load, b_save;
     JLabel l_title;
     JLabel l_vid_player;
     JMenuBar menuBar;
     JPanel p_title;
     JPanel p_image_disp;
+    ButtonGroup gr_color_scale;
     JRadioButton rb_gray_scale, rb_rgb;
     JLabel l_brightness;
     JLabel l_brightness1;
@@ -588,6 +599,13 @@ public class FunctioningMainMenu extends JFrame
     JLabel icon_up;
     JLabel jLabel2;
     ImageIcon cur_moment_view;
+
+    public static void main(String[] args) {
+
+
+        FunctioningMainMenu fmm = new FunctioningMainMenu();
+
+    }
 }
 /**
  * This method is called from within the constructor to initialize the
