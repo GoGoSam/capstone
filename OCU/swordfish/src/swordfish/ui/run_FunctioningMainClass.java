@@ -4,10 +4,12 @@
  */
 package swordfish.ui;
 
+import javax.imageio.
 /**
  *
  * @author jrob
  */
+
 public class run_FunctioningMainClass {
 
     /**
@@ -15,7 +17,9 @@ public class run_FunctioningMainClass {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+
+        javax.imageio.ImageReader ii
+
         FunctioningMainMenu fmm = new FunctioningMainMenu();
         fmm.setVisible(true);
         //FunctioningMainMenu.se
