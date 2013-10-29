@@ -69,9 +69,6 @@ public class FunctioningMainMenu extends JFrame
             "/Applications/ImageJ/ImageJ64.app/Contents/MacOS/JavaApplicationStub";
     Desktop ff = null;
     File ff_file = null;
-//    jLabel2 = new javax.swing.JLabel();
-//    String dir_image_icons = "/resources/";
-//    JPanel p_directionals;
 
     public FunctioningMainMenu() {
 
