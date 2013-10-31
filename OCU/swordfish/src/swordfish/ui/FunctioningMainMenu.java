@@ -35,7 +35,7 @@ import java.io.*;
 
 
 import ij.*;
-import ij.process.ByteProcessor;
+//import ij.process.ByteProcessor;
 //import ij.plugin.*;
 //import ij.process.*;
 //import ij.io.*;
@@ -43,6 +43,7 @@ import ij.process.ByteProcessor;
 import java.awt.Desktop;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 // </editor-fold>
 /**
@@ -58,9 +59,11 @@ import java.awt.event.WindowListener;
  * @author jrob
  */
 public class FunctioningMainMenu extends JFrame
-        implements KeyListener, WindowListener {
+        implements KeyListener, WindowListener, ActionListener {
 
-    ImagePlus im_plus;
+    ImagePlus im_plus = null;
+    ImagePlus im_plus_rgb = null;
+    ImagePlus im_plus_gray = null;
     int DarkColor = 110;// 64 (correct)
     int BrightColor = 138;
     boolean do_debug = true;
@@ -72,13 +75,14 @@ public class FunctioningMainMenu extends JFrame
             "/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg";
     Desktop ff = null;
     File ff_file = null;
+    boolean[] is_im_loaded = new boolean[1];
 
     public FunctioningMainMenu() {
 
         super("A Robots-eye View");
         //  init();
         buildGui();
-        System.out.printf("About to try\n");
+//        System.out.printf("About to try\n");
         try {
             Runtime rt = Runtime.getRuntime();
             p = rt.exec(imagej_app_fpath);
@@ -90,7 +94,13 @@ public class FunctioningMainMenu extends JFrame
         } catch (Exception exc) {
             System.out.printf("Thrown Exception %s\n", exc.getMessage());
         }
-        System.out.printf("Done trying\n");
+
+        // set flags
+        is_im_loaded[0] = false;
+
+        set_button_states();
+
+//        System.out.printf("Done trying\n");
     }
 
     // <editor-fold defaultstate="collapsed" desc="buildGui">
@@ -101,7 +111,7 @@ public class FunctioningMainMenu extends JFrame
 
 
         // <editor-fold defaultstate="collapsed" desc="Instantiate Components">
-        p_live_streaming = p_title = new JPanel();
+        p_live_streaming = new JPanel();
         p_title = new JPanel();
         p_file_handling = new JPanel();
         p_directional = new JPanel();
@@ -127,7 +137,7 @@ public class FunctioningMainMenu extends JFrame
         rb_gray_scale = new JRadioButton();
         rb_rgb = new JRadioButton();
 
-        im_plus = new ImagePlus();
+//        im_plus = new ImagePlus();
 
         menuBar = new JMenuBar();
         menu_file = new JMenu();
@@ -145,7 +155,8 @@ public class FunctioningMainMenu extends JFrame
         setTitle("Robotic Vision"); // set title
 
         // <editor-fold defaultstate="expanded" desc="Video Stream Panel">
-        p_live_streaming.setBorder(BorderFactory.createTitledBorder(null, "Live Streaming", TitledBorder.DEFAULT_JUSTIFICATION,
+        p_live_streaming.setBorder(BorderFactory.createTitledBorder(null,
+                "Live Streaming", TitledBorder.DEFAULT_JUSTIFICATION,
                 TitledBorder.DEFAULT_POSITION,
                 new Font("Arial", 1, 14))); //
         p_live_streaming.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -286,22 +297,33 @@ public class FunctioningMainMenu extends JFrame
         l_brightness1.setText("Contrast");
 
         rb_gray_scale.setText("Gray-Scale");
-        rb_gray_scale.setToolTipText("");
-        rb_gray_scale.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                rb_gray_scaleActionPerformed(evt);
-            }
-        });
+        rb_gray_scale.setToolTipText("View Image as 8-bit gray scale");
+//        rb_gray_scale.setSelected(false);
+        rb_gray_scale.setActionCommand("Type 8bit");
+        rb_gray_scale.addActionListener(this);
+//        rb_gray_scale.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent evt) {
+//                rb_color_scaleActionPerformed(evt);
+//            }
+//        });
 
         rb_rgb.setText("RGB");
-        rb_rgb.setToolTipText("");
-        rb_rgb.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                rb_rgbActionPerformed(evt);
-            }
-        });
+        rb_rgb.setToolTipText("View image as RGB");
+        rb_rgb.setSelected(true);
+
+
+//        rb_rgb.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent evt) {
+//                rb_color_scaleActionPerformed(evt);
+//            }
+//        });
+        rb_rgb.addActionListener(this);
+        rb_rgb.setActionCommand("Type RGB");
+
+        gr_color_scale.add(rb_rgb);
+        gr_color_scale.add(rb_gray_scale);
 
         GroupLayout p_inspect_toolsLayout = new GroupLayout(p_inspect_tools);
         p_inspect_tools.setLayout(p_inspect_toolsLayout);
@@ -428,6 +450,33 @@ public class FunctioningMainMenu extends JFrame
      *
      */
     private void set_button_states() {
+        if (is_im_loaded[0]) {
+
+            if (do_debug) {
+                System.out.println("set_button_states(): Image loaded");
+            }
+
+            rb_gray_scale.setEnabled(true);
+            rb_rgb.setEnabled(true);
+
+        } else {
+
+            if (do_debug) {
+                System.out.println("set_button_states(): Image not loaded");
+            }
+            rb_gray_scale.setSelected(false);
+            rb_gray_scale.setEnabled(false);
+            rb_rgb.setSelected(false);
+            rb_rgb.setEnabled(false);
+
+        }
+
+    }
+
+    /**
+     * Listens to the radio buttons.
+     */
+    public void actionPerformed(ActionEvent e) {
     }
 
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
@@ -471,56 +520,118 @@ public class FunctioningMainMenu extends JFrame
     private void b_loadActionPerformed(ActionEvent evt) {
 
 
-        new ImagePlus("My new image", new ByteProcessor(400, 400)).show();
-        ImagePlus imp = IJ.openImage(image_name);
-        imp.show();
-        /*  try {
+//        new ImagePlus("My new image", new ByteProcessor(400, 400)).show();
+//        ImagePlus imp = IJ.openImage(image_name);
 
-         ff = Desktop.getDesktop();
-         */ /* Runtime r=Runtime.getRuntime();
-         //    Process p=null;
-         String s="MyLineInInput.app";
-         try {
-         p = r.exec(s);
-         *//*
-         ff.open(new File(imagej_app_fpath));
-         ff_file = new File(imagej_app_fpath);
+        if (!do_debug) {
+            // Set for developing purposes
+            im_plus = IJ.openImage(image_name);
+            im_plus.show();
 
-         Class<?>[] tt = ff.getClass().getClasses();
 
-         for (int i = 0; i < tt.length; i++) {
-         System.out.println(Integer.toString(i) + ": " + tt[i].toString());
-         }
-         } catch (IOException ex) {
-         System.err.print(ex.getMessage());
-         } catch (IllegalArgumentException ee) {
-         System.err.printf(ee.getMessage());
-         }*/
+            if (im_plus != null) {
+                is_im_loaded[0] = true;
+            } else {
+                is_im_loaded[0] = false;
+            }
+            set_button_states();
+            return;
+
+        }
+
+
+
+
+        String cur_dir = IJ.getDirectory("current");
+        JFileChooser fileopen = new JFileChooser(cur_dir);
+
+        int ret = fileopen.showDialog(new JPanel(), "Open file");
+
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = fileopen.getSelectedFile();
+
+            if (file.isFile()) {
+                String fname = file.getName();
+                String fpath = file.getPath();
+//                String fpath = dir + fname;
+                im_plus = IJ.openImage(fpath);
+
+                im_plus.show();
+
+                if (im_plus != null) {
+                    is_im_loaded[0] = true;
+                } else {
+                    is_im_loaded[0] = false;
+                }
+
+                set_button_states();
+                //This is where a real application would open the file.
+
+                if (do_debug) {
+                    System.out.println("Opening: " + fpath);
+                }
+
+            } else {
+
+                if (do_debug) {
+                    System.out.println("Open command cancelled by user.");
+                }
+
+            }
+
+        } else if (ret == JFileChooser.CANCEL_OPTION) {
+
+            if (do_debug) {
+                System.out.print("user cancelled from 'open' dialog box");
+            }
+
+        } else {
+            if (do_debug) {
+                System.out.print("not approved or cancelled... sweet");
+            }
+        }
+
+
     }
 
     private void b_saveActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
-
-
-        File file = new File(image_name);
-        im_plus = IJ.createImage("Test", "RGB black", 258, 338, 1);
-
-
-
+//ImagePlus imp = ...
+//new FileSaver(imp).saveAsTiff("/path/to/image.tif");
+//        File file = new File(image_name);
+//        ImagePlus im_plus = IJ.createImage("Test", "RGB black", 258, 338, 1);
         // cur_moment_view.setImage(im_plus.getImage());im_plus
-        IJ.newImage(image_name, image_name, WIDTH, WIDTH, WIDTH);
+//        IJ.newImage(image_name, image_name, WIDTH, WIDTH, WIDTH);
 //        IJ.run("Open...");
 //        IJ.log("TEST");
-
-        IJ.open(image_name);
-
-
+//        IJ.open(image_name);
     }
 
-    private void rb_gray_scaleActionPerformed(ActionEvent evt) {
+    private void rb_color_scaleActionPerformed(ActionEvent evt) {
+
+        String message = evt.getActionCommand();
+
+        if (message.equals("Type 8bit")) {
+        } else if (message.equals("Type RGB")) {
+
+            im_plus_gray = im_plus_rgb.duplicate();
+        }
+
+
+        IJ.run(im_plus_gray, "8-bit", "");
+        im_plus_rgb.hide();
+        im_plus_gray.show();
     }
 
     private void rb_rgbActionPerformed(ActionEvent evt) {
+        im_plus_gray.close();
+        if (rb_gray_scale.isSelected()) {
+            rb_rgb.setSelected(true);
+            rb_gray_scale.setSelected(false);
+        } else {
+            rb_gray_scale.setSelected(true);
+            rb_rgb.setSelected(false);
+        }
     }
 
     // </editor-fold>
