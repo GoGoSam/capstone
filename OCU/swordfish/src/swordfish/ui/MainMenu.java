@@ -68,7 +68,10 @@ public class MainMenu extends JFrame
         jRadioButton2 = new javax.swing.JRadioButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_file = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mnu_open = new javax.swing.JMenuItem();
+        mnu_saveas = new javax.swing.JMenuItem();
+        mnu_close = new javax.swing.JMenuItem();
+        mnu_exit = new javax.swing.JMenuItem();
         menu_edit = new javax.swing.JMenu();
         menu_tools = new javax.swing.JMenu();
         menu_help = new javax.swing.JMenu();
@@ -268,13 +271,32 @@ public class MainMenu extends JFrame
 
         menu_file.setText("File");
 
-        jMenuItem2.setText("jMenuItem2");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        mnu_open.setText("Open...");
+        mnu_open.setToolTipText("");
+        mnu_open.setActionCommand("mnu_file");
+        mnu_open.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                mnu_openActionPerformed(evt);
             }
         });
-        menu_file.add(jMenuItem2);
+        menu_file.add(mnu_open);
+
+        mnu_saveas.setText("Save As...");
+        mnu_saveas.setActionCommand("mnu_file");
+        mnu_saveas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_saveasActionPerformed(evt);
+            }
+        });
+        menu_file.add(mnu_saveas);
+
+        mnu_close.setText("Close");
+        mnu_close.setActionCommand("mnu_file");
+        menu_file.add(mnu_close);
+
+        mnu_exit.setText("Exit");
+        mnu_exit.setActionCommand("mnu_file");
+        menu_file.add(mnu_exit);
 
         jMenuBar1.add(menu_file);
 
@@ -423,9 +445,13 @@ public class MainMenu extends JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mnu_openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_openActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mnu_openActionPerformed
+
+    private void mnu_saveasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_saveasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnu_saveasActionPerformed
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -531,7 +557,6 @@ public class MainMenu extends JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JRadioButton jRadioButton1;
@@ -543,6 +568,10 @@ public class MainMenu extends JFrame
     private javax.swing.JMenu menu_file;
     private javax.swing.JMenu menu_help;
     private javax.swing.JMenu menu_tools;
+    private javax.swing.JMenuItem mnu_close;
+    private javax.swing.JMenuItem mnu_exit;
+    private javax.swing.JMenuItem mnu_open;
+    private javax.swing.JMenuItem mnu_saveas;
     private javax.swing.JPanel p_directional;
     private javax.swing.JPanel p_file_handling;
     private javax.swing.JPanel p_inspect_tools;

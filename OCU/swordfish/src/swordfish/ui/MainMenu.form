@@ -14,13 +14,36 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="mnu_open">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem2"/>
+                <Property name="text" type="java.lang.String" value="Open..."/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+                <Property name="actionCommand" type="java.lang.String" value="mnu_file"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnu_openActionPerformed"/>
               </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnu_saveas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Save As..."/>
+                <Property name="actionCommand" type="java.lang.String" value="mnu_file"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnu_saveasActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnu_close">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Close"/>
+                <Property name="actionCommand" type="java.lang.String" value="mnu_file"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnu_exit">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Exit"/>
+                <Property name="actionCommand" type="java.lang.String" value="mnu_file"/>
+              </Properties>
             </MenuItem>
           </SubComponents>
         </Menu>

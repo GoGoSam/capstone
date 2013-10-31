@@ -61,6 +61,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class FunctioningMainMenu extends JFrame
         implements KeyListener, WindowListener, ActionListener {
 
+//    FunctioningMainMenu instance = this;
     ImagePlus im_plus = null;
     ImagePlus im_plus_rgb = null;
     ImagePlus im_plus_gray = null;
@@ -76,11 +77,15 @@ public class FunctioningMainMenu extends JFrame
     Desktop ff = null;
     File ff_file = null;
     boolean[] is_im_loaded = new boolean[1];
+    boolean[] color_scaler = new boolean[2]; /*  0 - RGB; 1 - 8 Bit
+     */
+
 
     public FunctioningMainMenu() {
 
         super("A Robots-eye View");
         //  init();
+
         buildGui();
 //        System.out.printf("About to try\n");
         try {
@@ -98,6 +103,8 @@ public class FunctioningMainMenu extends JFrame
         // set flags
         is_im_loaded[0] = false;
 
+        color_scaler[0] = false;
+        color_scaler[1] = false;
         set_button_states();
 
 //        System.out.printf("Done trying\n");
@@ -145,16 +152,21 @@ public class FunctioningMainMenu extends JFrame
         menu_tools = new JMenu();
         menu_help = new JMenu();
         menu_about = new JMenu();
+
+
+        mnu_open = new JMenuItem();
+        mnu_saveas = new JMenuItem();
+        mnu_close = new JMenuItem();
+        mnu_exit = new JMenuItem();
         // </editor-fold>
 
 
 
-
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
         setTitle("Robotic Vision"); // set title
 
-        // <editor-fold defaultstate="expanded" desc="Video Stream Panel">
+
+        // <editor-fold defaultstate="collapsed" desc="Video Stream Panel">
         p_live_streaming.setBorder(BorderFactory.createTitledBorder(null,
                 "Live Streaming", TitledBorder.DEFAULT_JUSTIFICATION,
                 TitledBorder.DEFAULT_POSITION,
@@ -199,7 +211,7 @@ public class FunctioningMainMenu extends JFrame
                 .addGap(0, 9, Short.MAX_VALUE)));
         // </editor-fold>
 
-        // <editor-fold defaultstate="expanded" desc="File Handling Panel">
+        // <editor-fold defaultstate="collapsed" desc="File Handling Panel">
         p_file_handling.setBorder(BorderFactory.createTitledBorder(null, "File Handling", TitledBorder.DEFAULT_JUSTIFICATION,
                 TitledBorder.DEFAULT_POSITION, new Font("Arial", 1, 14)));
 
@@ -275,7 +287,7 @@ public class FunctioningMainMenu extends JFrame
         p_image_disp.setMaximumSize(p_image_disp.getSize());
         // </editor-fold>
 
-        // <editor-fold defaultstate="expanded" desc="Directionals Panel">
+        // <editor-fold defaultstate="collapsed" desc="Directionals Panel">
         p_directional.setBorder(BorderFactory.createTitledBorder(null, "Directionals", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14)));
 
         GroupLayout p_directionalLayout = new GroupLayout(p_directional);
@@ -289,7 +301,7 @@ public class FunctioningMainMenu extends JFrame
 
         // </editor-fold>
 
-        // <editor-fold defaultstate="expanded" desc="Image Processing Panel">
+        // <editor-fold defaultstate="collapsed" desc="Image Processing Panel">
         p_inspect_tools.setBorder(BorderFactory.createTitledBorder(null, "Inspection Tools", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14)));
 
         l_brightness.setText("Brightness");
@@ -365,8 +377,54 @@ public class FunctioningMainMenu extends JFrame
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Menu Bar">
+
+        // <editor-fold defaultstate="collapsed" desc="File Dropdown">
         menu_file.setText("File");
+
+        mnu_open.setText("Open...");
+//        mnu_open.setToolTipText("");
+        mnu_open.setActionCommand("Open...");
+        mnu_open.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_fileActionPerformed(evt);
+            }
+        });
+        menu_file.add(mnu_open);
+
+        mnu_saveas.setText("Save As...");
+        mnu_saveas.setActionCommand("Save As...");
+        mnu_saveas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                mnu_fileActionPerformed(evt);
+            }
+        });
+        menu_file.add(mnu_saveas);
+
+        mnu_close.setText("Close");
+        mnu_close.setActionCommand("Close");
+        mnu_close.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                mnu_fileActionPerformed(evt);
+            }
+        });
+        menu_file.add(mnu_close);
+
+        mnu_exit.setText("Exit");
+        mnu_exit.setActionCommand("Exit");
+        mnu_exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                mnu_fileActionPerformed(evt);
+            }
+        });
+        menu_file.add(mnu_exit);
+
         menuBar.add(menu_file);
+
+        // </editor-fold>
 
         menu_edit.setText("Edit");
         menuBar.add(menu_edit);
@@ -468,7 +526,6 @@ public class FunctioningMainMenu extends JFrame
             rb_gray_scale.setEnabled(false);
             rb_rgb.setSelected(false);
             rb_rgb.setEnabled(false);
-
         }
 
     }
@@ -476,7 +533,28 @@ public class FunctioningMainMenu extends JFrame
     /**
      * Listens to the radio buttons.
      */
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent evt) {
+
+        String message = evt.getActionCommand();
+
+        if (message.equals("Type 8bit")) {
+            if (do_debug) {
+                System.out.println("8 - bit RadioButton was pressed");
+            }
+//            rb_rgb
+
+        } else if (message.equals("Type RGB")) {
+            if (do_debug) {
+                System.out.println("RGB RadioButton was pressed");
+            }
+
+            im_plus_gray = im_plus_rgb.duplicate();
+        }
+
+
+        IJ.run(im_plus_gray, "8-bit", "");
+        im_plus_rgb.hide();
+        im_plus_gray.show();
     }
 
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
@@ -516,80 +594,48 @@ public class FunctioningMainMenu extends JFrame
 //    public void windowStateChanged(WindowEvent e) {
 //    }
     // </editor-fold>
+    private boolean load_image(String fpath) {
+
+        boolean ret_val;
+
+        im_plus = IJ.openImage(image_name);
+        im_plus.show();
+
+        if (im_plus != null) {
+            ret_val = true;
+        } else {
+            ret_val = false;
+        }
+        set_button_states();
+
+        return ret_val;
+    }
+
     //<editor-fold defaultstate="expanded" desc="ComponentListeners">
     private void b_loadActionPerformed(ActionEvent evt) {
 
-
+        is_im_loaded[0] = load_image(image_name);
 //        new ImagePlus("My new image", new ByteProcessor(400, 400)).show();
 //        ImagePlus imp = IJ.openImage(image_name);
 
-        if (!do_debug) {
-            // Set for developing purposes
-            im_plus = IJ.openImage(image_name);
-            im_plus.show();
+//        if (!do_debug) {
+//            // Set for developing purposes
+//            im_plus = IJ.openImage(image_name);
+//            im_plus.show();
+//
+//
+//            if (im_plus != null) {
+//                is_im_loaded[0] = true;
+//            } else {
+//                is_im_loaded[0] = false;
+//            }
+//            set_button_states();
+//            return;
+//
+//        }
 
 
-            if (im_plus != null) {
-                is_im_loaded[0] = true;
-            } else {
-                is_im_loaded[0] = false;
-            }
-            set_button_states();
-            return;
 
-        }
-
-
-
-
-        String cur_dir = IJ.getDirectory("current");
-        JFileChooser fileopen = new JFileChooser(cur_dir);
-
-        int ret = fileopen.showDialog(new JPanel(), "Open file");
-
-        if (ret == JFileChooser.APPROVE_OPTION) {
-            File file = fileopen.getSelectedFile();
-
-            if (file.isFile()) {
-                String fname = file.getName();
-                String fpath = file.getPath();
-//                String fpath = dir + fname;
-                im_plus = IJ.openImage(fpath);
-
-                im_plus.show();
-
-                if (im_plus != null) {
-                    is_im_loaded[0] = true;
-                } else {
-                    is_im_loaded[0] = false;
-                }
-
-                set_button_states();
-                //This is where a real application would open the file.
-
-                if (do_debug) {
-                    System.out.println("Opening: " + fpath);
-                }
-
-            } else {
-
-                if (do_debug) {
-                    System.out.println("Open command cancelled by user.");
-                }
-
-            }
-
-        } else if (ret == JFileChooser.CANCEL_OPTION) {
-
-            if (do_debug) {
-                System.out.print("user cancelled from 'open' dialog box");
-            }
-
-        } else {
-            if (do_debug) {
-                System.out.print("not approved or cancelled... sweet");
-            }
-        }
 
 
     }
@@ -634,8 +680,83 @@ public class FunctioningMainMenu extends JFrame
         }
     }
 
+    /**
+     * Function called in the event an item under File menu tab is pressed
+     *
+     * @param evt
+     */
+    private void mnu_fileActionPerformed(ActionEvent evt) {
+        String s_mnu = evt.getActionCommand();
+        if (do_debug) {
+            System.out.println("File Menu Sub-menu triggered by " + s_mnu);
+        }
+
+        if (s_mnu.equals("Open...")) {
+
+
+            String cur_dir = IJ.getDirectory("current");
+            JFileChooser fileopen = new JFileChooser(cur_dir);
+
+            int ret = fileopen.showDialog(new JPanel(), "Open file");
+
+            if (ret == JFileChooser.APPROVE_OPTION) {
+                File file = fileopen.getSelectedFile();
+
+                if (file.isFile()) {
+//                    String fname = file.getName();
+                    String fpath = file.getPath();
+//                String fpath = dir + fname;
+                    im_plus = IJ.openImage(fpath);
+
+                    im_plus.show();
+
+                    if (im_plus != null) {
+                        is_im_loaded[0] = true;
+                    } else {
+                        is_im_loaded[0] = false;
+                    }
+
+                    set_button_states();
+                    //This is where a real application would open the file.
+
+                    if (do_debug) {
+                        System.out.println("Opening: " + fpath);
+                    }
+
+                } else {
+
+                    if (do_debug) {
+                        System.out.println("Open command cancelled by user.");
+                    }
+
+                }
+
+            } else if (ret == JFileChooser.CANCEL_OPTION) {
+
+                if (do_debug) {
+                    System.out.print("user cancelled from 'open' dialog box");
+                }
+
+            } else {
+                if (do_debug) {
+                    System.out.print("not approved or cancelled... sweet");
+                }
+            }
+        } else if (s_mnu.equals("Save As...")) {
+        } else if (s_mnu.equals("Close")) {
+        } else if (s_mnu.equals("Exit")) {
+            this.setVisible(false);
+            this.dispose();
+
+//            instance = null;
+        }
+
+
+
+    }
     // </editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Key Listeners">
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -690,6 +811,7 @@ public class FunctioningMainMenu extends JFrame
         }
     }
     // </editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Component Declarations">
     Canvas canvas2;
     JButton b_load, b_save;
     JLabel l_title;
@@ -702,6 +824,10 @@ public class FunctioningMainMenu extends JFrame
     JLabel l_brightness;
     JLabel l_brightness1;
     JMenu menu_about, menu_edit, menu_file, menu_help, menu_tools;
+    JMenuItem mnu_close;
+    JMenuItem mnu_exit;
+    JMenuItem mnu_open;
+    JMenuItem mnu_saveas;
     JPanel p_directional, p_file_handling, p_inspect_tools, p_live_streaming;
     JSlider slide_brightness, slide_contrast;
     JLabel icon_down;
@@ -710,13 +836,13 @@ public class FunctioningMainMenu extends JFrame
     JLabel icon_up;
     JLabel jLabel2;
     ImageIcon cur_moment_view;
+    // </editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Main (For Testing/Development)">
     public static void main(String[] args) {
-
-
         FunctioningMainMenu fmm = new FunctioningMainMenu();
-
     }
+    // </editor-fold>
 }
 /**
  * This method is called from within the constructor to initialize the
