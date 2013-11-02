@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package swordfish.ui;
+package swordfish.ui_develop;
 
+import swordfish.ui.*;
 import swordfish.*;
 import java.awt.event.KeyListener;
 import javax.swing.*;
@@ -17,7 +18,7 @@ import java.io.*;
  *
  * @author jrob
  */
-public class MainMenu extends JFrame
+public class MainMenu1 extends JFrame
         implements KeyListener {
 
     /**
@@ -32,7 +33,7 @@ public class MainMenu extends JFrame
 
 //    private String dir_image_icons = "/resources/";
     // globals
-    public MainMenu() {
+    public MainMenu1() {
         init();
         initComponents();
 
@@ -544,7 +545,7 @@ public class MainMenu extends JFrame
             @Override
             public void run() {
                 new MainMenu().setVisible(true);
-//                new MobileDirectionDisplay().setVisible(true);
+                new MobileDirectionDisplay().setVisible(true);
             }
         });
     }
