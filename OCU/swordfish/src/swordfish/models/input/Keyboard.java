@@ -1,4 +1,4 @@
-package swordfish.controller.input;
+package swordfish.models.input;
 
 import static java.awt.event.KeyEvent.*;
 
@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
-import swordfish.controller.device.Listeners;
+import swordfish.models.device.Listeners;
 
 /**
  * The input device for the system wide keyboard.

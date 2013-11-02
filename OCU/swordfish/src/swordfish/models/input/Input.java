@@ -1,4 +1,4 @@
-package swordfish.controller.input;
+package swordfish.models.input;
 
 /**
  * Represents an input from an input device. Eg, a button press or axis movement.

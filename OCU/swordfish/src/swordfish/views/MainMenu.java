@@ -2,8 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package swordfish.ui;
+package swordfish.views;
 
+import swordfish.ui_develop.*;
+import swordfish.ui.*;
 import swordfish.*;
 import java.awt.event.KeyListener;
 import javax.swing.*;

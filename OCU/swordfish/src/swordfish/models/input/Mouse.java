@@ -1,4 +1,4 @@
-package swordfish.controller.input;
+package swordfish.models.input;
 
 import java.awt.AWTEvent;
 import java.awt.AWTException;
@@ -13,7 +13,7 @@ import java.awt.event.MouseWheelEvent;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import swordfish.controller.device.Listeners;
+import swordfish.models.device.Listeners;
 
 /**
  * The input device for the system wide mouse.

@@ -1,9 +1,9 @@
-package swordfish.controller.input;
+package swordfish.models.input;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import swordfish.controller.device.*;
+import swordfish.models.device.*;
 
 /**
  * An input device for an Xbox 360 controller.

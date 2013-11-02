@@ -1,4 +1,6 @@
-package swordfish;
+package swordfish.controllers;
+
+import swordfish.views.MobileDirectionDisplay;
 
 /**
  *

@@ -1,4 +1,4 @@
-package swordfish.controller.device;
+package swordfish.models.device;
 
 public abstract class Deadzone {
 	protected float sizeX, sizeY;

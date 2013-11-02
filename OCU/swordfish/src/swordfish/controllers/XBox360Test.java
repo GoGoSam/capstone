@@ -1,4 +1,4 @@
-package swordfish;
+package swordfish.controllers;
 
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
@@ -7,8 +7,8 @@ import net.java.games.input.Event;
 import net.java.games.input.EventQueue;
 import net.java.games.input.Component;
 import net.java.games.input.Component.Identifier;
-import swordfish.controller.input.XboxController;
-import swordfish.controller.input.JInputXboxController;
+import swordfish.models.input.XboxController;
+import swordfish.models.input.JInputXboxController;
 
 /**
  * User: Sam Coe

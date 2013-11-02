@@ -1,4 +1,4 @@
-package swordfish.controller.device;
+package swordfish.models.device;
 
 import java.lang.reflect.Array;
 

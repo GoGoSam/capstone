@@ -1,4 +1,4 @@
-package swordfish;
+package swordfish.views;
 
 import java.awt.event.*;
 import javax.swing.*;
