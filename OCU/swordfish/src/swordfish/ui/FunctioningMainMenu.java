@@ -35,6 +35,7 @@ import java.io.*;
 
 
 import ij.*;
+import ij.process.ImageProcessor;
 //import ij.process.ByteProcessor;
 //import ij.plugin.*;
 //import ij.process.*;
@@ -54,6 +55,8 @@ import java.awt.event.WindowListener;
  * rev 1 October 22, 2013 - Created Document - Compressed much of the code to
  * reduce length - Added functionality to display image in the appropriate panel
  *
+ * rev 5 Nov 4 - Resize images to fit in panel [230 x 330]
+ *
  *
  * @since October 22, 2013
  * @author jrob
@@ -67,6 +70,8 @@ public class FunctioningMainMenu extends JFrame
     ImagePlus im_plus_gray = null;      // --- 8-Bit Gray
     int DarkColor = 110;// 64 (correct)
     int BrightColor = 138;
+    int IMG_WIDTH = 250; // pixels
+    int IMG_Height = 330; // pixels
     boolean do_debug = true;
     Process p;
     ImageJ dd;
@@ -257,7 +262,8 @@ public class FunctioningMainMenu extends JFrame
 
         // <editor-fold defaultstate="collapsed" desc="Image Viewer">
         p_image_disp.setBorder(BorderFactory.createTitledBorder(null, "Captured Moment", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14)));
-
+//        jLabel2.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg")); // NOI18N
+        jLabel2.setPreferredSize(new Dimension(250, 320));
         GroupLayout jPanel5Layout = new GroupLayout(p_image_disp);
         p_image_disp.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -600,19 +606,37 @@ public class FunctioningMainMenu extends JFrame
 //    public void windowStateChanged(WindowEvent e) {
 //    }
     // </editor-fold>
+    private void setImageDefaultSize() {
+
+        ImageProcessor ip_big = im_plus.getProcessor();
+        ip_big.setInterpolate(true);
+        ImageProcessor ip_small = ip_big.resize(IMG_WIDTH, IMG_Height);
+        ImagePlus small = new ImagePlus("small", ip_small);
+        im_plus = small;
+
+    }
+
     private boolean load_image(String fpath) {
 
         boolean ret_val;
 
         im_plus = IJ.openImage(image_name);
-        im_plus.show();
+//        im_plus.show();
 
         if (im_plus != null) {
             ret_val = true;
         } else {
             ret_val = false;
         }
+        int[] dims = im_plus.getDimensions();
 
+        if (dims[0] != IMG_WIDTH || dims[1] != IMG_Height) {
+            setImageDefaultSize();
+        }// else {
+        im_plus.show();
+//        }
+
+//        IJ.run(im_plus, "Size...", "");
 
         return ret_val;
     }
