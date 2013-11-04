@@ -4,6 +4,8 @@
 package swordfish.ui;
 
 // <editor-fold defaultstate="collapsed" desc="Imports">
+import com.google.common.primitives.Chars;
+import com.google.common.primitives.Ints;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.Container.*;
@@ -19,7 +21,7 @@ import javax.swing.BorderFactory;
 import javax.swing.border.TitledBorder;
 import javax.swing.GroupLayout.*;
 import javax.swing.*;
-
+import java.util.Collections;
 
 //import swordfish.MobileDirectionDisplay;
 import java.sql.Time.*;
@@ -35,7 +37,9 @@ import java.io.*;
 
 
 import ij.*;
+import ij.measure.Calibration;
 import ij.process.ImageProcessor;
+import ij.process.ImageStatistics;
 //import ij.process.ByteProcessor;
 //import ij.plugin.*;
 //import ij.process.*;
@@ -44,6 +48,10 @@ import ij.process.ImageProcessor;
 import java.awt.Desktop;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.text.MessageFormat;
+import java.util.Arrays;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 //import javax.swing.filechooser.FileNameExtensionFilter;
 
 // </editor-fold>
@@ -72,6 +80,7 @@ public class FunctioningMainMenu extends JFrame
     int BrightColor = 138;
     int IMG_WIDTH = 275; // pixels
     int IMG_HEIGHT = 280; // pixels
+    double[] orig_min_max = new double[2];
     boolean do_debug = true;
     Process p;
     ImageJ dd;
@@ -81,6 +90,8 @@ public class FunctioningMainMenu extends JFrame
             "/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg";
     Desktop ff = null;
     File ff_file = null;
+    int window = 255;
+    int level = 128;
     boolean[] is_im_loaded = new boolean[1];
     boolean[] color_scaler = new boolean[2]; /*  0 - RGB; 1 - 8 Bit
      */
@@ -92,19 +103,7 @@ public class FunctioningMainMenu extends JFrame
         //  init();
 
         buildGui();
-//       System.out.printf("About to try\n");
-   /*      try {
-         Runtime rt = Runtime.getRuntime();
-         p = rt.exec(imagej_app_fpath);
-         InputStream in = p.getInputStream();
-         OutputStream out = p.getOutputStream();
-         InputStream err = p.getErrorStream();
 
-         p.destroy();//
-         } catch (Exception exc) {
-         System.out.printf("Thrown Exception %s\n", exc.getMessage());
-         }
-         */
         // set flags
         is_im_loaded[0] = false;
 
@@ -134,7 +133,7 @@ public class FunctioningMainMenu extends JFrame
         b_save = new JButton();
 
         l_vid_player = new JLabel();
-        jLabel2 = new JLabel();
+        lab_imageIcon = new JLabel();
         l_brightness = new JLabel();
         l_brightness1 = new JLabel();
         l_title = new JLabel();
@@ -262,7 +261,7 @@ public class FunctioningMainMenu extends JFrame
 
         // <editor-fold defaultstate="collapsed" desc="Image Viewer">
         p_image_disp.setBorder(BorderFactory.createTitledBorder(null, "Captured Moment", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14)));
-        jLabel2.setPreferredSize(new Dimension(IMG_WIDTH, IMG_HEIGHT));
+        lab_imageIcon.setPreferredSize(new Dimension(IMG_WIDTH, IMG_HEIGHT));
         GroupLayout jPanel5Layout = new GroupLayout(p_image_disp);
         p_image_disp.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -270,7 +269,7 @@ public class FunctioningMainMenu extends JFrame
                 .addGroup(jPanel5Layout.createSequentialGroup()
                 //       .addGap(19, 19, 19)//
                 .addContainerGap() //235
-                .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lab_imageIcon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(canvas2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 //.addContainerGap(262, Short.MAX_VALUE)
@@ -282,7 +281,7 @@ public class FunctioningMainMenu extends JFrame
                 //  .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(Alignment.LEADING)
                 //  .addGap(0, 206, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(lab_imageIcon)
                 //               .addComponent(kk)
                 .addComponent(canvas2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 // .addContainerGap(276, Short.MAX_VALUE))
@@ -379,6 +378,19 @@ public class FunctioningMainMenu extends JFrame
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(slide_contrast, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(9, Short.MAX_VALUE)));
+
+//        slide_contrast.addChangeListener(null);
+//        slide_contrast.addChangeListener(new ChangeListener() {
+//            public void actionPerformed(ActionEvent evt) {
+//                slide_contrastActionPerformed(evt);
+//            }
+//
+//            @Override
+//            public void stateChanged(ChangeEvent e) {
+//                slide_contrastActionPerformed(e);
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//        });
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Menu Bar">
@@ -521,6 +533,12 @@ public class FunctioningMainMenu extends JFrame
 
             rb_gray_scale.setEnabled(true);
             rb_rgb.setEnabled(true);
+            slide_contrast.setEnabled(true);
+
+            slide_brightness.setEnabled(true);
+            b_save.setEnabled(true);
+
+
 
         } else {
 
@@ -531,9 +549,50 @@ public class FunctioningMainMenu extends JFrame
             rb_gray_scale.setEnabled(false);
             rb_rgb.setSelected(false);
             rb_rgb.setEnabled(false);
+            slide_contrast.setEnabled(false);
+            slide_brightness.setEnabled(false);
+            b_save.setEnabled(false);
         }
 
+
     }
+
+    private void slide_contrastActionPerformed(ChangeEvent evt) {
+
+        JSlider tmp = (JSlider) evt.getSource();
+//        tmp.getValue();
+        System.out.printf((tmp.getValue()) + "\n");//.getValue()));
+        ImageProcessor ff = im_plus.getProcessor();
+
+        double scaled_thres = tmp.getValue() - 50;
+
+//        System.out.printf(Double.toString(orig_min_max[0] * scaled_thres));
+        if (scaled_thres >= 0) {
+            im_plus.getProcessor().setMinAndMax(orig_min_max[0], orig_min_max[1] * scaled_thres / 100);
+            System.out.printf("Max: " + (orig_min_max[1] + scaled_thres) + "\n");//.getValue()));
+        } else {
+            im_plus.getProcessor().setMinAndMax(orig_min_max[0] * scaled_thres / 100, orig_min_max[1]);
+            System.out.printf("Min: " + (orig_min_max[0] - scaled_thres) + "\n");//.getValue()));
+//im_plus.getProcessor().
+        }
+
+
+
+
+//        Calibration cal = im_plus.getCalibration();
+//        im_plus.getProcessor().setMinAndMax(22, 77);
+
+        im_plus.updateAndDraw();
+
+    }
+//
+//    public static char[] convert(int[] chars) {
+//        char[] int = new char[chars.length];
+//        for (int i = 0; i < copy.length; i++) {
+//            copy[i] = ((chars[i]));
+//        }
+//        return copy;
+//    }
 
     /**
      * Listens to the radio buttons.
@@ -551,7 +610,7 @@ public class FunctioningMainMenu extends JFrame
 //            im_plus.hide();
 //            im_plus_gray.show();
 
-            jLabel2.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
+            lab_imageIcon.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
 
 
 
@@ -564,9 +623,50 @@ public class FunctioningMainMenu extends JFrame
 //            im_plus.hide();
 //            im_plus_rgb.show();
 
-            jLabel2.setIcon(new ImageIcon(im_plus_rgb.getImage())); // NOI18N
+            lab_imageIcon.setIcon(new ImageIcon(im_plus_rgb.getImage())); // NOI18N
 
 //            im_plus_gray.show();
+
+
+            int autoThreshold = 0;
+            int AUTO_THRESHOLD = 5000;
+
+//            Image imp = im_plus.getImage();
+
+            Calibration cal = im_plus.getCalibration();
+//            im_plus.setCalibration(cal);
+//            imp.setCalibration("None");
+            im_plus.setCalibration(null);
+            ImageStatistics stats = im_plus.getStatistics();// # get uncalibrated stats
+            im_plus.setCalibration(cal);
+            int limit = (stats.pixelCount / 10);
+            int[] histogram = stats.histogram;// #int[]
+//            for (int i = 0; i < histogram.length; i++) {
+//                System.out.printf(MessageFormat.format("{0}  ", Integer.toString(java.lang.Math.max(histogram))));
+//            }
+//            List b = Arrays.asList(ArrayUtils.toObject(histogram));
+//            Character[] b = convert(Array.histogram);
+            System.out.println(Ints.min(histogram));
+            System.out.println(Ints.max(histogram));
+//            return;
+//            System.out.println(Collections.max(Arrays.asList(histogram)));
+//            System.out.println(Collections.min(b));
+//            System.out.println(Collections.max(b));
+//            if (autoThreshold < 10) {
+//                autoThreshold = AUTO_THRESHOLD;
+//            } else {
+//            }
+////Array.
+//            autoThreshold /= 2;
+//            int threshold = stats.pixelCount / autoThreshold;
+////stats.
+////            System.out.printf("count: %d", stats.pixelCount);
+//            System.out.printf("count: %d", threshold);
+//            System.out.printf("count: %d", limit);
+////#int
+////print "pixelCount", stats.pixelCount;
+//print "threshold", threshold
+//print "limit", limit
 
         }
 
@@ -611,6 +711,9 @@ public class FunctioningMainMenu extends JFrame
 //    public void windowStateChanged(WindowEvent e) {
 //    }
     // </editor-fold>
+    /**
+     *
+     */
     private void setImageDefaultSize() {
 
         ImageProcessor ip_big = im_plus.getProcessor();
@@ -637,11 +740,14 @@ public class FunctioningMainMenu extends JFrame
 
         if (dims[0] != IMG_WIDTH || dims[1] != IMG_HEIGHT) {
             setImageDefaultSize();
-        }// else {
-//        im_plus.show();
-//        }//
-        jLabel2.setIcon(new ImageIcon(im_plus.getImage())); // NOI18N
+        }
+        lab_imageIcon.setIcon(new ImageIcon(im_plus.getImage()));
+        ImageProcessor proc = im_plus.getProcessor();
+        orig_min_max[0] = proc.getMin();
+        orig_min_max[1] = proc.getMax();
 
+//        String tmp = im_plus.getProperties().toString();
+//        System.out.printf(tmp);
 
         return ret_val;
     }
@@ -723,7 +829,7 @@ public class FunctioningMainMenu extends JFrame
             }
 //            im_plus_gray.show();
 
-            jLabel2.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
+            lab_imageIcon.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
 
 
         }
@@ -812,7 +918,7 @@ public class FunctioningMainMenu extends JFrame
         }
 
 
-
+//
     }
     // </editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Key Listeners">
@@ -894,7 +1000,7 @@ public class FunctioningMainMenu extends JFrame
     JLabel icon_left;
     JLabel icon_right;
     JLabel icon_up;
-    JLabel jLabel2;
+    JLabel lab_imageIcon;
     ImageIcon cur_moment_view;
     // </editor-fold>
 
