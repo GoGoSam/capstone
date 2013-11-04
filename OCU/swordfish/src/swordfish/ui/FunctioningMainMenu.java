@@ -35,6 +35,7 @@ import java.io.*;
 
 
 import ij.*;
+import ij.process.ImageProcessor;
 //import ij.process.ByteProcessor;
 //import ij.plugin.*;
 //import ij.process.*;
@@ -43,7 +44,7 @@ import ij.*;
 import java.awt.Desktop;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
+//import javax.swing.filechooser.FileNameExtensionFilter;
 
 // </editor-fold>
 /**
@@ -54,6 +55,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * rev 1 October 22, 2013 - Created Document - Compressed much of the code to
  * reduce length - Added functionality to display image in the appropriate panel
  *
+ * rev 5 Nov 4 - Resize images to fit in panel [230 x 330]
+ *
  *
  * @since October 22, 2013
  * @author jrob
@@ -62,11 +65,13 @@ public class FunctioningMainMenu extends JFrame
         implements KeyListener, WindowListener, ActionListener {
 
 //    FunctioningMainMenu instance = this;
-    ImagePlus im_plus = null;
-    ImagePlus im_plus_rgb = null;
-    ImagePlus im_plus_gray = null;
+    ImagePlus im_plus = null;       // This will be the original
+    ImagePlus im_plus_rgb = null;   // in the case RGB type is set as conversion
+    ImagePlus im_plus_gray = null;      // --- 8-Bit Gray
     int DarkColor = 110;// 64 (correct)
     int BrightColor = 138;
+    int IMG_WIDTH = 275; // pixels
+    int IMG_HEIGHT = 280; // pixels
     boolean do_debug = true;
     Process p;
     ImageJ dd;
@@ -87,19 +92,19 @@ public class FunctioningMainMenu extends JFrame
         //  init();
 
         buildGui();
-//        System.out.printf("About to try\n");
-        try {
-            Runtime rt = Runtime.getRuntime();
-            p = rt.exec(imagej_app_fpath);
-            InputStream in = p.getInputStream();
-            OutputStream out = p.getOutputStream();
-            InputStream err = p.getErrorStream();
+//       System.out.printf("About to try\n");
+   /*      try {
+         Runtime rt = Runtime.getRuntime();
+         p = rt.exec(imagej_app_fpath);
+         InputStream in = p.getInputStream();
+         OutputStream out = p.getOutputStream();
+         InputStream err = p.getErrorStream();
 
-            p.destroy();//
-        } catch (Exception exc) {
-            System.out.printf("Thrown Exception %s\n", exc.getMessage());
-        }
-
+         p.destroy();//
+         } catch (Exception exc) {
+         System.out.printf("Thrown Exception %s\n", exc.getMessage());
+         }
+         */
         // set flags
         is_im_loaded[0] = false;
 
@@ -257,7 +262,7 @@ public class FunctioningMainMenu extends JFrame
 
         // <editor-fold defaultstate="collapsed" desc="Image Viewer">
         p_image_disp.setBorder(BorderFactory.createTitledBorder(null, "Captured Moment", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14)));
-
+        jLabel2.setPreferredSize(new Dimension(IMG_WIDTH, IMG_HEIGHT));
         GroupLayout jPanel5Layout = new GroupLayout(p_image_disp);
         p_image_disp.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -541,20 +546,32 @@ public class FunctioningMainMenu extends JFrame
             if (do_debug) {
                 System.out.println("8 - bit RadioButton was pressed");
             }
-//            rb_rgb
+            im_plus_gray = im_plus.duplicate();
+            IJ.run(im_plus_gray, "8-bit", "");
+//            im_plus.hide();
+//            im_plus_gray.show();
+
+            jLabel2.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
+
+
 
         } else if (message.equals("Type RGB")) {
             if (do_debug) {
                 System.out.println("RGB RadioButton was pressed");
             }
+            im_plus_rgb = im_plus.duplicate();
+//            IJ.run(im_plus_gray, "8-bit", "");
+//            im_plus.hide();
+//            im_plus_rgb.show();
 
-            im_plus_gray = im_plus_rgb.duplicate();
+            jLabel2.setIcon(new ImageIcon(im_plus_rgb.getImage())); // NOI18N
+
+//            im_plus_gray.show();
+
         }
 
 
-        IJ.run(im_plus_gray, "8-bit", "");
-        im_plus_rgb.hide();
-        im_plus_gray.show();
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
@@ -594,19 +611,37 @@ public class FunctioningMainMenu extends JFrame
 //    public void windowStateChanged(WindowEvent e) {
 //    }
     // </editor-fold>
+    private void setImageDefaultSize() {
+
+        ImageProcessor ip_big = im_plus.getProcessor();
+        ip_big.setInterpolate(true);
+        ImageProcessor ip_small = ip_big.resize(IMG_WIDTH, IMG_HEIGHT);
+        ImagePlus small = new ImagePlus("small", ip_small);
+        im_plus = small;
+
+    }
+
     private boolean load_image(String fpath) {
 
         boolean ret_val;
 
         im_plus = IJ.openImage(image_name);
-        im_plus.show();
+//        im_plus.show();
 
         if (im_plus != null) {
             ret_val = true;
         } else {
             ret_val = false;
         }
-        set_button_states();
+        int[] dims = im_plus.getDimensions();
+
+        if (dims[0] != IMG_WIDTH || dims[1] != IMG_HEIGHT) {
+            setImageDefaultSize();
+        }// else {
+//        im_plus.show();
+//        }//
+        jLabel2.setIcon(new ImageIcon(im_plus.getImage())); // NOI18N
+
 
         return ret_val;
     }
@@ -636,7 +671,7 @@ public class FunctioningMainMenu extends JFrame
 
 
 
-
+        set_button_states();
 
     }
 
@@ -657,16 +692,41 @@ public class FunctioningMainMenu extends JFrame
 
         String message = evt.getActionCommand();
 
-        if (message.equals("Type 8bit")) {
-        } else if (message.equals("Type RGB")) {
+        if (message.equals("Type RGB")) {
+
+            im_plus_rgb = im_plus_rgb.duplicate();
+
+
+
+//            IJ.run(im_plus_, "8-bit", "");
+
+            im_plus.hide();
+            if (im_plus_gray != null) {
+
+
+                im_plus_gray = null;
+            }
+            im_plus_rgb.show();
+        } else if (message.equals("Type 8bit")) {
 
             im_plus_gray = im_plus_rgb.duplicate();
+
+
+
+            IJ.run(im_plus_gray, "8-bit", "");
+
+            im_plus.hide();
+            if (im_plus_rgb != null) {
+
+
+                im_plus_rgb = null;
+            }
+//            im_plus_gray.show();
+
+            jLabel2.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
+
+
         }
-
-
-        IJ.run(im_plus_gray, "8-bit", "");
-        im_plus_rgb.hide();
-        im_plus_gray.show();
     }
 
     private void rb_rgbActionPerformed(ActionEvent evt) {
