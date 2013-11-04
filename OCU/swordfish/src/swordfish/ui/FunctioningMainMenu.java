@@ -70,8 +70,8 @@ public class FunctioningMainMenu extends JFrame
     ImagePlus im_plus_gray = null;      // --- 8-Bit Gray
     int DarkColor = 110;// 64 (correct)
     int BrightColor = 138;
-    int IMG_WIDTH = 250; // pixels
-    int IMG_Height = 330; // pixels
+    int IMG_WIDTH = 275; // pixels
+    int IMG_HEIGHT = 280; // pixels
     boolean do_debug = true;
     Process p;
     ImageJ dd;
@@ -262,8 +262,7 @@ public class FunctioningMainMenu extends JFrame
 
         // <editor-fold defaultstate="collapsed" desc="Image Viewer">
         p_image_disp.setBorder(BorderFactory.createTitledBorder(null, "Captured Moment", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14)));
-//        jLabel2.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/hanger_test_image.jpg")); // NOI18N
-        jLabel2.setPreferredSize(new Dimension(250, 320));
+        jLabel2.setPreferredSize(new Dimension(IMG_WIDTH, IMG_HEIGHT));
         GroupLayout jPanel5Layout = new GroupLayout(p_image_disp);
         p_image_disp.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -549,8 +548,11 @@ public class FunctioningMainMenu extends JFrame
             }
             im_plus_gray = im_plus.duplicate();
             IJ.run(im_plus_gray, "8-bit", "");
-            im_plus.hide();
-            im_plus_gray.show();
+//            im_plus.hide();
+//            im_plus_gray.show();
+
+            jLabel2.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
+
 
 
         } else if (message.equals("Type RGB")) {
@@ -559,8 +561,11 @@ public class FunctioningMainMenu extends JFrame
             }
             im_plus_rgb = im_plus.duplicate();
 //            IJ.run(im_plus_gray, "8-bit", "");
-            im_plus.hide();
-            im_plus_rgb.show();
+//            im_plus.hide();
+//            im_plus_rgb.show();
+
+            jLabel2.setIcon(new ImageIcon(im_plus_rgb.getImage())); // NOI18N
+
 //            im_plus_gray.show();
 
         }
@@ -610,7 +615,7 @@ public class FunctioningMainMenu extends JFrame
 
         ImageProcessor ip_big = im_plus.getProcessor();
         ip_big.setInterpolate(true);
-        ImageProcessor ip_small = ip_big.resize(IMG_WIDTH, IMG_Height);
+        ImageProcessor ip_small = ip_big.resize(IMG_WIDTH, IMG_HEIGHT);
         ImagePlus small = new ImagePlus("small", ip_small);
         im_plus = small;
 
@@ -630,13 +635,13 @@ public class FunctioningMainMenu extends JFrame
         }
         int[] dims = im_plus.getDimensions();
 
-        if (dims[0] != IMG_WIDTH || dims[1] != IMG_Height) {
+        if (dims[0] != IMG_WIDTH || dims[1] != IMG_HEIGHT) {
             setImageDefaultSize();
         }// else {
-        im_plus.show();
-//        }
+//        im_plus.show();
+//        }//
+        jLabel2.setIcon(new ImageIcon(im_plus.getImage())); // NOI18N
 
-//        IJ.run(im_plus, "Size...", "");
 
         return ret_val;
     }
@@ -716,7 +721,10 @@ public class FunctioningMainMenu extends JFrame
 
                 im_plus_rgb = null;
             }
-            im_plus_gray.show();
+//            im_plus_gray.show();
+
+            jLabel2.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
+
 
         }
     }
