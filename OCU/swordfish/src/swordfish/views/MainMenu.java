@@ -4,8 +4,7 @@
  */
 package swordfish.views;
 
-import swordfish.ui_develop.*;
-import swordfish.ui.*;
+//import swordfish.ui_develop.*;
 import swordfish.*;
 import java.awt.event.KeyListener;
 import javax.swing.*;

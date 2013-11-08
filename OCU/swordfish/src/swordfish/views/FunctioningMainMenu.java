@@ -1,7 +1,7 @@
 /*
  * Interface Providing Image Processing Tool Library.
  */
-package swordfish.ui;
+package swordfish.views;
 
 // <editor-fold defaultstate="collapsed" desc="Imports">
 import com.google.common.primitives.Chars;
