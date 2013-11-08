@@ -816,7 +816,7 @@ public class FunctioningMainMenu extends JFrame
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
     @Override
     public void windowClosing(WindowEvent e) {
-        p.destroy();
+//        p.destroy();
     }
 
     @Override
