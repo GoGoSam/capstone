@@ -73,13 +73,13 @@ public class FunctioningMainMenu extends JFrame
         implements KeyListener, WindowListener, ActionListener {
 
 //    FunctioningMainMenu instance = this;
-    ImagePlus im_plus = null;       // This will be the original
-    ImagePlus im_plus_rgb = null;   // in the case RGB type is set as conversion
+    ImagePlus im_plus = null;           // This will be the original
+    ImagePlus im_plus_rgb = null;       // in the case RGB type is set as conversion
     ImagePlus im_plus_gray = null;      // --- 8-Bit Gray
-    int DarkColor = 110;// 64 (correct)
+    int DarkColor = 110;    // 64 (correct)
     int BrightColor = 138;
-    int IMG_WIDTH = 275; // pixels
-    int IMG_HEIGHT = 280; // pixels
+    int IMG_WIDTH = 275;    // pixels
+    int IMG_HEIGHT = 280;   // pixels
     double[] orig_min_max = new double[2];
     boolean do_debug = true;
     Process p;
@@ -100,7 +100,6 @@ public class FunctioningMainMenu extends JFrame
     public FunctioningMainMenu() {
 
         super("A Robots-eye View");
-        //  init();
 
         buildGui();
 
@@ -111,7 +110,6 @@ public class FunctioningMainMenu extends JFrame
         color_scaler[1] = false;
         set_button_states();
 
-//        System.out.printf("Done trying\n");
     }
 
     // <editor-fold defaultstate="collapsed" desc="buildGui">
@@ -128,27 +126,35 @@ public class FunctioningMainMenu extends JFrame
         p_directional = new JPanel();
         p_inspect_tools = new JPanel();
         p_image_disp = new JPanel();
+        p_video_buttons = new JPanel();
+        p_media_player = new JPanel();
 
         b_load = new JButton();
         b_save = new JButton();
+
+        lab_record = new JLabel();
+        lab_pause = new JLabel();
+        lab_stop = new JLabel();
+
+        b_take_image = new JButton();
 
         l_vid_player = new JLabel();
         lab_imageIcon = new JLabel();
         l_brightness = new JLabel();
         l_brightness1 = new JLabel();
         l_title = new JLabel();
+        lab_record = new JLabel();
+        lab_pause = new JLabel();
+        lab_stop = new JLabel();
 
         canvas2 = new Canvas();
 
         slide_contrast = new JSlider();
         slide_brightness = new JSlider();
 
-
         gr_color_scale = new ButtonGroup();
         rb_gray_scale = new JRadioButton();
         rb_rgb = new JRadioButton();
-
-//        im_plus = new ImagePlus();
 
         menuBar = new JMenuBar();
         menu_file = new JMenu();
@@ -171,48 +177,175 @@ public class FunctioningMainMenu extends JFrame
 
 
         // <editor-fold defaultstate="collapsed" desc="Video Stream Panel">
+
         p_live_streaming.setBorder(BorderFactory.createTitledBorder(null,
                 "Live Streaming", TitledBorder.DEFAULT_JUSTIFICATION,
                 TitledBorder.DEFAULT_POSITION,
                 new Font("Arial", 1, 14))); //
-        p_live_streaming.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        p_live_streaming.setFont(new java.awt.Font("Lucida Grande", 1, 13));
-
+        p_live_streaming.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        p_live_streaming.setFont(new Font("Lucida Grande", 1, 13));
 
 
         l_vid_player.setText("<Media Player>");
+
+//        GroupLayout p_live_streamingLayout = new GroupLayout(p_live_streaming);
+//        p_live_streaming.setLayout(p_live_streamingLayout);
+//        p_live_streamingLayout.setHorizontalGroup(
+//                p_live_streamingLayout.createParallelGroup(Alignment.LEADING)
+//                .addGroup(p_live_streamingLayout.createSequentialGroup()
+//                .addGap(152, 152, 152)
+//                .addComponent(l_vid_player)
+//                .addContainerGap(163, Short.MAX_VALUE)));
+//        p_live_streamingLayout.setVerticalGroup(
+//                p_live_streamingLayout.createParallelGroup(Alignment.LEADING)
+//                .addGroup(p_live_streamingLayout.createSequentialGroup()
+//                .addGap(125, 125, 125)
+//                .addComponent(l_vid_player)
+//                .addContainerGap(145, Short.MAX_VALUE)));
+//        p_title.setFont(new java.awt.Font("Arial", 3, 13));
+//        l_title.setFont(new java.awt.Font("Lucida Grande", 3, 18));
+//        l_title.setHorizontalAlignment(SwingConstants.CENTER);
+//        l_title.setText("Robotic Vision v0.1");
+//
+//        GroupLayout p_titleLayout = new GroupLayout(p_title);
+//        p_title.setLayout(p_titleLayout);
+//        p_titleLayout.setHorizontalGroup(
+//                p_titleLayout.createParallelGroup(Alignment.LEADING)
+//                .addGroup(Alignment.TRAILING, p_titleLayout.createSequentialGroup()
+//                .addContainerGap()
+//                .addComponent(l_title, GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)));
+//        p_titleLayout.setVerticalGroup(
+//                p_titleLayout.createParallelGroup(Alignment.LEADING)
+//                .addGroup(p_titleLayout.createSequentialGroup()
+//                .addComponent(l_title)
+//                .addGap(0, 9, Short.MAX_VALUE)));
+
+
+//        jLabel3.setText("<Media Player>");
+
+
+
+
+        GroupLayout p_media_playerLayout = new GroupLayout(p_media_player);
+        p_media_player.setLayout(p_media_playerLayout);
+        p_media_playerLayout.setHorizontalGroup(
+                p_media_playerLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(p_media_playerLayout.createSequentialGroup()
+                .addGap(146, 146, Short.MAX_VALUE)
+                .addComponent(l_vid_player)
+                .addGap(146, 146, Short.MAX_VALUE)));
+        p_media_playerLayout.setVerticalGroup(
+                p_media_playerLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(p_media_playerLayout.createSequentialGroup()
+                .addGap(146, 146, Short.MAX_VALUE)
+                .addComponent(l_vid_player)
+                .addGap(146, 146, 146)));
+
+        p_video_buttons.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        b_take_image.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/sym_camera.jpg")); // NOI18N
+        b_take_image.setBorderPainted(false);
+        b_take_image.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_take_imageActionPerformed(evt);
+            }
+        });
+
+        lab_record.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/sym_record.jpg")); // NOI18N
+        lab_record.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                recordMousePressed(evt);
+            }
+        });
+
+        lab_pause.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/sym_pause.jpg")); // NOI18N
+        lab_pause.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                recordMousePressed(evt);
+            }
+        });
+
+        lab_stop.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/sym_stop.jpg")); // NOI18N
+        lab_stop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                recordMousePressed(evt);
+            }
+        });
+
+        GroupLayout p_video_buttonsLayout = new GroupLayout(p_video_buttons);
+        p_video_buttons.setLayout(p_video_buttonsLayout);
+        p_video_buttonsLayout.setHorizontalGroup(
+                p_video_buttonsLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(Alignment.TRAILING, p_video_buttonsLayout.createSequentialGroup()
+                //                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(121, 121, 121)
+                .addComponent(b_take_image)
+                .addGap(0, 0, 0)
+                .addComponent(lab_record)
+                //                .addPreferredGap(LayoutStyle.RELATED)
+                .addComponent(lab_pause)
+                //                .addPreferredGap(LayoutStyle.RELATED)
+                .addComponent(lab_stop)
+                .addGap(130, 130, 130)));
+
+
+        p_video_buttonsLayout.setVerticalGroup(
+                p_video_buttonsLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(Alignment.TRAILING, p_video_buttonsLayout.createSequentialGroup()
+                .addGroup(p_video_buttonsLayout.createParallelGroup(Alignment.TRAILING)
+                //                .addGroup(p_video_buttonsLayout.createParallelGroup(Alignment.LEADING)
+                //                .addGap(0, 0, 0)
+                //                .addComponent(Alignment.LEADING, lab_stop, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                //                .addComponent(Alignment.LEADING, lab_record, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                //                .addComponent(Alignment.LEADING, lab_pause, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                //                .addComponent(Alignment.LEADING, b_take_image, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))//)
+                .addComponent(lab_stop, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lab_record, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lab_pause, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(b_take_image, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))//)
+
+                .addContainerGap()));
 
         GroupLayout p_live_streamingLayout = new GroupLayout(p_live_streaming);
         p_live_streaming.setLayout(p_live_streamingLayout);
         p_live_streamingLayout.setHorizontalGroup(
                 p_live_streamingLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(p_live_streamingLayout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(l_vid_player)
-                .addContainerGap(163, Short.MAX_VALUE)));
+                //                .addGroup(p_live_streamingLayout.createSequentialGroup()
+                //                .addGroup(p_live_streamingLayout.createParallelGroup(Alignment.LEADING)
+                //                .addGroup(p_live_streamingLayout.createSequentialGroup()
+                //                .addGroup(p_live_streamingLayout.createParallelGroup(Alignment.LEADING)
+                //                .addGroup(p_live_streamingLayout.createSequentialGroup()
+                //                .addGap(177, 177, 177)
+                //                .addGap(177, 177, 177)
+                //  .add(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                ///       .add(p_live_streamingLayout.createSequentialGroup()
+                //     .add(166, 166, 166)
+                // .add(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                /// .add(p_live_streamingLayout.createSequentialGroup()
+                /////   .add(152, 152, 152)
+                //    .add(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(p_media_player, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(p_video_buttons, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));//                .addGap(GroupLayout.DEFAULT_SIZE
+
+        // .addGap(119, 119, 119))))));//.addContainerGap())))));
+//                .addGap(119, 119, 119))))));
+
         p_live_streamingLayout.setVerticalGroup(
                 p_live_streamingLayout.createParallelGroup(Alignment.LEADING)
                 .addGroup(p_live_streamingLayout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(l_vid_player)
-                .addContainerGap(145, Short.MAX_VALUE)));
-        p_title.setFont(new java.awt.Font("Arial", 3, 13));
-        l_title.setFont(new java.awt.Font("Lucida Grande", 3, 18));
-        l_title.setHorizontalAlignment(SwingConstants.CENTER);
-        l_title.setText("Robotic Vision v0.1");
+                .addComponent(p_media_player, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                ///   .add(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                //////   .add(0, 0, 0)
+                ///.add(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                //.add(0, 0, 0)
+                //.add(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                //.add(0, 0, 0)
+                .addComponent(p_video_buttons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                //                .addGap(0, 0 0));
+                .addContainerGap()));
 
-        GroupLayout p_titleLayout = new GroupLayout(p_title);
-        p_title.setLayout(p_titleLayout);
-        p_titleLayout.setHorizontalGroup(
-                p_titleLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(Alignment.TRAILING, p_titleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(l_title, GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)));
-        p_titleLayout.setVerticalGroup(
-                p_titleLayout.createParallelGroup(Alignment.LEADING)
-                .addGroup(p_titleLayout.createSequentialGroup()
-                .addComponent(l_title)
-                .addGap(0, 9, Short.MAX_VALUE)));
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="File Handling Panel">
@@ -269,7 +402,7 @@ public class FunctioningMainMenu extends JFrame
                 .addGroup(jPanel5Layout.createSequentialGroup()
                 //       .addGap(19, 19, 19)//
                 .addContainerGap() //235
-                .addComponent(lab_imageIcon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lab_imageIcon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
                 .addComponent(canvas2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 //.addContainerGap(262, Short.MAX_VALUE)
@@ -515,11 +648,17 @@ public class FunctioningMainMenu extends JFrame
         addWindowListener(this);
         this.setVisible(true);
 
-
-
     }
 
+    private void b_take_imageActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void recordMousePressed(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+    }
     // </editor-fold>
+
     /**
      * Method called to set GUI components according to the flag values.
      *
@@ -980,11 +1119,14 @@ public class FunctioningMainMenu extends JFrame
     //<editor-fold defaultstate="collapsed" desc="Component Declarations">
     Canvas canvas2;
     JButton b_load, b_save;
+    JButton b_take_image;
     JLabel l_title;
     JLabel l_vid_player;
     JMenuBar menuBar;
     JPanel p_title;
     JPanel p_image_disp;
+    JPanel p_video_buttons;
+    JPanel p_media_player;
     ButtonGroup gr_color_scale;
     JRadioButton rb_gray_scale, rb_rgb;
     JLabel l_brightness;
@@ -1001,9 +1143,12 @@ public class FunctioningMainMenu extends JFrame
     JLabel icon_right;
     JLabel icon_up;
     JLabel lab_imageIcon;
+    JLabel lab_pause;
+    JLabel lab_record;
+    JLabel lab_stop;
     ImageIcon cur_moment_view;
-    // </editor-fold>
 
+    // </editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Main (For Testing/Development)">
     public static void main(String[] args) {
         FunctioningMainMenu fmm = new FunctioningMainMenu();

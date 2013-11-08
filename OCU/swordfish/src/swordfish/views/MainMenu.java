@@ -50,7 +50,16 @@ public class MainMenu extends JFrame
 
         jMenuItem1 = new javax.swing.JMenuItem();
         p_live_streaming = new javax.swing.JPanel();
+        canvas1 = new java.awt.Canvas();
+        canvas3 = new java.awt.Canvas();
+        canvas4 = new java.awt.Canvas();
+        p_media_player = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        p_video_buttons = new javax.swing.JPanel();
+        b_take_image = new javax.swing.JButton();
+        lab_record = new javax.swing.JLabel();
+        lab_pause = new javax.swing.JLabel();
+        lab_stop = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         p_file_handling = new javax.swing.JPanel();
@@ -89,21 +98,115 @@ public class MainMenu extends JFrame
 
         jLabel3.setText("<Media Player>");
 
+        org.jdesktop.layout.GroupLayout p_media_playerLayout = new org.jdesktop.layout.GroupLayout(p_media_player);
+        p_media_player.setLayout(p_media_playerLayout);
+        p_media_playerLayout.setHorizontalGroup(
+            p_media_playerLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(p_media_playerLayout.createSequentialGroup()
+                .add(0, 0, Short.MAX_VALUE)
+                .add(jLabel3)
+                .add(0, 0, Short.MAX_VALUE))
+        );
+        p_media_playerLayout.setVerticalGroup(
+            p_media_playerLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(p_media_playerLayout.createSequentialGroup()
+                .add(0, 146, Short.MAX_VALUE)
+                .add(jLabel3)
+                .add(146, 146, 146))
+        );
+
+        p_video_buttons.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        b_take_image.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/sym_camera.jpg")); // NOI18N
+        b_take_image.setBorderPainted(false);
+        b_take_image.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_take_imageActionPerformed(evt);
+            }
+        });
+
+        lab_record.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/sym_record.jpg")); // NOI18N
+        lab_record.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                recordMousePressed(evt);
+            }
+        });
+
+        lab_pause.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/sym_pause.jpg")); // NOI18N
+        lab_pause.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                recordMousePressed(evt);
+            }
+        });
+
+        lab_stop.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/sym_stop.jpg")); // NOI18N
+        lab_stop.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                recordMousePressed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout p_video_buttonsLayout = new org.jdesktop.layout.GroupLayout(p_video_buttons);
+        p_video_buttons.setLayout(p_video_buttonsLayout);
+        p_video_buttonsLayout.setHorizontalGroup(
+            p_video_buttonsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, p_video_buttonsLayout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(b_take_image)
+                .add(0, 0, 0)
+                .add(lab_record)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(lab_pause)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(lab_stop)
+                .add(119, 119, 119))
+        );
+        p_video_buttonsLayout.setVerticalGroup(
+            p_video_buttonsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, p_video_buttonsLayout.createSequentialGroup()
+                .add(p_video_buttonsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, lab_stop, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, lab_record, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, lab_pause, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, b_take_image, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         org.jdesktop.layout.GroupLayout p_live_streamingLayout = new org.jdesktop.layout.GroupLayout(p_live_streaming);
         p_live_streaming.setLayout(p_live_streamingLayout);
         p_live_streamingLayout.setHorizontalGroup(
             p_live_streamingLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(p_live_streamingLayout.createSequentialGroup()
-                .add(152, 152, 152)
-                .add(jLabel3)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .add(p_live_streamingLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(p_live_streamingLayout.createSequentialGroup()
+                        .add(p_live_streamingLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(p_live_streamingLayout.createSequentialGroup()
+                                .add(177, 177, 177)
+                                .add(canvas3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(p_live_streamingLayout.createSequentialGroup()
+                                .add(166, 166, 166)
+                                .add(canvas4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(p_live_streamingLayout.createSequentialGroup()
+                                .add(152, 152, 152)
+                                .add(canvas1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(p_media_player, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, p_video_buttons, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(0, 0, 0))
         );
         p_live_streamingLayout.setVerticalGroup(
             p_live_streamingLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(p_live_streamingLayout.createSequentialGroup()
-                .add(125, 125, 125)
-                .add(jLabel3)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(p_media_player, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, Short.MAX_VALUE)
+                .add(canvas1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, 0)
+                .add(canvas4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, 0)
+                .add(canvas3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, 0)
+                .add(p_video_buttons, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, 0))
         );
 
         jPanel3.setFont(new java.awt.Font("Arial", 3, 13)); // NOI18N
@@ -325,12 +428,12 @@ public class MainMenu extends JFrame
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(layout.createSequentialGroup()
                                 .add(p_directional, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                                 .add(p_file_handling, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                            .add(p_live_streaming, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                            .add(p_live_streaming, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -345,7 +448,7 @@ public class MainMenu extends JFrame
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(p_live_streaming, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, p_directional, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.LEADING, p_file_handling, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -455,6 +558,14 @@ public class MainMenu extends JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_mnu_saveasActionPerformed
 
+    private void b_take_imageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_take_imageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_take_imageActionPerformed
+
+    private void recordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_recordMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_recordMousePressed
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -551,7 +662,11 @@ public class MainMenu extends JFrame
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton b_take_image;
+    private java.awt.Canvas canvas1;
     private java.awt.Canvas canvas2;
+    private java.awt.Canvas canvas3;
+    private java.awt.Canvas canvas4;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -565,6 +680,9 @@ public class MainMenu extends JFrame
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JLabel l_brightness;
     private javax.swing.JLabel l_brightness1;
+    private javax.swing.JLabel lab_pause;
+    private javax.swing.JLabel lab_record;
+    private javax.swing.JLabel lab_stop;
     private javax.swing.JMenu menu_about;
     private javax.swing.JMenu menu_edit;
     private javax.swing.JMenu menu_file;
@@ -578,6 +696,8 @@ public class MainMenu extends JFrame
     private javax.swing.JPanel p_file_handling;
     private javax.swing.JPanel p_inspect_tools;
     private javax.swing.JPanel p_live_streaming;
+    private javax.swing.JPanel p_media_player;
+    private javax.swing.JPanel p_video_buttons;
     private javax.swing.JSlider slide_brightness;
     private javax.swing.JSlider slide_contrast;
     // End of variables declaration//GEN-END:variables
