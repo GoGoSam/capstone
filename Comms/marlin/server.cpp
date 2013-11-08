@@ -7,11 +7,15 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio.hpp>
-
-//TODO: Move to header file
-#define HEADER_SIZE 4
+#include <google/protobuf/io/coded_stream.h>
+#include <google/protobuf/io/zero_copy_stream_impl.h>
+#include "robocomms.pb.h"
 
 using boost::asio::ip::tcp;
+using google::protobuf::io::CodedInputStream;
+using google::protobuf::io::CodedOutputStream;
+using google::protobuf::io::ArrayInputStream;
+using google::protobuf::io::OstreamOutputStream;
 
 class session : public boost::enable_shared_from_this<session>
 {
@@ -29,7 +33,7 @@ class session : public boost::enable_shared_from_this<session>
 
         void start()
         {
-            read_header();
+            read();
         }
 
     private:
@@ -38,30 +42,60 @@ class session : public boost::enable_shared_from_this<session>
         {
         }
 
-        void read_header() {
-            data_.resize(HEADER_SIZE);
+        void read() {
             boost::asio::async_read(socket_,
                     boost::asio::buffer(data_),
-                    boost::bind(&session::handle_read_header, shared_from_this(),
+                    boost::asio::transfer_at_least(1),
+                    boost::bind(&session::handle_read, shared_from_this(),
                         boost::asio::placeholders::error));
         }
 
-        void handle_read_header(const boost::system::error_code& error)
+        void handle_read(const boost::system::error_code& error)
         {
             if (!error) {
-                //Received header
-                //unsigned msg_len = m_packed_request.decode_header(data_);
-                unsigned msg_len = 0;
-                read_body(msg_len);
+                ArrayInputStream arrayInputStream(data_, max_length);
+                CodedInputStream codedInputStream(&arrayInputStream);
+                uint32_t messageSize;
+                if(codedInputStream.ReadVarint32(&messageSize)) {
+                    //TODO: Check that whole message is in buffer
+                    CodedInputStream::Limit msgLimit = codedInputStream.PushLimit(messageSize);
+                    RoboComms::RoboReq req;
+                    req.ParseFromCodedStream(&codedInputStream);
+                    process_request(req);
+                    codedInputStream.PopLimit(messageSize);
+                }
             }
         }
 
-        void read_body(unsigned msg_len)
-        {
+        void write(RoboComms::RoboRes res) {
+            boost::asio::streambuf request;
+            std::ostream request_stream(&request);
+
+            OstreamOutputStream raw_output(&request_stream);
+            CodedOutputStream coded_output(&raw_output);
+
+            coded_output.WriteVarint32(res.ByteSize());
+            res.SerializeToCodedStream(&coded_output);
+
+            boost::asio::async_write(socket_,
+                    request,
+                    boost::bind(&session::handle_write, shared_from_this(),
+                        boost::asio::placeholders::error));
+        }
+
+        void handle_write(const boost::system::error_code& error) {
+            //TODO: Handle return from write
+
+        }
+
+        void process_request(RoboComms::RoboReq req) {
+            //TODO: Implement
+            std::cout << req.type() << std::endl;
         }
 
         tcp::socket socket_;
-        std::vector<uint8_t> data_;
+        enum { max_length = 5120 };
+        char data_[max_length];
 };
 
 class server

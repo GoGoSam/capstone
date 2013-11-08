@@ -9,6 +9,10 @@
 ## Java
 *.class
 
+## C++
+*.o
+*.d
+
 ## Intellij
 .idea/
 *.iml
