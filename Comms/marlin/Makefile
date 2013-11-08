@@ -12,7 +12,7 @@ COMPILE_OPTIONS = -ansi -pedantic -Wall
 #Header include directories
 HEADERS = -I/usr/local/include/
 #Libraries for linking
-LIBS = -lboost_system
+LIBS = -lboost_system -lprotobuf
 
 # Dependency options
 DEPENDENCY_OPTIONS = -MM
