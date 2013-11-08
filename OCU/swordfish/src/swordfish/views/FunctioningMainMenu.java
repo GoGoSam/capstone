@@ -243,7 +243,7 @@ public class FunctioningMainMenu extends JFrame
 
         p_video_buttons.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        b_take_image.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/sym_camera.jpg")); // NOI18N
+        b_take_image.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/sym_camera.jpg")); // NOI18N
         b_take_image.setBorderPainted(false);
         b_take_image.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,21 +251,21 @@ public class FunctioningMainMenu extends JFrame
             }
         });
 
-        lab_record.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/sym_record.jpg")); // NOI18N
+        lab_record.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/sym_record.jpg")); // NOI18N
         lab_record.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 recordMousePressed(evt);
             }
         });
 
-        lab_pause.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/sym_pause.jpg")); // NOI18N
+        lab_pause.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/sym_pause.jpg")); // NOI18N
         lab_pause.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 recordMousePressed(evt);
             }
         });
 
-        lab_stop.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/sym_stop.jpg")); // NOI18N
+        lab_stop.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/sym_stop.jpg")); // NOI18N
         lab_stop.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 recordMousePressed(evt);
