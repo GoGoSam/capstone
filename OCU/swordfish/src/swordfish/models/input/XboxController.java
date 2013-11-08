@@ -9,7 +9,7 @@ import swordfish.models.device.*;
  * An input device for an Xbox 360 controller.
  */
 public abstract class XboxController implements InputDevice {
-	private Listeners<Listener> listeners = new Listeners(Listener.class);
+	private Listeners<Listener> listeners = new Listeners<Listener>(Listener.class);
 
 	protected Button lastButton;
 	protected Axis lastAxis;

@@ -4,54 +4,34 @@
 package swordfish.views;
 
 // <editor-fold defaultstate="collapsed" desc="Imports">
-import com.google.common.primitives.Chars;
-import com.google.common.primitives.Ints;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.Container.*;
-import java.awt.event.KeyEvent.*;
-import java.awt.event.KeyListener;
-import java.awt.Container.*;
-import java.awt.event.KeyEvent.*;
-import java.awt.event.*;
-import javax.swing.BorderFactory.*;
-import javax.swing.GroupLayout.*;
-import javax.swing.GroupLayout;
-import javax.swing.BorderFactory;
-import javax.swing.border.TitledBorder;
-import javax.swing.GroupLayout.*;
-import javax.swing.*;
-import java.util.Collections;
-
-//import swordfish.MobileDirectionDisplay;
-import java.sql.Time.*;
-//import ij.*;
-//import ij.gui.*;
-//import ij.io.FileInfo;
-//import ij.process.ImageProcessor;
-//import java.io.DataInputStream;
-import java.io.File;
-//import java.io.FileInputStream;
-import java.io.*;
-
-
+//import com.google.common.primitives.Chars;
+//import com.google.common.primitives.Ints;
 
 import ij.*;
 import ij.measure.Calibration;
 import ij.process.ImageProcessor;
 import ij.process.ImageStatistics;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.File;
+
+//import swordfish.MobileDirectionDisplay;
+//import ij.*;
+//import ij.gui.*;
+//import ij.io.FileInfo;
+//import ij.process.ImageProcessor;
+//import java.io.DataInputStream;
+//import java.io.FileInputStream;
 //import ij.process.ByteProcessor;
 //import ij.plugin.*;
 //import ij.process.*;
 //import ij.io.*;
 //import ij.measure.*;
-import java.awt.Desktop;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.text.MessageFormat;
-import java.util.Arrays;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 //import javax.swing.filechooser.FileNameExtensionFilter;
 
 // </editor-fold>
@@ -579,7 +559,7 @@ public class FunctioningMainMenu extends JFrame
         menu_edit.setText("Edit");
         menuBar.add(menu_edit);
 
-        menu_tools.setLabel("Tools");
+        menu_tools.setText("Tools");
         menuBar.add(menu_tools);
 
         menu_help.setText("Help");
@@ -785,8 +765,8 @@ public class FunctioningMainMenu extends JFrame
 //            }
 //            List b = Arrays.asList(ArrayUtils.toObject(histogram));
 //            Character[] b = convert(Array.histogram);
-            System.out.println(Ints.min(histogram));
-            System.out.println(Ints.max(histogram));
+//            System.out.println(Ints.min(histogram));
+//            System.out.println(Ints.max(histogram));
 //            return;
 //            System.out.println(Collections.max(Arrays.asList(histogram)));
 //            System.out.println(Collections.min(b));

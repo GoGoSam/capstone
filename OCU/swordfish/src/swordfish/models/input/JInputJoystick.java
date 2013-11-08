@@ -58,7 +58,7 @@ public class JInputJoystick implements InputDevice {
 	}
 
 	static public List<JInputJoystick> getAll () {
-		ArrayList<JInputJoystick> list = new ArrayList();
+		ArrayList<JInputJoystick> list = new ArrayList<JInputJoystick>();
 		boolean isWindows = System.getProperty("os.name").toLowerCase().contains("windows");
 		for (Controller controller : ControllerEnvironment.getDefaultEnvironment().getControllers()) {
 			if (controller.getType() == Type.MOUSE) continue;
