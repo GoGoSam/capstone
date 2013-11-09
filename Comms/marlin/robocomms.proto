@@ -1,6 +1,7 @@
 package RoboComms;
 
 option java_package = "swordfish.models";
+option java_outer_classname = "RoboComms";
 
 message RoboReq {
     enum Type {
