@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 abstract public class Device {
-	static private final HashMap<String, Target> nameToTarget = new HashMap();
-	static private List<Target> targets = new ArrayList();
+	static private final HashMap<String, Target> nameToTarget = new HashMap<String, Target>();
+	static private List<Target> targets = new ArrayList<Target>();
 	static {
 		for (Button button : Button.values()) {
 			targets.add(button);
@@ -37,12 +37,12 @@ abstract public class Device {
 	private float[] collectedAxisStates = new float[Axis.values().length];
 	private float[] axisDeflections = new float[Axis.values().length];
 
-	private final Listeners<Listener> listeners = new Listeners(Listener.class);
+	private final Listeners<Listener> listeners = new Listeners<Listener>(Listener.class);
 	private final Deadzone[] stickToDeadzone = new Deadzone[Stick.values().length];
 	private float mouseDeltaX, mouseDeltaY;
 	private Stick mouseDeltaStick;
-	private Map<String, Target> alternateNameToTarget = new HashMap();
-	private Map<String, String> targetToAlternateName = new HashMap();
+	private Map<String, Target> alternateNameToTarget = new HashMap<String, Target>();
+	private Map<String, String> targetToAlternateName = new HashMap<String, String>();
 
 	public Device () {
 		super();

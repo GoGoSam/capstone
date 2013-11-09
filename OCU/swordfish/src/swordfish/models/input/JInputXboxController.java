@@ -296,7 +296,7 @@ public class JInputXboxController extends XboxController {
 	}
 
 	static public List<XboxController> getJInputControllers () {
-		ArrayList<XboxController> list = new ArrayList();
+		ArrayList<XboxController> list = new ArrayList<XboxController>();
 		for (Controller controller : ControllerEnvironment.getDefaultEnvironment().getControllers())
 			if (controller.getType() == Controller.Type.GAMEPAD) list.add(new JInputXboxController(controller));
 		return list;

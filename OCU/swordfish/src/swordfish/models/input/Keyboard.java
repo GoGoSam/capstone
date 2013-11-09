@@ -17,8 +17,8 @@ import swordfish.models.device.Listeners;
 public class Keyboard implements InputDevice {
 	static public final Keyboard instance = new Keyboard();
 
-	static private final HashMap<Integer, String> codeToName = new HashMap();
-	static private final HashMap<String, Integer> nameToCode = new HashMap();
+	static private final HashMap<Integer, String> codeToName = new HashMap<Integer, String>();
+	static private final HashMap<String, Integer> nameToCode = new HashMap<String, Integer>();
 	static {
 		int fieldModifiers = Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL;
 		Field[] fields = KeyEvent.class.getDeclaredFields();
@@ -38,7 +38,7 @@ public class Keyboard implements InputDevice {
 	}
 
 	private boolean[] keys = new boolean[256];
-	private Listeners<Listener> listeners = new Listeners(Listener.class);
+	private Listeners<Listener> listeners = new Listeners<Listener>(Listener.class);
 	private int lastKeyCode = -1;
 
 	private Keyboard () {
