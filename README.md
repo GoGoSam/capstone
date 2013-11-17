@@ -17,13 +17,12 @@ competition for the department of Electrical and Computer engineering.
 
 ## Contributors
 
-Sam Coe
-Joe Robinson
-Rob Watson
-Josh Johnson
-Matt VanBerlo
+* Sam Coe
+* Joe Robinson
+* Rob Watson
+* Josh Johnson
+* Matt VanBerlo
 
 ## License
 
-The Capstone project is licensed under a MIT License -
-http://opensource.org/licenses/mit-license.html.
+The Capstone project is licensed under a [MIT License](http://opensource.org/licenses/mit-license.html)
