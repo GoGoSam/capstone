@@ -23,7 +23,7 @@ public class Mouse implements InputDevice {
 
 	private int x, y;
 	private boolean[] buttons = new boolean[4];
-	private Listeners<Listener> listeners = new Listeners(Listener.class);
+	private Listeners<Listener> listeners = new Listeners<Listener>(Listener.class);
 	private int lastButton, lastDeltaX, lastDeltaY, lastMouseWheel;
 	private int currentDeltaX, currentDeltaY, currentMouseWheel;
 	private JFrame grabbedFrame;
