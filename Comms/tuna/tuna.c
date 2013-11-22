@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <signal.h>
 #include <gst/gst.h>
-
-// Compile command - gcc -Wall gstreamer.c $(pkg-config --cflags --libs gstreamer-1.0)
 
 /*
  * TCP Pipeline
@@ -12,11 +11,15 @@
  */
 
 /*
- * UDP Pipeline
+ * TODO: Implement UDP Pipeline
  * raspivid -t 0 -w 1280 -h 720 -fps 25 -hf -b 2500000 -o - | \
  * gst-launch-1.0 -v fdsrc ! h264parse ! rtph264pay config-interval=1 pt=96 \
  * ! udpsink host=192.168.1.16 port=5000
  */
+
+void int_handler(int);
+
+GMainLoop *loop;
 
 int main(int argc, char *argv[]) {
     /* Check input arguments */
@@ -25,9 +28,10 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
+    signal(SIGINT, int_handler);
+
     char *address = argv[1];
     int port = atoi(argv[2]);
-    GMainLoop *loop;
     GstElement *pipeline;
     GstElement *source, *parser, *encoder, *payloader, *sink;
 
@@ -72,13 +76,15 @@ int main(int argc, char *argv[]) {
     g_print ("Running...\n");
     g_main_loop_run (loop);
 
-    // TODO: Cleanup gracefully after ctrl-c
     /* change pipeline state to null and clean up */
-    g_print ("Stopping Pipeline\n");
-    g_main_loop_quit (loop);
+    g_print ("\nStopping Pipeline\n");
     gst_element_set_state (pipeline, GST_STATE_NULL);
     gst_object_unref (pipeline);
     g_main_loop_unref (loop);
 
     return 0;
+}
+
+void int_handler(int sig) {
+    g_main_loop_quit(loop);
 }
