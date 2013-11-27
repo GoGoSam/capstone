@@ -5,15 +5,14 @@
 package swordfish.views;
 
 //import swordfish.ui_develop.*;
-import swordfish.*;
+//import swordfish.*;
 import java.awt.event.KeyListener;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Container.*;
 import java.awt.event.KeyEvent.*;
 
-import java.io.*;
-
+//import java.io.*;
 /**
  *
  * @author jrob
