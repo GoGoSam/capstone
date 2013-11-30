@@ -4,13 +4,16 @@
 package swordfish.views;
 
 //import swordfish.ui_develop.*;
-//import swordfish.*;
+//import swordfish;
+//import com.sun.jna.Native;
+//import com.sun.jna.NativeLibrary;
+import java.awt.BorderLayout;
 import java.awt.Container.*;
 import java.awt.Canvas;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Color;
-import java.awt.Desktop;
+//import java.awt.Desktop;
 import java.awt.Dimension;
 
 import java.awt.event.KeyEvent.*;
@@ -21,22 +24,48 @@ import java.awt.event.KeyListener;
 import java.awt.Font;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.io.File;
+//import java.io.IOException;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 import javax.swing.border.*;
 import javax.swing.*;
 import javax.swing.LayoutStyle.*;
 import javax.swing.WindowConstants;
+//import uk.co.caprica.vlcj.binding.LibVlc;
+//import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+//import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+//import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+
+//import java.awt.BorderLayout;
+//import java.awt.Canvas;
+//import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
+
+//import uk.co.caprica.vlcj.binding.LibVlc;
+//import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+//import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+//import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+//
+//import com.sun.jna.Native;
+//import com.sun.jna.NativeLibrary;
 /*
  import javax.media.*; //media.*;
  import java.io.File;
  import java.awt.*;
  import java.net.MalformedURLException;
  import java.net.URL;*/
-
 /**
  *
  * @author jrob
@@ -54,11 +83,17 @@ public class InspectorRobot extends JFrame
     private JPanel p_directionals;
     private boolean do_debug = true;
 
+//    Player pp;
 //    private String dir_image_icons = "/resources/";
     // globals
     public InspectorRobot() {
         init();
         buildGui();
+        Player1 pp = new Player1();
+        JPanel ppp = pp.getF();
+        ppp.setSize(p_media_player.getSize());
+        p_media_player.add(ppp);
+        pp.playz();
 
     }
     /*
@@ -465,6 +500,8 @@ public class InspectorRobot extends JFrame
         p_media_player.setForeground(new Color(102, 102, 102));
         p_media_player.setMaximumSize(new Dimension(350, 32767));
 
+//x        pp = new Player();
+//        pp = new Player();
         GroupLayout p_media_playerLayout = new GroupLayout(p_media_player);
         p_media_player.setLayout(p_media_playerLayout);
         p_media_playerLayout.setHorizontalGroup(
@@ -1370,4 +1407,90 @@ public class InspectorRobot extends JFrame
     private void println(String property) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+}
+
+class Player1 {
+    /*
+     private Player(String[] args) {
+     JFrame frame = new JFrame("vlcj Tutorial");
+
+     MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
+
+     Canvas c = new Canvas();
+     c.setBackground(Color.black);
+     JPanel p = new JPanel();
+     p.setLayout(new BorderLayout());
+     p.add(c, BorderLayout.CENTER);
+     frame.add(p, BorderLayout.CENTER);
+
+     EmbeddedMediaPlayer mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
+     mediaPlayer.setVideoSurface(mediaPlayerFactory.newVideoSurface(c));
+     frame.setLocation(100, 100);
+     frame.setSize(1280, 720);
+     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     frame.setVisible(true);
+
+     mediaPlayer.playMedia("/Users/jrob/Google Drive/Capstone/Visualization/Video and PNGs/Wifi/wifi_Rust.avi");
+     }
+     public static void main(final String[] args) {
+
+     NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
+     Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+     SwingUtilities.invokeLater(new Runnable() {
+     @Override
+     public void run() {
+     new Player(args);
+     }
+     });
+     }
+     */
+
+    JFrame frame = new JFrame("vlcj Tutorial");
+    JPanel p;
+    MediaPlayerFactory mediaPlayerFactory;
+    EmbeddedMediaPlayer mediaPlayer;
+
+    Player1() {
+        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
+        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+
+        mediaPlayerFactory = new MediaPlayerFactory();
+
+        Canvas c = new Canvas();
+        c.setBackground(Color.black);
+        p = new JPanel();
+        p.setLayout(new BorderLayout());
+        p.add(c, BorderLayout.CENTER);
+        frame.add(p, BorderLayout.CENTER);
+
+        mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
+        mediaPlayer.setVideoSurface(mediaPlayerFactory.newVideoSurface(c));
+        frame.setLocation(100, 100);
+        frame.setSize(1280, 720);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public JPanel getF() {
+        return p;
+    }
+
+    public void playz() {
+        mediaPlayer.playMedia("/Users/jrob/Google Drive/Capstone/Visualization/Video and PNGs/Scene 10/Office_Scene_10.avi");
+    }
+//    public static void main(final String[] args) {
+//
+//        // NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
+////        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+//     //   SwingUtilities.invokeLater(new Runnable() {
+//       //     @Override
+//         //   public void run() {
+//                NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
+//                Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+//                new Player1();
+//            }
+//        });
+//    }
 }

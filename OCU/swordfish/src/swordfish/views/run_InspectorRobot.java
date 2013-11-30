@@ -4,8 +4,7 @@
  */
 package swordfish.views;
 
-import javax.media.MediaException;
-
+//import javax.media.MediaException;
 /**
  *
  * @author jrob
@@ -16,7 +15,7 @@ public class run_InspectorRobot {
      * @param args the command line arguments
      * @throws javax.media.MediaException
      */
-    public static void main(String[] args) throws MediaException {
+    public static void main(String[] args) {// throws MediaException {
         // TODO code application logic here
 
 //        javax.imageio.ImageReader ii
