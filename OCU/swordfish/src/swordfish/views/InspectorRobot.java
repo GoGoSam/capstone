@@ -1287,6 +1287,7 @@ public class InspectorRobot extends JFrame
             return;
         }
         media_pan.playz(dir + "/" + fname);
+
     }
 
     private void b_save_imageActionPerformed(ActionEvent evt) {
@@ -1312,7 +1313,12 @@ public class InspectorRobot extends JFrame
     }
 
     private void b_snap_imageActionPerformed(ActionEvent evt) {
-
+        boolean tmp = media_pan.save_snap_shot();
+        if (tmp) {
+            System.out.println("Yupp, Snap!\n\n");
+        } else {
+            System.out.println("No Snap!\n\n");
+        }
     }
 
     @Override
@@ -1666,5 +1672,10 @@ class MediaPlayerHandle {
 
         mediaPlayer.mute(!mediaPlayer.isMute());
 
+//        mediaPlayer .addMediaOptions(strings);
+    }
+
+    public boolean save_snap_shot() {
+        return mediaPlayer.saveSnapshot();
     }
 }
