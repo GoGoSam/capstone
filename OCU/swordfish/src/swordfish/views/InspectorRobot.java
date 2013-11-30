@@ -52,6 +52,7 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
+import ij.IJ;
 import java.awt.FileDialog;
 import java.io.File;
 
@@ -84,7 +85,7 @@ public class InspectorRobot extends JFrame
     private JLabel icon_up;
     private JPanel p_directionals;
     private boolean do_debug = true;
-    Player1 media_pan;
+    MediaPlayerHandle media_pan;
 
     String icon_path = System.getProperty("user.dir") + "/resources/";
 
@@ -92,9 +93,8 @@ public class InspectorRobot extends JFrame
 //    private String dir_image_icons = "/resources/";
     // globals
     public InspectorRobot() {
-        init();
         buildGui();
-        media_pan = new Player1();
+        media_pan = new MediaPlayerHandle();
         JPanel ppp = media_pan.getF();
         ppp.setSize(p_media_player.getSize());
         p_media_player.add(ppp);
@@ -343,6 +343,7 @@ public class InspectorRobot extends JFrame
         );
         // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Panel Builds">
         pan_vid_controls.setBorder(BorderFactory.createTitledBorder(null, "Video Control", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Arial", 1, 14)));
         pan_vid_controls.setPreferredSize(new Dimension(121, 145));
 
@@ -411,6 +412,7 @@ public class InspectorRobot extends JFrame
                         .addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23))
         );
+        // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Bottom Pans">
         jLabel2.setIcon(new ImageIcon(icon_path + "massDot_log.jpg"));
@@ -1030,93 +1032,16 @@ public class InspectorRobot extends JFrame
         );
         // </editor-fold>
 
-        pack();
-    }// </editor-fold>
-
-// <editor-fold defaultstate="collapsed" desc="Init">
-    /**
-     * This method is called from within the constructor
-     */
-    private void init() {
-
-        // instantiate
-        //   p_directionals = new JPanel();
-        icon_up = new JLabel();
-        icon_right = new JLabel();
-        icon_left = new JLabel();
-        icon_down = new JLabel();
-
-//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        // System.out.println(System.getProperty("user.dir"));
-        // Get images to set as icons on label JComponents;
-        // default state disabled
-   /*     icon_up.setIcon(new ImageIcon
-         (getClass().getResource(dir_image_icons + "Arrow_up.jpg")));
-         icon_up.setEnabled(false);
-
-         icon_right.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_right.jpg")));
-         icon_right.setEnabled(false);
-
-         icon_left.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_left.jpg")));
-         icon_left.setEnabled(false);
-
-         icon_down.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_down.jpg")));
-         icon_down.setEnabled(false);
-         */
-        // Layour components
-        /*
-         org.jdesktop.layout.GroupLayout p_directionalsLayout = new org.jdesktop.layout.GroupLayout(getContentPane());
-         getContentPane().setLayout(p_directionalsLayout);
-         p_directionalsLayout.setHorizontalGroup(
-         p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(p_directionalsLayout.createSequentialGroup()
-         .addContainerGap()
-         .add(icon_left, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-         .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(icon_up, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 54, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-         .add(icon_down))
-         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-         .add(icon_right)
-         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-         p_directionalsLayout.setVerticalGroup(
-         p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(p_directionalsLayout.createSequentialGroup()
-         .addContainerGap()
-         .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(p_directionalsLayout.createSequentialGroup()
-         .add(icon_up)
-         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-         .add(icon_down))
-         .add(p_directionalsLayout.createSequentialGroup()
-         .add(41, 41, 41)
-         .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(icon_right)
-         .add(icon_left))))
-         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-
-         icon_up.getAccessibleContext().setAccessibleName("U");
-         icon_left.getAccessibleContext().setAccessibleName("Up");
-         icon_down.getAccessibleContext().setAccessibleName("L_down");*/
-        /*
-         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
-         getContentPane().setLayout(layout);
-         layout.setHorizontalGroup(
-         layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(p_directionals, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE));
-         layout.setVerticalGroup(
-         layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(p_directionals, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE));
-         */
-        //       ControllerEnvironment.getDefaultEnvironment().addControllerListener(this);
-        addKeyListener(this);
+        addKeyListener(IJ.getInstance());
 
         setResizable(false);
         this.pack();
         addWindowListener(this);
-        this.setVisible(true);
+        //  this.setVisible(true);
+
     }// </editor-fold>
 
+// <editor-fold defaultstate="collapsed" desc="TO DO">
     private void mnu_openActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
 
@@ -1138,6 +1063,80 @@ public class InspectorRobot extends JFrame
 
     }
 
+    /**
+     * Function called in the event an item under File menu tab is pressed
+     *
+     * @param evt
+     */
+    private void mnu_fileActionPerformed(ActionEvent evt) {
+        String s_mnu = evt.getActionCommand();
+        if (do_debug) {
+            System.out.println("File Menu Sub-menu triggered by " + s_mnu);
+        }
+
+        if (s_mnu.equals("Open...")) {
+
+            String cur_dir = IJ.getDirectory("current");
+            JFileChooser fileopen = new JFileChooser(cur_dir);
+
+            int ret = fileopen.showDialog(new JPanel(), "Open file");
+
+            if (ret == JFileChooser.APPROVE_OPTION) {
+                File file = fileopen.getSelectedFile();
+
+                if (file.isFile()) {
+//                    String fname = file.getName();
+                    String fpath = file.getPath();
+//                String fpath = dir + fname;
+//                    im_plus = IJ.openImage(fpath);
+//
+//                    im_plus.show();
+//
+//                    if (im_plus != null) {
+//                        is_im_loaded[0] = true;
+//                    } else {
+//                        is_im_loaded[0] = false;
+//                    }
+//
+//                    set_button_states();
+                    //This is where a real application would open the file.
+
+                    if (do_debug) {
+                        System.out.println("Opening: " + fpath);
+                    }
+
+                } else {
+
+                    if (do_debug) {
+                        System.out.println("Open command cancelled by user.");
+                    }
+
+                }
+
+            } else if (ret == JFileChooser.CANCEL_OPTION) {
+
+                if (do_debug) {
+                    System.out.print("user cancelled from 'open' dialog box");
+                }
+
+            } else {
+                if (do_debug) {
+                    System.out.print("not approved or cancelled... sweet");
+                }
+            }
+        } else if (s_mnu.equals("Save As...")) {
+        } else if (s_mnu.equals("Close")) {
+        } else if (s_mnu.equals("Exit")) {
+            this.setVisible(false);
+            this.dispose();
+
+//            instance = null;
+        }
+
+//
+    }
+
+    // </editor-fold>
     private void mnu_saveasActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -1282,121 +1281,125 @@ public class InspectorRobot extends JFrame
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    /*
+     public static void main(String args[]) {
 
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+     try {
+     for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+     if ("Nimbus".equals(info.getName())) {
+     UIManager.setLookAndFeel(info.getClassName());
+     break;
+     }
+     }
+     } catch (ClassNotFoundException ex) {
+     java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (InstantiationException ex) {
+     java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (IllegalAccessException ex) {
+     java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     } catch (UnsupportedLookAndFeelException ex) {
+     java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+     }
+     //</editor-fold>
+     */
 
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MainMenu().setVisible(true);
-//                new MobileDirectionDisplay().setVisible(true);
-            }
-        });
-    }
+    /*  //Create and display the form
+     java.awt.EventQueue.invokeLater(new Runnable() {
+     @Override
+     public void run() {
+     new MainMenu().setVisible(true);
+     //                new MobileDirectionDisplay().setVisible(true);
+     }
+     });
+     }
+     */
+    //<editor-fold defaultstate="collapsed" desc="Component Declared">
     // Variables declaration - do not modify
-    private Canvas canvas1;
-    private Canvas canvas3;
-    private Canvas canvas4;
-    private JButton b_scan_hanger;
-    private JButton b_connect;
-    private JButton b_reset;
-    private JButton b_close;
-    private JButton b_snap_image;
-    private JButton b_inspect_ceiling;
-    private JButton b_look_around;
-    private JButton b_load;
-    private JButton b_archive;
-    private JButton b_set_flag;
-    private JButton b_open_image;
-    private JButton b_save_image;
-    private JButton b_close_image;
-    private JCheckBox cb_object_aware;
-    private JCheckBox cb_do_log;
-    private JComboBox combox_src_ip;
-    private JComboBox combox_dest_ip;
-    private JLabel jLabel1;
-    private JLabel l_battery;
-    private JLabel l_capture_moment;
-    private JLabel l_log_file;
-    private JLabel l_battery_per;
-    private JLabel l_robo_conn_per;
-    private JLabel l_vid_sig_per;
-    private JLabel l_logging_per;
-    private JLabel l_cam_sig_per;
-    private JLabel l_r_id;
-    private JLabel l_src_ip;
-    private JLabel jLabel2;
-    private JLabel l_dest_ip;
-    private JLabel l_host_ip;
-    private JLabel l_vid_con_icons;
-    private JLabel l_plenum_map;
-    private JLabel jLabel3;
-    private JLabel l_logo;
-    private JLabel jLabel5;
-    private JLabel l_robo_connect;
-    private JLabel l_vid_signal;
-    private JLabel jLabel8;
-    private JLabel l_data_logging;
-    private JMenuBar jMenuBar1;
-    private JMenuItem jMenuItem1;
-    private JPanel jPanel1;
-    private JPanel pan_2nd_level_sw;
-    private JPanel pan_top_level;
-    private JPanel pan_middle_sys_utils;
-    private JPanel pan_top_sys_utils;
-    private JPanel jPanel14;
-    private JPanel pan_image_file_buttons;
-    private JPanel pan_com_buttons;
-    private JPanel pan_sys_status;
-    private JPanel jPanel3;
-    private JPanel pan_dDisplay;
-    private JPanel pan_vision_utils;
-    private JPanel pan_logo_icons;
-    private JPanel pan_3rd_level_south;
-    private JPanel pan_data_logging;
-    private JPanel pan_2nd_level_top;
-    private JProgressBar pb_load_image;
-    private JProgressBar sb_robo_connection;
-    private JProgressBar sb_video_signal;
-    private JProgressBar sb_logging;
-    private JProgressBar sb_battery;
-    private JProgressBar sb_camera_signal;
-    private JTextField tf_log_dump_file;
-    private JTextField tf_r_id;
-    private JTextField tf_ip;
-    private JMenu menu_about;
-    private JMenu menu_edit;
-    private JMenu menu_file;
-    private JMenu menu_help;
-    private JMenu menu_tools;
-    private JMenuItem mnu_close;
-    private JMenuItem mnu_exit;
-    private JMenuItem mnu_open;
-    private JMenuItem mnu_saveas;
-    private JPanel pan_vid_controls;
-    private JPanel pan_video_stream;
-    private JPanel p_media_player;
-    // End of variables declaration
+    Canvas canvas1;
+    Canvas canvas3;
+    Canvas canvas4;
+    JButton b_scan_hanger;
+    JButton b_connect;
+    JButton b_reset;
+    JButton b_close;
+    JButton b_snap_image;
+    JButton b_inspect_ceiling;
+    JButton b_look_around;
+    JButton b_load;
+    JButton b_archive;
+    JButton b_set_flag;
+    JButton b_open_image;
+    JButton b_save_image;
+    JButton b_close_image;
+    JCheckBox cb_object_aware;
+    JCheckBox cb_do_log;
+    JComboBox combox_src_ip;
+    JComboBox combox_dest_ip;
+    JLabel jLabel1;
+    JLabel l_battery;
+    JLabel l_capture_moment;
+    JLabel l_log_file;
+    JLabel l_battery_per;
+    JLabel l_robo_conn_per;
+    JLabel l_vid_sig_per;
+    JLabel l_logging_per;
+    JLabel l_cam_sig_per;
+    JLabel l_r_id;
+    JLabel l_src_ip;
+    JLabel jLabel2;
+    JLabel l_dest_ip;
+    JLabel l_host_ip;
+    JLabel l_vid_con_icons;
+    JLabel l_plenum_map;
+    JLabel jLabel3;
+    JLabel l_logo;
+    JLabel jLabel5;
+    JLabel l_robo_connect;
+    JLabel l_vid_signal;
+    JLabel jLabel8;
+    JLabel l_data_logging;
+    JMenuBar jMenuBar1;
+    JMenuItem jMenuItem1;
+    JPanel jPanel1;
+    JPanel pan_2nd_level_sw;
+    JPanel pan_top_level;
+    JPanel pan_middle_sys_utils;
+    JPanel pan_top_sys_utils;
+    JPanel jPanel14;
+    JPanel pan_image_file_buttons;
+    JPanel pan_com_buttons;
+    JPanel pan_sys_status;
+    JPanel jPanel3;
+    JPanel pan_dDisplay;
+    JPanel pan_vision_utils;
+    JPanel pan_logo_icons;
+    JPanel pan_3rd_level_south;
+    JPanel pan_data_logging;
+    JPanel pan_2nd_level_top;
+    JProgressBar pb_load_image;
+    JProgressBar sb_robo_connection;
+    JProgressBar sb_video_signal;
+    JProgressBar sb_logging;
+    JProgressBar sb_battery;
+    JProgressBar sb_camera_signal;
+    JTextField tf_log_dump_file;
+    JTextField tf_r_id;
+    JTextField tf_ip;
+    JMenu menu_about;
+    JMenu menu_edit;
+    JMenu menu_file;
+    JMenu menu_help;
+    JMenu menu_tools;
+    JMenuItem mnu_close;
+    JMenuItem mnu_exit;
+    JMenuItem mnu_open;
+    JMenuItem mnu_saveas;
+    JPanel pan_vid_controls;
+    JPanel pan_video_stream;
+    JPanel p_media_player;
+    // </editor-fold>
 
+    // End of variables declaration
     //  @Override
     //public void actionPerformed(ActionEvent ae) {
     //System.out.println(ae.getSource());
@@ -1406,9 +1409,10 @@ public class InspectorRobot extends JFrame
     private void println(String property) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }
 
-class Player1 {
+class MediaPlayerHandle {
 
 //    JFrame frame = new JFrame("");
     JPanel p;
@@ -1416,7 +1420,7 @@ class Player1 {
     EmbeddedMediaPlayer mediaPlayer;
     String icon_path = System.getProperty("user.dir") + "/resources/";
 
-    Player1() {
+    MediaPlayerHandle() {
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
         Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 
