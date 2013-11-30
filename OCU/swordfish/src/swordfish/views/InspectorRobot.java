@@ -52,6 +52,8 @@ import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
+import java.awt.FileDialog;
+import java.io.File;
 
 //import uk.co.caprica.vlcj.binding.LibVlc;
 //import uk.co.caprica.vlcj.player.MediaPlayerFactory;
@@ -82,18 +84,19 @@ public class InspectorRobot extends JFrame
     private JLabel icon_up;
     private JPanel p_directionals;
     private boolean do_debug = true;
-
+    Player1 media_pan;
 //    Player pp;
 //    private String dir_image_icons = "/resources/";
     // globals
+
     public InspectorRobot() {
         init();
         buildGui();
-        Player1 pp = new Player1();
-        JPanel ppp = pp.getF();
+        media_pan = new Player1();
+        JPanel ppp = media_pan.getF();
         ppp.setSize(p_media_player.getSize());
         p_media_player.add(ppp);
-        pp.playz();
+        media_pan.playz();
 
     }
     /*
@@ -1112,6 +1115,23 @@ public class InspectorRobot extends JFrame
 
     private void mnu_openActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
+
+        FileDialog fd = new FileDialog(this, "TrivialJMFPlayer", FileDialog.LOAD);
+
+        fd.setVisible(true);
+
+        String dir = fd.getDirectory();
+        String fname = fd.getFile();
+        File f = new File(dir, fname);
+
+        if (!f.exists()) {
+            if (do_debug) {
+                System.out.println("Open Dialog Box did not return a file chose.\n");
+            }
+            return;
+        }
+        media_pan.playz(dir + "/" + fname);
+
     }
 
     private void mnu_saveasActionPerformed(ActionEvent evt) {
@@ -1477,20 +1497,11 @@ class Player1 {
         return p;
     }
 
+    public void playz(String vpath) {
+        mediaPlayer.playMedia(vpath);
+    }
+
     public void playz() {
         mediaPlayer.playMedia("/Users/jrob/Google Drive/Capstone/Visualization/Video and PNGs/Scene 10/Office_Scene_10.avi");
     }
-//    public static void main(final String[] args) {
-//
-//        // NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
-////        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-//     //   SwingUtilities.invokeLater(new Runnable() {
-//       //     @Override
-//         //   public void run() {
-//                NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
-//                Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-//                new Player1();
-//            }
-//        });
-//    }
 }
