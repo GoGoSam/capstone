@@ -54,27 +54,16 @@ import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 import ij.IJ;
 import java.awt.FileDialog;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 
-//import uk.co.caprica.vlcj.binding.LibVlc;
-//import uk.co.caprica.vlcj.player.MediaPlayerFactory;
-//import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-//import uk.co.caprica.vlcj.runtime.RuntimeUtil;
-//
-//import com.sun.jna.Native;
-//import com.sun.jna.NativeLibrary;
-/*
- import javax.media.*; //media.*;
- import java.io.File;
- import java.awt.*;
- import java.net.MalformedURLException;
- import java.net.URL;*/
 /**
  *
  * @author jrob
  */
 public class InspectorRobot extends JFrame
-        implements KeyListener, WindowListener {
+        implements KeyListener, WindowListener, MouseListener {
 
     /**
      * Creates new form MainMenu
@@ -94,11 +83,13 @@ public class InspectorRobot extends JFrame
     // globals
     public InspectorRobot() {
         buildGui();
+
         media_pan = new MediaPlayerHandle();
         JPanel ppp = media_pan.getF();
         ppp.setSize(p_media_player.getSize());
+
         p_media_player.add(ppp);
-        media_pan.playz();
+        //media_pan.playz();
 
     }
 
@@ -201,8 +192,16 @@ public class InspectorRobot extends JFrame
         menu_tools = new JMenu();
         menu_help = new JMenu();
         menu_about = new JMenu();
-// </editor-fold>
 
+        tb_vid_controls = new javax.swing.JToolBar();
+        b_vid_rw = new javax.swing.JButton();
+        b_vid_play = new javax.swing.JButton();
+        b_vid_stop = new javax.swing.JButton();
+        b_vid_pause = new javax.swing.JButton();
+        b_vid_ff = new javax.swing.JButton();
+        b_vid_mute = new javax.swing.JToggleButton();
+
+// </editor-fold>
         jMenuItem1.setText("jMenuItem1");
 
         // setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -239,6 +238,7 @@ public class InspectorRobot extends JFrame
         b_snap_image.setIcon(new ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/video_image_control_icons/camera_icon.jpg"));
         b_snap_image.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
+
                 b_snap_imageActionPerformed(evt);
 
             }
@@ -350,12 +350,17 @@ public class InspectorRobot extends JFrame
         b_set_flag.setText("Set Flag");
 
         b_load.setText("Load");
+
         b_load.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 b_loadActionPerformed(evt);
             }
         });
 
+        //  public void actionPerformed(ActionEvent evt) {
+        //    b_loadActionPerformed(evt);
+        //}
+//        );
         b_archive.setText("Archive");
 
         GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
@@ -384,36 +389,7 @@ public class InspectorRobot extends JFrame
                                 .addComponent(b_archive)))
         );
 
-        jPanel3Layout.linkSize(SwingConstants.VERTICAL, new Component[]{b_load, b_archive, b_set_flag});
-
-        l_vid_con_icons.setIcon(new ImageIcon(icon_path + "video_image_control_icons/video_control_icons.jpg"));
-
-        GroupLayout pan_vid_controlsLayout = new GroupLayout(pan_vid_controls);
-        pan_vid_controls.setLayout(pan_vid_controlsLayout);
-        pan_vid_controlsLayout.setHorizontalGroup(
-                pan_vid_controlsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pan_vid_controlsLayout.createSequentialGroup()
-                        .addGroup(pan_vid_controlsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5, GroupLayout.Alignment.CENTER)
-                                .addGroup(pan_vid_controlsLayout.createSequentialGroup()
-                                        .addGap(100, 100, 100)
-                                        .addComponent(l_vid_con_icons)))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pan_vid_controlsLayout.setVerticalGroup(
-                pan_vid_controlsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(pan_vid_controlsLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel5)
-                        .addGap(16, 16, 16)
-                        .addComponent(l_vid_con_icons)
-                        .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
-        );
         // </editor-fold>
-
         // <editor-fold defaultstate="collapsed" desc="Bottom Pans">
         jLabel2.setIcon(new ImageIcon(icon_path + "massDot_log.jpg"));
 
@@ -488,6 +464,160 @@ public class InspectorRobot extends JFrame
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Media Streaming">
+        jPanel3Layout.linkSize(SwingConstants.VERTICAL, new Component[]{b_load, b_archive, b_set_flag});
+
+        tb_vid_controls.setFloatable(false);
+        tb_vid_controls.setForeground(new java.awt.Color(0, 102, 102));
+        tb_vid_controls.setRollover(true);
+
+        b_vid_rw.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/rewind_icon.jpg")); // NOI18N
+        b_vid_rw.setFocusable(false);
+        b_vid_rw.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_rw.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_rw.setMinimumSize(new java.awt.Dimension(50, 50));
+        b_vid_rw.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_rw.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_rw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                media_pan.rr//
+//                b_vid_rwActionPerformed(evt);
+            }
+        });
+        tb_vid_controls.add(b_vid_rw);
+
+        b_vid_play.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/play_icon.jpg")); // NOI18N
+        b_vid_play.setFocusable(false);
+        b_vid_play.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_play.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_play.setMinimumSize(new java.awt.Dimension(50, 50));
+        b_vid_play.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_play.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_play.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                b_vid_playActionPerformed(evt);
+                media_pan.playz();
+            }
+        });
+        tb_vid_controls.add(b_vid_play);
+
+        b_vid_stop.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/stop_icon.jpg")); // NOI18N
+        b_vid_stop.setFocusable(false);
+        b_vid_stop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_stop.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_stop.setMinimumSize(new java.awt.Dimension(50, 50));
+        b_vid_stop.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_stop.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_stop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                media_pan.stop();
+//                b_vid_stopActionPerformed(evt);
+            }
+        });
+        tb_vid_controls.add(b_vid_stop);
+
+        b_vid_pause.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/pause_icon.jpg")); // NOI18N
+        b_vid_pause.setFocusable(false);
+        b_vid_pause.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_pause.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_pause.setMinimumSize(new java.awt.Dimension(50, 50));
+        b_vid_pause.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_pause.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_pause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                b_vid_pauseActionPerformed(evt);
+                media_pan.pause();
+            }
+
+        });
+        tb_vid_controls.add(b_vid_pause);
+
+        b_vid_ff.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/ff_icon.jpg")); // NOI18N
+        b_vid_ff.setBorderPainted(false);
+        b_vid_ff.setFocusable(false);
+        b_vid_ff.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_ff.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_ff.setMinimumSize(new java.awt.Dimension(50, 50));
+        b_vid_ff.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_ff.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_ff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+//                b_vid_ffActionPerformed(evt);
+            }
+        });
+        tb_vid_controls.add(b_vid_ff);
+
+        b_vid_mute.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/mute_icon.jpg")); // NOI18N
+        b_vid_mute.setContentAreaFilled(false);
+        b_vid_mute.setFocusable(false);
+        b_vid_mute.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_mute.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_mute.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_mute.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_mute.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                media_pan.mute();
+//                b_vid_muteActionPerformed(evt);
+            }
+        });
+        tb_vid_controls.add(b_vid_mute);
+        GroupLayout pan_vid_controlsLayout = new GroupLayout(pan_vid_controls);
+        pan_vid_controls.setLayout(pan_vid_controlsLayout);
+
+        //    javax.swing.GroupLayout p_inspect_toolsLayout = new javax.swing.GroupLayout(p_inspect_tools);
+        pan_vid_controls.setLayout(pan_vid_controlsLayout);
+        pan_vid_controlsLayout.setHorizontalGroup(
+                pan_vid_controlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pan_vid_controlsLayout.createSequentialGroup()
+                        .addGroup(pan_vid_controlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addGroup(pan_vid_controlsLayout.createSequentialGroup()
+                                        .addGap(111, 111, 111)
+                                        .addComponent(tb_vid_controls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pan_vid_controlsLayout.setVerticalGroup(
+                pan_vid_controlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pan_vid_controlsLayout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tb_vid_controls, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))
+        );
+
+        /*
+         l_vid_con_icons.setIcon(new ImageIcon(icon_path + "video_image_control_icons/video_control_icons.jpg"));
+         l_vid_con_icons.addMouseListener(this);//new MouseListener() {
+         l_vid_con_icons.setName("Vid Controls");
+         GroupLayout pan_vid_controlsLayout = new GroupLayout(pan_vid_controls);
+         pan_vid_controls.setLayout(pan_vid_controlsLayout);
+         pan_vid_controlsLayout.setHorizontalGroup(
+         pan_vid_controlsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+         .addComponent(jPanel3, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         .addGroup(pan_vid_controlsLayout.createSequentialGroup()
+         .addGroup(pan_vid_controlsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+         .addComponent(jLabel5, GroupLayout.Alignment.CENTER)
+         .addGroup(pan_vid_controlsLayout.createSequentialGroup()
+         .addGap(100, 100, 100)
+         .addComponent(l_vid_con_icons)))
+         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+         );
+         pan_vid_controlsLayout.setVerticalGroup(
+         pan_vid_controlsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+         .addGroup(pan_vid_controlsLayout.createSequentialGroup()
+         .addGap(0, 0, 0)
+         .addComponent(jLabel5)
+         .addGap(16, 16, 16)
+         .addComponent(l_vid_con_icons)
+         .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+         .addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+         .addGap(23, 23, 23))
+         );
+         */
         pan_video_stream.setBorder(BorderFactory.createTitledBorder(null, "Live Streaming", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Arial", 1, 14)));
         pan_video_stream.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         pan_video_stream.setFont(new Font("Lucida Grande", 1, 13));
@@ -545,19 +675,6 @@ public class InspectorRobot extends JFrame
         );
 
         jPanel1.setBorder(BorderFactory.createTitledBorder(null, "RoboTracker", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Arial", 1, 14)));
-        /*
-         jLabel1.setIcon(new JLabel() {
-         public Icon getIcon() {
-         try {
-         return new ImageIcon(
-         new java.net.URL("file:/Users/jrob/Desktop/tunnel_map-8.jpg")
-         );
-         } catch (java.net.MalformedURLException e) {
-         }
-         return null;
-         }
-         }.getIcon());*/
-
         l_plenum_map.setIcon(new ImageIcon(icon_path + "test_images_n_template_im/tunnel_map-8.jpg"));
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
@@ -1154,7 +1271,22 @@ public class InspectorRobot extends JFrame
     }
 
     private void b_loadActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+
+        FileDialog fd = new FileDialog(this, "TrivialJMFPlayer", FileDialog.LOAD);
+
+        fd.setVisible(true);
+
+        String dir = fd.getDirectory();
+        String fname = fd.getFile();
+        File f = new File(dir, fname);
+
+        if (!f.exists()) {
+            if (do_debug) {
+                System.out.println("Open Dialog Box did not return a file chose.\n");
+            }
+            return;
+        }
+        media_pan.playz(dir + "/" + fname);
     }
 
     private void b_save_imageActionPerformed(ActionEvent evt) {
@@ -1180,6 +1312,60 @@ public class InspectorRobot extends JFrame
     }
 
     private void b_snap_imageActionPerformed(ActionEvent evt) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+        String src = e.getComponent().getName();
+        if (src.equals("Vid Controls")) {
+
+            System.out.println("\n");
+            System.out.println(Integer.toString(e.getX()));
+            System.out.println(", " + Integer.toString(e.getY()) + "\n");
+
+            int point = e.getX();
+            String vid_command = "";
+            if (point >= 5 && point <= 32) {
+                media_pan.playz();
+            } else if (point >= 42 && point < 70) {
+                media_pan.pause();
+
+            } else if (point >= 80 && point <= 105) {
+                media_pan.stop();
+
+            } else if (point >= 114 && point <= 145) {
+
+            } else if (point >= 152 && point < 180) {
+
+            } else if (point >= 186 && point < 218) {
+
+            } else if (point >= 222 && point <= 252) {
+
+            } else if (point >= 260 && point <= 288) {
+
+            } else if (point >= 298 && point <= 325) {
+                media_pan.mute();
+            }
+
+        }
 
     }
 
@@ -1331,6 +1517,14 @@ public class InspectorRobot extends JFrame
     JButton b_open_image;
     JButton b_save_image;
     JButton b_close_image;
+
+    JButton b_vid_ff;
+    JToggleButton b_vid_mute;
+    JButton b_vid_pause;
+    JButton b_vid_play;
+    JButton b_vid_rw;
+    JButton b_vid_stop;
+
     JCheckBox cb_object_aware;
     JCheckBox cb_do_log;
     JComboBox combox_src_ip;
@@ -1397,8 +1591,10 @@ public class InspectorRobot extends JFrame
     JPanel pan_vid_controls;
     JPanel pan_video_stream;
     JPanel p_media_player;
-    // </editor-fold>
 
+    JToolBar tb_vid_controls;
+
+    // </editor-fold>
     // End of variables declaration
     //  @Override
     //public void actionPerformed(ActionEvent ae) {
@@ -1452,7 +1648,23 @@ class MediaPlayerHandle {
     }
 
     public void playz() {
-        mediaPlayer.playMedia(icon_path + "/Users/jrob/Google Drive/Capstone/Visualization/Video and PNGs/Scene 10/Office_Scene_10.avi");
+
+        mediaPlayer.play();
+    }
+
+    public void pause() {
+
+        mediaPlayer.pause();
+    }
+
+    public void stop() {
+
+        mediaPlayer.stop();
+    }
+
+    public void mute() {
+
+        mediaPlayer.mute(!mediaPlayer.isMute());
 
     }
 }
