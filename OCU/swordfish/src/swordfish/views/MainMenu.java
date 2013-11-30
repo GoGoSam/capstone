@@ -914,7 +914,7 @@ public class MainMenu extends JFrame
         menu_edit.setText("Edit");
         jMenuBar1.add(menu_edit);
 
-        menu_tools.setLabel("Tools");
+        menu_tools.setText("Tools");
         jMenuBar1.add(menu_tools);
 
         menu_help.setText("Help");
