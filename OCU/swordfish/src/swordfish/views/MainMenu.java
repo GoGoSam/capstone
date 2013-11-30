@@ -69,7 +69,13 @@ public class MainMenu extends JFrame
         jButton6 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel22 = new javax.swing.JLabel();
+        tb_vid_controls = new javax.swing.JToolBar();
+        b_vid_rw = new javax.swing.JButton();
+        b_vid_play = new javax.swing.JButton();
+        b_vid_stop = new javax.swing.JButton();
+        b_vid_pause = new javax.swing.JButton();
+        b_vid_ff = new javax.swing.JButton();
+        b_vid_mute = new javax.swing.JToggleButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -79,6 +85,7 @@ public class MainMenu extends JFrame
         canvas1 = new java.awt.Canvas();
         canvas3 = new java.awt.Canvas();
         canvas4 = new java.awt.Canvas();
+        jLabel22 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -263,7 +270,7 @@ public class MainMenu extends JFrame
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         p_inspect_tools.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Video Control", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
@@ -285,13 +292,13 @@ public class MainMenu extends JFrame
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
-                .addGap(119, 119, 119)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
-                .addContainerGap())
+                .addGap(113, 113, 113))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, jButton5, jButton6});
@@ -308,7 +315,94 @@ public class MainMenu extends JFrame
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton4, jButton5, jButton6});
 
-        jLabel22.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/video_image_control_icons/video_control_icons.jpg")); // NOI18N
+        tb_vid_controls.setFloatable(false);
+        tb_vid_controls.setForeground(new java.awt.Color(0, 102, 102));
+        tb_vid_controls.setRollover(true);
+
+        b_vid_rw.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/rewind_icon.jpg")); // NOI18N
+        b_vid_rw.setFocusable(false);
+        b_vid_rw.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_rw.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_rw.setMinimumSize(new java.awt.Dimension(50, 50));
+        b_vid_rw.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_rw.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_rw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_vid_rwActionPerformed(evt);
+            }
+        });
+        tb_vid_controls.add(b_vid_rw);
+
+        b_vid_play.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/play_icon.jpg")); // NOI18N
+        b_vid_play.setFocusable(false);
+        b_vid_play.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_play.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_play.setMinimumSize(new java.awt.Dimension(50, 50));
+        b_vid_play.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_play.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_play.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_vid_playActionPerformed(evt);
+            }
+        });
+        tb_vid_controls.add(b_vid_play);
+
+        b_vid_stop.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/stop_icon.jpg")); // NOI18N
+        b_vid_stop.setFocusable(false);
+        b_vid_stop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_stop.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_stop.setMinimumSize(new java.awt.Dimension(50, 50));
+        b_vid_stop.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_stop.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_stop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_vid_stopActionPerformed(evt);
+            }
+        });
+        tb_vid_controls.add(b_vid_stop);
+
+        b_vid_pause.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/pause_icon.jpg")); // NOI18N
+        b_vid_pause.setFocusable(false);
+        b_vid_pause.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_pause.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_pause.setMinimumSize(new java.awt.Dimension(50, 50));
+        b_vid_pause.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_pause.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_pause.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_vid_pauseActionPerformed(evt);
+            }
+        });
+        tb_vid_controls.add(b_vid_pause);
+
+        b_vid_ff.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/ff_icon.jpg")); // NOI18N
+        b_vid_ff.setBorderPainted(false);
+        b_vid_ff.setFocusable(false);
+        b_vid_ff.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_ff.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_ff.setMinimumSize(new java.awt.Dimension(50, 50));
+        b_vid_ff.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_ff.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_ff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_vid_ffActionPerformed(evt);
+            }
+        });
+        tb_vid_controls.add(b_vid_ff);
+
+        b_vid_mute.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/media_control_icons/mute_icon.jpg")); // NOI18N
+        b_vid_mute.setContentAreaFilled(false);
+        b_vid_mute.setFocusable(false);
+        b_vid_mute.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        b_vid_mute.setMaximumSize(new java.awt.Dimension(50, 50));
+        b_vid_mute.setPreferredSize(new java.awt.Dimension(50, 50));
+        b_vid_mute.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        b_vid_mute.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_vid_muteActionPerformed(evt);
+            }
+        });
+        tb_vid_controls.add(b_vid_mute);
 
         javax.swing.GroupLayout p_inspect_toolsLayout = new javax.swing.GroupLayout(p_inspect_tools);
         p_inspect_tools.setLayout(p_inspect_toolsLayout);
@@ -317,10 +411,10 @@ public class MainMenu extends JFrame
             .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(p_inspect_toolsLayout.createSequentialGroup()
                 .addGroup(p_inspect_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel5)
                     .addGroup(p_inspect_toolsLayout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel22)))
+                        .addGap(111, 111, 111)
+                        .addComponent(tb_vid_controls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         p_inspect_toolsLayout.setVerticalGroup(
@@ -328,9 +422,9 @@ public class MainMenu extends JFrame
             .addGroup(p_inspect_toolsLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jLabel5)
-                .addGap(16, 16, 16)
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tb_vid_controls, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -348,7 +442,7 @@ public class MainMenu extends JFrame
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(20, 20, 20))
         );
@@ -371,7 +465,7 @@ public class MainMenu extends JFrame
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(p_inspect_tools, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)))
@@ -381,7 +475,7 @@ public class MainMenu extends JFrame
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(p_inspect_tools, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addComponent(p_inspect_tools, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -410,6 +504,9 @@ public class MainMenu extends JFrame
         p_live_streaming.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         p_live_streaming.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
 
+        jLabel22.setBackground(new java.awt.Color(0, 204, 204));
+        jLabel22.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/video_image_control_icons/video_control_icons.jpg")); // NOI18N
+
         javax.swing.GroupLayout p_live_streamingLayout = new javax.swing.GroupLayout(p_live_streaming);
         p_live_streaming.setLayout(p_live_streamingLayout);
         p_live_streamingLayout.setHorizontalGroup(
@@ -426,11 +523,17 @@ public class MainMenu extends JFrame
                         .addGap(152, 152, 152)
                         .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(362, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_live_streamingLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel22)
+                .addGap(102, 102, 102))
         );
         p_live_streamingLayout.setVerticalGroup(
             p_live_streamingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_live_streamingLayout.createSequentialGroup()
-                .addGap(464, 464, 464)
+                .addGap(324, 324, 324)
+                .addComponent(jLabel22)
+                .addGap(98, 98, 98)
                 .addComponent(canvas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(canvas4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -914,7 +1017,7 @@ public class MainMenu extends JFrame
         menu_edit.setText("Edit");
         jMenuBar1.add(menu_edit);
 
-        menu_tools.setText("Tools");
+        menu_tools.setLabel("Tools");
         jMenuBar1.add(menu_tools);
 
         menu_help.setText("Help");
@@ -1062,6 +1165,30 @@ public class MainMenu extends JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton13ActionPerformed
 
+    private void b_vid_pauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_pauseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_vid_pauseActionPerformed
+
+    private void b_vid_stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_stopActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_vid_stopActionPerformed
+
+    private void b_vid_ffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_ffActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_vid_ffActionPerformed
+
+    private void b_vid_muteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_muteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_vid_muteActionPerformed
+
+    private void b_vid_playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_playActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_vid_playActionPerformed
+
+    private void b_vid_rwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_rwActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_vid_rwActionPerformed
+
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -1156,6 +1283,12 @@ public class MainMenu extends JFrame
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton b_vid_ff;
+    private javax.swing.JToggleButton b_vid_mute;
+    private javax.swing.JButton b_vid_pause;
+    private javax.swing.JButton b_vid_play;
+    private javax.swing.JButton b_vid_rw;
+    private javax.swing.JButton b_vid_stop;
     private java.awt.Canvas canvas1;
     private java.awt.Canvas canvas3;
     private java.awt.Canvas canvas4;
@@ -1238,6 +1371,7 @@ public class MainMenu extends JFrame
     private javax.swing.JPanel p_inspect_tools;
     private javax.swing.JPanel p_live_streaming;
     private javax.swing.JPanel p_media_player;
+    private javax.swing.JToolBar tb_vid_controls;
     // End of variables declaration//GEN-END:variables
 
     //  @Override

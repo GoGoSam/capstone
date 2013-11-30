@@ -21,6 +21,6 @@ public class run_InspectorRobot {
 //        javax.imageio.ImageReader ii
         InspectorRobot fmm = new InspectorRobot();
         fmm.setVisible(true);
-        //FunctioningMainMenu.se
+//        FunctioningMainMenu.se
     }
 }
