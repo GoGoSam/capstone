@@ -541,7 +541,7 @@ public class InspectorRobot extends JFrame
         b_vid_ff.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         b_vid_ff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-
+                media_pan.ff(b_vid_ff);
 //                b_vid_ffActionPerformed(evt);
             }
         });
@@ -1287,6 +1287,7 @@ public class InspectorRobot extends JFrame
             return;
         }
         media_pan.playz(dir + "/" + fname);
+
     }
 
     private void b_save_imageActionPerformed(ActionEvent evt) {
@@ -1312,7 +1313,12 @@ public class InspectorRobot extends JFrame
     }
 
     private void b_snap_imageActionPerformed(ActionEvent evt) {
-
+        boolean tmp = media_pan.save_snap_shot();
+        if (tmp) {
+            System.out.println("Yupp, Snap!\n\n");
+        } else {
+            System.out.println("No Snap!\n\n");
+        }
     }
 
     @Override
@@ -1666,5 +1672,27 @@ class MediaPlayerHandle {
 
         mediaPlayer.mute(!mediaPlayer.isMute());
 
+//        mediaPlayer .addMediaOptions(strings);
+    }
+
+    public boolean save_snap_shot() {
+        return mediaPlayer.saveSnapshot();
+    }
+
+    public void ff(JButton j_in) {
+        float rate = mediaPlayer.getRate();
+        if (rate == 1.0f) {
+            mediaPlayer.setRate(1.5f);
+            j_in.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/ff_icon_1_5x.jpg"));
+
+        } else if (rate == 1.5f) {
+            mediaPlayer.setRate(2.0f);
+            j_in.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/ff_icon_2x.jpg"));
+        } else {
+            mediaPlayer.setRate(1.0f);
+            j_in.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/ff_icon.jpg"));
+        }
+        // mediaPlayer.setTime((long) mediaPlayer.getRate());
+        mediaPlayer.setTitle((int) (mediaPlayer.getRate()));
     }
 }
