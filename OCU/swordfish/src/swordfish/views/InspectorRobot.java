@@ -85,10 +85,12 @@ public class InspectorRobot extends JFrame
     private JPanel p_directionals;
     private boolean do_debug = true;
     Player1 media_pan;
+
+    String icon_path = System.getProperty("user.dir") + "/resources/";
+
 //    Player pp;
 //    private String dir_image_icons = "/resources/";
     // globals
-
     public InspectorRobot() {
         init();
         buildGui();
@@ -99,24 +101,6 @@ public class InspectorRobot extends JFrame
         media_pan.playz();
 
     }
-    /*
-     private void func()
-     throws java.io.IOException,
-     java.net.MalformedURLException,
-     javax.media.MediaException {
-     //        FileDialog fd = new FileDialog(this, "TrivialJMFPlayer", FileDialog.LOAD);
-     // fd.setVisible(true);
-     //        File f = new File(fd.getDirectory(), fd.getFile());
-     System.out.println("Snap1!\n\n");
-     Processor p = Manager.createProcessor(new URL(" http://youtu.be/lTC1NWImP_0"));
-
-     //        Player pe = Manager.createRealizedPlayer(new URL(" http://youtu.be/lTC1NWImP_0"));
-     System.out.println("Snap2!\n\n");
-     Component c = p.getVisualComponent();
-     add(c);
-     p.start();
-
-     }*/
 
 // <editor-fold defaultstate="collapsed" desc="buildGui">
     /**
@@ -124,6 +108,7 @@ public class InspectorRobot extends JFrame
      */
     private void buildGui() {
 
+        // <editor-fold defaultstate="collapsed" desc="Instantiate Components">
         jMenuItem1 = new JMenuItem();
 
         pan_top_level = new JPanel();
@@ -216,12 +201,14 @@ public class InspectorRobot extends JFrame
         menu_tools = new JMenu();
         menu_help = new JMenu();
         menu_about = new JMenu();
+// </editor-fold>
 
         jMenuItem1.setText("jMenuItem1");
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Inspector Robot");
+        // setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Inspector Robot"); // set title
 
+        // <editor-fold defaultstate="collapsed" desc="Vision Utils">
         pan_vision_utils.setBorder(BorderFactory.createTitledBorder(null, "Vision Utils", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Arial", 1, 14)));
 
         b_scan_hanger.setText("Scan Hanger");
@@ -354,6 +341,7 @@ public class InspectorRobot extends JFrame
                         .addComponent(pb_load_image, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(21, Short.MAX_VALUE))
         );
+        // </editor-fold>
 
         pan_vid_controls.setBorder(BorderFactory.createTitledBorder(null, "Video Control", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Arial", 1, 14)));
         pan_vid_controls.setPreferredSize(new Dimension(121, 145));
@@ -397,7 +385,7 @@ public class InspectorRobot extends JFrame
 
         jPanel3Layout.linkSize(SwingConstants.VERTICAL, new Component[]{b_load, b_archive, b_set_flag});
 
-        l_vid_con_icons.setIcon(new ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/video_image_control_icons/video_control_icons.jpg"));
+        l_vid_con_icons.setIcon(new ImageIcon(icon_path + "video_image_control_icons/video_control_icons.jpg"));
 
         GroupLayout pan_vid_controlsLayout = new GroupLayout(pan_vid_controls);
         pan_vid_controls.setLayout(pan_vid_controlsLayout);
@@ -424,9 +412,10 @@ public class InspectorRobot extends JFrame
                         .addGap(23, 23, 23))
         );
 
-        jLabel2.setIcon(new ImageIcon("/Users/jrob/Documents/download.jpg"));
+        // <editor-fold defaultstate="collapsed" desc="Bottom Pans">
+        jLabel2.setIcon(new ImageIcon(icon_path + "massDot_log.jpg"));
 
-        l_logo.setIcon(new ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/company_logo.jpg"));
+        l_logo.setIcon(new ImageIcon(icon_path + "company_logo.jpg"));
 
         GroupLayout pan_logo_iconsLayout = new GroupLayout(pan_logo_icons);
         pan_logo_icons.setLayout(pan_logo_iconsLayout);
@@ -494,7 +483,9 @@ public class InspectorRobot extends JFrame
                                 .addComponent(pan_3rd_level_south, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
         );
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Media Streaming">
         pan_video_stream.setBorder(BorderFactory.createTitledBorder(null, "Live Streaming", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Arial", 1, 14)));
         pan_video_stream.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         pan_video_stream.setFont(new Font("Lucida Grande", 1, 13));
@@ -552,20 +543,20 @@ public class InspectorRobot extends JFrame
         );
 
         jPanel1.setBorder(BorderFactory.createTitledBorder(null, "RoboTracker", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Arial", 1, 14)));
+        /*
+         jLabel1.setIcon(new JLabel() {
+         public Icon getIcon() {
+         try {
+         return new ImageIcon(
+         new java.net.URL("file:/Users/jrob/Desktop/tunnel_map-8.jpg")
+         );
+         } catch (java.net.MalformedURLException e) {
+         }
+         return null;
+         }
+         }.getIcon());*/
 
-        jLabel1.setIcon(new JLabel() {
-            public Icon getIcon() {
-                try {
-                    return new ImageIcon(
-                            new java.net.URL("file:/Users/jrob/Desktop/tunnel_map-8.jpg")
-                    );
-                } catch (java.net.MalformedURLException e) {
-                }
-                return null;
-            }
-        }.getIcon());
-
-        l_plenum_map.setIcon(new ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/test_images_n_template_im/tunnel_map-8.jpg"));
+        l_plenum_map.setIcon(new ImageIcon(icon_path + "test_images_n_template_im/tunnel_map-8.jpg"));
 
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -589,6 +580,8 @@ public class InspectorRobot extends JFrame
                         .addComponent(jLabel1))
         );
 
+        // </editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="System Status">
         pan_sys_status.setBorder(BorderFactory.createTitledBorder(null, "System Status", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Arial", 1, 14)));
 
         tf_log_dump_file.setText("...ecenu/05182014_i90E.log");
@@ -799,7 +792,9 @@ public class InspectorRobot extends JFrame
                         .addComponent(pan_com_buttons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Higher Level Panels">
         GroupLayout pan_top_sys_utilsLayout = new GroupLayout(pan_top_sys_utils);
         pan_top_sys_utils.setLayout(pan_top_sys_utilsLayout);
         pan_top_sys_utilsLayout.setHorizontalGroup(
@@ -925,7 +920,9 @@ public class InspectorRobot extends JFrame
                                 .addComponent(pan_video_stream, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
         );
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Data Zone">
         jPanel1.getAccessibleContext().setAccessibleName("I-90 East");
         jPanel1.getAccessibleContext().setAccessibleDescription("");
 
@@ -969,7 +966,10 @@ public class InspectorRobot extends JFrame
                                 .addComponent(pan_dDisplay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
         );
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Menu Bar">
+        // <editor-fold defaultstate="collapsed" desc="Drop Down Menus">
         menu_file.setText("File");
 
         mnu_open.setText("Open...");
@@ -1000,6 +1000,7 @@ public class InspectorRobot extends JFrame
         menu_file.add(mnu_exit);
 
         jMenuBar1.add(menu_file);
+        // </editor-fold>
 
         menu_edit.setText("Edit");
         jMenuBar1.add(menu_edit);
@@ -1014,7 +1015,9 @@ public class InspectorRobot extends JFrame
         jMenuBar1.add(menu_about);
 
         setJMenuBar(jMenuBar1);
+        // </editor-fold>
 
+        // <editor-fold defaultstate="collapsed" desc="Combined Panel">
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1025,6 +1028,7 @@ public class InspectorRobot extends JFrame
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addComponent(pan_top_level, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        // </editor-fold>
 
         pack();
     }// </editor-fold>
@@ -1144,24 +1148,6 @@ public class InspectorRobot extends JFrame
 
     private void b_look_aroundActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
-/*
-         try {
-         System.out.println("Snap!\n\n");
-         // TODO add your handling code here:
-         //  Desktop.getDesktop().open(new File("/Users/jrob/Google Drive/Capstone/Visualization/Clips/image_processing/rust.mov"));
-         //             Player p = Manager.
-         //            Player p = Manager.createRealizedPlayer(new File("/Users/jrob/Google Drive/Capstone/Visualization/Clips/image_processing/rust.mov"));
-         //            System.out.println("Sna1p!\n\n");
-         //            Component c = p.getVisualComponent();
-         //            add(c);
-         //            p.start();
-         func();
-         } catch (IOException ex) {
-         System.out.println(ex.toString());
-         Logger.getLogger(InspectorRobot.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (MediaException ex) {
-         System.out.println("1: " + ex.toString());
-         }*/
     }
 
     private void b_inspect_ceilingActionPerformed(ActionEvent evt) {
@@ -1179,13 +1165,6 @@ public class InspectorRobot extends JFrame
     private void b_open_imageActionPerformed(ActionEvent evt) {
 
         System.out.println("Snap!\n\n");
-        /*   try {
-         System.out.println("Snap!\n\n");
-         // TODO add your handling code here:
-         Desktop.getDesktop().open(new File("the.mp4"));
-         } catch (IOException ex) {
-         Logger.getLogger(InspectorRobot.class.getName()).log(Level.SEVERE, null, ex);
-         }*/
         // TODO add your handling code here:
     }
 
@@ -1430,45 +1409,12 @@ public class InspectorRobot extends JFrame
 }
 
 class Player1 {
-    /*
-     private Player(String[] args) {
-     JFrame frame = new JFrame("vlcj Tutorial");
 
-     MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
-
-     Canvas c = new Canvas();
-     c.setBackground(Color.black);
-     JPanel p = new JPanel();
-     p.setLayout(new BorderLayout());
-     p.add(c, BorderLayout.CENTER);
-     frame.add(p, BorderLayout.CENTER);
-
-     EmbeddedMediaPlayer mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
-     mediaPlayer.setVideoSurface(mediaPlayerFactory.newVideoSurface(c));
-     frame.setLocation(100, 100);
-     frame.setSize(1280, 720);
-     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     frame.setVisible(true);
-
-     mediaPlayer.playMedia("/Users/jrob/Google Drive/Capstone/Visualization/Video and PNGs/Wifi/wifi_Rust.avi");
-     }
-     public static void main(final String[] args) {
-
-     NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
-     Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-     SwingUtilities.invokeLater(new Runnable() {
-     @Override
-     public void run() {
-     new Player(args);
-     }
-     });
-     }
-     */
-
-    JFrame frame = new JFrame("vlcj Tutorial");
+//    JFrame frame = new JFrame("");
     JPanel p;
     MediaPlayerFactory mediaPlayerFactory;
     EmbeddedMediaPlayer mediaPlayer;
+    String icon_path = System.getProperty("user.dir") + "/resources/";
 
     Player1() {
         NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
@@ -1481,14 +1427,14 @@ class Player1 {
         p = new JPanel();
         p.setLayout(new BorderLayout());
         p.add(c, BorderLayout.CENTER);
-        frame.add(p, BorderLayout.CENTER);
+//        frame.add(p, BorderLayout.CENTER);
 
         mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
         mediaPlayer.setVideoSurface(mediaPlayerFactory.newVideoSurface(c));
-        frame.setLocation(100, 100);
-        frame.setSize(1280, 720);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+//        frame.setLocation(100, 100);
+//        frame.setSize(1280, 720);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setVisible(true);
 
         //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -1502,6 +1448,7 @@ class Player1 {
     }
 
     public void playz() {
-        mediaPlayer.playMedia("/Users/jrob/Google Drive/Capstone/Visualization/Video and PNGs/Scene 10/Office_Scene_10.avi");
+        mediaPlayer.playMedia(icon_path + "/Users/jrob/Google Drive/Capstone/Visualization/Video and PNGs/Scene 10/Office_Scene_10.avi");
+
     }
 }
