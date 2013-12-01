@@ -1650,7 +1650,19 @@ class MediaPlayerHandle {
     }
 
     public void playz(String vpath) {
+
         mediaPlayer.playMedia(vpath);
+
+        mediaPlayer.setAdjustVideo(true);
+
+//        System.out.print((mediaPlayer.isAdjustVideo()));
+        mediaPlayer.setBrightness(2.0f);
+
+        /* while (mediaPlayer.getBrightness() >
+         0.0f) {
+         mediaPlayer.setBrightness(mediaPlayer.getBrightness() - 0.02f);
+         System.out.println(mediaPlayer.getBrightness());
+         }*/
     }
 
     public void playz() {
