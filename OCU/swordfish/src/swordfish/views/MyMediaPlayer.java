@@ -72,12 +72,24 @@ public class MyMediaPlayer {
          }*/
     }
 
+    public long getLength() {
+        return mediaPlayer.getLength();
+    }
+
+    public long getTime() {
+        return mediaPlayer.getTime();
+    }
+
     public void playz() {
         mediaPlayer.play();
     }
 
     public void pause() {
         mediaPlayer.pause();
+//        System.out.println(mediaPlayer.getMediaDetails());
+//        System.out.println(Long.toString(mediaPlayer.getLength()));
+
+//        System.out.println(Long.toString(mediaPlayer.getTime()));
     }
 
     public void stop() {

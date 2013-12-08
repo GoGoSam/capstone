@@ -42,6 +42,7 @@ public class MainMenu extends JFrame
     private JLabel icon_up;
     private JPanel p_directionals;
     private boolean do_debug = true;
+    boolean[] f_video_loaded = new boolean[1];
     MyMediaPlayer media_pan;
     String icon_path = System.getProperty("user.dir") + "/resources/";
 //    private String dir_image_icons = "/resources/";
@@ -52,6 +53,18 @@ public class MainMenu extends JFrame
         initComponents();
         initMediaPlayer();
         initContainer();
+        f_video_loaded[0] = false;
+        set_button_states();
+    }
+
+    private void set_button_states() {
+        b_vid_ff.setEnabled(f_video_loaded[0]);
+        b_vid_mute.setEnabled(f_video_loaded[0]);
+        b_vid_pause.setEnabled(f_video_loaded[0]);
+        b_vid_play.setEnabled(f_video_loaded[0]);
+        b_vid_rw.setEnabled(f_video_loaded[0]);
+        b_vid_stop.setEnabled(f_video_loaded[0]);
+        b_capture_moment.setEnabled(f_video_loaded[0]);
 
     }
 
@@ -1315,6 +1328,7 @@ public class MainMenu extends JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="init()">
     private void init() {
 
         // instantiate
@@ -1390,6 +1404,9 @@ public class MainMenu extends JFrame
         addKeyListener(this);
 
     }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Action Performed">
     private void mnu_sub_openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_sub_openActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mnu_sub_openActionPerformed
@@ -1449,29 +1466,34 @@ public class MainMenu extends JFrame
             if (do_debug) {
                 System.out.println("Open Dialog Box did not return a file chose.\n");
             }
-            return;
+            f_video_loaded[0] = false;
+        } else {
+            media_pan.playz(dir + "/" + fname);
+            f_video_loaded[0] = true;
         }
-        media_pan.playz(dir + "/" + fname);
+        set_button_states();
+
     }//GEN-LAST:event_b_loadActionPerformed
 
     private void b_vid_muteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_muteActionPerformed
-        // TODO add your handling code here:
+        media_pan.mute();
     }//GEN-LAST:event_b_vid_muteActionPerformed
 
     private void b_vid_ffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_ffActionPerformed
         // TODO add your handling code here:
+        media_pan.ff(b_vid_ff);
     }//GEN-LAST:event_b_vid_ffActionPerformed
 
     private void b_vid_pauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_pauseActionPerformed
-        // TODO add your handling code here:
+        media_pan.pause();
     }//GEN-LAST:event_b_vid_pauseActionPerformed
 
     private void b_vid_stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_stopActionPerformed
-        // TODO add your handling code here:
+        media_pan.stop();
     }//GEN-LAST:event_b_vid_stopActionPerformed
 
     private void b_vid_playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_playActionPerformed
-        // TODO add your handling code here:
+        media_pan.playz();
     }//GEN-LAST:event_b_vid_playActionPerformed
 
     private void b_vid_rwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_rwActionPerformed
@@ -1514,6 +1536,7 @@ public class MainMenu extends JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_mnu_sub_copyActionPerformed
 
+    // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
     @Override
     public void windowClosing(WindowEvent e) {
@@ -1551,6 +1574,7 @@ public class MainMenu extends JFrame
 //    public void windowStateChanged(WindowEvent e) {
 //    }
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="KeyListeners">
     @Override
     public void keyTyped(KeyEvent e) {
     }
@@ -1607,6 +1631,7 @@ public class MainMenu extends JFrame
         }
     }
 
+    // </editor-fold>
     /**
      * @param args the command line arguments
      */
