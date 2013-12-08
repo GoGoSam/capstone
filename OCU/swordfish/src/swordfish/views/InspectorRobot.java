@@ -765,7 +765,6 @@ public class InspectorRobot extends JFrame
                                 .addComponent(l_logging_per))
                         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
         sb_camera_signal.setValue(100);
 
         jLabel8.setFont(new Font("Lucida Grande", 3, 13));
@@ -814,7 +813,9 @@ public class InspectorRobot extends JFrame
                         .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                 .addComponent(sb_camera_signal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(l_cam_sig_per))
-                        .addContainerGap())
+                        //                        .addContainerGap()
+                        .addGap(0, 0, 0)
+                )
         );
 
         sb_battery.setValue(86);
@@ -1005,7 +1006,9 @@ public class InspectorRobot extends JFrame
                                         .addGroup(pan_sys_statusLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                 .addComponent(pan_data_logging, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(pan_middle_sys_utils, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(3, 3, 3))))
+                                        .addGap(3, 3, 3)
+                                        .addGap(0, 0, 0)
+                                )))
         );
         pan_sys_statusLayout.setVerticalGroup(
                 pan_sys_statusLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -1037,7 +1040,7 @@ public class InspectorRobot extends JFrame
                                 .addComponent(pan_sys_status, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jPanel1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(pan_video_stream, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 0, 0))//Short.MAX_VALUE))
         );
         // </editor-fold>
 
@@ -1055,7 +1058,8 @@ public class InspectorRobot extends JFrame
         );
         pan_dDisplayLayout.setVerticalGroup(
                 pan_dDisplayLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+        //                .addGap(0, 0, Short.MAX_VALUE)
         );
 
         GroupLayout pan_top_levelLayout = new GroupLayout(pan_top_level);
@@ -1084,9 +1088,11 @@ public class InspectorRobot extends JFrame
                                 .addComponent(pan_2nd_level_sw, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(pan_dDisplay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
+        //                        .addGap(0, 0, 0))
         );
-        // </editor-fold>
+//        pan_dDisplay.setPreferredSize(new Dimension(jPanel1.getWidth(), pan_dDisplay.getHeight()));
 
+        // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="Menu Bar">
         // <editor-fold defaultstate="collapsed" desc="Drop Down Menus">
         menu_file.setText("File");
@@ -1470,6 +1476,7 @@ public class InspectorRobot extends JFrame
 //    public void windowStateChanged(WindowEvent e) {
 //    }
     // </editor-fold>
+    // <editor-fold defaultstate="collapsed" desc="Old Main">
     /**
      * @param args the command line arguments
      */
@@ -1505,6 +1512,7 @@ public class InspectorRobot extends JFrame
      });
      }
      */
+    // </editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Component Declared">
     // Variables declaration - do not modify
     Canvas canvas1;
@@ -1666,24 +1674,19 @@ class MediaPlayerHandle {
     }
 
     public void playz() {
-
         mediaPlayer.play();
     }
 
     public void pause() {
-
         mediaPlayer.pause();
     }
 
     public void stop() {
-
         mediaPlayer.stop();
     }
 
     public void mute() {
-
         mediaPlayer.mute(!mediaPlayer.isMute());
-
 //        mediaPlayer .addMediaOptions(strings);
     }
 

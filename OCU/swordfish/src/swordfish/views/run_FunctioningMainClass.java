@@ -19,8 +19,8 @@ public class run_FunctioningMainClass {
         // TODO code application logic here
 
 //        javax.imageio.ImageReader ii
-
-        FunctioningMainMenu fmm = new FunctioningMainMenu();
+//        FunctioningMainMenu fmm = new FunctioningMainMenu();
+        MainMenu fmm = new MainMenu();
         fmm.setVisible(true);
         //FunctioningMainMenu.se
     }
