@@ -58,7 +58,8 @@ public class MyMediaPlayer {
 
     public void playz(String vpath) {
 
-        mediaPlayer.playMedia(vpath);
+//        mediaPlayer.p
+        boolean ttt = mediaPlayer.playMedia(vpath);
 
         mediaPlayer.setAdjustVideo(true);
 
