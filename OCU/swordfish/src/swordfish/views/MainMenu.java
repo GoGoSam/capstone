@@ -17,8 +17,8 @@ import java.awt.FileDialog;
 import java.awt.event.KeyEvent.*;
 import java.io.File;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 //import java.io.*;
 /**
@@ -56,7 +56,7 @@ public class MainMenu extends JFrame
         b_vid_mute.setEnabled(f_video_loaded[0]);
         b_vid_pause.setEnabled(f_video_loaded[0]);
         b_vid_play.setEnabled(f_video_loaded[0]);
-        b_vid_rw.setEnabled(f_video_loaded[0]);
+//        b_vid_rw.setEnabled(f_video_loaded[0]);
         b_vid_stop.setEnabled(f_video_loaded[0]);
         b_capture_moment.setEnabled(f_video_loaded[0]);
 
@@ -522,6 +522,11 @@ public class MainMenu extends JFrame
         jLabel2.setText("-- / --");
 
         b_close.setText("Close");
+        b_close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_closeActionPerformed(evt);
+            }
+        });
 
         b_save.setText("Save");
         b_save.addActionListener(new java.awt.event.ActionListener() {
@@ -830,11 +835,9 @@ public class MainMenu extends JFrame
                 .addComponent(jLabel1)
                 .addGap(14, 14, 14))
             .addGroup(pan_robo_trackerLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addComponent(p_media_player, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(1, 1, 1)
-                .addComponent(l_plenum_map_icon)
-                .addGap(0, 0, 0))
+                .addComponent(l_plenum_map_icon))
         );
         pan_robo_trackerLayout.setVerticalGroup(
             pan_robo_trackerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1181,7 +1184,7 @@ public class MainMenu extends JFrame
             pan_northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pan_live_streaming, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pan_systam_status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pan_robo_tracker, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(pan_robo_tracker, javax.swing.GroupLayout.PREFERRED_SIZE, 445, Short.MAX_VALUE)
         );
 
         pan_robo_tracker.getAccessibleContext().setAccessibleName("I-90 East");
@@ -1361,7 +1364,7 @@ public class MainMenu extends JFrame
     private void init() {
 
         // instantiate
-        //   p_directionals = new JPanel();
+        p_directionals = new JPanel();
         icon_up = new JLabel();
         icon_right = new JLabel();
         icon_left = new JLabel();
@@ -1371,54 +1374,62 @@ public class MainMenu extends JFrame
         // System.out.println(System.getProperty("user.dir"));
         // Get images to set as icons on label JComponents;
         // default state disabled
-   /*     icon_up.setIcon(new ImageIcon
-         (getClass().getResource(dir_image_icons + "Arrow_up.jpg")));
-         icon_up.setEnabled(false);
+//        icon_up.setIcon(new ImageIcon(getClass().getResource(icon_path + "xbox_controller_arrow_pics/Arrow_up.jpg")));
 
-         icon_right.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_right.jpg"))); // NOI18N
-         icon_right.setEnabled(false);
+        icon_up.setIcon(new ImageIcon(icon_path + "xbox_controller_arrow_pics/Arrow_up.jpg"));
 
-         icon_left.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_left.jpg"))); // NOI18N
-         icon_left.setEnabled(false);
+        icon_up.setEnabled(false);
 
-         icon_down.setIcon(new ImageIcon(getClass().getResource(dir_image_icons + "Arrow_down.jpg"))); // NOI18N
-         icon_down.setEnabled(false);
-         */
+        //   icon_right.setIcon(new ImageIcon(getClass().getResource(icon_path + "xbox_controller_arrow_pics/Arrow_right.jpg"))); // NOI18N
+        icon_right.setIcon(new ImageIcon(icon_path + "xbox_controller_arrow_pics/Arrow_right.jpg")); // NOI18N
+
+        icon_right.setEnabled(false);
+
+        // icon_left.setIcon(new ImageIcon(getClass().getResource(icon_path + "xbox_controller_arrow_pics/Arrow_left.jpg"))); // NOI18N
+        icon_left.setIcon(new ImageIcon(icon_path + "xbox_controller_arrow_pics/Arrow_left.jpg")); // NOI18N
+
+        icon_left.setEnabled(false);
+
+        //  icon_down.setIcon(new ImageIcon(getClass().getResource(icon_path + "xbox_controller_arrow_pics/Arrow_down.jpg"))); // NOI18N
+        icon_down.setIcon(new ImageIcon(icon_path + "xbox_controller_arrow_pics/Arrow_down.jpg")); // NOI18N
+
+        icon_down.setEnabled(false);
+
         // Layour components
-        /*
-         org.jdesktop.layout.GroupLayout p_directionalsLayout = new org.jdesktop.layout.GroupLayout(getContentPane());
-         getContentPane().setLayout(p_directionalsLayout);
-         p_directionalsLayout.setHorizontalGroup(
-         p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(p_directionalsLayout.createSequentialGroup()
-         .addContainerGap()
-         .add(icon_left, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-         .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(icon_up, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 54, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-         .add(icon_down))
-         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-         .add(icon_right)
-         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-         p_directionalsLayout.setVerticalGroup(
-         p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(p_directionalsLayout.createSequentialGroup()
-         .addContainerGap()
-         .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(p_directionalsLayout.createSequentialGroup()
-         .add(icon_up)
-         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-         .add(icon_down))
-         .add(p_directionalsLayout.createSequentialGroup()
-         .add(41, 41, 41)
-         .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-         .add(icon_right)
-         .add(icon_left))))
-         .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        org.jdesktop.layout.GroupLayout p_directionalsLayout = new org.jdesktop.layout.GroupLayout(p_directionals);
+        getContentPane().setLayout(p_directionalsLayout);
+        p_directionalsLayout.setHorizontalGroup(
+                p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(p_directionalsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(icon_left, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(icon_up, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 54, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(icon_down))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(icon_right)
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        p_directionalsLayout.setVerticalGroup(
+                p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(p_directionalsLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(p_directionalsLayout.createSequentialGroup()
+                                        .add(icon_up)
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(icon_down))
+                                .add(p_directionalsLayout.createSequentialGroup()
+                                        .add(41, 41, 41)
+                                        .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                                .add(icon_right)
+                                                .add(icon_left))))
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
-         icon_up.getAccessibleContext().setAccessibleName("U");
-         icon_left.getAccessibleContext().setAccessibleName("Up");
-         icon_down.getAccessibleContext().setAccessibleName("L_down");*/
+        icon_up.getAccessibleContext().setAccessibleName("U");
+        icon_left.getAccessibleContext().setAccessibleName("Up");
+        icon_down.getAccessibleContext().setAccessibleName("L_down");
+        new JFrame().add(p_directionals).setVisible(true);
         /*
          org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
          getContentPane().setLayout(layout);
@@ -1523,7 +1534,7 @@ public class MainMenu extends JFrame
     }//GEN-LAST:event_b_vid_playActionPerformed
 
     private void b_vid_rwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_rwActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_b_vid_rwActionPerformed
 
     private void b_analyze_anchorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_analyze_anchorActionPerformed
@@ -1618,6 +1629,14 @@ public class MainMenu extends JFrame
 ////            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }//GEN-LAST:event_b_logonActionPerformed
+
+    private void b_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_closeActionPerformed
+        if (media_pan.isPlaying()) {
+            media_pan.stop();
+        }
+        f_video_loaded[0] = false;
+        set_button_states();
+    }//GEN-LAST:event_b_closeActionPerformed
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
