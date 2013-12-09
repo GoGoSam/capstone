@@ -4,7 +4,10 @@
  */
 package swordfish.views;
 
-import swordfish.views.FunctioningMainMenu;
+import java.io.IOException;
+//import java.net.URI;
+import java.net.URISyntaxException;
+//import swordfish.views.FunctioningMainMenu;
 
 /**
  *
@@ -15,13 +18,15 @@ public class run_FunctioningMainClass {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, URISyntaxException {
         // TODO code application logic here
 
 //        javax.imageio.ImageReader ii
 //        FunctioningMainMenu fmm = new FunctioningMainMenu();
         MainMenu fmm = new MainMenu();
         fmm.setVisible(true);
-        //FunctioningMainMenu.se
+//        String theURI = "http://tour.mapsalive.com/37974/page1.htm";
+//        java.awt.Desktop.getDesktop().browse(new URI(theURI));
+//        //FunctioningMainMenu.se
     }
 }

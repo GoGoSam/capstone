@@ -10,8 +10,10 @@ import com.sun.jna.NativeLibrary;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Window;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JWindow;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
@@ -58,7 +60,8 @@ public class MyMediaPlayer {
 
     public void playz(String vpath) {
 
-        mediaPlayer.playMedia(vpath);
+//        mediaPlayer.p
+        boolean ttt = mediaPlayer.playMedia(vpath);
 
         mediaPlayer.setAdjustVideo(true);
 
@@ -72,6 +75,11 @@ public class MyMediaPlayer {
          }*/
     }
 
+    public boolean isPlaying() {
+        return mediaPlayer.isPlaying();
+
+    }
+
     public long getLength() {
         return mediaPlayer.getLength();
     }
@@ -81,6 +89,12 @@ public class MyMediaPlayer {
     }
 
     public void playz() {
+//        XBox360_DirectionDisplay dd = new XBox360_DirectionDisplay();
+
+//        dd.setVisible(true);//
+//        mediaPlayer.enableOverlay(true);
+//        System.out.println(mediaPlayer.overlayEnabled());
+//        mediaPlayer.setOverlay(new XBox360_DirectionDisplay());
         mediaPlayer.play();
     }
 
