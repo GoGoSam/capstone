@@ -136,15 +136,48 @@
             <Property name="label" type="java.lang.String" value="Tools"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="menu_tools1">
-              <Properties>
-                <Property name="label" type="java.lang.String" value="Tools"/>
-              </Properties>
-            </Menu>
             <Menu class="javax.swing.JMenu" name="menu_tools2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Preferences"/>
               </Properties>
+            </Menu>
+            <Menu class="javax.swing.JMenu" name="menu_tools3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tools"/>
+              </Properties>
+              <SubComponents>
+                <Menu class="javax.swing.JMenu" name="menu_tools4">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Inspection Tools"/>
+                  </Properties>
+                </Menu>
+                <MenuItem class="javax.swing.JMenuItem" name="mnu_inspect_robot">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Inspect Robot"/>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="actionCommand" type="java.lang.String" value="inspectrobotactioncommand"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnu_inspect_robotActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Workspace Organizer"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="History Profiler"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
             </Menu>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
@@ -154,39 +187,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
               </Events>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="menu_tools3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="References"/>
-              </Properties>
-              <SubComponents>
-                <Menu class="javax.swing.JMenu" name="menu_tools4">
-                  <Properties>
-                    <Property name="label" type="java.lang.String" value="Tools"/>
-                  </Properties>
-                </Menu>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="References"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem5ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <Menu class="javax.swing.JMenu" name="menu_tools5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Preferences"/>
-                  </Properties>
-                </Menu>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="References"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
-                  </Events>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -391,7 +391,7 @@
                                   <Component id="b_logon" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="8" max="32767" attributes="0"/>
+                          <EmptySpace pref="28" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -506,7 +506,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Lucida Grande" size="13" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Peter Reed"/>
+                    <Property name="text" type="java.lang.String" value="   - - -  "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="l_mid__static">
@@ -519,7 +519,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="l_mid">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="000549887"/>
+                    <Property name="text" type="java.lang.String" value="    - - -  "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="l_date_static">
@@ -532,7 +532,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="l_date">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="May 18, 2014"/>
+                    <Property name="text" type="java.lang.String" value="     - - -  "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="l_logo_icon">
@@ -1255,7 +1255,7 @@
                                           <Component id="l_vid_sig" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="pb_vid_sig_per" linkSize="10" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="l_vid_sig_per" alignment="1" min="-2" max="-2" attributes="0"/>
                                           <Component id="l_cam_sig_per" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -1298,18 +1298,16 @@
                               <Component id="l_data_logging" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="pb_logging_per" linkSize="11" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="tf_log_fpath" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="l_log_file" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cb_output_log" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="pb_logging_per" linkSize="11" min="-2" max="-2" attributes="0"/>
                                   <Component id="l_logging_per" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tf_log_fpath" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="l_log_file" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="cb_output_log" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1326,7 +1324,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="l_logging_per">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="100%"/>
+                        <Property name="text" type="java.lang.String" value="0%"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="l_log_file">
@@ -1336,9 +1334,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JProgressBar" name="pb_logging_per">
-                      <Properties>
-                        <Property name="value" type="int" value="100"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="cb_output_log">
                       <Properties>
@@ -1365,24 +1360,18 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JProgressBar" name="pb_vid_sig_per">
-                      <Properties>
-                        <Property name="value" type="int" value="97"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="l_vid_sig_per">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="97%"/>
+                        <Property name="text" type="java.lang.String" value="0%"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="l_cam_sig_per">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="100%"/>
+                        <Property name="text" type="java.lang.String" value="0%"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JProgressBar" name="pb_cam_sig_per">
-                      <Properties>
-                        <Property name="value" type="int" value="100"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="l_cam_sig">
                       <Properties>
@@ -1514,7 +1503,6 @@
                   <SubComponents>
                     <Component class="javax.swing.JProgressBar" name="pb_battery">
                       <Properties>
-                        <Property name="value" type="int" value="86"/>
                         <Property name="borderPainted" type="boolean" value="false"/>
                       </Properties>
                     </Component>
@@ -1545,9 +1533,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JProgressBar" name="pb_robo_connect">
-                      <Properties>
-                        <Property name="value" type="int" value="95"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="l_r_id">
                       <Properties>
