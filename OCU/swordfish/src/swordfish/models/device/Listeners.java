@@ -9,6 +9,7 @@ public class Listeners<T> {
 	private final Class<T> listenerClass;
 	private T[] listeners;
 
+    @SuppressWarnings("unchecked")
 	public Listeners (Class<T> listenerClass) {
 		this.listenerClass = listenerClass;
 		listeners = (T[])Array.newInstance(listenerClass, 0);
@@ -17,7 +18,8 @@ public class Listeners<T> {
 	/**
 	 * If the listener already exists, it is not added again.
 	 */
-	public synchronized void addListener (T listener) {
+    @SuppressWarnings("unchecked")
+    public synchronized void addListener (T listener) {
 		if (listener == null) throw new IllegalArgumentException("listener cannot be null.");
 		synchronized (this) {
 			T[] listeners = this.listeners;
@@ -31,6 +33,7 @@ public class Listeners<T> {
 		}
 	}
 
+    @SuppressWarnings("unchecked")
 	public synchronized void removeListener (T listener) {
 		if (listener == null) throw new IllegalArgumentException("listener cannot be null.");
 		T[] listeners = this.listeners;
