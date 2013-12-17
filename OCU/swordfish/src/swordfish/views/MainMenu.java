@@ -12,11 +12,15 @@ import java.awt.event.KeyListener;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Container.*;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FileDialog;
 import java.awt.event.KeyEvent.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
@@ -255,14 +259,13 @@ public class MainMenu extends JFrame
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         menu_tools = new javax.swing.JMenu();
-        menu_tools1 = new javax.swing.JMenu();
         menu_tools2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
         menu_tools3 = new javax.swing.JMenu();
         menu_tools4 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        menu_tools5 = new javax.swing.JMenu();
+        mnu_inspect_robot = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         menu_about = new javax.swing.JMenu();
@@ -305,17 +308,17 @@ public class MainMenu extends JFrame
         l_inspect_static.setText("Inspector:");
 
         l_inspector.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        l_inspector.setText("Peter Reed");
+        l_inspector.setText("   - - -  ");
 
         l_mid__static.setFont(new java.awt.Font("Lucida Grande", 2, 13)); // NOI18N
         l_mid__static.setText("MID:");
 
-        l_mid.setText("000549887");
+        l_mid.setText("    - - -  ");
 
         l_date_static.setFont(new java.awt.Font("Lucida Grande", 2, 13)); // NOI18N
         l_date_static.setText("Date:");
 
-        l_date.setText("May 18, 2014");
+        l_date.setText("     - - -  ");
 
         l_logo_icon.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/company_logo_small.jpg")); // NOI18N
 
@@ -367,7 +370,7 @@ public class MainMenu extends JFrame
                     .addGroup(pan_south_eastLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(b_logon)))
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         pan_south_eastLayout.setVerticalGroup(
             pan_south_eastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -859,12 +862,10 @@ public class MainMenu extends JFrame
             }
         });
 
-        l_logging_per.setText("100%");
+        l_logging_per.setText("0%");
 
         l_log_file.setText("Log File:");
         l_log_file.setToolTipText("");
-
-        pb_logging_per.setValue(100);
 
         cb_output_log.setText("Save Log to File");
         cb_output_log.addActionListener(new java.awt.event.ActionListener() {
@@ -879,13 +880,9 @@ public class MainMenu extends JFrame
         l_vid_sig.setFont(new java.awt.Font("Lucida Grande", 3, 13)); // NOI18N
         l_vid_sig.setText("Video Signal");
 
-        pb_vid_sig_per.setValue(97);
+        l_vid_sig_per.setText("0%");
 
-        l_vid_sig_per.setText("97%");
-
-        l_cam_sig_per.setText("100%");
-
-        pb_cam_sig_per.setValue(100);
+        l_cam_sig_per.setText("0%");
 
         l_cam_sig.setFont(new java.awt.Font("Lucida Grande", 3, 13)); // NOI18N
         l_cam_sig.setText("Camera Signal");
@@ -905,7 +902,7 @@ public class MainMenu extends JFrame
                             .addComponent(l_cam_sig)
                             .addComponent(l_vid_sig)
                             .addComponent(pb_vid_sig_per, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(20, 20, 20)
                         .addGroup(pan_north_east_bottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(l_vid_sig_per, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(l_cam_sig_per, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -942,20 +939,18 @@ public class MainMenu extends JFrame
                 .addComponent(l_data_logging)
                 .addGap(3, 3, 3)
                 .addGroup(pan_north_east_bottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pan_north_east_bottomLayout.createSequentialGroup()
-                        .addComponent(pb_logging_per, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pan_north_east_bottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tf_log_fpath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(l_log_file))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cb_output_log))
-                    .addComponent(l_logging_per)))
+                    .addComponent(pb_logging_per, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(l_logging_per))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pan_north_east_bottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_log_fpath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(l_log_file))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cb_output_log))
         );
 
         pan_north_east_bottomLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {pb_cam_sig_per, pb_logging_per, pb_vid_sig_per});
 
-        pb_battery.setValue(86);
         pb_battery.setBorderPainted(false);
 
         l_battery_per.setText(" --");
@@ -967,8 +962,6 @@ public class MainMenu extends JFrame
 
         l_robot_connection.setFont(new java.awt.Font("Lucida Grande", 3, 13)); // NOI18N
         l_robot_connection.setText("Robot Connection ");
-
-        pb_robo_connect.setValue(95);
 
         l_r_id.setFont(new java.awt.Font("Lucida Grande", 2, 11)); // NOI18N
         l_r_id.setText("R-ID:");
@@ -1282,11 +1275,41 @@ public class MainMenu extends JFrame
 
         menu_tools.setLabel("Tools");
 
-        menu_tools1.setLabel("Tools");
-        menu_tools.add(menu_tools1);
-
         menu_tools2.setText("Preferences");
         menu_tools.add(menu_tools2);
+
+        menu_tools3.setText("Tools");
+
+        menu_tools4.setText("Inspection Tools");
+        menu_tools3.add(menu_tools4);
+
+        mnu_inspect_robot.setText("Inspect Robot");
+        mnu_inspect_robot.setToolTipText("");
+        mnu_inspect_robot.setActionCommand("inspectrobotactioncommand");
+        mnu_inspect_robot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_inspect_robotActionPerformed(evt);
+            }
+        });
+        menu_tools3.add(mnu_inspect_robot);
+
+        jMenuItem6.setText("Workspace Organizer");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        menu_tools3.add(jMenuItem6);
+
+        jMenuItem9.setText("History Profiler");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        menu_tools3.add(jMenuItem9);
+
+        menu_tools.add(menu_tools3);
 
         jMenuItem4.setText("References");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -1295,32 +1318,6 @@ public class MainMenu extends JFrame
             }
         });
         menu_tools.add(jMenuItem4);
-
-        menu_tools3.setText("References");
-
-        menu_tools4.setLabel("Tools");
-        menu_tools3.add(menu_tools4);
-
-        jMenuItem5.setText("References");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        menu_tools3.add(jMenuItem5);
-
-        menu_tools5.setText("Preferences");
-        menu_tools3.add(menu_tools5);
-
-        jMenuItem6.setText("References");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        menu_tools3.add(jMenuItem6);
-
-        menu_tools.add(menu_tools3);
 
         jMenuBar1.add(menu_tools);
 
@@ -1542,7 +1539,7 @@ public class MainMenu extends JFrame
     }//GEN-LAST:event_b_analyze_anchorActionPerformed
 
     private void b_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_logoutActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_b_logoutActionPerformed
 
     private void comboB_remote_ipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboB_remote_ipActionPerformed
@@ -1557,23 +1554,11 @@ public class MainMenu extends JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_mnu_saveasActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void logging_on(java.awt.event.ActionEvent evt) {
+    private void logging_on(ActionEvent evt) {
 //        evt.equals(evt);
         System.out.println(evt.getSource().toString());
         if (logger.get(0) == evt.getSource()) {
@@ -1595,7 +1580,11 @@ public class MainMenu extends JFrame
 //        try {
 
         pointer[0] = 0;
-        LogOn instance = new LogOn(pointer);
+        Vector<JLabel> labs = new Vector<JLabel>();
+        labs.add(l_inspector);
+        labs.add(l_mid);
+        labs.add(l_date);
+        LogIn instance = new LogIn(pointer, labs);
 
         instance.setVisible(true);
 //        instance.addWindowListener(this);
@@ -1637,6 +1626,28 @@ public class MainMenu extends JFrame
         f_video_loaded[0] = false;
         set_button_states();
     }//GEN-LAST:event_b_closeActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void mnu_inspect_robotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_inspect_robotActionPerformed
+        try {
+            //        media_pan.playz("debris_robo_view.mov");
+            Desktop.getDesktop().open(new File("~/Desktop/go.mpg"));
+//        open();
+        } catch (IOException ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mnu_inspect_robotActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
@@ -1815,10 +1826,10 @@ public class MainMenu extends JFrame
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel3;
@@ -1859,13 +1870,12 @@ public class MainMenu extends JFrame
     private javax.swing.JMenu menu_file;
     private javax.swing.JMenu menu_help;
     private javax.swing.JMenu menu_tools;
-    private javax.swing.JMenu menu_tools1;
     private javax.swing.JMenu menu_tools2;
     private javax.swing.JMenu menu_tools3;
     private javax.swing.JMenu menu_tools4;
-    private javax.swing.JMenu menu_tools5;
     private javax.swing.JMenuItem mnu_close;
     private javax.swing.JMenuItem mnu_exit;
+    private javax.swing.JMenuItem mnu_inspect_robot;
     private javax.swing.JMenuItem mnu_open;
     private javax.swing.JMenuItem mnu_saveas;
     private javax.swing.JMenuItem mnu_saveas1;
