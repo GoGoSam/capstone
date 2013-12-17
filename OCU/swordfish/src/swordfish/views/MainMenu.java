@@ -1584,7 +1584,7 @@ public class MainMenu extends JFrame
         labs.add(l_inspector);
         labs.add(l_mid);
         labs.add(l_date);
-        LogOn instance = new LogOn(pointer, labs);
+        LogIn instance = new LogIn(pointer, labs);
 
         instance.setVisible(true);
 //        instance.addWindowListener(this);
