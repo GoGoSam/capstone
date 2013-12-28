@@ -41,7 +41,7 @@ public class MainMenu extends JFrame
     private JLabel icon_right;
     private JLabel icon_up;
     private JPanel p_directionals;
-    private boolean do_debug = true;
+    private final boolean do_debug = true;
     boolean[] f_video_loaded = new boolean[1];
     MyMediaPlayer media_pan;
     String icon_path = System.getProperty("user.dir") + "/resources/";
@@ -370,7 +370,7 @@ public class MainMenu extends JFrame
                     .addGroup(pan_south_eastLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(b_logon)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         pan_south_eastLayout.setVerticalGroup(
             pan_south_eastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -669,8 +669,8 @@ public class MainMenu extends JFrame
                                 .addComponent(b_vid_ff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(b_vid_mute, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 2, Short.MAX_VALUE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGap(0, 3, Short.MAX_VALUE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pan_media_controlLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {b_vid_ff, b_vid_mute, b_vid_pause, b_vid_play, b_vid_rw, b_vid_stop});
@@ -686,7 +686,7 @@ public class MainMenu extends JFrame
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel2))
                             .addComponent(b_capture_moment, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addGroup(pan_media_controlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_media_controlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(b_vid_rw, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -754,12 +754,12 @@ public class MainMenu extends JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_south_allLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(pan_south_allLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pan_south_east, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pan_south_east, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, Short.MAX_VALUE)
                     .addGroup(pan_south_allLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(pan_south_allLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pan_media_control, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                            .addComponent(pan_vision_utils, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(pan_vision_utils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(3, 3, 3)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -822,7 +822,7 @@ public class MainMenu extends JFrame
         p_media_player.setLayout(p_media_playerLayout);
         p_media_playerLayout.setHorizontalGroup(
             p_media_playerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
+            .addGap(0, 5, Short.MAX_VALUE)
         );
         p_media_playerLayout.setVerticalGroup(
             p_media_playerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1452,14 +1452,6 @@ public class MainMenu extends JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_object_awareActionPerformed
 
-    private void b_do_lookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_do_lookActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_b_do_lookActionPerformed
-
-    private void b_inspect_ceilingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_inspect_ceilingActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_b_inspect_ceilingActionPerformed
-
     private void b_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_saveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_b_saveActionPerformed
@@ -1533,10 +1525,6 @@ public class MainMenu extends JFrame
     private void b_vid_rwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_rwActionPerformed
 
     }//GEN-LAST:event_b_vid_rwActionPerformed
-
-    private void b_analyze_anchorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_analyze_anchorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_b_analyze_anchorActionPerformed
 
     private void b_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_logoutActionPerformed
 
@@ -1649,6 +1637,18 @@ public class MainMenu extends JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void b_analyze_anchorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_analyze_anchorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_analyze_anchorActionPerformed
+
+    private void b_inspect_ceilingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_inspect_ceilingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_inspect_ceilingActionPerformed
+
+    private void b_do_lookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_do_lookActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_do_lookActionPerformed
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
     @Override
@@ -1696,6 +1696,8 @@ public class MainMenu extends JFrame
      * Handle the key pressed event from the text field. The function checks if
      * event was triggered via arrow keys on keypad. If so, the corresponding
      * arrow icon will be enabled, i.e., will display its true color.
+     *
+     * @param e
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -1723,6 +1725,8 @@ public class MainMenu extends JFrame
      * event was triggered via arrow keys on keypad. If so, the corresponding
      * arrow icon will be disabled, i.e., will lose its true color set when key
      * was pressed.
+     *
+     * @param e
      */
     @Override
     public void keyReleased(KeyEvent e) {

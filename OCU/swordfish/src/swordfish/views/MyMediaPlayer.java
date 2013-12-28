@@ -10,10 +10,8 @@ import com.sun.jna.NativeLibrary;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Window;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JWindow;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
@@ -63,10 +61,9 @@ public class MyMediaPlayer {
 //        mediaPlayer.p
         boolean ttt = mediaPlayer.playMedia(vpath);
 
-        mediaPlayer.setAdjustVideo(true);
-
+        // mediaPlayer.setAdjustVideo(true);
 //        System.out.print((mediaPlayer.isAdjustVideo()));
-        mediaPlayer.setBrightness(2.0f);
+        //       mediaPlayer.setBrightness(2.0f);
 
         /* while (mediaPlayer.getBrightness() >
          0.0f) {
