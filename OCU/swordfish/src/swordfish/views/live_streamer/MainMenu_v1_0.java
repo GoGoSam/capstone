@@ -2,10 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package swordfish.views;
+package swordfish.views.live_streamer;
 
 //import swordfish.ui_develop.*;
 //import swordfish.*;
+import swordfish.views.live_streamer.MyMediaPlayer;
 import ij.IJ;
 import java.awt.Color;
 import java.awt.event.KeyListener;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import swordfish.views.LogIn;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 
@@ -176,7 +178,7 @@ public class MainMenu_v1_0 extends JFrame
         l_date_static = new javax.swing.JLabel();
         l_date = new javax.swing.JLabel();
         l_logo_icon = new javax.swing.JLabel();
-        b_logon = new javax.swing.JButton();
+        b_login = new javax.swing.JButton();
         pan_vision_utils = new javax.swing.JPanel();
         b_scan_hanger = new javax.swing.JButton();
         b_inspect_ceiling = new javax.swing.JButton();
@@ -322,11 +324,11 @@ public class MainMenu_v1_0 extends JFrame
 
         l_logo_icon.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/company_logo_small.jpg")); // NOI18N
 
-        b_logon.setText("Log-on");
-        b_logon.setActionCommand("b_logon");
-        b_logon.addActionListener(new java.awt.event.ActionListener() {
+        b_login.setText("Log In");
+        b_login.setActionCommand("b_logon");
+        b_login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_logonActionPerformed(evt);
+                b_loginActionPerformed(evt);
             }
         });
 
@@ -369,8 +371,8 @@ public class MainMenu_v1_0 extends JFrame
                             .addComponent(l_mid)))
                     .addGroup(pan_south_eastLayout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addComponent(b_logon)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addComponent(b_login)))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         pan_south_eastLayout.setVerticalGroup(
             pan_south_eastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,7 +409,7 @@ public class MainMenu_v1_0 extends JFrame
                 .addGap(12, 12, 12)
                 .addGroup(pan_south_eastLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(l_logo_icon)
-                    .addComponent(b_logon))
+                    .addComponent(b_login))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -669,8 +671,8 @@ public class MainMenu_v1_0 extends JFrame
                                 .addComponent(b_vid_ff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(b_vid_mute, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 2, Short.MAX_VALUE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGap(0, 3, Short.MAX_VALUE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pan_media_controlLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {b_vid_ff, b_vid_mute, b_vid_pause, b_vid_play, b_vid_rw, b_vid_stop});
@@ -686,7 +688,7 @@ public class MainMenu_v1_0 extends JFrame
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel2))
                             .addComponent(b_capture_moment, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addGroup(pan_media_controlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_media_controlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(b_vid_rw, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -754,12 +756,12 @@ public class MainMenu_v1_0 extends JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_south_allLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(pan_south_allLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pan_south_east, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pan_south_east, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, Short.MAX_VALUE)
                     .addGroup(pan_south_allLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(pan_south_allLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pan_media_control, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                            .addComponent(pan_vision_utils, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(pan_vision_utils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(3, 3, 3)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -822,7 +824,7 @@ public class MainMenu_v1_0 extends JFrame
         p_media_player.setLayout(p_media_playerLayout);
         p_media_playerLayout.setHorizontalGroup(
             p_media_playerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
+            .addGap(0, 5, Short.MAX_VALUE)
         );
         p_media_playerLayout.setVerticalGroup(
             p_media_playerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1177,7 +1179,7 @@ public class MainMenu_v1_0 extends JFrame
             pan_northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pan_live_streaming, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pan_systam_status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pan_robo_tracker, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+            .addComponent(pan_robo_tracker, javax.swing.GroupLayout.PREFERRED_SIZE, 445, Short.MAX_VALUE)
         );
 
         pan_robo_tracker.getAccessibleContext().setAccessibleName("I-90 East");
@@ -1576,7 +1578,7 @@ public class MainMenu_v1_0 extends JFrame
             }
         }
     }
-    private void b_logonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_logonActionPerformed
+    private void b_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_loginActionPerformed
 //        try {
 
         pointer[0] = 0;
@@ -1617,7 +1619,7 @@ public class MainMenu_v1_0 extends JFrame
 //        } catch (InterruptedException ex) {
 ////            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-    }//GEN-LAST:event_b_logonActionPerformed
+    }//GEN-LAST:event_b_loginActionPerformed
 
     private void b_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_closeActionPerformed
         if (media_pan.isPlaying()) {
@@ -1792,7 +1794,7 @@ public class MainMenu_v1_0 extends JFrame
     private javax.swing.JButton b_do_look;
     private javax.swing.JButton b_inspect_ceiling;
     private javax.swing.JButton b_load;
-    private javax.swing.JButton b_logon;
+    private javax.swing.JButton b_login;
     private javax.swing.JButton b_logout;
     private javax.swing.JButton b_reset;
     private javax.swing.JButton b_save;
