@@ -30,11 +30,11 @@ import swordfish.views.LogIn;
  *
  * @author jrob
  */
-public class MainMenu extends JFrame
+public class LiveStreamerWindow extends JFrame
         implements KeyListener, WindowListener {
 
     /**
-     * Creates new form MainMenu
+     * Creates new form LiveStreamerWindow
      */
     int[] pointer = new int[1];
     private JLabel icon_down;
@@ -47,7 +47,7 @@ public class MainMenu extends JFrame
     MyMediaPlayer media_pan;
     String icon_path = System.getProperty("user.dir") + "/resources/";
 
-    public MainMenu() {
+    public LiveStreamerWindow() {
         init();
         initComponents();
         initMediaPlayer();
@@ -755,7 +755,7 @@ public class MainMenu extends JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_south_allLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(pan_south_allLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pan_south_east, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                    .addComponent(pan_south_east, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, Short.MAX_VALUE)
                     .addGroup(pan_south_allLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(pan_south_allLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1178,7 +1178,7 @@ public class MainMenu extends JFrame
             pan_northLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pan_live_streaming, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pan_systam_status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pan_robo_tracker, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+            .addComponent(pan_robo_tracker, javax.swing.GroupLayout.PREFERRED_SIZE, 445, Short.MAX_VALUE)
         );
 
         pan_robo_tracker.getAccessibleContext().setAccessibleName("I-90 East");
@@ -1613,10 +1613,10 @@ public class MainMenu extends JFrame
 ////            System.out.println("Not");
 //////        instance.setName("Log On");
 ////        } catch (InterruptedException ex) {
-////            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+////            Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
 ////        }
 //        } catch (InterruptedException ex) {
-////            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+////            Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
 //        }
     }//GEN-LAST:event_b_logonActionPerformed
 
@@ -1642,7 +1642,7 @@ public class MainMenu extends JFrame
             Desktop.getDesktop().open(new File("~/Desktop/go.mpg"));
 //        open();
         } catch (IOException ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_mnu_inspect_robotActionPerformed
 
@@ -1763,13 +1763,13 @@ public class MainMenu extends JFrame
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LiveStreamerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LiveStreamerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LiveStreamerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LiveStreamerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1778,7 +1778,7 @@ public class MainMenu extends JFrame
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainMenu().setVisible(true);
+                new LiveStreamerWindow().setVisible(true);
 //                new MobileDirectionDisplay().setVisible(true);
             }
         });

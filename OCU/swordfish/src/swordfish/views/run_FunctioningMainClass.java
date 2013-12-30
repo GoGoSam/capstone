@@ -1,6 +1,6 @@
 package swordfish.views;
 
-import swordfish.views.live_streamer.MainMenu;
+import swordfish.views.live_streamer.LiveStreamerWindow;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -26,7 +26,11 @@ public class run_FunctioningMainClass {
             MobileDirectionDisplayKeyboard ppp = new MobileDirectionDisplayKeyboard();
             ppp.setVisible(true);
         }
-        MainMenu mm = new MainMenu();
+        if (false) {
+            InspectorRobot fmm = new InspectorRobot();
+            fmm.setVisible(true);
+        }
+        LiveStreamerWindow mm = new LiveStreamerWindow();
         mm.setVisible(true);
 
     }
