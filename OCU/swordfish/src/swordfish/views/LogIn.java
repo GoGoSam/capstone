@@ -5,9 +5,9 @@
  */
 package swordfish.views;
 
-import java.util.Vector;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import java.awt.event.*;
+import java.util.ArrayList;
+import javax.swing.*;
 
 /**
  *
@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 public class LogIn extends javax.swing.JDialog {
 
     @SuppressWarnings("UseOfObsoleteCollectionType")
-    private final Vector<JButton> butts = new Vector<JButton>();
+    private ArrayList<JButton> butts = new ArrayList<JButton>();
 
     public LogIn(int[] pointer) {
         this.pointer = pointer;
@@ -29,7 +29,7 @@ public class LogIn extends javax.swing.JDialog {
         this.setResizable(false);
     }
 
-    public LogIn(int[] pointer, Vector<JLabel> labs) {
+    public LogIn(int[] pointer, ArrayList<JLabel> labs) {
         this.pointer = pointer;
         initComponents();
 //        pack();
@@ -55,7 +55,7 @@ public class LogIn extends javax.swing.JDialog {
         butts.add(b_register);
     }
 
-    public Vector<JButton> getButtons() {
+    public ArrayList<JButton> getButtons() {
         return butts;
     }
 
@@ -68,7 +68,7 @@ public class LogIn extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        p_root = new javax.swing.JPanel();
+        p_root = new JPanel();
         l_massID = new javax.swing.JLabel();
         l_password = new javax.swing.JLabel();
         tf_massID = new javax.swing.JTextField();
@@ -87,95 +87,97 @@ public class LogIn extends javax.swing.JDialog {
         l_massDOT_logo.setIcon(new javax.swing.ImageIcon("/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/massDot_log_small.jpg")); // NOI18N
 
         b_logon.setText("Log-on");
-        b_logon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        b_logon.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 b_logonActionPerformed(evt);
             }
         });
 
         b_cancel.setText("Cancel");
-        b_cancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        b_cancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 b_cancelActionPerformed(evt);
             }
         });
 
         b_register.setText("Register");
-        b_register.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        b_register.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 b_registerActionPerformed(evt);
             }
         });
 
-        org.jdesktop.layout.GroupLayout p_rootLayout = new org.jdesktop.layout.GroupLayout(p_root);
+        GroupLayout p_rootLayout = new GroupLayout(p_root);
         p_root.setLayout(p_rootLayout);
         p_rootLayout.setHorizontalGroup(
-                p_rootLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(org.jdesktop.layout.GroupLayout.TRAILING, p_rootLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(p_rootLayout.createSequentialGroup()
-                                .add(0, 0, 0)
-                                .add(b_logon, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(3, 3, 3)
-                                .add(b_cancel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(3, 3, 3)
-                                .add(b_register, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 75, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(p_rootLayout.createSequentialGroup()
-                                .add(60, 60, 60)
-                                .add(l_massDOT_logo)))
-                .add(p_rootLayout.createSequentialGroup()
-                        .add(12, 12, 12)
-                        .add(p_rootLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                .add(l_massID)
-                                .add(l_password))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(p_rootLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                .add(tf_massID, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                .add(tf_password)))
+                p_rootLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(GroupLayout.Alignment.TRAILING, p_rootLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(p_rootLayout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addComponent(b_logon, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)
+                                .addComponent(b_cancel, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+                                .addGap(3, 3, 3)
+                                .addComponent(b_register, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE))
+                        .addGroup(p_rootLayout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addComponent(l_massDOT_logo)))
+                .addGroup(p_rootLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(p_rootLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                .addComponent(l_massID)
+                                .addComponent(l_password))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(p_rootLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tf_massID, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                .addComponent(tf_password)))
         );
         p_rootLayout.setVerticalGroup(
-                p_rootLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(org.jdesktop.layout.GroupLayout.TRAILING, p_rootLayout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(p_rootLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                .add(l_massID)
-                                .add(tf_massID, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(3, 3, 3)
-                        .add(p_rootLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                .add(l_password)
-                                .add(tf_password, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(3, 3, 3)
-                        .add(p_rootLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                .add(b_cancel)
-                                .add(b_logon)
-                                .add(b_register))
-                        .add(3, 3, 3)
-                        .add(l_massDOT_logo))
+                p_rootLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(GroupLayout.Alignment.TRAILING, p_rootLayout.createSequentialGroup()
+                        .addGap(6, 6, Short.MAX_VALUE)
+                        .addGroup(p_rootLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(l_massID)
+                                .addComponent(tf_massID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
+                        .addGroup(p_rootLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(l_password)
+                                .addComponent(tf_password, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
+                        .addGroup(p_rootLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(b_cancel)
+                                .addComponent(b_logon)
+                                .addComponent(b_register))
+                        .addGap(3, 3, 3)
+                        .addComponent(l_massDOT_logo)
+                        .addGap(12, 12, 12))
         );
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(p_root, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(p_root, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(p_root, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(p_root, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(3, 3, 3)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void b_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_registerActionPerformed
+    private void b_registerActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_registerActionPerformed
         pointer[0] = 3;
     }//GEN-LAST:event_b_registerActionPerformed
 
-    private void b_cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_cancelActionPerformed
+    private void b_cancelActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_cancelActionPerformed
         pointer[0] = 2;
         this.dispose();
     }//GEN-LAST:event_b_cancelActionPerformed
 
-    private void b_logonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_logonActionPerformed
+    private void b_logonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_logonActionPerformed
         pointer[0] = 1;
     }//GEN-LAST:event_b_logonActionPerformed
 
@@ -183,37 +185,15 @@ public class LogIn extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                final LogIn dialog = new LogIn(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                final LogIn dialog = new LogIn(new JFrame(), true);
+                dialog.addWindowListener(new WindowAdapter() {
                     @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
+                    public void windowClosing(WindowEvent e) {
 //                        System.exit(0);
                         dialog.setVisible(false);
                     }
@@ -228,7 +208,7 @@ public class LogIn extends javax.swing.JDialog {
      */
     int[] pointer = new int[1];
 
-    private Vector<JLabel> labs;
+    private ArrayList<JLabel> labs;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_cancel;
     private javax.swing.JButton b_logon;
