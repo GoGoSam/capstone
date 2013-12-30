@@ -27,21 +27,185 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        p_image = new javax.swing.JPanel();
+        pan_utils = new javax.swing.JPanel();
+        b_save = new javax.swing.JButton();
+        b_load = new javax.swing.JButton();
+        pan_tools = new javax.swing.JPanel();
+        rb_rgb32 = new javax.swing.JRadioButton();
+        rb_grayscale = new javax.swing.JRadioButton();
+        slider_brightness = new javax.swing.JSlider();
+        slider_contrast = new javax.swing.JSlider();
+        l_brightness = new javax.swing.JLabel();
+        l_contrast = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        p_image.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        org.jdesktop.layout.GroupLayout p_imageLayout = new org.jdesktop.layout.GroupLayout(p_image);
+        p_image.setLayout(p_imageLayout);
+        p_imageLayout.setHorizontalGroup(
+            p_imageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 0, Short.MAX_VALUE)
+        );
+        p_imageLayout.setVerticalGroup(
+            p_imageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(0, 382, Short.MAX_VALUE)
+        );
+
+        b_save.setText("Save");
+        b_save.setEnabled(false);
+
+        b_load.setText("Load");
+        b_load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_loadActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout pan_utilsLayout = new org.jdesktop.layout.GroupLayout(pan_utils);
+        pan_utils.setLayout(pan_utilsLayout);
+        pan_utilsLayout.setHorizontalGroup(
+            pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pan_utilsLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(b_save)
+                    .add(b_load))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pan_utilsLayout.linkSize(new java.awt.Component[] {b_load, b_save}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+
+        pan_utilsLayout.setVerticalGroup(
+            pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pan_utilsLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(b_save, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(b_load, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(82, 82, 82))
+        );
+
+        rb_rgb32.setText("RGB (32 Bit)");
+        rb_rgb32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_rgb32ActionPerformed(evt);
+            }
+        });
+
+        rb_grayscale.setText("Gray-Scale (8 Bit)");
+        rb_grayscale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_grayscaleActionPerformed(evt);
+            }
+        });
+
+        slider_brightness.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                slider_brightnessCaretPositionChanged(evt);
+            }
+        });
+
+        slider_contrast.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                slider_brightnessCaretPositionChanged(evt);
+            }
+        });
+
+        l_brightness.setText("Brightness");
+
+        l_contrast.setText("Contrast");
+
+        org.jdesktop.layout.GroupLayout pan_toolsLayout = new org.jdesktop.layout.GroupLayout(pan_tools);
+        pan_tools.setLayout(pan_toolsLayout);
+        pan_toolsLayout.setHorizontalGroup(
+            pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pan_toolsLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(l_contrast)
+                    .add(l_brightness)
+                    .add(pan_toolsLayout.createSequentialGroup()
+                        .add(rb_rgb32)
+                        .add(0, 0, Short.MAX_VALUE)))
+                .add(18, 18, 18)
+                .add(rb_grayscale)
+                .addContainerGap())
+            .add(pan_toolsLayout.createSequentialGroup()
+                .add(50, 50, 50)
+                .add(pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(slider_brightness, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(slider_contrast, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        pan_toolsLayout.setVerticalGroup(
+            pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pan_toolsLayout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(rb_rgb32)
+                    .add(rb_grayscale))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(l_brightness)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(slider_brightness, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(l_contrast)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(slider_contrast, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(26, 26, 26))
+        );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 633, Short.MAX_VALUE)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(p_image, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(layout.createSequentialGroup()
+                        .add(pan_utils, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(pan_tools, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 254, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 581, Short.MAX_VALUE)
+            .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(p_image, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(pan_utils, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(pan_tools, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void rb_rgb32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_rgb32ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rb_rgb32ActionPerformed
+
+    private void b_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_loadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_loadActionPerformed
+
+    private void rb_grayscaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_grayscaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rb_grayscaleActionPerformed
+
+    private void slider_brightnessCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_slider_brightnessCaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_slider_brightnessCaretPositionChanged
 
     /**
      * @param args the command line arguments
@@ -79,5 +243,16 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton b_load;
+    private javax.swing.JButton b_save;
+    private javax.swing.JLabel l_brightness;
+    private javax.swing.JLabel l_contrast;
+    private javax.swing.JPanel p_image;
+    private javax.swing.JPanel pan_tools;
+    private javax.swing.JPanel pan_utils;
+    private javax.swing.JRadioButton rb_grayscale;
+    private javax.swing.JRadioButton rb_rgb32;
+    private javax.swing.JSlider slider_brightness;
+    private javax.swing.JSlider slider_contrast;
     // End of variables declaration//GEN-END:variables
 }
