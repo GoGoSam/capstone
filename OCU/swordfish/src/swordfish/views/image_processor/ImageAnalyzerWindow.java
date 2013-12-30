@@ -13,9 +13,12 @@ import ij.process.ImageProcessor;
 import ij.process.ImageStatistics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.ButtonGroup;
 //import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 //import javax.swing.JLabel;
 //import javax.swing.JScrollPane;
 
@@ -91,6 +94,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         pan_utils = new javax.swing.JPanel();
         b_save = new javax.swing.JButton();
         b_load = new javax.swing.JButton();
+        b_close = new javax.swing.JButton();
         pan_tools = new javax.swing.JPanel();
         rb_rgb32 = new javax.swing.JRadioButton();
         rb_grayscale = new javax.swing.JRadioButton();
@@ -98,6 +102,13 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         slider_contrast = new javax.swing.JSlider();
         l_brightness = new javax.swing.JLabel();
         l_contrast = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        b_open = new javax.swing.JMenuItem();
+        mnu_save = new javax.swing.JMenuItem();
+        mnu_saveas = new javax.swing.JMenuItem();
+        mnu_quit = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,7 +130,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             pan_imageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pan_imageLayout.createSequentialGroup()
                 .add(lab_image)
-                .add(0, 380, Short.MAX_VALUE))
+                .add(0, 359, Short.MAX_VALUE))
         );
 
         b_save.setText("Save");
@@ -132,29 +143,44 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             }
         });
 
+        b_close.setText("Close");
+        b_close.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_closeActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout pan_utilsLayout = new org.jdesktop.layout.GroupLayout(pan_utils);
         pan_utils.setLayout(pan_utilsLayout);
         pan_utilsLayout.setHorizontalGroup(
             pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pan_utilsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(b_save)
-                    .add(b_load))
+                .add(b_save)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, pan_utilsLayout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(b_load)
+                    .add(b_close))
+                .addContainerGap())
         );
 
-        pan_utilsLayout.linkSize(new java.awt.Component[] {b_load, b_save}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+        pan_utilsLayout.linkSize(new java.awt.Component[] {b_close, b_load, b_save}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
 
         pan_utilsLayout.setVerticalGroup(
             pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pan_utilsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(b_save, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(b_load, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(82, 82, 82))
+                .add(b_save)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(b_load, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(b_close)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pan_utilsLayout.linkSize(new java.awt.Component[] {b_close, b_load, b_save}, org.jdesktop.layout.GroupLayout.VERTICAL);
 
         rb_rgb32.setText("RGB (32 Bit)");
         rb_rgb32.addActionListener(new java.awt.event.ActionListener() {
@@ -220,14 +246,63 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                     .add(rb_grayscale))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(l_brightness)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(3, 3, 3)
                 .add(slider_brightness, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(l_contrast)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(3, 3, 3)
                 .add(slider_contrast, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(26, 26, 26))
+                .addContainerGap())
         );
+
+        jMenu1.setText("File");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openActionPerformed(evt);
+            }
+        });
+
+        b_open.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.META_MASK));
+        b_open.setText("Open");
+        b_open.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_openActionPerformed(evt);
+            }
+        });
+        jMenu1.add(b_open);
+
+        mnu_save.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.META_MASK));
+        mnu_save.setText("Save");
+        mnu_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_saveActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnu_save);
+
+        mnu_saveas.setText("Save As...");
+        mnu_saveas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_saveasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnu_saveas);
+
+        mnu_quit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.META_MASK));
+        mnu_quit.setText("Quit");
+        mnu_quit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_quitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnu_quit);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -340,6 +415,74 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     private void slider_brightnessCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_slider_brightnessCaretPositionChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_slider_brightnessCaretPositionChanged
+
+    private void b_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_closeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b_closeActionPerformed
+
+    private void mnu_saveasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_saveasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnu_saveasActionPerformed
+
+    private void openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_openActionPerformed
+
+    private void mnu_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_saveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnu_saveActionPerformed
+
+    private void b_openActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_openActionPerformed
+
+        String cur_dir = IJ.getDirectory("current");
+        JFileChooser fileopen = new JFileChooser(cur_dir);
+
+        int ret = fileopen.showDialog(new JPanel(), "Open file");
+
+        if (ret == JFileChooser.APPROVE_OPTION) {
+            File file = fileopen.getSelectedFile();
+
+            if (file.isFile()) {
+                String fpath = file.getPath();
+                image_name = fpath;
+                is_im_loaded[0] = load_image(image_name);
+//                im_plus = IJ.openImage(fpath);
+
+//                im_plus.show();
+//                is_im_loaded[0] = im_plus != null;
+                set_button_states();
+                //This is where a real application would open the file.
+
+                if (do_debug) {
+                    System.out.println("Opening: " + fpath);
+                }
+
+            } else {
+
+                if (do_debug) {
+                    System.out.println("Open command cancelled by user.");
+                }
+
+            }
+
+        } else if (ret == JFileChooser.CANCEL_OPTION) {
+
+            if (do_debug) {
+                System.out.print("user cancelled from 'open' dialog box");
+            }
+
+        } else {
+            if (do_debug) {
+                System.out.print("not approved or cancelled... sweet");
+            }
+        }
+
+    }//GEN-LAST:event_b_openActionPerformed
+
+    private void mnu_quitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_quitActionPerformed
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_mnu_quitActionPerformed
 // </editor-fold>
 
     /**
@@ -403,11 +546,19 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Declare Local Components">
     private ButtonGroup bg_image_type;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton b_close;
     private javax.swing.JButton b_load;
+    private javax.swing.JMenuItem b_open;
     private javax.swing.JButton b_save;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel l_brightness;
     private javax.swing.JLabel l_contrast;
     private javax.swing.JLabel lab_image;
+    private javax.swing.JMenuItem mnu_quit;
+    private javax.swing.JMenuItem mnu_save;
+    private javax.swing.JMenuItem mnu_saveas;
     private javax.swing.JPanel pan_image;
     private javax.swing.JPanel pan_tools;
     private javax.swing.JPanel pan_utils;
