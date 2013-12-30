@@ -6,7 +6,7 @@ package swordfish.views.live_streamer;
 
 //import swordfish.ui_develop.*;
 //import swordfish.*;
-import swordfish.views.live_streamer.MyMediaPlayer;
+//import swordfish.views.live_streamer.MyMediaPlayer;
 import ij.IJ;
 import java.awt.Color;
 import java.awt.event.KeyListener;
@@ -19,7 +19,7 @@ import java.awt.FileDialog;
 import java.awt.event.KeyEvent.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import swordfish.views.LogIn;
@@ -1582,7 +1582,7 @@ public class MainMenu_v1_0 extends JFrame
 //        try {
 
         pointer[0] = 0;
-        Vector<JLabel> labs = new Vector<JLabel>();
+        ArrayList<JLabel> labs = new ArrayList<JLabel>();
         labs.add(l_inspector);
         labs.add(l_mid);
         labs.add(l_date);
@@ -1784,7 +1784,7 @@ public class MainMenu_v1_0 extends JFrame
             }
         });
     }
-    private Vector<JButton> logger;
+    private ArrayList<JButton> logger;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_analyze_anchor;
     private javax.swing.JButton b_archive;

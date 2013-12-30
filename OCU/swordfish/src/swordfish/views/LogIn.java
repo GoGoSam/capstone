@@ -6,7 +6,7 @@
 package swordfish.views;
 
 import java.awt.event.*;
-import java.util.Vector;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.GroupLayout;
@@ -19,7 +19,7 @@ import javax.swing.LayoutStyle;
 public class LogIn extends javax.swing.JDialog {
 
     @SuppressWarnings("UseOfObsoleteCollectionType")
-    private final Vector<JButton> butts = new Vector<JButton>();
+    private ArrayList<JButton> butts = new ArrayList<JButton>();
 
     public LogIn(int[] pointer) {
         this.pointer = pointer;
@@ -32,7 +32,7 @@ public class LogIn extends javax.swing.JDialog {
         this.setResizable(false);
     }
 
-    public LogIn(int[] pointer, Vector<JLabel> labs) {
+    public LogIn(int[] pointer, ArrayList<JLabel> labs) {
         this.pointer = pointer;
         initComponents();
 //        pack();
@@ -58,7 +58,7 @@ public class LogIn extends javax.swing.JDialog {
         butts.add(b_register);
     }
 
-    public Vector<JButton> getButtons() {
+    public ArrayList<JButton> getButtons() {
         return butts;
     }
 
@@ -231,7 +231,7 @@ public class LogIn extends javax.swing.JDialog {
      */
     int[] pointer = new int[1];
 
-    private Vector<JLabel> labs;
+    private ArrayList<JLabel> labs;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_cancel;
     private javax.swing.JButton b_logon;

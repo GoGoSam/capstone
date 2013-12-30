@@ -18,7 +18,7 @@ import java.awt.FileDialog;
 import java.awt.event.KeyEvent.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import swordfish.views.LogIn;
@@ -1581,7 +1581,7 @@ public class LiveStreamerWindow extends JFrame
 //        try {
 
         pointer[0] = 0;
-        Vector<JLabel> labs = new Vector<JLabel>();
+        ArrayList<JLabel> labs = new ArrayList<JLabel>();
         labs.add(l_inspector);
         labs.add(l_mid);
         labs.add(l_date);
@@ -1783,7 +1783,7 @@ public class LiveStreamerWindow extends JFrame
             }
         });
     }
-    private Vector<JButton> logger;
+    private ArrayList<JButton> logger;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_analyze_anchor;
     private javax.swing.JButton b_archive;
