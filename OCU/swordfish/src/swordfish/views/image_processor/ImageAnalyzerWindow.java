@@ -31,6 +31,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame {
         pan_utils = new javax.swing.JPanel();
         b_save = new javax.swing.JButton();
         b_load = new javax.swing.JButton();
+        l_contrast1 = new javax.swing.JLabel();
         pan_tools = new javax.swing.JPanel();
         rb_rgb32 = new javax.swing.JRadioButton();
         rb_grayscale = new javax.swing.JRadioButton();
@@ -64,6 +65,8 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame {
             }
         });
 
+        l_contrast1.setText("Contrast");
+
         org.jdesktop.layout.GroupLayout pan_utilsLayout = new org.jdesktop.layout.GroupLayout(pan_utils);
         pan_utils.setLayout(pan_utilsLayout);
         pan_utilsLayout.setHorizontalGroup(
@@ -74,6 +77,11 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame {
                     .add(b_save)
                     .add(b_load))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(pan_utilsLayout.createSequentialGroup()
+                    .add(18, 18, 18)
+                    .add(l_contrast1)
+                    .addContainerGap(18, Short.MAX_VALUE)))
         );
 
         pan_utilsLayout.linkSize(new java.awt.Component[] {b_load, b_save}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
@@ -86,6 +94,11 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(b_load, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(82, 82, 82))
+            .add(pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(pan_utilsLayout.createSequentialGroup()
+                    .add(66, 66, 66)
+                    .add(l_contrast1)
+                    .addContainerGap(66, Short.MAX_VALUE)))
         );
 
         rb_rgb32.setText("RGB (32 Bit)");
@@ -247,6 +260,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame {
     private javax.swing.JButton b_save;
     private javax.swing.JLabel l_brightness;
     private javax.swing.JLabel l_contrast;
+    private javax.swing.JLabel l_contrast1;
     private javax.swing.JPanel p_image;
     private javax.swing.JPanel pan_tools;
     private javax.swing.JPanel pan_utils;
