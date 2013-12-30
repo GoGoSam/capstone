@@ -9,7 +9,7 @@ package barracuda;
  *
  * @author jrob
  */
-public class Barracuda {
+public class barracuda {
 
     /**
      * @param args the command line arguments
