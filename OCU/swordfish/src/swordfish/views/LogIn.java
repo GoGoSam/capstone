@@ -7,10 +7,7 @@ package swordfish.views;
 
 import java.awt.event.*;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.GroupLayout;
-import javax.swing.LayoutStyle;
+import javax.swing.*;
 
 /**
  *
@@ -71,7 +68,7 @@ public class LogIn extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        p_root = new javax.swing.JPanel();
+        p_root = new JPanel();
         l_massID = new javax.swing.JLabel();
         l_password = new javax.swing.JLabel();
         tf_massID = new javax.swing.JTextField();
@@ -138,7 +135,7 @@ public class LogIn extends javax.swing.JDialog {
         p_rootLayout.setVerticalGroup(
                 p_rootLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(GroupLayout.Alignment.TRAILING, p_rootLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(6, 6, Short.MAX_VALUE)
                         .addGroup(p_rootLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(l_massID)
                                 .addComponent(tf_massID, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -152,7 +149,8 @@ public class LogIn extends javax.swing.JDialog {
                                 .addComponent(b_logon)
                                 .addComponent(b_register))
                         .addGap(3, 3, 3)
-                        .addComponent(l_massDOT_logo))
+                        .addComponent(l_massDOT_logo)
+                        .addGap(12, 12, 12))
         );
 
         GroupLayout layout = new GroupLayout(getContentPane());
@@ -163,7 +161,8 @@ public class LogIn extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(p_root, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(p_root, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(3, 3, 3)
         );
 
         pack();
@@ -191,29 +190,29 @@ public class LogIn extends javax.swing.JDialog {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        /*   try {
+         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+         if ("Nimbus".equals(info.getName())) {
+         javax.swing.UIManager.setLookAndFeel(info.getClassName());
+         break;
+         }
+         }
+         } catch (ClassNotFoundException ex) {
+         java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         } catch (InstantiationException ex) {
+         java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         } catch (IllegalAccessException ex) {
+         java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+         java.util.logging.Logger.getLogger(LogIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+         }*/
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                final LogIn dialog = new LogIn(new javax.swing.JFrame(), true);
+                final LogIn dialog = new LogIn(new JFrame(), true);
                 dialog.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent e) {
