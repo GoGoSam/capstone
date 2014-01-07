@@ -44,8 +44,8 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 //            "/Applications/ImageJ/ImageJ64.app/Contents/MacOS/JavaApplicationStub";
     String image_name = icon_path + "test_images_n_template_im/hanger_test_image.jpg";
 
-    int IMG_WIDTH = 320;    // pixels
-    int IMG_HEIGHT = 370;   // pixels
+    int IMG_WIDTH = 340;    // pixels
+    int IMG_HEIGHT = 357;   // pixels
 
     boolean do_debug = true;
 
@@ -58,7 +58,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         initComponents();
 
         configureComponents();
-//        this.setResizable(false);
+        this.setResizable(false);
         // set flags
         is_im_loaded[0] = false;
 
@@ -75,7 +75,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
      */
     private void configureComponents() {
         bg_image_type = new ButtonGroup();
-        bg_image_type.add(rb_grayscale);
+        bg_image_type.add(rb_grayscale32);
         bg_image_type.add(rb_rgb32);
 
     }
@@ -97,7 +97,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         b_close = new javax.swing.JButton();
         pan_tools = new javax.swing.JPanel();
         rb_rgb32 = new javax.swing.JRadioButton();
-        rb_grayscale = new javax.swing.JRadioButton();
+        rb_grayscale32 = new javax.swing.JRadioButton();
         slider_brightness = new javax.swing.JSlider();
         slider_contrast = new javax.swing.JSlider();
         l_brightness = new javax.swing.JLabel();
@@ -124,13 +124,13 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             pan_imageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pan_imageLayout.createSequentialGroup()
                 .add(lab_image)
-                .add(0, 0, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pan_imageLayout.setVerticalGroup(
             pan_imageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pan_imageLayout.createSequentialGroup()
                 .add(lab_image)
-                .add(0, 359, Short.MAX_VALUE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
 
         b_save.setText("Save");
@@ -182,17 +182,17 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         pan_utilsLayout.linkSize(new java.awt.Component[] {b_close, b_load, b_save}, org.jdesktop.layout.GroupLayout.VERTICAL);
 
-        rb_rgb32.setText("RGB (32 Bit)");
+        rb_rgb32.setText("RGB");
         rb_rgb32.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rb_rgb32ActionPerformed(evt);
             }
         });
 
-        rb_grayscale.setText("Gray-Scale (8 Bit)");
-        rb_grayscale.addActionListener(new java.awt.event.ActionListener() {
+        rb_grayscale32.setText("Gray-Scale");
+        rb_grayscale32.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rb_grayscaleActionPerformed(evt);
+                rb_grayscale32ActionPerformed(evt);
             }
         });
 
@@ -229,7 +229,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                             .add(l_brightness)
                             .add(rb_rgb32))
                         .add(0, 0, Short.MAX_VALUE)
-                        .add(rb_grayscale))
+                        .add(rb_grayscale32))
                     .add(pan_toolsLayout.createSequentialGroup()
                         .add(50, 50, 50)
                         .add(pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
@@ -243,7 +243,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(rb_rgb32)
-                    .add(rb_grayscale))
+                    .add(rb_grayscale32))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(l_brightness)
                 .add(3, 3, 3)
@@ -313,9 +313,9 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(pan_image, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
-                        .add(pan_utils, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(pan_utils, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(pan_tools, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 254, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(pan_tools, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 254, Short.MAX_VALUE)
                         .add(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -326,10 +326,12 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 .add(pan_image, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(pan_utils, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(pan_tools, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(pan_tools, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 116, Short.MAX_VALUE)
+                    .add(pan_utils, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        layout.linkSize(new java.awt.Component[] {pan_tools, pan_utils}, org.jdesktop.layout.GroupLayout.VERTICAL);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -343,7 +345,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 System.out.println("set_button_states(): Image loaded");
             }
 
-            rb_grayscale.setEnabled(true);
+            rb_grayscale32.setEnabled(true);
             rb_rgb32.setEnabled(true);
             slider_contrast.setEnabled(true);
 
@@ -355,8 +357,8 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             if (do_debug) {
                 System.out.println("set_button_states(): Image not loaded");
             }
-            rb_grayscale.setSelected(false);
-            rb_grayscale.setEnabled(false);
+            rb_grayscale32.setSelected(false);
+            rb_grayscale32.setEnabled(false);
             rb_rgb32.setSelected(false);
             rb_rgb32.setEnabled(false);
             slider_contrast.setEnabled(false);
@@ -399,18 +401,18 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         is_im_loaded[0] = load_image(image_name);
         set_button_states();    }//GEN-LAST:event_b_loadActionPerformed
 
-    private void rb_grayscaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_grayscaleActionPerformed
+    private void rb_grayscale32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_grayscale32ActionPerformed
 
         if (do_debug) {
             System.out.println("8 - bit RadioButton was pressed");
         }
         im_plus_gray = im_plus.duplicate();
-        IJ.run(im_plus_gray, "8-bit", "");
+        IJ.run(im_plus_gray, "32-bit", "");
 //            im_plus.hide();
 //            im_plus_gray.show();
         lab_image.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
 
-    }//GEN-LAST:event_rb_grayscaleActionPerformed
+    }//GEN-LAST:event_rb_grayscale32ActionPerformed
 
     private void slider_brightnessCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_slider_brightnessCaretPositionChanged
         // TODO add your handling code here:
@@ -562,7 +564,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     private javax.swing.JPanel pan_image;
     private javax.swing.JPanel pan_tools;
     private javax.swing.JPanel pan_utils;
-    private javax.swing.JRadioButton rb_grayscale;
+    private javax.swing.JRadioButton rb_grayscale32;
     private javax.swing.JRadioButton rb_rgb32;
     private javax.swing.JSlider slider_brightness;
     private javax.swing.JSlider slider_contrast;
