@@ -19,8 +19,8 @@ import java.util.List;
  *  Build Protobuf messages to send to robot
  *  Send message to robot through TCPClient
  */
-
 public class RobotController {
+
     private volatile PollerThread thread;
     private JInputXboxController controller;
     private RobotControllerListener listener;
@@ -34,7 +34,9 @@ public class RobotController {
     public void connect(String addr, int port, JFrame ui) {
         //if (!client.connect(addr, port)) System.out.println("Unable to Connect to Robot");
         List<XboxController> controllerList = XboxController.getAll();
-        if (controllerList.size() == 0) System.out.println("No Xbox Controller Found");
+        if (controllerList.size() == 0) {
+            System.out.println("No Xbox Controller Found");
+        }
         controller = (JInputXboxController) XboxController.getAll().get(0);
         controller.addListener(listener);
         startPolling();
@@ -75,10 +77,11 @@ public class RobotController {
     }
 
     private class PollerThread extends Thread {
+
         JInputXboxController controller;
         boolean running;
 
-        public PollerThread (JInputXboxController c) {
+        public PollerThread(JInputXboxController c) {
             this.controller = c;
             running = true;
         }
@@ -96,26 +99,28 @@ public class RobotController {
         //TODO: Determine if these functions get called in the poller thread
 
         @Override
-        public void connected () {
+        public void connected() {
             //TODO: Handle what happens when a controller is connected
         }
 
         @Override
-        public void disconnected () {
+        public void disconnected() {
             //TODO: Handle what happens when a controller is disconnected
             stopPolling();
         }
 
         @Override
-        public void buttonChanged (Button button, boolean pressed) {
+        public void buttonChanged(Button button, boolean pressed) {
             //TODO: Handle what happens when a button is changed
+            System.out.println("BLAHASDKJBASFHJDJHB");
             buildCommand();
             updateUI();
         }
 
         @Override
-        public void axisChanged (Axis axis, float state) {
+        public void axisChanged(Axis axis, float state) {
             //TODO: Handle what happens when a axis is changed
+            System.out.println(state);
             buildCommand();
             updateUI();
         }
