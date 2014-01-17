@@ -32,7 +32,7 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
                 boost::asio::serial_port_base::stop_bits::one
             )
         : io_service_(io_service),
-          serial_port_(boost::asio::serial_port(io_service_)),
+          serial_port_(boost::asio::serial_port(io_service)),
           name_(name),
           baud_rate_(baud_rate),
           char_size_(char_size),
@@ -80,7 +80,7 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
             //TODO: Handle return from read
         }
 
-        void write(char* data, int size)
+        void write(unsigned char* data, int size)
         {
             boost::asio::async_write(serial_port_,
                     boost::asio::buffer(data, size),

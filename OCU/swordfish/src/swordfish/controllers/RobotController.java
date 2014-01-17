@@ -32,7 +32,7 @@ public class RobotController {
     }
 
     public void connect(String addr, int port, JFrame ui) {
-        if (!client.connect(addr, port)) System.out.println("Unable to Connect to Robot");
+        //if (!client.connect(addr, port)) System.out.println("Unable to Connect to Robot");
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.size() == 0) System.out.println("No Xbox Controller Found");
         controller = (JInputXboxController) XboxController.getAll().get(0);
