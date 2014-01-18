@@ -33,20 +33,16 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     ImagePlus im_plus_rgb = null;       // in the case RGB type is set as conversion
     ImagePlus im_plus_gray = null;      // --- 8-Bit Gray
     ImageCanvas canvas;
-
     boolean[] is_im_loaded = new boolean[1];
     boolean[] color_scaler = new boolean[2]; /*  0 - RGB; 1 - Gray, 8 Bit    */
 
     double[] orig_min_max = new double[2];
-
     String icon_path = System.getProperty("user.dir") + "/resources/";
 //    String imagej_app_fpath =
 //            "/Applications/ImageJ/ImageJ64.app/Contents/MacOS/JavaApplicationStub";
     String image_name = icon_path + "test_images_n_template_im/hanger_test_image.jpg";
-
     int IMG_WIDTH = 340;    // pixels
     int IMG_HEIGHT = 357;   // pixels
-
     boolean do_debug = true;
 
     /**
@@ -80,6 +76,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
     }
     // <editor-fold defaultstate="collapsed" desc="initComponents">
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -117,18 +114,18 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         lab_image.setText(".");
         lab_image.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        org.jdesktop.layout.GroupLayout pan_imageLayout = new org.jdesktop.layout.GroupLayout(pan_image);
+        javax.swing.GroupLayout pan_imageLayout = new javax.swing.GroupLayout(pan_image);
         pan_image.setLayout(pan_imageLayout);
         pan_imageLayout.setHorizontalGroup(
-            pan_imageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pan_imageLayout.createSequentialGroup()
-                .add(lab_image)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            pan_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pan_imageLayout.createSequentialGroup()
+                .addComponent(lab_image)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pan_imageLayout.setVerticalGroup(
-            pan_imageLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pan_imageLayout.createSequentialGroup()
-                .add(lab_image)
+            pan_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pan_imageLayout.createSequentialGroup()
+                .addComponent(lab_image)
                 .addContainerGap(347, Short.MAX_VALUE))
         );
 
@@ -149,34 +146,34 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             }
         });
 
-        org.jdesktop.layout.GroupLayout pan_utilsLayout = new org.jdesktop.layout.GroupLayout(pan_utils);
+        javax.swing.GroupLayout pan_utilsLayout = new javax.swing.GroupLayout(pan_utils);
         pan_utils.setLayout(pan_utilsLayout);
         pan_utilsLayout.setHorizontalGroup(
-            pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pan_utilsLayout.createSequentialGroup()
-                .add(12, 12, 12)
-                .add(pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(b_load)
-                    .add(b_save)
-                    .add(b_close))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            pan_utilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pan_utilsLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(pan_utilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(b_load)
+                    .addComponent(b_save)
+                    .addComponent(b_close))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pan_utilsLayout.linkSize(new java.awt.Component[] {b_close, b_load, b_save}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+        pan_utilsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {b_close, b_load, b_save});
 
         pan_utilsLayout.setVerticalGroup(
-            pan_utilsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, pan_utilsLayout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(b_save)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(b_load, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(b_close)
+            pan_utilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_utilsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(b_save)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(b_load, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(b_close)
                 .addContainerGap())
         );
 
-        pan_utilsLayout.linkSize(new java.awt.Component[] {b_close, b_load, b_save}, org.jdesktop.layout.GroupLayout.VERTICAL);
+        pan_utilsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {b_close, b_load, b_save});
 
         rb_rgb32.setText("RGB");
         rb_rgb32.addActionListener(new java.awt.event.ActionListener() {
@@ -212,39 +209,39 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         l_contrast.setText("Contrast");
 
-        org.jdesktop.layout.GroupLayout pan_toolsLayout = new org.jdesktop.layout.GroupLayout(pan_tools);
+        javax.swing.GroupLayout pan_toolsLayout = new javax.swing.GroupLayout(pan_tools);
         pan_tools.setLayout(pan_toolsLayout);
         pan_toolsLayout.setHorizontalGroup(
-            pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pan_toolsLayout.createSequentialGroup()
+            pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pan_toolsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(l_brightness)
-                    .add(l_contrast)
-                    .add(pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                        .add(slider_brightness, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(pan_toolsLayout.createSequentialGroup()
-                            .add(rb_rgb32)
-                            .add(88, 88, 88)
-                            .add(rb_grayscale32))
-                        .add(slider_contrast, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(l_brightness)
+                    .addComponent(l_contrast)
+                    .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(slider_brightness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pan_toolsLayout.createSequentialGroup()
+                            .addComponent(rb_rgb32)
+                            .addGap(88, 88, 88)
+                            .addComponent(rb_grayscale32))
+                        .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         pan_toolsLayout.setVerticalGroup(
-            pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pan_toolsLayout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(pan_toolsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(rb_rgb32)
-                    .add(rb_grayscale32))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(l_brightness)
-                .add(3, 3, 3)
-                .add(slider_brightness, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(l_contrast)
-                .add(3, 3, 3)
-                .add(slider_contrast, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pan_toolsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rb_rgb32)
+                    .addComponent(rb_grayscale32))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(l_brightness)
+                .addGap(3, 3, 3)
+                .addComponent(slider_brightness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(l_contrast)
+                .addGap(3, 3, 3)
+                .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -297,31 +294,31 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         setJMenuBar(jMenuBar1);
 
-        org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(pan_image, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(layout.createSequentialGroup()
-                        .add(pan_utils, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(pan_tools, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(jSeparator1))
-                .add(6, 6, 6))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pan_image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pan_utils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jSeparator1))
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(pan_image, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(2, 2, 2)
-                .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(pan_tools, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(pan_utils, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pan_image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(2, 2, 2)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pan_utils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -536,7 +533,6 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             }
         });
     }// </editor-fold>
-
     // <editor-fold defaultstate="collapsed" desc="Declare Local Components">
     private ButtonGroup bg_image_type;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -568,5 +564,4 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }
