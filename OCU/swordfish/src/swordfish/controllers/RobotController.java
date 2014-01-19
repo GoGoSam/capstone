@@ -17,6 +17,25 @@ public class RobotController {
     private RobotControllerListener listener;
     private TCPClient client;
 
+    //Packet mode
+    private static final byte ADDRESS = (byte) 128;
+
+    //Standard commands
+    private static final byte FM1 = 0;
+    private static final byte BM1 = 1;
+    private static final byte FM2 = 4;
+    private static final byte BM2 = 5;
+    private static final byte FBM1 = 6;
+    private static final byte FBM2 = 7;
+
+    //Mixed-mode commands
+    private static final byte FM = 8;
+    private static final byte BM = 9;
+    private static final byte RM = 10;
+    private static final byte LM = 11;
+    private static final byte FBM = 12;
+    private static final byte LRM = 13;
+
     public RobotController() {
         client = new TCPClient();
         listener = new RobotControllerListener();
@@ -24,6 +43,7 @@ public class RobotController {
 
     public void connect(String addr, int port, JFrame ui) {
         if (!client.connect(addr, port)) System.out.println("Unable to Connect to Robot");
+        /*
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.size() == 0) {
             System.out.println("No Xbox Controller Found");
@@ -31,23 +51,77 @@ public class RobotController {
         controller = (JInputXboxController) XboxController.getAll().get(0);
         controller.addListener(listener);
         startPolling();
+        */
     }
 
     private void buildCommand(Button button, boolean pressed) {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
-        byte[] test = {127, 7, 127, (127+7+127)&0xF7};
+        byte[] test = {ADDRESS, FM1, 127, checksum(ADDRESS, FM1, (byte)127)};
         RoboReq.Builder req = RoboReq.newBuilder();
         req.setType(RoboReq.Type.MBASE);
         RoboReq.MoveBaseCmd.Builder mreq = RoboReq.MoveBaseCmd.newBuilder();
         mreq.setCmd(ByteString.copyFrom(test));
         req.setBase(mreq);
         sendCommand(req.build());
+
+        /*
+        switch (button) {
+            case up:
+                break;
+            case down:
+                break;
+            case left:
+                break;
+            case right:
+                break;
+            case start:
+                break;
+            case guide:
+                break;
+            case a:
+                break;
+            case b:
+                break;
+            case x:
+                break;
+            case y:
+                break;
+            case leftShoulder:
+                break;
+            case rightShoulder:
+                break;
+            case back:
+                break;
+            case leftStick:
+                break;
+            case rightStick:
+                break;
+        }
+        */
     }
 
     private void buildCommand(Axis axis, float state) {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
+        switch (axis) {
+            case leftTrigger:
+                break;
+            case rightTrigger:
+                break;
+            case leftStickX:
+                break;
+            case leftStickY:
+                break;
+            case rightStickX:
+                break;
+            case rightStickY:
+                break;
+        }
+    }
+
+    private byte checksum(byte addr, byte command, byte data) {
+        return (byte) ((addr + command + data) & 0x7F);
     }
 
     private void sendCommand(RoboReq req) {
