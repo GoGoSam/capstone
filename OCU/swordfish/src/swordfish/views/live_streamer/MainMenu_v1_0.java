@@ -136,10 +136,10 @@ public class MainMenu_v1_0 extends JFrame
                 .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         media_pan = new MyMediaPlayer();
-        JPanel mediaFrame = media_pan.getF();
-        mediaFrame.setSize(p_media_player.getSize());
+//        JPanel mediaFrame = media_pan.getF();
+//        mediaFrame.setSize(p_media_player.getSize());
 
-        p_media_player.add(mediaFrame);
+//        p_media_player.add(mediaFrame);
     }
 
     // </editor-fold>
@@ -1482,13 +1482,13 @@ public class MainMenu_v1_0 extends JFrame
     }//GEN-LAST:event_b_connectActionPerformed
 
     private void b_capture_momentActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_capture_momentActionPerformed
-
-        boolean tmp = media_pan.save_snap_shot();
-        if (tmp) {
-            System.out.println("Yupp, Snap!\n\n");
-        } else {
-            System.out.println("No Snap!\n\n");
-        }
+        /*
+         boolean tmp = media_pan.save_snap_shot();
+         if (tmp) {
+         System.out.println("Yupp, Snap!\n\n");
+         } else {
+         System.out.println("No Snap!\n\n");
+         }*/
     }//GEN-LAST:event_b_capture_momentActionPerformed
 
     private void b_loadActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_loadActionPerformed
@@ -1514,25 +1514,23 @@ public class MainMenu_v1_0 extends JFrame
     }//GEN-LAST:event_b_loadActionPerformed
 
     private void b_vid_muteActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_vid_muteActionPerformed
-
-        media_pan.mute();
-
+//        media_pan.mute();
     }//GEN-LAST:event_b_vid_muteActionPerformed
 
     private void b_vid_ffActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_vid_ffActionPerformed
-        media_pan.ff(b_vid_ff);
+//        media_pan.ff(b_vid_ff);
     }//GEN-LAST:event_b_vid_ffActionPerformed
 
     private void b_vid_pauseActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_vid_pauseActionPerformed
-        media_pan.pause();
+//        media_pan.pause();
     }//GEN-LAST:event_b_vid_pauseActionPerformed
 
     private void b_vid_stopActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_vid_stopActionPerformed
-        media_pan.stop();
+//        media_pan.stop();
     }//GEN-LAST:event_b_vid_stopActionPerformed
 
     private void b_vid_playActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_vid_playActionPerformed
-        media_pan.playz();
+//        media_pan.playz();
     }//GEN-LAST:event_b_vid_playActionPerformed
 
     private void b_vid_rwActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_vid_rwActionPerformed
@@ -1623,9 +1621,9 @@ public class MainMenu_v1_0 extends JFrame
     }//GEN-LAST:event_b_loginActionPerformed
 
     private void b_closeActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_closeActionPerformed
-        if (media_pan.isPlaying()) {
-            media_pan.stop();
-        }
+//        if (media_pan.isPlaying()) {
+//            media_pan.stop();
+//        }
         f_video_loaded[0] = false;
         set_button_states();
     }//GEN-LAST:event_b_closeActionPerformed
