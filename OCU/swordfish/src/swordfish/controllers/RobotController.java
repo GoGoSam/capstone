@@ -112,7 +112,6 @@ public class RobotController {
         @Override
         public void buttonChanged(Button button, boolean pressed) {
             //TODO: Handle what happens when a button is changed
-            System.out.println("BLAHASDKJBASFHJDJHB");
             buildCommand();
             updateUI();
         }
@@ -120,7 +119,6 @@ public class RobotController {
         @Override
         public void axisChanged(Axis axis, float state) {
             //TODO: Handle what happens when a axis is changed
-            System.out.println(state);
             buildCommand();
             updateUI();
         }
