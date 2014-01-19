@@ -1398,35 +1398,35 @@ public class MainMenu_v1_0 extends JFrame
         icon_down.setEnabled(false);
 
         // Layour components
-        org.jdesktop.layout.GroupLayout p_directionalsLayout = new org.jdesktop.layout.GroupLayout(p_directionals);
+        GroupLayout p_directionalsLayout = new GroupLayout(p_directionals);
         getContentPane().setLayout(p_directionalsLayout);
         p_directionalsLayout.setHorizontalGroup(
-                p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(p_directionalsLayout.createSequentialGroup()
+                p_directionalsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(p_directionalsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(icon_left, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(icon_up, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 54, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(icon_down))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(icon_right)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                .addComponent(icon_left, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+                //                .addPreferredGap(GroupLayout.Ali)
+                .addGroup(p_directionalsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(icon_up, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+                .addComponent(icon_down))
+                //                .addPreferredGap(LayoutStyle.Alignment.RELATED)
+                .addComponent(icon_right)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         p_directionalsLayout.setVerticalGroup(
-                p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(p_directionalsLayout.createSequentialGroup()
+                p_directionalsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(p_directionalsLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(p_directionalsLayout.createSequentialGroup()
-                .add(icon_up)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(icon_down))
-                .add(p_directionalsLayout.createSequentialGroup()
-                .add(41, 41, 41)
-                .add(p_directionalsLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(icon_right)
-                .add(icon_left))))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                .addGroup(p_directionalsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(p_directionalsLayout.createSequentialGroup()
+                .addComponent(icon_up)
+                //                .addPreferredGap(LayoutStyle.RELATED)
+                .addComponent(icon_down))
+                .addGroup(p_directionalsLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(p_directionalsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(icon_right)
+                .addComponent(icon_left))))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         icon_up.getAccessibleContext().setAccessibleName("U");
         icon_left.getAccessibleContext().setAccessibleName("Up");
