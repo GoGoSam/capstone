@@ -333,20 +333,15 @@ public final class RoboComms {
     public interface MoveBaseCmdOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
 
-      // optional string cmd = 1;
+      // optional bytes cmd = 1;
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
       boolean hasCmd();
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
-      java.lang.String getCmd();
-      /**
-       * <code>optional string cmd = 1;</code>
-       */
-      com.google.protobuf.ByteString
-          getCmdBytes();
+      com.google.protobuf.ByteString getCmd();
     }
     /**
      * Protobuf type {@code RoboComms.RoboReq.MoveBaseCmd}
@@ -444,51 +439,24 @@ public final class RoboComms {
       }
 
       private int bitField0_;
-      // optional string cmd = 1;
+      // optional bytes cmd = 1;
       public static final int CMD_FIELD_NUMBER = 1;
-      private java.lang.Object cmd_;
+      private com.google.protobuf.ByteString cmd_;
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
       public boolean hasCmd() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
-      public java.lang.String getCmd() {
-        java.lang.Object ref = cmd_;
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            cmd_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>optional string cmd = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getCmdBytes() {
-        java.lang.Object ref = cmd_;
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          cmd_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+      public com.google.protobuf.ByteString getCmd() {
+        return cmd_;
       }
 
       private void initFields() {
-        cmd_ = "";
+        cmd_ = com.google.protobuf.ByteString.EMPTY;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -503,7 +471,7 @@ public final class RoboComms {
                           throws java.io.IOException {
         getSerializedSize();
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeBytes(1, getCmdBytes());
+          output.writeBytes(1, cmd_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -516,7 +484,7 @@ public final class RoboComms {
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(1, getCmdBytes());
+            .computeBytesSize(1, cmd_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -634,7 +602,7 @@ public final class RoboComms {
 
         public Builder clear() {
           super.clear();
-          cmd_ = "";
+          cmd_ = com.google.protobuf.ByteString.EMPTY;
           bitField0_ = (bitField0_ & ~0x00000001);
           return this;
         }
@@ -685,9 +653,7 @@ public final class RoboComms {
         public Builder mergeFrom(swordfish.models.RoboComms.RoboReq.MoveBaseCmd other) {
           if (other == swordfish.models.RoboComms.RoboReq.MoveBaseCmd.getDefaultInstance()) return this;
           if (other.hasCmd()) {
-            bitField0_ |= 0x00000001;
-            cmd_ = other.cmd_;
-            onChanged();
+            setCmd(other.getCmd());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -716,49 +682,24 @@ public final class RoboComms {
         }
         private int bitField0_;
 
-        // optional string cmd = 1;
-        private java.lang.Object cmd_ = "";
+        // optional bytes cmd = 1;
+        private com.google.protobuf.ByteString cmd_ = com.google.protobuf.ByteString.EMPTY;
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
         public boolean hasCmd() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
-        public java.lang.String getCmd() {
-          java.lang.Object ref = cmd_;
-          if (!(ref instanceof java.lang.String)) {
-            java.lang.String s = ((com.google.protobuf.ByteString) ref)
-                .toStringUtf8();
-            cmd_ = s;
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
+        public com.google.protobuf.ByteString getCmd() {
+          return cmd_;
         }
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
-        public com.google.protobuf.ByteString
-            getCmdBytes() {
-          java.lang.Object ref = cmd_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            cmd_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>optional string cmd = 1;</code>
-         */
-        public Builder setCmd(
-            java.lang.String value) {
+        public Builder setCmd(com.google.protobuf.ByteString value) {
           if (value == null) {
     throw new NullPointerException();
   }
@@ -768,24 +709,11 @@ public final class RoboComms {
           return this;
         }
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
         public Builder clearCmd() {
           bitField0_ = (bitField0_ & ~0x00000001);
           cmd_ = getDefaultInstance().getCmd();
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string cmd = 1;</code>
-         */
-        public Builder setCmdBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          cmd_ = value;
           onChanged();
           return this;
         }
@@ -804,20 +732,15 @@ public final class RoboComms {
     public interface MoveLiftCmdOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
 
-      // optional string cmd = 1;
+      // optional bytes cmd = 1;
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
       boolean hasCmd();
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
-      java.lang.String getCmd();
-      /**
-       * <code>optional string cmd = 1;</code>
-       */
-      com.google.protobuf.ByteString
-          getCmdBytes();
+      com.google.protobuf.ByteString getCmd();
     }
     /**
      * Protobuf type {@code RoboComms.RoboReq.MoveLiftCmd}
@@ -915,51 +838,24 @@ public final class RoboComms {
       }
 
       private int bitField0_;
-      // optional string cmd = 1;
+      // optional bytes cmd = 1;
       public static final int CMD_FIELD_NUMBER = 1;
-      private java.lang.Object cmd_;
+      private com.google.protobuf.ByteString cmd_;
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
       public boolean hasCmd() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
-      public java.lang.String getCmd() {
-        java.lang.Object ref = cmd_;
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            cmd_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>optional string cmd = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getCmdBytes() {
-        java.lang.Object ref = cmd_;
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          cmd_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+      public com.google.protobuf.ByteString getCmd() {
+        return cmd_;
       }
 
       private void initFields() {
-        cmd_ = "";
+        cmd_ = com.google.protobuf.ByteString.EMPTY;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -974,7 +870,7 @@ public final class RoboComms {
                           throws java.io.IOException {
         getSerializedSize();
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeBytes(1, getCmdBytes());
+          output.writeBytes(1, cmd_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -987,7 +883,7 @@ public final class RoboComms {
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(1, getCmdBytes());
+            .computeBytesSize(1, cmd_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -1105,7 +1001,7 @@ public final class RoboComms {
 
         public Builder clear() {
           super.clear();
-          cmd_ = "";
+          cmd_ = com.google.protobuf.ByteString.EMPTY;
           bitField0_ = (bitField0_ & ~0x00000001);
           return this;
         }
@@ -1156,9 +1052,7 @@ public final class RoboComms {
         public Builder mergeFrom(swordfish.models.RoboComms.RoboReq.MoveLiftCmd other) {
           if (other == swordfish.models.RoboComms.RoboReq.MoveLiftCmd.getDefaultInstance()) return this;
           if (other.hasCmd()) {
-            bitField0_ |= 0x00000001;
-            cmd_ = other.cmd_;
-            onChanged();
+            setCmd(other.getCmd());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -1187,49 +1081,24 @@ public final class RoboComms {
         }
         private int bitField0_;
 
-        // optional string cmd = 1;
-        private java.lang.Object cmd_ = "";
+        // optional bytes cmd = 1;
+        private com.google.protobuf.ByteString cmd_ = com.google.protobuf.ByteString.EMPTY;
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
         public boolean hasCmd() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
-        public java.lang.String getCmd() {
-          java.lang.Object ref = cmd_;
-          if (!(ref instanceof java.lang.String)) {
-            java.lang.String s = ((com.google.protobuf.ByteString) ref)
-                .toStringUtf8();
-            cmd_ = s;
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
+        public com.google.protobuf.ByteString getCmd() {
+          return cmd_;
         }
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
-        public com.google.protobuf.ByteString
-            getCmdBytes() {
-          java.lang.Object ref = cmd_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            cmd_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>optional string cmd = 1;</code>
-         */
-        public Builder setCmd(
-            java.lang.String value) {
+        public Builder setCmd(com.google.protobuf.ByteString value) {
           if (value == null) {
     throw new NullPointerException();
   }
@@ -1239,24 +1108,11 @@ public final class RoboComms {
           return this;
         }
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
         public Builder clearCmd() {
           bitField0_ = (bitField0_ & ~0x00000001);
           cmd_ = getDefaultInstance().getCmd();
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string cmd = 1;</code>
-         */
-        public Builder setCmdBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          cmd_ = value;
           onChanged();
           return this;
         }
@@ -1275,20 +1131,15 @@ public final class RoboComms {
     public interface MoveSensCmdOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
 
-      // optional string cmd = 1;
+      // optional bytes cmd = 1;
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
       boolean hasCmd();
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
-      java.lang.String getCmd();
-      /**
-       * <code>optional string cmd = 1;</code>
-       */
-      com.google.protobuf.ByteString
-          getCmdBytes();
+      com.google.protobuf.ByteString getCmd();
     }
     /**
      * Protobuf type {@code RoboComms.RoboReq.MoveSensCmd}
@@ -1386,51 +1237,24 @@ public final class RoboComms {
       }
 
       private int bitField0_;
-      // optional string cmd = 1;
+      // optional bytes cmd = 1;
       public static final int CMD_FIELD_NUMBER = 1;
-      private java.lang.Object cmd_;
+      private com.google.protobuf.ByteString cmd_;
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
       public boolean hasCmd() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string cmd = 1;</code>
+       * <code>optional bytes cmd = 1;</code>
        */
-      public java.lang.String getCmd() {
-        java.lang.Object ref = cmd_;
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            cmd_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>optional string cmd = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getCmdBytes() {
-        java.lang.Object ref = cmd_;
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          cmd_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+      public com.google.protobuf.ByteString getCmd() {
+        return cmd_;
       }
 
       private void initFields() {
-        cmd_ = "";
+        cmd_ = com.google.protobuf.ByteString.EMPTY;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -1445,7 +1269,7 @@ public final class RoboComms {
                           throws java.io.IOException {
         getSerializedSize();
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeBytes(1, getCmdBytes());
+          output.writeBytes(1, cmd_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -1458,7 +1282,7 @@ public final class RoboComms {
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(1, getCmdBytes());
+            .computeBytesSize(1, cmd_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -1576,7 +1400,7 @@ public final class RoboComms {
 
         public Builder clear() {
           super.clear();
-          cmd_ = "";
+          cmd_ = com.google.protobuf.ByteString.EMPTY;
           bitField0_ = (bitField0_ & ~0x00000001);
           return this;
         }
@@ -1627,9 +1451,7 @@ public final class RoboComms {
         public Builder mergeFrom(swordfish.models.RoboComms.RoboReq.MoveSensCmd other) {
           if (other == swordfish.models.RoboComms.RoboReq.MoveSensCmd.getDefaultInstance()) return this;
           if (other.hasCmd()) {
-            bitField0_ |= 0x00000001;
-            cmd_ = other.cmd_;
-            onChanged();
+            setCmd(other.getCmd());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -1658,49 +1480,24 @@ public final class RoboComms {
         }
         private int bitField0_;
 
-        // optional string cmd = 1;
-        private java.lang.Object cmd_ = "";
+        // optional bytes cmd = 1;
+        private com.google.protobuf.ByteString cmd_ = com.google.protobuf.ByteString.EMPTY;
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
         public boolean hasCmd() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
-        public java.lang.String getCmd() {
-          java.lang.Object ref = cmd_;
-          if (!(ref instanceof java.lang.String)) {
-            java.lang.String s = ((com.google.protobuf.ByteString) ref)
-                .toStringUtf8();
-            cmd_ = s;
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
+        public com.google.protobuf.ByteString getCmd() {
+          return cmd_;
         }
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
-        public com.google.protobuf.ByteString
-            getCmdBytes() {
-          java.lang.Object ref = cmd_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            cmd_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>optional string cmd = 1;</code>
-         */
-        public Builder setCmd(
-            java.lang.String value) {
+        public Builder setCmd(com.google.protobuf.ByteString value) {
           if (value == null) {
     throw new NullPointerException();
   }
@@ -1710,24 +1507,11 @@ public final class RoboComms {
           return this;
         }
         /**
-         * <code>optional string cmd = 1;</code>
+         * <code>optional bytes cmd = 1;</code>
          */
         public Builder clearCmd() {
           bitField0_ = (bitField0_ & ~0x00000001);
           cmd_ = getDefaultInstance().getCmd();
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string cmd = 1;</code>
-         */
-        public Builder setCmdBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          cmd_ = value;
           onChanged();
           return this;
         }
@@ -4373,8 +4157,8 @@ public final class RoboComms {
       "MoveLiftCmd\022,\n\004sens\030\004 \001(\0132\036.RoboComms.Ro" +
       "boReq.MoveSensCmd\022(\n\004data\030\005 \001(\0132\032.RoboCo" +
       "mms.RoboReq.DataReq\032\032\n\013MoveBaseCmd\022\013\n\003cm" +
-      "d\030\001 \001(\t\032\032\n\013MoveLiftCmd\022\013\n\003cmd\030\001 \001(\t\032\032\n\013M" +
-      "oveSensCmd\022\013\n\003cmd\030\001 \001(\t\032\026\n\007DataReq\022\013\n\003cm" +
+      "d\030\001 \001(\014\032\032\n\013MoveLiftCmd\022\013\n\003cmd\030\001 \001(\014\032\032\n\013M" +
+      "oveSensCmd\022\013\n\003cmd\030\001 \001(\014\032\026\n\007DataReq\022\013\n\003cm" +
       "d\030\001 \001(\t\"2\n\004Type\022\t\n\005MBASE\020\000\022\t\n\005MLIFT\020\001\022\t\n",
       "\005MSENS\020\002\022\t\n\005RDATA\020\003\"\205\001\n\007RoboRes\022%\n\004type\030" +
       "\001 \002(\0162\027.RoboComms.RoboRes.Type\022(\n\004data\030\002" +

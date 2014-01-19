@@ -226,14 +226,14 @@ void protobuf_AddDesc_robocomms_2eproto() {
     "MoveLiftCmd\022,\n\004sens\030\004 \001(\0132\036.RoboComms.Ro"
     "boReq.MoveSensCmd\022(\n\004data\030\005 \001(\0132\032.RoboCo"
     "mms.RoboReq.DataReq\032\032\n\013MoveBaseCmd\022\013\n\003cm"
-    "d\030\001 \001(\t\032\032\n\013MoveLiftCmd\022\013\n\003cmd\030\001 \001(\t\032\032\n\013M"
-    "oveSensCmd\022\013\n\003cmd\030\001 \001(\t\032\026\n\007DataReq\022\013\n\003cm"
+    "d\030\001 \001(\014\032\032\n\013MoveLiftCmd\022\013\n\003cmd\030\001 \001(\014\032\032\n\013M"
+    "oveSensCmd\022\013\n\003cmd\030\001 \001(\014\032\026\n\007DataReq\022\013\n\003cm"
     "d\030\001 \001(\t\"2\n\004Type\022\t\n\005MBASE\020\000\022\t\n\005MLIFT\020\001\022\t\n"
     "\005MSENS\020\002\022\t\n\005RDATA\020\003\"\205\001\n\007RoboRes\022%\n\004type\030"
     "\001 \002(\0162\027.RoboComms.RoboRes.Type\022(\n\004data\030\002"
     " \001(\0132\032.RoboComms.RoboRes.DataRes\032\026\n\007Data"
-    "Res\022\013\n\003res\030\001 \001(\t\"\021\n\004Type\022\t\n\005DATAR\020\000B\022\n\020s"
-    "wordfish.models", 575);
+    "Res\022\013\n\003res\030\001 \001(\t\"\021\n\004Type\022\t\n\005DATAR\020\000B\035\n\020s"
+    "wordfish.modelsB\tRoboComms", 586);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "robocomms.proto", &protobuf_RegisterTypes);
   RoboReq::default_instance_ = new RoboReq();
@@ -362,15 +362,12 @@ bool RoboReq_MoveBaseCmd::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string cmd = 1;
+      // optional bytes cmd = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_cmd()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->cmd().data(), this->cmd().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -396,12 +393,9 @@ bool RoboReq_MoveBaseCmd::MergePartialFromCodedStream(
 
 void RoboReq_MoveBaseCmd::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional string cmd = 1;
+  // optional bytes cmd = 1;
   if (has_cmd()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->cmd().data(), this->cmd().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       1, this->cmd(), output);
   }
 
@@ -413,13 +407,10 @@ void RoboReq_MoveBaseCmd::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* RoboReq_MoveBaseCmd::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional string cmd = 1;
+  // optional bytes cmd = 1;
   if (has_cmd()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->cmd().data(), this->cmd().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         1, this->cmd(), target);
   }
 
@@ -434,10 +425,10 @@ int RoboReq_MoveBaseCmd::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional string cmd = 1;
+    // optional bytes cmd = 1;
     if (has_cmd()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->cmd());
     }
 
@@ -587,15 +578,12 @@ bool RoboReq_MoveLiftCmd::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string cmd = 1;
+      // optional bytes cmd = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_cmd()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->cmd().data(), this->cmd().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -621,12 +609,9 @@ bool RoboReq_MoveLiftCmd::MergePartialFromCodedStream(
 
 void RoboReq_MoveLiftCmd::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional string cmd = 1;
+  // optional bytes cmd = 1;
   if (has_cmd()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->cmd().data(), this->cmd().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       1, this->cmd(), output);
   }
 
@@ -638,13 +623,10 @@ void RoboReq_MoveLiftCmd::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* RoboReq_MoveLiftCmd::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional string cmd = 1;
+  // optional bytes cmd = 1;
   if (has_cmd()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->cmd().data(), this->cmd().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         1, this->cmd(), target);
   }
 
@@ -659,10 +641,10 @@ int RoboReq_MoveLiftCmd::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional string cmd = 1;
+    // optional bytes cmd = 1;
     if (has_cmd()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->cmd());
     }
 
@@ -812,15 +794,12 @@ bool RoboReq_MoveSensCmd::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional string cmd = 1;
+      // optional bytes cmd = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_cmd()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->cmd().data(), this->cmd().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -846,12 +825,9 @@ bool RoboReq_MoveSensCmd::MergePartialFromCodedStream(
 
 void RoboReq_MoveSensCmd::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional string cmd = 1;
+  // optional bytes cmd = 1;
   if (has_cmd()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->cmd().data(), this->cmd().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
       1, this->cmd(), output);
   }
 
@@ -863,13 +839,10 @@ void RoboReq_MoveSensCmd::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* RoboReq_MoveSensCmd::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional string cmd = 1;
+  // optional bytes cmd = 1;
   if (has_cmd()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->cmd().data(), this->cmd().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         1, this->cmd(), target);
   }
 
@@ -884,10 +857,10 @@ int RoboReq_MoveSensCmd::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional string cmd = 1;
+    // optional bytes cmd = 1;
     if (has_cmd()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->cmd());
     }
 

@@ -19,17 +19,17 @@ message RoboReq {
     optional DataReq     data = 5;
 
     message MoveBaseCmd {
-        optional string cmd = 1;
+        optional bytes cmd = 1;
 
     }
 
     message MoveLiftCmd {
-        optional string cmd = 1;
+        optional bytes cmd = 1;
 
     }
 
     message MoveSensCmd {
-        optional string cmd = 1;
+        optional bytes cmd = 1;
 
     }
 

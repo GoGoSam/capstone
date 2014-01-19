@@ -6,12 +6,6 @@ import org.gstreamer.swing.VideoComponent;
 import javax.swing.*;
 import java.awt.*;
 
-/*
- * VideoStreamer Tasks:
- *  Initialize gstreamer pipeline
- *  Update UI with video component
- */
-
 public class VideoStreamer {
     private Pipeline pipe;
 

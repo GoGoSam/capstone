@@ -12,18 +12,8 @@ import swordfish.views.image_processor.ImageAnalyzerWindow;
  *
  * @author Sam Coe and Joe Robinson
  *
- * @version 1.0
- *
- * Revisions: 1) December 17, 2013, JR - Updated according to external class
- * filename. MobileDirectionDisplay -> MobileDirectionDisplayKeyboard
  */
 
-/*
- * Swordfish Tasks:
- *  Initialize UI
- *  Initialize RobotController
- *  Initialize VideoStreaming
- */
 public class Swordfish {
 
     /**
@@ -35,14 +25,13 @@ public class Swordfish {
                 do_video_streamer = false,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
-                //                do_inspector_robot = true,
+                do_inspector_robot = false,
                 do_media_streamer_ui = true,
                 do_image_processor = false;
 
         String addr = "192.168.1.1";
         int port = 5000;
         JFrame ui = new JFrame();
-        //JFrame ui = new UI();
 
         if (do_robot_controller) {
             RobotController rc = new RobotController();
@@ -60,10 +49,10 @@ public class Swordfish {
             MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
             mddk.setVisible(true);
         }
-//        if (do_inspector_robot) {
-//            InspectorRobot ir = new InspectorRobot();
-//            ir.setVisible(true);
-//        }
+        if (do_inspector_robot) {
+            InspectorRobot ir = new InspectorRobot();
+            ir.setVisible(true);
+        }
         if (do_media_streamer_ui) {
             LiveStreamerWindow lsw = new LiveStreamerWindow();
             lsw.setVisible(true);

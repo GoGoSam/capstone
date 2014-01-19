@@ -1,5 +1,6 @@
 package swordfish.controllers;
 
+import com.google.protobuf.ByteString;
 import swordfish.models.device.Axis;
 import swordfish.models.device.Button;
 import swordfish.models.input.XboxController;
@@ -9,16 +10,6 @@ import swordfish.models.RoboComms.RoboReq;
 import javax.swing.*;
 import java.util.List;
 
-/*
- * RobotController Tasks:
- *  Create/Initialize XboxController
- *  Create/Initialize Poller Thread
- *  Create/Initialize TCPClient
- *  Listen To Changes in XboxController
- *  Update UI for XboxController Changes
- *  Build Protobuf messages to send to robot
- *  Send message to robot through TCPClient
- */
 public class RobotController {
 
     private volatile PollerThread thread;
@@ -32,7 +23,7 @@ public class RobotController {
     }
 
     public void connect(String addr, int port, JFrame ui) {
-        //if (!client.connect(addr, port)) System.out.println("Unable to Connect to Robot");
+        if (!client.connect(addr, port)) System.out.println("Unable to Connect to Robot");
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.size() == 0) {
             System.out.println("No Xbox Controller Found");
@@ -42,15 +33,21 @@ public class RobotController {
         startPolling();
     }
 
-    private void buildCommand() {
+    private void buildCommand(Button button, boolean pressed) {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
+        byte[] test = {127, 7, 127, (127+7+127)&0xF7};
         RoboReq.Builder req = RoboReq.newBuilder();
-        RoboReq.DataReq.Builder dreq = RoboReq.DataReq.newBuilder();
-        dreq.setCmd("Testing");
-        req.setType(RoboReq.Type.RDATA);
-        req.setData(dreq);
+        req.setType(RoboReq.Type.MBASE);
+        RoboReq.MoveBaseCmd.Builder mreq = RoboReq.MoveBaseCmd.newBuilder();
+        mreq.setCmd(ByteString.copyFrom(test));
+        req.setBase(mreq);
         sendCommand(req.build());
+    }
+
+    private void buildCommand(Axis axis, float state) {
+        //TODO: Determine if this needs to be done asynch
+        //TODO: Implement this function
     }
 
     private void sendCommand(RoboReq req) {
@@ -72,8 +69,12 @@ public class RobotController {
         }
     }
 
-    private void updateUI() {
+    private void updateUI(Axis axis, float state) {
         //TODO: Implement this function
+    }
+
+    private void updateUI(Button button, boolean pressed) {
+
     }
 
     private class PollerThread extends Thread {
@@ -100,27 +101,25 @@ public class RobotController {
 
         @Override
         public void connected() {
-            //TODO: Handle what happens when a controller is connected
+            //Handle what happens when a controller is connected
         }
 
         @Override
         public void disconnected() {
-            //TODO: Handle what happens when a controller is disconnected
+            //Handle what happens when a controller is disconnected
             stopPolling();
         }
 
         @Override
         public void buttonChanged(Button button, boolean pressed) {
-            //TODO: Handle what happens when a button is changed
-            buildCommand();
-            updateUI();
+            buildCommand(button, pressed);
+            updateUI(button, pressed);
         }
 
         @Override
         public void axisChanged(Axis axis, float state) {
-            //TODO: Handle what happens when a axis is changed
-            buildCommand();
-            updateUI();
+            buildCommand(axis, state);
+            updateUI(axis, state);
         }
     }
 }
