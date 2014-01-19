@@ -4,91 +4,87 @@
  * and open the template in the editor.
  */
 package swordfish.views.live_streamer;
-
-import com.sun.jna.Native;
-import com.sun.jna.NativeLibrary;
-import java.awt.BorderLayout;
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Window;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JWindow;
-import uk.co.caprica.vlcj.binding.LibVlc;
-import uk.co.caprica.vlcj.player.MediaPlayerFactory;
-import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+/*
+ import com.sun.jna.Native;
+ import com.sun.jna.NativeLibrary;
+ import java.awt.BorderLayout;
+ import java.awt.Canvas;
+ import java.awt.Color;
+ import java.awt.Window;
+ import javax.swing.JButton;
+ import javax.swing.JPanel;
+ import javax.swing.JWindow;
+ //import uk.co.caprica.vlcj.binding.LibVlc;
+ //import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+ //import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+ //import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+ */
 
 /**
  *
  * @author jrob
+ *//*
+ public class MyMediaPlayer {
+
+ //    JFrame frame = new JFrame("");
+ JPanel p;
+ //    MediaPlayerFactory mediaPlayerFactory;
+ //    EmbeddedMediaPlayer mediaPlayer;
+ String icon_path = System.getProperty("user.dir") + "/resources/";
+ //
+ //    MyMediaPlayer() {
+ //        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
+ //        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+ //
+ //        mediaPlayerFactory = new MediaPlayerFactory();
+ //
+ //        Canvas c = new Canvas();
+ //        c.setBackground(Color.black);
+ //        p = new JPanel();
+ //        p.setLayout(new BorderLayout());
+ //        p.add(c, BorderLayout.CENTER);
+ //        frame.add(p, BorderLayout.CENTER);
+ //
+ //        mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
+ //        mediaPlayer.setVideoSurface(mediaPlayerFactory.newVideoSurface(c));
+ //        frame.setLocation(100, 100);
+ //        frame.setSize(1280, 720);
+ //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ //        frame.setVisible(true);
+
+ //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+ //    }
+ //
+ //    public JPanel getF() {
+ //        return p;
+ //    }
+
+ public void playz(String vpath) {
+
+
+ //        boolean ttt = mediaPlayer.playMedia(vpath);
+ //
+ //        mediaPlayer.setAdjustVideo(true);
+ //
+
+ //        mediaPlayer.setBrightness(2.0f);
+
+ }
+
+ boolean isPlaying() {
+ return mediaPlayer.isPlaying();
+
+ }
+
+ public long getLength() {
+ return mediaPlayer.getLength();
+ }
+
+ public long getTime() {
+ return mediaPlayer.getTime();
+ }
  */
-public class MyMediaPlayer {
-
-//    JFrame frame = new JFrame("");
-    JPanel p;
-    MediaPlayerFactory mediaPlayerFactory;
-    EmbeddedMediaPlayer mediaPlayer;
-    String icon_path = System.getProperty("user.dir") + "/resources/";
-
-    MyMediaPlayer() {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
-        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-
-        mediaPlayerFactory = new MediaPlayerFactory();
-
-        Canvas c = new Canvas();
-        c.setBackground(Color.black);
-        p = new JPanel();
-        p.setLayout(new BorderLayout());
-        p.add(c, BorderLayout.CENTER);
-//        frame.add(p, BorderLayout.CENTER);
-
-        mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
-        mediaPlayer.setVideoSurface(mediaPlayerFactory.newVideoSurface(c));
-//        frame.setLocation(100, 100);
-//        frame.setSize(1280, 720);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setVisible(true);
-
-        //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public JPanel getF() {
-        return p;
-    }
-
-    public void playz(String vpath) {
-
-//        mediaPlayer.p
-        boolean ttt = mediaPlayer.playMedia(vpath);
-
-        mediaPlayer.setAdjustVideo(true);
-
-//        System.out.print((mediaPlayer.isAdjustVideo()));
-        mediaPlayer.setBrightness(2.0f);
-
-        /* while (mediaPlayer.getBrightness() >
-         0.0f) {
-         mediaPlayer.setBrightness(mediaPlayer.getBrightness() - 0.02f);
-         System.out.println(mediaPlayer.getBrightness());
-         }*/
-    }
-
-    public boolean isPlaying() {
-        return mediaPlayer.isPlaying();
-
-    }
-
-    public long getLength() {
-        return mediaPlayer.getLength();
-    }
-
-    public long getTime() {
-        return mediaPlayer.getTime();
-    }
-
-    public void playz() {
+ /*   public void playz() {
 //        XBox360_DirectionDisplay dd = new XBox360_DirectionDisplay();
 
 //        dd.setVisible(true);//
@@ -136,3 +132,4 @@ public class MyMediaPlayer {
         mediaPlayer.setTitle((int) (mediaPlayer.getRate()));
     }
 }
+*/

@@ -45,10 +45,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import uk.co.caprica.vlcj.binding.LibVlc;
-import uk.co.caprica.vlcj.player.MediaPlayerFactory;
-import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+//import uk.co.caprica.vlcj.binding.LibVlc;
+//import uk.co.caprica.vlcj.player.MediaPlayerFactory;
+//import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+//import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
@@ -75,7 +75,6 @@ public class InspectorRobot extends JFrame
     private JPanel p_directionals;
     private boolean do_debug = true;
     MediaPlayerHandle media_pan;
-
     String icon_path = System.getProperty("user.dir") + "/resources/";
 
 //    Player pp;
@@ -266,81 +265,77 @@ public class InspectorRobot extends JFrame
         pan_image_file_buttonsLayout.setHorizontalGroup(
                 pan_image_file_buttonsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_image_file_buttonsLayout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(b_open_image)
-                        .addGap(18, 18, 18)
-                        .addComponent(b_save_image)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(b_close_image)
-                        .addGap(12, 12, 12))
-        );
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(b_open_image)
+                .addGap(18, 18, 18)
+                .addComponent(b_save_image)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(b_close_image)
+                .addGap(12, 12, 12)));
 
         pan_image_file_buttonsLayout.linkSize(SwingConstants.HORIZONTAL, new Component[]{b_open_image, b_save_image, b_close_image});
 
         pan_image_file_buttonsLayout.setVerticalGroup(
                 pan_image_file_buttonsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_image_file_buttonsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pan_image_file_buttonsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(b_open_image)
-                                .addComponent(b_save_image)
-                                .addComponent(b_close_image))
-                        .addContainerGap())
-        );
+                .addContainerGap()
+                .addGroup(pan_image_file_buttonsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(b_open_image)
+                .addComponent(b_save_image)
+                .addComponent(b_close_image))
+                .addContainerGap()));
 
         GroupLayout pan_vision_utilsLayout = new GroupLayout(pan_vision_utils);
         pan_vision_utils.setLayout(pan_vision_utilsLayout);
         pan_vision_utilsLayout.setHorizontalGroup(
                 pan_vision_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_vision_utilsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pan_vision_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(pan_vision_utilsLayout.createSequentialGroup()
-                                        .addGroup(pan_vision_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addComponent(cb_object_aware, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(b_look_around, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(b_inspect_ceiling, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(b_scan_hanger, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(pan_vision_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addGroup(pan_vision_utilsLayout.createSequentialGroup()
-                                                        .addPreferredGap(ComponentPlacement.UNRELATED)
-                                                        .addComponent(l_capture_moment)
-                                                        .addContainerGap(12, Short.MAX_VALUE))
-                                                .addGroup(GroupLayout.Alignment.TRAILING, pan_vision_utilsLayout.createSequentialGroup()
-                                                        .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(b_snap_image)
-                                                        .addGap(25, 25, 25))))
-                                .addGroup(pan_vision_utilsLayout.createSequentialGroup()
-                                        .addComponent(pan_image_file_buttons, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addContainerGap()
+                .addGroup(pan_vision_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_vision_utilsLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(pb_load_image, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-        );
+                .addGroup(pan_vision_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(cb_object_aware, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(b_look_around, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(b_inspect_ceiling, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(b_scan_hanger, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pan_vision_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(pan_vision_utilsLayout.createSequentialGroup()
+                .addPreferredGap(ComponentPlacement.UNRELATED)
+                .addComponent(l_capture_moment)
+                .addContainerGap(12, Short.MAX_VALUE))
+                .addGroup(GroupLayout.Alignment.TRAILING, pan_vision_utilsLayout.createSequentialGroup()
+                .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(b_snap_image)
+                .addGap(25, 25, 25))))
+                .addGroup(pan_vision_utilsLayout.createSequentialGroup()
+                .addComponent(pan_image_file_buttons, GroupLayout.PREFERRED_SIZE, 264, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))))
+                .addGroup(pan_vision_utilsLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(pb_load_image, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)));
         pan_vision_utilsLayout.setVerticalGroup(
                 pan_vision_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_vision_utilsLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(pan_vision_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(pan_vision_utilsLayout.createSequentialGroup()
-                                        .addComponent(b_snap_image)
-                                        .addPreferredGap(ComponentPlacement.RELATED)
-                                        .addComponent(l_capture_moment))
-                                .addGroup(pan_vision_utilsLayout.createSequentialGroup()
-                                        .addComponent(b_scan_hanger)
-                                        .addPreferredGap(ComponentPlacement.RELATED)
-                                        .addComponent(b_inspect_ceiling)
-                                        .addPreferredGap(ComponentPlacement.RELATED)
-                                        .addComponent(b_look_around)
-                                        .addGap(7, 7, 7)
-                                        .addComponent(cb_object_aware)))
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(pan_image_file_buttons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(pb_load_image, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(21, Short.MAX_VALUE))
-        );
+                .addGap(12, 12, 12)
+                .addGroup(pan_vision_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(pan_vision_utilsLayout.createSequentialGroup()
+                .addComponent(b_snap_image)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(l_capture_moment))
+                .addGroup(pan_vision_utilsLayout.createSequentialGroup()
+                .addComponent(b_scan_hanger)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(b_inspect_ceiling)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(b_look_around)
+                .addGap(7, 7, 7)
+                .addComponent(cb_object_aware)))
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(pan_image_file_buttons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(pb_load_image, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE)));
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Panel Builds">
@@ -368,26 +363,24 @@ public class InspectorRobot extends JFrame
         jPanel3Layout.setHorizontalGroup(
                 jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(b_load)
-                        .addPreferredGap(ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                        .addComponent(b_archive)
-                        .addGap(119, 119, 119)
-                        .addComponent(b_set_flag)
-                        .addContainerGap())
-        );
+                .addContainerGap()
+                .addComponent(b_load)
+                .addPreferredGap(ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addComponent(b_archive)
+                .addGap(119, 119, 119)
+                .addComponent(b_set_flag)
+                .addContainerGap()));
 
         jPanel3Layout.linkSize(SwingConstants.HORIZONTAL, new Component[]{b_load, b_archive, b_set_flag});
 
         jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(b_set_flag)
-                                .addComponent(b_load)
-                                .addComponent(b_archive)))
-        );
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(b_set_flag)
+                .addComponent(b_load)
+                .addComponent(b_archive))));
 
         // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="Bottom Pans">
@@ -400,67 +393,61 @@ public class InspectorRobot extends JFrame
         pan_logo_iconsLayout.setHorizontalGroup(
                 pan_logo_iconsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_logo_iconsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(l_logo)
-                        .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(20, 20, 20))
-        );
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(l_logo)
+                .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(20, 20, 20)));
         pan_logo_iconsLayout.setVerticalGroup(
                 pan_logo_iconsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_logo_iconsLayout.createSequentialGroup()
-                        .addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(101, 101, 101))
+                .addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(101, 101, 101))
                 .addGroup(pan_logo_iconsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pan_logo_iconsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2)
-                                .addComponent(l_logo))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addContainerGap()
+                .addGroup(pan_logo_iconsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                .addComponent(jLabel2)
+                .addComponent(l_logo))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         GroupLayout pan_3rd_level_southLayout = new GroupLayout(pan_3rd_level_south);
         pan_3rd_level_south.setLayout(pan_3rd_level_southLayout);
         pan_3rd_level_southLayout.setHorizontalGroup(
                 pan_3rd_level_southLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_3rd_level_southLayout.createSequentialGroup()
-                        .addGroup(pan_3rd_level_southLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(pan_logo_icons, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(pan_3rd_level_southLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(pan_vid_controls, GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)))
-                        .addContainerGap())
-        );
+                .addGroup(pan_3rd_level_southLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(pan_logo_icons, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pan_3rd_level_southLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pan_vid_controls, GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)))
+                .addContainerGap()));
         pan_3rd_level_southLayout.setVerticalGroup(
                 pan_3rd_level_southLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_3rd_level_southLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pan_vid_controls, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(pan_logo_icons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        );
+                .addContainerGap()
+                .addComponent(pan_vid_controls, GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(pan_logo_icons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)));
 
         GroupLayout pan_2nd_level_swLayout = new GroupLayout(pan_2nd_level_sw);
         pan_2nd_level_sw.setLayout(pan_2nd_level_swLayout);
         pan_2nd_level_swLayout.setHorizontalGroup(
                 pan_2nd_level_swLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_2nd_level_swLayout.createSequentialGroup()
-                        .addComponent(pan_vision_utils, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.UNRELATED)
-                        .addComponent(pan_3rd_level_south, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addComponent(pan_vision_utils, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.UNRELATED)
+                .addComponent(pan_3rd_level_south, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         pan_2nd_level_swLayout.setVerticalGroup(
                 pan_2nd_level_swLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(GroupLayout.Alignment.TRAILING, pan_2nd_level_swLayout.createSequentialGroup()
-                        .addGap(0, 6, Short.MAX_VALUE)
-                        .addGroup(pan_2nd_level_swLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(pan_vision_utils, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pan_3rd_level_south, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-        );
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addGroup(pan_2nd_level_swLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                .addComponent(pan_vision_utils, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pan_3rd_level_south, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()));
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Media Streaming">
@@ -495,7 +482,7 @@ public class InspectorRobot extends JFrame
         b_vid_play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 //                b_vid_playActionPerformed(evt);
-                media_pan.playz();
+//                media_pan.playz();
             }
         });
         tb_vid_controls.add(b_vid_play);
@@ -509,7 +496,7 @@ public class InspectorRobot extends JFrame
         b_vid_stop.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         b_vid_stop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                media_pan.stop();
+//                media_pan.stop();
 //                b_vid_stopActionPerformed(evt);
             }
         });
@@ -525,9 +512,8 @@ public class InspectorRobot extends JFrame
         b_vid_pause.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
 //                b_vid_pauseActionPerformed(evt);
-                media_pan.pause();
+//                media_pan.pause();
             }
-
         });
         tb_vid_controls.add(b_vid_pause);
 
@@ -541,7 +527,7 @@ public class InspectorRobot extends JFrame
         b_vid_ff.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         b_vid_ff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                media_pan.ff(b_vid_ff);
+//                media_pan.ff(b_vid_ff);
 //                b_vid_ffActionPerformed(evt);
             }
         });
@@ -556,7 +542,7 @@ public class InspectorRobot extends JFrame
         b_vid_mute.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         b_vid_mute.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                media_pan.mute();
+//                media_pan.mute();
 //                b_vid_muteActionPerformed(evt);
             }
         });
@@ -570,24 +556,22 @@ public class InspectorRobot extends JFrame
                 pan_vid_controlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pan_vid_controlsLayout.createSequentialGroup()
-                        .addGroup(pan_vid_controlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addGroup(pan_vid_controlsLayout.createSequentialGroup()
-                                        .addGap(111, 111, 111)
-                                        .addComponent(tb_vid_controls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addGroup(pan_vid_controlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel5)
+                .addGroup(pan_vid_controlsLayout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addComponent(tb_vid_controls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         pan_vid_controlsLayout.setVerticalGroup(
                 pan_vid_controlsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(pan_vid_controlsLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tb_vid_controls, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
-        );
+                .addGap(0, 0, 0)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tb_vid_controls, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)));
 
         /*
          l_vid_con_icons.setIcon(new ImageIcon(icon_path + "video_image_control_icons/video_control_icons.jpg"));
@@ -632,47 +616,43 @@ public class InspectorRobot extends JFrame
         p_media_player.setLayout(p_media_playerLayout);
         p_media_playerLayout.setHorizontalGroup(
                 p_media_playerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGap(0, 0, Short.MAX_VALUE)
-        );
+                .addGap(0, 0, Short.MAX_VALUE));
         p_media_playerLayout.setVerticalGroup(
                 p_media_playerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGap(0, 464, Short.MAX_VALUE)
-        );
+                .addGap(0, 464, Short.MAX_VALUE));
 
         GroupLayout pan_video_streamLayout = new GroupLayout(pan_video_stream);
         pan_video_stream.setLayout(pan_video_streamLayout);
         pan_video_streamLayout.setHorizontalGroup(
                 pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_video_streamLayout.createSequentialGroup()
-                        .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                                        .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                                                        .addGap(177, 177, 177)
-                                                        .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                                                        .addGap(166, 166, 166)
-                                                        .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                                                        .addGap(152, 152, 152)
-                                                        .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 356, Short.MAX_VALUE))
-                                .addComponent(p_media_player, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-        );
+                .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(pan_video_streamLayout.createSequentialGroup()
+                .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(pan_video_streamLayout.createSequentialGroup()
+                .addGap(177, 177, 177)
+                .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(pan_video_streamLayout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(pan_video_streamLayout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 356, Short.MAX_VALUE))
+                .addComponent(p_media_player, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()));
         pan_video_streamLayout.setVerticalGroup(
                 pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_video_streamLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(p_media_player, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addGap(0, 0, 0)
+                .addComponent(p_media_player, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         jPanel1.setBorder(BorderFactory.createTitledBorder(null, "RoboTracker", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Arial", 1, 14)));
         l_plenum_map.setIcon(new ImageIcon(icon_path + "test_images_n_template_im/tunnel_map-8.jpg"));
@@ -682,22 +662,20 @@ public class InspectorRobot extends JFrame
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(14, 14, 14))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(14, 14, 14))
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(l_plenum_map)
-                        .addContainerGap(24, Short.MAX_VALUE))
-        );
+                .addContainerGap()
+                .addComponent(l_plenum_map)
+                .addContainerGap(24, Short.MAX_VALUE)));
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(l_plenum_map, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1))
-        );
+                .addContainerGap()
+                .addComponent(l_plenum_map, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)));
 
         // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="System Status">
@@ -733,38 +711,36 @@ public class InspectorRobot extends JFrame
         pan_data_loggingLayout.setHorizontalGroup(
                 pan_data_loggingLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_data_loggingLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pan_data_loggingLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(cb_do_log)
-                                .addGroup(pan_data_loggingLayout.createSequentialGroup()
-                                        .addComponent(l_log_file)
-                                        .addPreferredGap(ComponentPlacement.RELATED)
-                                        .addComponent(tf_log_dump_file, GroupLayout.PREFERRED_SIZE, 193, GroupLayout.PREFERRED_SIZE))
-                                .addGroup(pan_data_loggingLayout.createSequentialGroup()
-                                        .addComponent(sb_logging, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(ComponentPlacement.UNRELATED)
-                                        .addComponent(l_logging_per))
-                                .addComponent(l_data_logging))
-                        .addContainerGap())
-        );
+                .addContainerGap()
+                .addGroup(pan_data_loggingLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(cb_do_log)
+                .addGroup(pan_data_loggingLayout.createSequentialGroup()
+                .addComponent(l_log_file)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(tf_log_dump_file, GroupLayout.PREFERRED_SIZE, 193, GroupLayout.PREFERRED_SIZE))
+                .addGroup(pan_data_loggingLayout.createSequentialGroup()
+                .addComponent(sb_logging, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.UNRELATED)
+                .addComponent(l_logging_per))
+                .addComponent(l_data_logging))
+                .addContainerGap()));
         pan_data_loggingLayout.setVerticalGroup(
                 pan_data_loggingLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_data_loggingLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(l_data_logging)
-                        .addGap(1, 1, 1)
-                        .addGroup(pan_data_loggingLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(pan_data_loggingLayout.createSequentialGroup()
-                                        .addComponent(sb_logging, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(ComponentPlacement.RELATED)
-                                        .addGroup(pan_data_loggingLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(tf_log_dump_file, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(l_log_file))
-                                        .addPreferredGap(ComponentPlacement.RELATED)
-                                        .addComponent(cb_do_log))
-                                .addComponent(l_logging_per))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addContainerGap()
+                .addComponent(l_data_logging)
+                .addGap(1, 1, 1)
+                .addGroup(pan_data_loggingLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(pan_data_loggingLayout.createSequentialGroup()
+                .addComponent(sb_logging, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(pan_data_loggingLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(tf_log_dump_file, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(l_log_file))
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(cb_do_log))
+                .addComponent(l_logging_per))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         sb_camera_signal.setValue(100);
 
         jLabel8.setFont(new Font("Lucida Grande", 3, 13));
@@ -784,39 +760,36 @@ public class InspectorRobot extends JFrame
         pan_middle_sys_utilsLayout.setHorizontalGroup(
                 pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_middle_sys_utilsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(pan_middle_sys_utilsLayout.createSequentialGroup()
-                                        .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(sb_camera_signal, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                                                .addComponent(sb_video_signal, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(10, 10, 10)
-                                        .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addComponent(l_vid_sig_per)
-                                                .addComponent(l_cam_sig_per)))
-                                .addComponent(jLabel8)
-                                .addComponent(l_vid_signal))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addContainerGap()
+                .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(pan_middle_sys_utilsLayout.createSequentialGroup()
+                .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                .addComponent(sb_camera_signal, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                .addComponent(sb_video_signal, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(l_vid_sig_per)
+                .addComponent(l_cam_sig_per)))
+                .addComponent(jLabel8)
+                .addComponent(l_vid_signal))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         pan_middle_sys_utilsLayout.setVerticalGroup(
                 pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_middle_sys_utilsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(l_vid_signal)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(sb_video_signal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(l_vid_sig_per))
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addGap(3, 3, 3)
-                        .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(sb_camera_signal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(l_cam_sig_per))
-                        //                        .addContainerGap()
-                        .addGap(0, 0, 0)
-                )
-        );
+                .addContainerGap()
+                .addComponent(l_vid_signal)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                .addComponent(sb_video_signal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(l_vid_sig_per))
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addGap(3, 3, 3)
+                .addGroup(pan_middle_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(sb_camera_signal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(l_cam_sig_per))
+                //                        .addContainerGap()
+                .addGap(0, 0, 0)));
 
         sb_battery.setValue(86);
         sb_battery.setBorderPainted(false);
@@ -875,27 +848,25 @@ public class InspectorRobot extends JFrame
         pan_com_buttonsLayout.setHorizontalGroup(
                 pan_com_buttonsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_com_buttonsLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(b_connect)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(b_reset)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(b_close)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addGap(0, 0, 0)
+                .addComponent(b_connect)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(b_reset)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(b_close)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pan_com_buttonsLayout.linkSize(SwingConstants.HORIZONTAL, new Component[]{b_connect, b_reset, b_close});
 
         pan_com_buttonsLayout.setVerticalGroup(
                 pan_com_buttonsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_com_buttonsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pan_com_buttonsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(b_reset)
-                                .addComponent(b_close)
-                                .addComponent(b_connect))
-                        .addContainerGap())
-        );
+                .addContainerGap()
+                .addGroup(pan_com_buttonsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(b_reset)
+                .addComponent(b_close)
+                .addComponent(b_connect))
+                .addContainerGap()));
 
         pan_com_buttonsLayout.linkSize(SwingConstants.VERTICAL, new Component[]{b_connect, b_reset, b_close});
 
@@ -903,15 +874,13 @@ public class InspectorRobot extends JFrame
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
                 jPanel14Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(pan_com_buttons, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                .addComponent(pan_com_buttons, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         jPanel14Layout.setVerticalGroup(
                 jPanel14Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pan_com_buttons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addContainerGap()
+                .addComponent(pan_com_buttons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Higher Level Panels">
@@ -920,128 +889,122 @@ public class InspectorRobot extends JFrame
         pan_top_sys_utilsLayout.setHorizontalGroup(
                 pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
-                        .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(GroupLayout.Alignment.TRAILING, pan_top_sys_utilsLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addComponent(l_robo_connect)
-                                                .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
-                                                        .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                                .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
-                                                                        .addGap(31, 31, 31)
-                                                                        .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                                                .addComponent(l_src_ip)
-                                                                                .addComponent(l_r_id)))
-                                                                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                                        .addComponent(l_host_ip)
-                                                                        .addComponent(l_dest_ip)))
-                                                        .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                                .addComponent(combox_dest_ip, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(tf_ip, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(combox_src_ip, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(tf_r_id, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)))
-                                                .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
-                                                        .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                                .addComponent(l_battery, GroupLayout.Alignment.LEADING)
-                                                                .addComponent(sb_robo_connection, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                                                                .addComponent(sb_battery, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                        .addGap(10, 10, 10)
-                                                        .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                                .addComponent(l_battery_per)
-                                                                .addComponent(l_robo_conn_per)))))
-                                .addComponent(jPanel14, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-        );
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(GroupLayout.Alignment.TRAILING, pan_top_sys_utilsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(l_robo_connect)
+                .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                .addComponent(l_src_ip)
+                .addComponent(l_r_id)))
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                .addComponent(l_host_ip)
+                .addComponent(l_dest_ip)))
+                .addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(combox_dest_ip, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_ip, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+                .addComponent(combox_src_ip, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_r_id, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)))
+                .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                .addComponent(l_battery, GroupLayout.Alignment.LEADING)
+                .addComponent(sb_robo_connection, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                .addComponent(sb_battery, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(l_battery_per)
+                .addComponent(l_robo_conn_per)))))
+                .addComponent(jPanel14, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()));
         pan_top_sys_utilsLayout.setVerticalGroup(
                 pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(l_battery)
-                        .addGap(0, 0, 0)
-                        .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(sb_battery, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(l_battery_per))
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(l_robo_connect)
-                        .addGap(0, 0, 0)
-                        .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(sb_robo_connection, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(l_robo_conn_per))
-                        .addPreferredGap(ComponentPlacement.UNRELATED)
-                        .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
-                                        .addComponent(l_r_id)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(l_src_ip)
-                                        .addGap(11, 11, 11)
-                                        .addComponent(l_dest_ip)
-                                        .addGap(11, 11, 11)
-                                        .addComponent(l_host_ip)
-                                        .addGap(0, 6, Short.MAX_VALUE)
-                                        .addComponent(jPanel14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
-                                        .addComponent(tf_r_id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(combox_src_ip, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(combox_dest_ip, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(tf_ip, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(0, 0, 0))
-        );
+                .addContainerGap()
+                .addComponent(l_battery)
+                .addGap(0, 0, 0)
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(sb_battery, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(l_battery_per))
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(l_robo_connect)
+                .addGap(0, 0, 0)
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(sb_robo_connection, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(l_robo_conn_per))
+                .addPreferredGap(ComponentPlacement.UNRELATED)
+                .addGroup(pan_top_sys_utilsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
+                .addComponent(l_r_id)
+                .addGap(12, 12, 12)
+                .addComponent(l_src_ip)
+                .addGap(11, 11, 11)
+                .addComponent(l_dest_ip)
+                .addGap(11, 11, 11)
+                .addComponent(l_host_ip)
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jPanel14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addGroup(pan_top_sys_utilsLayout.createSequentialGroup()
+                .addComponent(tf_r_id, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(combox_src_ip, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(combox_dest_ip, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(tf_ip, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(0, 0, 0)));
 
         GroupLayout pan_sys_statusLayout = new GroupLayout(pan_sys_status);
         pan_sys_status.setLayout(pan_sys_statusLayout);
         pan_sys_statusLayout.setHorizontalGroup(
                 pan_sys_statusLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_sys_statusLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(pan_sys_statusLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(pan_sys_statusLayout.createSequentialGroup()
-                                        .addComponent(pan_top_sys_utils, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(GroupLayout.Alignment.TRAILING, pan_sys_statusLayout.createSequentialGroup()
-                                        .addGroup(pan_sys_statusLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addComponent(pan_data_logging, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(pan_middle_sys_utils, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(3, 3, 3)
-                                        .addGap(0, 0, 0)
-                                )))
-        );
+                .addGap(3, 3, 3)
+                .addGroup(pan_sys_statusLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(pan_sys_statusLayout.createSequentialGroup()
+                .addComponent(pan_top_sys_utils, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(GroupLayout.Alignment.TRAILING, pan_sys_statusLayout.createSequentialGroup()
+                .addGroup(pan_sys_statusLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(pan_data_logging, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pan_middle_sys_utils, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(3, 3, 3)
+                .addGap(0, 0, 0)))));
         pan_sys_statusLayout.setVerticalGroup(
                 pan_sys_statusLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_sys_statusLayout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(pan_top_sys_utils, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(pan_middle_sys_utils, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(pan_data_logging, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                .addGap(0, 0, 0)
+                .addComponent(pan_top_sys_utils, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(pan_middle_sys_utils, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(pan_data_logging, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         GroupLayout pan_2nd_level_topLayout = new GroupLayout(pan_2nd_level_top);
         pan_2nd_level_top.setLayout(pan_2nd_level_topLayout);
         pan_2nd_level_topLayout.setHorizontalGroup(
                 pan_2nd_level_topLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_2nd_level_topLayout.createSequentialGroup()
-                        .addComponent(pan_sys_status, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(pan_video_stream, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        );
+                .addComponent(pan_sys_status, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(pan_video_stream, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)));
         pan_2nd_level_topLayout.setVerticalGroup(
                 pan_2nd_level_topLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_2nd_level_topLayout.createSequentialGroup()
-                        .addGroup(pan_2nd_level_topLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(pan_sys_status, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pan_video_stream, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, 0))//Short.MAX_VALUE))
-        );
+                .addGroup(pan_2nd_level_topLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                .addComponent(pan_sys_status, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pan_video_stream, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))//Short.MAX_VALUE))
+                );
         // </editor-fold>
 
         // <editor-fold defaultstate="collapsed" desc="Data Zone">
@@ -1054,42 +1017,38 @@ public class InspectorRobot extends JFrame
         pan_dDisplay.setLayout(pan_dDisplayLayout);
         pan_dDisplayLayout.setHorizontalGroup(
                 pan_dDisplayLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGap(0, 226, Short.MAX_VALUE)
-        );
+                .addGap(0, 226, Short.MAX_VALUE));
         pan_dDisplayLayout.setVerticalGroup(
                 pan_dDisplayLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGap(0, 0, 0)
-        //                .addGap(0, 0, Short.MAX_VALUE)
-        );
+                .addGap(0, 0, 0) //                .addGap(0, 0, Short.MAX_VALUE)
+                );
 
         GroupLayout pan_top_levelLayout = new GroupLayout(pan_top_level);
         pan_top_level.setLayout(pan_top_levelLayout);
         pan_top_levelLayout.setHorizontalGroup(
                 pan_top_levelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_top_levelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pan_top_levelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(pan_top_levelLayout.createSequentialGroup()
-                                        .addComponent(pan_2nd_level_top, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(pan_top_levelLayout.createSequentialGroup()
-                                        .addComponent(pan_2nd_level_sw, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(pan_dDisplay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-        );
+                .addContainerGap()
+                .addGroup(pan_top_levelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(pan_top_levelLayout.createSequentialGroup()
+                .addComponent(pan_2nd_level_top, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(pan_top_levelLayout.createSequentialGroup()
+                .addComponent(pan_2nd_level_sw, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(pan_dDisplay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()));
         pan_top_levelLayout.setVerticalGroup(
                 pan_top_levelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(pan_top_levelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pan_2nd_level_top, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(ComponentPlacement.RELATED)
-                        .addGroup(pan_top_levelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(pan_2nd_level_sw, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pan_dDisplay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-        //                        .addGap(0, 0, 0))
-        );
+                .addContainerGap()
+                .addComponent(pan_2nd_level_top, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED)
+                .addGroup(pan_top_levelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(pan_2nd_level_sw, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(pan_dDisplay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()) //                        .addGap(0, 0, 0))
+                );
 //        pan_dDisplay.setPreferredSize(new Dimension(jPanel1.getWidth(), pan_dDisplay.getHeight()));
 
         // </editor-fold>
@@ -1147,12 +1106,10 @@ public class InspectorRobot extends JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(pan_top_level, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                .addComponent(pan_top_level, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addComponent(pan_top_level, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                .addComponent(pan_top_level, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         // </editor-fold>
 
         addKeyListener(IJ.getInstance());
@@ -1182,7 +1139,7 @@ public class InspectorRobot extends JFrame
             }
             return;
         }
-        media_pan.playz(dir + "/" + fname);
+//        media_pan.playz(dir + "/" + fname);
 
     }
 
@@ -1292,7 +1249,7 @@ public class InspectorRobot extends JFrame
             }
             return;
         }
-        media_pan.playz(dir + "/" + fname);
+//        media_pan.playz(dir + "/" + fname);
 
     }
 
@@ -1319,12 +1276,12 @@ public class InspectorRobot extends JFrame
     }
 
     private void b_snap_imageActionPerformed(ActionEvent evt) {
-        boolean tmp = media_pan.save_snap_shot();
-        if (tmp) {
-            System.out.println("Yupp, Snap!\n\n");
-        } else {
-            System.out.println("No Snap!\n\n");
-        }
+        /*    boolean tmp = media_pan.save_snap_shot();
+         if (tmp) {
+         System.out.println("Yupp, Snap!\n\n");
+         } else {
+         System.out.println("No Snap!\n\n");
+         }*/
     }
 
     @Override
@@ -1352,30 +1309,25 @@ public class InspectorRobot extends JFrame
             System.out.println("\n");
             System.out.println(Integer.toString(e.getX()));
             System.out.println(", " + Integer.toString(e.getY()) + "\n");
+            /*
+             int point = e.getX();
+             String vid_command = "";
+             if (point >= 5 && point <= 32) {
+             media_pan.playz();
+             } else if (point >= 42 && point < 70) {
+             media_pan.pause();
 
-            int point = e.getX();
-            String vid_command = "";
-            if (point >= 5 && point <= 32) {
-                media_pan.playz();
-            } else if (point >= 42 && point < 70) {
-                media_pan.pause();
+             } else if (point >= 80 && point <= 105) {
+             media_pan.stop();
 
-            } else if (point >= 80 && point <= 105) {
-                media_pan.stop();
-
-            } else if (point >= 114 && point <= 145) {
-
-            } else if (point >= 152 && point < 180) {
-
-            } else if (point >= 186 && point < 218) {
-
-            } else if (point >= 222 && point <= 252) {
-
-            } else if (point >= 260 && point <= 288) {
-
-            } else if (point >= 298 && point <= 325) {
-                media_pan.mute();
-            }
+             } else if (point >= 114 && point <= 145) {
+             } else if (point >= 152 && point < 180) {
+             } else if (point >= 186 && point < 218) {
+             } else if (point >= 222 && point <= 252) {
+             } else if (point >= 260 && point <= 288) {
+             } else if (point >= 298 && point <= 325) {
+             media_pan.mute();
+             }*/
 
         }
 
@@ -1391,8 +1343,7 @@ public class InspectorRobot extends JFrame
      * arrow icon will be enabled, i.e., will display its true color.
      */
     @Override
-    public void keyPressed(KeyEvent e
-    ) {
+    public void keyPressed(KeyEvent e) {
 
         if (do_debug) {
             System.out.println("Key Press: " + e.toString());
@@ -1419,8 +1370,7 @@ public class InspectorRobot extends JFrame
      * was pressed.
      */
     @Override
-    public void keyReleased(KeyEvent e
-    ) {
+    public void keyReleased(KeyEvent e) {
         if (do_debug) {
             System.out.println("Key Released: " + e.toString());
         }
@@ -1468,7 +1418,6 @@ public class InspectorRobot extends JFrame
     @Override
     public void windowDeactivated(WindowEvent e) {
     }
-
 //    public void windowGainedFocus(WindowEvent e) {    }
 //    public void windowLostFocus(WindowEvent e) {
 //    }
@@ -1531,14 +1480,12 @@ public class InspectorRobot extends JFrame
     JButton b_open_image;
     JButton b_save_image;
     JButton b_close_image;
-
     JButton b_vid_ff;
     JToggleButton b_vid_mute;
     JButton b_vid_pause;
     JButton b_vid_play;
     JButton b_vid_rw;
     JButton b_vid_stop;
-
     JCheckBox cb_object_aware;
     JCheckBox cb_do_log;
     JComboBox combox_src_ip;
@@ -1605,7 +1552,6 @@ public class InspectorRobot extends JFrame
     JPanel pan_vid_controls;
     JPanel pan_video_stream;
     JPanel p_media_player;
-
     JToolBar tb_vid_controls;
 
     // </editor-fold>
@@ -1619,22 +1565,21 @@ public class InspectorRobot extends JFrame
     private void println(String property) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }
 
 class MediaPlayerHandle {
 
 //    JFrame frame = new JFrame("");
     JPanel p;
-    MediaPlayerFactory mediaPlayerFactory;
-    EmbeddedMediaPlayer mediaPlayer;
+//    MediaPlayerFactory mediaPlayerFactory;
+//    EmbeddedMediaPlayer mediaPlayer;
     String icon_path = System.getProperty("user.dir") + "/resources/";
 
     MediaPlayerHandle() {
-        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
-        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+//        NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "/Applications/VLC.app/Contents/MacOS/lib/");
+//        Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
 
-        mediaPlayerFactory = new MediaPlayerFactory();
+//        mediaPlayerFactory = new MediaPlayerFactory();
 
         Canvas c = new Canvas();
         c.setBackground(Color.black);
@@ -1643,8 +1588,8 @@ class MediaPlayerHandle {
         p.add(c, BorderLayout.CENTER);
 //        frame.add(p, BorderLayout.CENTER);
 
-        mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
-        mediaPlayer.setVideoSurface(mediaPlayerFactory.newVideoSurface(c));
+//        mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer();
+//        mediaPlayer.setVideoSurface(mediaPlayerFactory.newVideoSurface(c));
 //        frame.setLocation(100, 100);
 //        frame.setSize(1280, 720);
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -1656,58 +1601,54 @@ class MediaPlayerHandle {
     public JPanel getF() {
         return p;
     }
+    /*
+     public void playz(String vpath) {
 
-    public void playz(String vpath) {
+     mediaPlayer.playMedia(vpath);
 
-        mediaPlayer.playMedia(vpath);
+     mediaPlayer.setAdjustVideo(true);
 
-        mediaPlayer.setAdjustVideo(true);
+     //        System.out.print((mediaPlayer.isAdjustVideo()));
+     mediaPlayer.setBrightness(2.0f);
 
-//        System.out.print((mediaPlayer.isAdjustVideo()));
-        mediaPlayer.setBrightness(2.0f);
 
-        /* while (mediaPlayer.getBrightness() >
-         0.0f) {
-         mediaPlayer.setBrightness(mediaPlayer.getBrightness() - 0.02f);
-         System.out.println(mediaPlayer.getBrightness());
-         }*/
-    }
+     }
 
-    public void playz() {
-        mediaPlayer.play();
-    }
+     public void playz() {
+     mediaPlayer.play();
+     }
 
-    public void pause() {
-        mediaPlayer.pause();
-    }
+     public void pause() {
+     mediaPlayer.pause();
+     }
 
-    public void stop() {
-        mediaPlayer.stop();
-    }
+     public void stop() {
+     mediaPlayer.stop();
+     }
 
-    public void mute() {
-        mediaPlayer.mute(!mediaPlayer.isMute());
-//        mediaPlayer .addMediaOptions(strings);
-    }
+     public void mute() {
+     mediaPlayer.mute(!mediaPlayer.isMute());
+     //        mediaPlayer .addMediaOptions(strings);
+     }
 
-    public boolean save_snap_shot() {
-        return mediaPlayer.saveSnapshot();
-    }
+     public boolean save_snap_shot() {
+     return mediaPlayer.saveSnapshot();
+     }
 
-    public void ff(JButton j_in) {
-        float rate = mediaPlayer.getRate();
-        if (rate == 1.0f) {
-            mediaPlayer.setRate(1.5f);
-            j_in.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/ff_icon_1_5x.jpg"));
+     public void ff(JButton j_in) {
+     float rate = mediaPlayer.getRate();
+     if (rate == 1.0f) {
+     mediaPlayer.setRate(1.5f);
+     j_in.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/ff_icon_1_5x.jpg"));
 
-        } else if (rate == 1.5f) {
-            mediaPlayer.setRate(2.0f);
-            j_in.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/ff_icon_2x.jpg"));
-        } else {
-            mediaPlayer.setRate(1.0f);
-            j_in.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/ff_icon.jpg"));
-        }
-        // mediaPlayer.setTime((long) mediaPlayer.getRate());
-        mediaPlayer.setTitle((int) (mediaPlayer.getRate()));
-    }
+     } else if (rate == 1.5f) {
+     mediaPlayer.setRate(2.0f);
+     j_in.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/ff_icon_2x.jpg"));
+     } else {
+     mediaPlayer.setRate(1.0f);
+     j_in.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/ff_icon.jpg"));
+     }
+     // mediaPlayer.setTime((long) mediaPlayer.getRate());
+     mediaPlayer.setTitle((int) (mediaPlayer.getRate()));
+     }*/
 }
