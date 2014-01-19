@@ -63,7 +63,7 @@ MY_CFLAGS =
 MY_LIBS   = -lboost_system -lprotobuf
 
 # The pre-processor options used by the cpp (man cpp for more).
-CPPFLAGS  = -Wall -std=c99 -pedantic
+CPPFLAGS  = -Wall -pedantic
 
 # The options used in linking as well as in any direct use of ld.
 LDFLAGS   =
