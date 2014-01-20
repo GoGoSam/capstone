@@ -20,6 +20,15 @@ using google::protobuf::io::OstreamOutputStream;
 class serial_connection : public boost::enable_shared_from_this<serial_connection>
 {
     public:
+        typedef boost::shared_ptr<serial_connection> pointer;
+
+        static pointer create(boost::asio::io_service& io_service,
+                              const std::string name)
+        {
+            return pointer(new serial_connection(io_service, name));
+        }
+
+    private:
         serial_connection(boost::asio::io_service& io_service,
             const std::string name,
             const unsigned int baud_rate = 19200,
@@ -43,7 +52,6 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
             open();
         }
 
-    private:
         void open()
         {
             if (!serial_port_.is_open())
@@ -111,7 +119,7 @@ class session : public boost::enable_shared_from_this<session>
         typedef boost::shared_ptr<session> pointer;
 
         static pointer create(boost::asio::io_service& io_service,
-                              serial_connection& serial_connection)
+                              serial_connection::pointer serial_connection)
         {
             return pointer(new session(io_service, serial_connection));
         }
@@ -127,7 +135,7 @@ class session : public boost::enable_shared_from_this<session>
         }
 
     private:
-        session(boost::asio::io_service& io_service, serial_connection& serial_connection)
+        session(boost::asio::io_service& io_service, serial_connection::pointer serial_connection)
             : socket_(io_service),
               serial_connection_(serial_connection)
         {
@@ -184,6 +192,7 @@ class session : public boost::enable_shared_from_this<session>
         void process_request(RoboComms::RoboReq req)
         {
             //TODO: Implement
+            std::cout << "HERE" << std::endl;
             std::cout << req.type() << std::endl;
             std::cout << req.base().cmd() << std::endl;
         }
@@ -191,7 +200,7 @@ class session : public boost::enable_shared_from_this<session>
         static const int max_length = 5120;
         char data_[max_length];
         tcp::socket socket_;
-        serial_connection& serial_connection_;
+        serial_connection::pointer serial_connection_;
 };
 
 class server
@@ -200,7 +209,7 @@ class server
         server(boost::asio::io_service& io_service, int port, const char* device)
             : io_service_(io_service),
               acceptor_(io_service, tcp::endpoint(tcp::v4(), port)),
-              serial_connection_(io_service, device)
+              serial_connection_(serial_connection::create(io_service, device))
         {
             listen();
         }
@@ -227,7 +236,7 @@ class server
 
         boost::asio::io_service& io_service_;
         tcp::acceptor acceptor_;
-        serial_connection serial_connection_;
+        serial_connection::pointer serial_connection_;
 };
 
 int main(int argc, const char* argv[])
