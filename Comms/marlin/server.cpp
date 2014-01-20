@@ -28,6 +28,15 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
             return pointer(new serial_connection(io_service, name));
         }
 
+        void write(unsigned char* data, int size)
+        {
+            boost::asio::async_write(serial_port_,
+                    boost::asio::buffer(data, size),
+                    boost::bind(&serial_connection::handle_write, shared_from_this(),
+                        boost::asio::placeholders::error,
+                        boost::asio::placeholders::bytes_transferred));
+        }
+
     private:
         serial_connection(boost::asio::io_service& io_service,
             const std::string name,
@@ -75,7 +84,7 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
 
         void read()
         {
-            //TODO: Should this be async_read_some? Will this ever be called?
+            //TODO: Should this be async_read_some
             boost::asio::async_read(serial_port_,
                     boost::asio::buffer(data_),
                     boost::asio::transfer_at_least(1),
@@ -88,17 +97,12 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
             //TODO: Handle return from read
         }
 
-        void write(unsigned char* data, int size)
-        {
-            boost::asio::async_write(serial_port_,
-                    boost::asio::buffer(data, size),
-                    boost::bind(&serial_connection::handle_write, shared_from_this(),
-                        boost::asio::placeholders::error));
-        }
-
-        void handle_write(const boost::system::error_code& error)
+        void handle_write(const boost::system::error_code& error,
+                          std::size_t bytes)
         {
             //TODO: Handle return from write
+            std::cout << error << std::endl;
+            std::cout << bytes << std::endl;
         }
 
         boost::asio::io_service& io_service_;
@@ -192,9 +196,13 @@ class session : public boost::enable_shared_from_this<session>
         void process_request(RoboComms::RoboReq req)
         {
             //TODO: Implement
-            std::cout << "HERE" << std::endl;
             std::cout << req.type() << std::endl;
-            std::cout << req.base().cmd() << std::endl;
+            unsigned char *test = (unsigned char*) req.base().cmd().c_str();
+            for (int i = 0; i < req.base().cmd().length(); i++) {
+                std::cout << (int)test[i] << " ";
+            }
+            std::cout << std::endl;
+            serial_connection_->write(test, req.base().cmd().length());
         }
 
         static const int max_length = 5120;
