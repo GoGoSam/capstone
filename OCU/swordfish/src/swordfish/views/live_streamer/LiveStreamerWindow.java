@@ -100,39 +100,39 @@ public class LiveStreamerWindow extends JFrame
                 p_media_playerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGap(0, 464, Short.MAX_VALUE));
 
-        GroupLayout pan_video_streamLayout = new GroupLayout(pan_live_streaming);
-        pan_live_streaming.setLayout(pan_video_streamLayout);
-        pan_video_streamLayout.setHorizontalGroup(
-                pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 356, Short.MAX_VALUE))
-                .addComponent(p_media_player, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap()));
-        pan_video_streamLayout.setVerticalGroup(
-                pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(p_media_player, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-//        media_pan = new MyMediaPlayer();
+        /* GroupLayout pan_video_streamLayout = new GroupLayout(pan_live_streaming);
+         pan_live_streaming.setLayout(pan_video_streamLayout);
+         pan_video_streamLayout.setHorizontalGroup(
+         pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+         .addGroup(pan_video_streamLayout.createSequentialGroup()
+         .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+         .addGroup(pan_video_streamLayout.createSequentialGroup()
+         .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+         .addGroup(pan_video_streamLayout.createSequentialGroup()
+         .addGap(177, 177, 177)
+         .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+         .addGroup(pan_video_streamLayout.createSequentialGroup()
+         .addGap(166, 166, 166)
+         .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+         .addGroup(pan_video_streamLayout.createSequentialGroup()
+         .addGap(152, 152, 152)
+         .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+         .addGap(0, 356, Short.MAX_VALUE))
+         .addComponent(p_media_player, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+         .addContainerGap()));
+         pan_video_streamLayout.setVerticalGroup(
+         pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+         .addGroup(pan_video_streamLayout.createSequentialGroup()
+         .addGap(0, 0, 0)
+         .addComponent(p_media_player, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+         .addGap(0, 0, 0)
+         .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+         .addGap(0, 0, 0)
+         .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+         .addGap(0, 0, 0)
+         .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+         .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+         media_pan = new MyMediaPlayer();*/
 //        JPanel mediaFrame = media_pan.getF();
 //        mediaFrame.setSize(p_media_player.getSize());
 
