@@ -1196,7 +1196,7 @@ public class LiveStreamerWindow extends JFrame
 
         jMenuBar1.add(menu_edit);
 
-        menu_tools.setText("Tools");
+        menu_tools.setLabel("Tools");
 
         menu_tools2.setText("Preferences");
         menu_tools.add(menu_tools2);
@@ -1263,8 +1263,6 @@ public class LiveStreamerWindow extends JFrame
         jMenuBar1.add(menu_about);
 
         setJMenuBar(jMenuBar1);
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // <editor-fold defaultstate="collapsed" desc="init()">
@@ -1681,21 +1679,12 @@ public class LiveStreamerWindow extends JFrame
     private JButton b_archive;
     private JButton b_capture_moment;
     private JButton b_close;
-    private JButton b_connect;
-    private JButton b_connect1;
-    private JButton b_connect2;
     private JButton b_connect5;
     private JButton b_do_look;
     private JButton b_inspect_ceiling;
     private JButton b_load;
     private JButton b_logon;
-    private JButton b_logout;
-    private JButton b_logout1;
-    private JButton b_logout2;
     private JButton b_logout5;
-    private JButton b_reset;
-    private JButton b_reset1;
-    private JButton b_reset2;
     private JButton b_reset5;
     private JButton b_save;
     private JButton b_scan_hanger;
@@ -1731,9 +1720,6 @@ public class LiveStreamerWindow extends JFrame
     private JMenuItem jMenuItem7;
     private JMenuItem jMenuItem8;
     private JMenuItem jMenuItem9;
-    private JPanel jPanel16;
-    private JPanel jPanel17;
-    private JPanel jPanel18;
     private JScrollPane jScrollPane1;
     private JScrollPane jScrollPane2;
     private JTextArea jTextArea1;
