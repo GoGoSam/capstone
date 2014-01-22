@@ -812,10 +812,10 @@ public class InspectorRobot extends JFrame
         tf_r_id.setText("Barracuda");
 
         combox_src_ip.setFont(new Font("Lucida Grande", 0, 10));
-        combox_src_ip.setModel(new DefaultComboBoxModel(new String[]{"localHost"}));
+//        combox_src_ip.setModel(new DefaultComboBoxModel<>(new String[]{"localHost"}));
 
         combox_dest_ip.setFont(new Font("Lucida Grande", 0, 10));
-        combox_dest_ip.setModel(new DefaultComboBoxModel(new String[]{"localHost"}));
+//        combox_dest_ip.setModel(new DefaultComboBoxModel(new String[]{"localHost"}));
 
         l_src_ip.setText("Source IP");
 

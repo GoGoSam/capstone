@@ -975,10 +975,8 @@ public class MainMenu_v1_0 extends JFrame
         tf_r_id.setText("Barracuda");
 
         comboB_source_ip.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-        comboB_source_ip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "localHost" }));
 
         comboB_remote_ip.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-        comboB_remote_ip.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "localHost" }));
         comboB_remote_ip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboB_remote_ipActionPerformed(evt);
@@ -1278,7 +1276,7 @@ public class MainMenu_v1_0 extends JFrame
 
         jMenuBar1.add(menu_edit);
 
-        menu_tools.setText("Tools");
+        menu_tools.setText("Tool");
 
         menu_tools2.setText("Preferences");
         menu_tools.add(menu_tools2);

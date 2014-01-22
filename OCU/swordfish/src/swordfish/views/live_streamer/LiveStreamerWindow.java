@@ -237,14 +237,14 @@ public class LiveStreamerWindow extends JFrame
         tf_ip1 = new javax.swing.JTextField();
         l_ip1 = new javax.swing.JLabel();
         l_remote_ip1 = new javax.swing.JLabel();
-        comboB_remote_ip1 = new javax.swing.JComboBox();
-        comboB_source_ip1 = new javax.swing.JComboBox();
         tf_r_id1 = new javax.swing.JTextField();
         l_r_id1 = new javax.swing.JLabel();
         l_source_ip1 = new javax.swing.JLabel();
         b_reset5 = new javax.swing.JButton();
         b_logout5 = new javax.swing.JButton();
         b_connect5 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_file = new javax.swing.JMenu();
         mnu_open = new javax.swing.JMenuItem();
@@ -934,17 +934,6 @@ public class LiveStreamerWindow extends JFrame
         l_remote_ip1.setFont(new java.awt.Font("Lucida Grande", 2, 11)); // NOI18N
         l_remote_ip1.setText("Remote IP: ");
 
-        comboB_remote_ip1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-        comboB_remote_ip1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "localHost" }));
-        comboB_remote_ip1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboB_remote_ip1ActionPerformed(evt);
-            }
-        });
-
-        comboB_source_ip1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-        comboB_source_ip1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "localHost" }));
-
         tf_r_id1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         tf_r_id1.setText("Barracuda");
 
@@ -975,6 +964,10 @@ public class LiveStreamerWindow extends JFrame
                 b_connect5b_connectActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("LocalHost");
+
+        jLabel4.setText("Pi");
 
         javax.swing.GroupLayout pan_systam_statusLayout = new javax.swing.GroupLayout(pan_systam_status);
         pan_systam_status.setLayout(pan_systam_statusLayout);
@@ -1009,10 +1002,13 @@ public class LiveStreamerWindow extends JFrame
                             .addComponent(l_source_ip1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboB_source_ip1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboB_remote_ip1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_ip1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_r_id1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tf_r_id1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pan_systam_statusLayout.createSequentialGroup()
+                                .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(tf_ip1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(7, 7, 7))))
                     .addGroup(pan_systam_statusLayout.createSequentialGroup()
                         .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(l_battery1)
@@ -1054,20 +1050,19 @@ public class LiveStreamerWindow extends JFrame
                 .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tf_r_id1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(l_r_id1))
-                .addGap(0, 0, 0)
+                .addGap(6, 6, 6)
                 .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_systam_statusLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                    .addGroup(pan_systam_statusLayout.createSequentialGroup()
                         .addComponent(l_source_ip1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(l_remote_ip1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(l_ip1))
                     .addGroup(pan_systam_statusLayout.createSequentialGroup()
-                        .addComponent(comboB_source_ip1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(comboB_remote_ip1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addGap(4, 4, 4)
                         .addComponent(tf_ip1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1196,7 +1191,7 @@ public class LiveStreamerWindow extends JFrame
 
         jMenuBar1.add(menu_edit);
 
-        menu_tools4.setText("Inspection Tools");
+        menu_tools4.setText("Tool");
 
         jMenuItem6.setText("Workspace Organizer");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -1530,10 +1525,6 @@ public class LiveStreamerWindow extends JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_log_fpathActionPerformed
 
-    private void comboB_remote_ip1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_comboB_remote_ip1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboB_remote_ip1ActionPerformed
-
     private void b_logout5b_logoutActionPerformed(ActionEvent evt) {//GEN-FIRST:event_b_logout5b_logoutActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_b_logout5b_logoutActionPerformed
@@ -1701,12 +1692,12 @@ public class LiveStreamerWindow extends JFrame
     private java.awt.Canvas canvas4;
     private javax.swing.JCheckBox cb_object_aware;
     private javax.swing.JCheckBox cb_output_log;
-    private javax.swing.JComboBox comboB_remote_ip1;
-    private javax.swing.JComboBox comboB_source_ip1;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
