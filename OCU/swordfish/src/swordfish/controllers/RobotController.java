@@ -43,7 +43,6 @@ public class RobotController {
 
     public void connect(String addr, int port, JFrame ui) {
         if (!client.connect(addr, port)) System.out.println("Unable to Connect to Robot");
-        /*
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.size() == 0) {
             System.out.println("No Xbox Controller Found");
@@ -51,12 +50,9 @@ public class RobotController {
         controller = (JInputXboxController) XboxController.getAll().get(0);
         controller.addListener(listener);
         startPolling();
-        */
     }
 
-    private void buildCommand(Button button, boolean pressed) {
-        //TODO: Determine if this needs to be done asynch
-        //TODO: Implement this function
+    public void testCommand() {
         byte[] test = {ADDRESS, FM1, 127, checksum(ADDRESS, FM1, (byte)127)};
         RoboReq.Builder req = RoboReq.newBuilder();
         req.setType(RoboReq.Type.MBASE);
@@ -64,8 +60,11 @@ public class RobotController {
         mreq.setCmd(ByteString.copyFrom(test));
         req.setBase(mreq);
         sendCommand(req.build());
+    }
 
-        /*
+    private void buildCommand(Button button, boolean pressed) {
+        //TODO: Determine if this needs to be done asynch
+        //TODO: Implement this function
         switch (button) {
             case up:
                 break;
@@ -98,7 +97,6 @@ public class RobotController {
             case rightStick:
                 break;
         }
-        */
     }
 
     private void buildCommand(Axis axis, float state) {
@@ -148,11 +146,10 @@ public class RobotController {
     }
 
     private void updateUI(Button button, boolean pressed) {
-
+        //TODO: Implement this function
     }
 
     private class PollerThread extends Thread {
-
         JInputXboxController controller;
         boolean running;
 
