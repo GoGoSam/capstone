@@ -1278,7 +1278,7 @@ public class MainMenu_v1_0 extends JFrame
 
         jMenuBar1.add(menu_edit);
 
-        menu_tools.setLabel("Tools");
+        menu_tools.setText("Tools");
 
         menu_tools2.setText("Preferences");
         menu_tools.add(menu_tools2);
@@ -1581,7 +1581,7 @@ public class MainMenu_v1_0 extends JFrame
 //        try {
 
         pointer[0] = 0;
-        ArrayList<JLabel> labs = new ArrayList<>();
+        ArrayList<JLabel> labs = new ArrayList<JLabel>();
         labs.add(l_inspector);
         labs.add(l_mid);
         labs.add(l_date);

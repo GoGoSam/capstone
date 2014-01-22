@@ -745,69 +745,65 @@ public class FunctioningMainMenu extends JFrame
      */
     @Override
     public void actionPerformed(ActionEvent evt) {
-
         String message = evt.getActionCommand();
-        switch (message) {
-            case "Type 8bit":
-                if (do_debug) {
-                    System.out.println("8 - bit RadioButton was pressed");
-                }
-                im_plus_gray = im_plus.duplicate();
-                IJ.run(im_plus_gray, "8-bit", "");
-                //            im_plus.hide();
-                //            im_plus_gray.show();
-                lab_imageIcon.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
-                break;
-            case "Type RGB":
-                if (do_debug) {
-                    System.out.println("RGB RadioButton was pressed");
-                }
-                im_plus_rgb = im_plus.duplicate();
-                //            IJ.run(im_plus_gray, "8-bit", "");
-                //            im_plus.hide();
-                //            im_plus_rgb.show();
-                lab_imageIcon.setIcon(new ImageIcon(im_plus_rgb.getImage())); // NOI18N
+        if (message == "Type 8bit") {
+            if (do_debug) {
+                System.out.println("8 - bit RadioButton was pressed");
+            }
+            im_plus_gray = im_plus.duplicate();
+            IJ.run(im_plus_gray, "8-bit", "");
+            //            im_plus.hide();
+            //            im_plus_gray.show();
+            lab_imageIcon.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
+        } else if(message == "Type RGB") {
+            if (do_debug) {
+                System.out.println("RGB RadioButton was pressed");
+            }
+            im_plus_rgb = im_plus.duplicate();
+            //            IJ.run(im_plus_gray, "8-bit", "");
+            //            im_plus.hide();
+            //            im_plus_rgb.show();
+            lab_imageIcon.setIcon(new ImageIcon(im_plus_rgb.getImage())); // NOI18N
 
-                //            im_plus_gray.show();
-                int autoThreshold = 0;
-                int AUTO_THRESHOLD = 5000;
-                //            Image imp = im_plus.getImage();
-                Calibration cal = im_plus.getCalibration();
-                //            im_plus.setCalibration(cal);
-                //            imp.setCalibration("None");
-                im_plus.setCalibration(null);
-                ImageStatistics stats = im_plus.getStatistics();// # get uncalibrated stats
-                im_plus.setCalibration(cal);
-                int limit = (stats.pixelCount / 10);
-                int[] histogram = new int[stats.histogram.length];// #int[]
-                histogram = stats.histogram;
-                //            for (int i = 0; i < histogram.length; i++) {
-                //                System.out.printf(MessageFormat.format("{0}  ", Integer.toString(java.lang.Math.max(histogram))));
-                //            }
-                //            List b = Arrays.asList(ArrayUtils.toObject(histogram));
-                //            Character[] b = convert(Array.histogram);
-                //            System.out.println(Ints.min(histogram));
-                //            System.out.println(Ints.max(histogram));
-                //            return;
-                //            System.out.println(Collections.max(Arrays.asList(histogram)));
-                //            System.out.println(Collections.min(b));
-                //            System.out.println(Collections.max(b));
-                //            if (autoThreshold < 10) {
-                //                autoThreshold = AUTO_THRESHOLD;
-                //            } else {
-                //            }
-                ////Array.
-                //            autoThreshold /= 2;
-                //            int threshold = stats.pixelCount / autoThreshold;
-                ////stats.
-                ////            System.out.printf("count: %d", stats.pixelCount);
-                //            System.out.printf("count: %d", threshold);
-                //            System.out.printf("count: %d", limit);
-                ////#int
-                ////print "pixelCount", stats.pixelCount;
-                //print "threshold", threshold
-                //print "limit", limit
-                break;
+            //            im_plus_gray.show();
+            int autoThreshold = 0;
+            int AUTO_THRESHOLD = 5000;
+            //            Image imp = im_plus.getImage();
+            Calibration cal = im_plus.getCalibration();
+            //            im_plus.setCalibration(cal);
+            //            imp.setCalibration("None");
+            im_plus.setCalibration(null);
+            ImageStatistics stats = im_plus.getStatistics();// # get uncalibrated stats
+            im_plus.setCalibration(cal);
+            int limit = (stats.pixelCount / 10);
+            int[] histogram = new int[stats.histogram.length];// #int[]
+            histogram = stats.histogram;
+            //            for (int i = 0; i < histogram.length; i++) {
+            //                System.out.printf(MessageFormat.format("{0}  ", Integer.toString(java.lang.Math.max(histogram))));
+            //            }
+            //            List b = Arrays.asList(ArrayUtils.toObject(histogram));
+            //            Character[] b = convert(Array.histogram);
+            //            System.out.println(Ints.min(histogram));
+            //            System.out.println(Ints.max(histogram));
+            //            return;
+            //            System.out.println(Collections.max(Arrays.asList(histogram)));
+            //            System.out.println(Collections.min(b));
+            //            System.out.println(Collections.max(b));
+            //            if (autoThreshold < 10) {
+            //                autoThreshold = AUTO_THRESHOLD;
+            //            } else {
+            //            }
+            ////Array.
+            //            autoThreshold /= 2;
+            //            int threshold = stats.pixelCount / autoThreshold;
+            ////stats.
+            ////            System.out.printf("count: %d", stats.pixelCount);
+            //            System.out.printf("count: %d", threshold);
+            //            System.out.printf("count: %d", limit);
+            ////#int
+            ////print "pixelCount", stats.pixelCount;
+            //print "threshold", threshold
+            //print "limit", limit
         }
 
 
@@ -937,31 +933,27 @@ public class FunctioningMainMenu extends JFrame
     private void rb_color_scaleActionPerformed(ActionEvent evt) {
 
         String message = evt.getActionCommand();
-        switch (message) {
-            case "Type RGB":
-                im_plus_rgb = im_plus_rgb.duplicate();
-                //            IJ.run(im_plus_, "8-bit", "");
-                im_plus.hide();
-                if (im_plus_gray != null) {
+        if (message == "Type RGB") {
+            im_plus_rgb = im_plus_rgb.duplicate();
+            //            IJ.run(im_plus_, "8-bit", "");
+            im_plus.hide();
+            if (im_plus_gray != null) {
 
 
-                    im_plus_gray = null;
-                }
-                im_plus_rgb.show();
-                break;
-            case "Type 8bit":
-                im_plus_gray = im_plus_rgb.duplicate();
-                IJ.run(im_plus_gray, "8-bit", "");
-                im_plus.hide();
-                if (im_plus_rgb != null) {
+                im_plus_gray = null;
+            }
+            im_plus_rgb.show();
+        } else if(message == "Type 8bit") {
+            im_plus_gray = im_plus_rgb.duplicate();
+            IJ.run(im_plus_gray, "8-bit", "");
+            im_plus.hide();
+            if (im_plus_rgb != null) {
 
 
-                    im_plus_rgb = null;
-                }
-                //            im_plus_gray.show();
-                lab_imageIcon.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
-                break;
-
+                im_plus_rgb = null;
+            }
+            //            im_plus_gray.show();
+            lab_imageIcon.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
         }
     }
 
@@ -986,65 +978,58 @@ public class FunctioningMainMenu extends JFrame
         if (do_debug) {
             System.out.println("File Menu Sub-menu triggered by " + s_mnu);
         }
-        switch (s_mnu) {
-            case "Open...":
-                String cur_dir = IJ.getDirectory("current");
-                JFileChooser fileopen = new JFileChooser(cur_dir);
-                int ret = fileopen.showDialog(new JPanel(), "Open file");
-                if (ret == JFileChooser.APPROVE_OPTION) {
-                    File file = fileopen.getSelectedFile();
+        if (s_mnu == "Open...") {
+            String cur_dir = IJ.getDirectory("current");
+            JFileChooser fileopen = new JFileChooser(cur_dir);
+            int ret = fileopen.showDialog(new JPanel(), "Open file");
+            if (ret == JFileChooser.APPROVE_OPTION) {
+                File file = fileopen.getSelectedFile();
 
-                    if (file.isFile()) {
-                        //                    String fname = file.getName();
-                        String fpath = file.getPath();
-                        //                String fpath = dir + fname;
-                        im_plus = IJ.openImage(fpath);
+                if (file.isFile()) {
+                    //                    String fname = file.getName();
+                    String fpath = file.getPath();
+                    //                String fpath = dir + fname;
+                    im_plus = IJ.openImage(fpath);
 
-                        im_plus.show();
+                    im_plus.show();
 
-                        if (im_plus != null) {
-                            is_im_loaded[0] = true;
-                        } else {
-                            is_im_loaded[0] = false;
-                        }
-
-                        set_button_states();
-                        //This is where a real application would open the file.
-
-                        if (do_debug) {
-                            System.out.println("Opening: " + fpath);
-                        }
-
+                    if (im_plus != null) {
+                        is_im_loaded[0] = true;
                     } else {
-
-                        if (do_debug) {
-                            System.out.println("Open command cancelled by user.");
-                        }
-
+                        is_im_loaded[0] = false;
                     }
 
-                } else if (ret == JFileChooser.CANCEL_OPTION) {
+                    set_button_states();
+                    //This is where a real application would open the file.
 
                     if (do_debug) {
-                        System.out.print("user cancelled from 'open' dialog box");
+                        System.out.println("Opening: " + fpath);
                     }
 
                 } else {
-                    if (do_debug) {
-                        System.out.print("not approved or cancelled... sweet");
-                    }
-                }
-                break;
-            case "Save As...":
-                break;
-            case "Close":
-                break;
-            case "Exit":
-                this.setVisible(false);
-                this.dispose();
 
-                //            instance = null;
-                break;
+                    if (do_debug) {
+                        System.out.println("Open command cancelled by user.");
+                    }
+
+                }
+
+            } else if (ret == JFileChooser.CANCEL_OPTION) {
+
+                if (do_debug) {
+                    System.out.print("user cancelled from 'open' dialog box");
+                }
+
+            } else {
+                if (do_debug) {
+                    System.out.print("not approved or cancelled... sweet");
+                }
+            }
+        } else if(s_mnu == "Save As...") {
+        } else if(s_mnu == "Close") {
+        } else if(s_mnu == "Exit") {
+            this.setVisible(false);
+            this.dispose();
         }
     }
     // </editor-fold>
