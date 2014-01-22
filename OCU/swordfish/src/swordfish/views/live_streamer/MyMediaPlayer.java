@@ -54,9 +54,10 @@ public class MyMediaPlayer {
     //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     //    }
     //
-    //    public JPanel getF() {
-    //        return p;
-    //    }
+    public JPanel getF() {
+        return p;
+    }
+
     public void playz(String vpath) {
         //        boolean ttt = mediaPlayer.playMedia(vpath);
         //
