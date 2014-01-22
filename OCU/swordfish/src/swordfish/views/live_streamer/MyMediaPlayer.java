@@ -5,15 +5,15 @@
  */
 package swordfish.views.live_streamer;
 
-import com.sun.jna.Native;
-import com.sun.jna.NativeLibrary;
-import java.awt.BorderLayout;
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Window;
-import javax.swing.JButton;
+//import com.sun.jna.Native;
+//import com.sun.jna.NativeLibrary;
+//import java.awt.BorderLayout;
+//import java.awt.Canvas;
+//import java.awt.Color;
+//import java.awt.Window;
+//import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JWindow;
+//import javax.swing.JWindow;
 //import uk.co.caprica.vlcj.binding.LibVlc;
 //import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 //import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;

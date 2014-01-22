@@ -50,6 +50,7 @@ import java.io.File;
 import java.awt.Desktop;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.lang.reflect.Array;
 //import java.text.MessageFormat;
 //import java.util.Arrays;
 //import java.util.Properties;
@@ -248,6 +249,7 @@ public class FunctioningMainMenu extends JFrame
         b_take_image.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/sym_camera.jpg")); // NOI18N
         b_take_image.setBorderPainted(false);
         b_take_image.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 b_take_imageActionPerformed(evt);
             }
@@ -255,6 +257,7 @@ public class FunctioningMainMenu extends JFrame
 
         lab_record.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/sym_record.jpg")); // NOI18N
         lab_record.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 recordMousePressed(evt);
             }
@@ -262,6 +265,7 @@ public class FunctioningMainMenu extends JFrame
 
         lab_pause.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/sym_pause.jpg")); // NOI18N
         lab_pause.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 recordMousePressed(evt);
             }
@@ -269,6 +273,7 @@ public class FunctioningMainMenu extends JFrame
 
         lab_stop.setIcon(new javax.swing.ImageIcon(icon_path + "media_control_icons/sym_stop.jpg")); // NOI18N
         lab_stop.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 recordMousePressed(evt);
             }
@@ -703,7 +708,7 @@ public class FunctioningMainMenu extends JFrame
         JSlider tmp = (JSlider) evt.getSource();
 //        tmp.getValue();
         System.out.printf((tmp.getValue()) + "\n");//.getValue()));
-        ImageProcessor ff = im_plus.getProcessor();
+//        ImageProcessor ff = im_plus.getProcessor();
 
         double scaled_thres = tmp.getValue() - 50;
 
@@ -738,77 +743,71 @@ public class FunctioningMainMenu extends JFrame
     /**
      * Listens to the radio buttons.
      */
+    @Override
     public void actionPerformed(ActionEvent evt) {
 
         String message = evt.getActionCommand();
+        switch (message) {
+            case "Type 8bit":
+                if (do_debug) {
+                    System.out.println("8 - bit RadioButton was pressed");
+                }
+                im_plus_gray = im_plus.duplicate();
+                IJ.run(im_plus_gray, "8-bit", "");
+                //            im_plus.hide();
+                //            im_plus_gray.show();
+                lab_imageIcon.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
+                break;
+            case "Type RGB":
+                if (do_debug) {
+                    System.out.println("RGB RadioButton was pressed");
+                }
+                im_plus_rgb = im_plus.duplicate();
+                //            IJ.run(im_plus_gray, "8-bit", "");
+                //            im_plus.hide();
+                //            im_plus_rgb.show();
+                lab_imageIcon.setIcon(new ImageIcon(im_plus_rgb.getImage())); // NOI18N
 
-        if (message.equals("Type 8bit")) {
-            if (do_debug) {
-                System.out.println("8 - bit RadioButton was pressed");
-            }
-            im_plus_gray = im_plus.duplicate();
-            IJ.run(im_plus_gray, "8-bit", "");
-//            im_plus.hide();
-//            im_plus_gray.show();
-
-            lab_imageIcon.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
-
-
-
-        } else if (message.equals("Type RGB")) {
-            if (do_debug) {
-                System.out.println("RGB RadioButton was pressed");
-            }
-            im_plus_rgb = im_plus.duplicate();
-//            IJ.run(im_plus_gray, "8-bit", "");
-//            im_plus.hide();
-//            im_plus_rgb.show();
-
-            lab_imageIcon.setIcon(new ImageIcon(im_plus_rgb.getImage())); // NOI18N
-
-//            im_plus_gray.show();
-
-
-            int autoThreshold = 0;
-            int AUTO_THRESHOLD = 5000;
-
-//            Image imp = im_plus.getImage();
-
-            Calibration cal = im_plus.getCalibration();
-//            im_plus.setCalibration(cal);
-//            imp.setCalibration("None");
-            im_plus.setCalibration(null);
-            ImageStatistics stats = im_plus.getStatistics();// # get uncalibrated stats
-            im_plus.setCalibration(cal);
-            int limit = (stats.pixelCount / 10);
-            int[] histogram = stats.histogram;// #int[]
-//            for (int i = 0; i < histogram.length; i++) {
-//                System.out.printf(MessageFormat.format("{0}  ", Integer.toString(java.lang.Math.max(histogram))));
-//            }
-//            List b = Arrays.asList(ArrayUtils.toObject(histogram));
-//            Character[] b = convert(Array.histogram);
-//            System.out.println(Ints.min(histogram));
-//            System.out.println(Ints.max(histogram));
-//            return;
-//            System.out.println(Collections.max(Arrays.asList(histogram)));
-//            System.out.println(Collections.min(b));
-//            System.out.println(Collections.max(b));
-//            if (autoThreshold < 10) {
-//                autoThreshold = AUTO_THRESHOLD;
-//            } else {
-//            }
-////Array.
-//            autoThreshold /= 2;
-//            int threshold = stats.pixelCount / autoThreshold;
-////stats.
-////            System.out.printf("count: %d", stats.pixelCount);
-//            System.out.printf("count: %d", threshold);
-//            System.out.printf("count: %d", limit);
-////#int
-////print "pixelCount", stats.pixelCount;
-//print "threshold", threshold
-//print "limit", limit
-
+                //            im_plus_gray.show();
+                int autoThreshold = 0;
+                int AUTO_THRESHOLD = 5000;
+                //            Image imp = im_plus.getImage();
+                Calibration cal = im_plus.getCalibration();
+                //            im_plus.setCalibration(cal);
+                //            imp.setCalibration("None");
+                im_plus.setCalibration(null);
+                ImageStatistics stats = im_plus.getStatistics();// # get uncalibrated stats
+                im_plus.setCalibration(cal);
+                int limit = (stats.pixelCount / 10);
+                int[] histogram = new int[stats.histogram.length];// #int[]
+                histogram = stats.histogram;
+                //            for (int i = 0; i < histogram.length; i++) {
+                //                System.out.printf(MessageFormat.format("{0}  ", Integer.toString(java.lang.Math.max(histogram))));
+                //            }
+                //            List b = Arrays.asList(ArrayUtils.toObject(histogram));
+                //            Character[] b = convert(Array.histogram);
+                //            System.out.println(Ints.min(histogram));
+                //            System.out.println(Ints.max(histogram));
+                //            return;
+                //            System.out.println(Collections.max(Arrays.asList(histogram)));
+                //            System.out.println(Collections.min(b));
+                //            System.out.println(Collections.max(b));
+                //            if (autoThreshold < 10) {
+                //                autoThreshold = AUTO_THRESHOLD;
+                //            } else {
+                //            }
+                ////Array.
+                //            autoThreshold /= 2;
+                //            int threshold = stats.pixelCount / autoThreshold;
+                ////stats.
+                ////            System.out.printf("count: %d", stats.pixelCount);
+                //            System.out.printf("count: %d", threshold);
+                //            System.out.printf("count: %d", limit);
+                ////#int
+                ////print "pixelCount", stats.pixelCount;
+                //print "threshold", threshold
+                //print "limit", limit
+                break;
         }
 
 
@@ -938,40 +937,30 @@ public class FunctioningMainMenu extends JFrame
     private void rb_color_scaleActionPerformed(ActionEvent evt) {
 
         String message = evt.getActionCommand();
-
-        if (message.equals("Type RGB")) {
-
-            im_plus_rgb = im_plus_rgb.duplicate();
-
-
-
-//            IJ.run(im_plus_, "8-bit", "");
-
-            im_plus.hide();
-            if (im_plus_gray != null) {
+        switch (message) {
+            case "Type RGB":
+                im_plus_rgb = im_plus_rgb.duplicate();
+                //            IJ.run(im_plus_, "8-bit", "");
+                im_plus.hide();
+                if (im_plus_gray != null) {
 
 
-                im_plus_gray = null;
-            }
-            im_plus_rgb.show();
-        } else if (message.equals("Type 8bit")) {
-
-            im_plus_gray = im_plus_rgb.duplicate();
-
-
-
-            IJ.run(im_plus_gray, "8-bit", "");
-
-            im_plus.hide();
-            if (im_plus_rgb != null) {
+                    im_plus_gray = null;
+                }
+                im_plus_rgb.show();
+                break;
+            case "Type 8bit":
+                im_plus_gray = im_plus_rgb.duplicate();
+                IJ.run(im_plus_gray, "8-bit", "");
+                im_plus.hide();
+                if (im_plus_rgb != null) {
 
 
-                im_plus_rgb = null;
-            }
-//            im_plus_gray.show();
-
-            lab_imageIcon.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
-
+                    im_plus_rgb = null;
+                }
+                //            im_plus_gray.show();
+                lab_imageIcon.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
+                break;
 
         }
     }
@@ -997,69 +986,66 @@ public class FunctioningMainMenu extends JFrame
         if (do_debug) {
             System.out.println("File Menu Sub-menu triggered by " + s_mnu);
         }
+        switch (s_mnu) {
+            case "Open...":
+                String cur_dir = IJ.getDirectory("current");
+                JFileChooser fileopen = new JFileChooser(cur_dir);
+                int ret = fileopen.showDialog(new JPanel(), "Open file");
+                if (ret == JFileChooser.APPROVE_OPTION) {
+                    File file = fileopen.getSelectedFile();
 
-        if (s_mnu.equals("Open...")) {
+                    if (file.isFile()) {
+                        //                    String fname = file.getName();
+                        String fpath = file.getPath();
+                        //                String fpath = dir + fname;
+                        im_plus = IJ.openImage(fpath);
 
+                        im_plus.show();
 
-            String cur_dir = IJ.getDirectory("current");
-            JFileChooser fileopen = new JFileChooser(cur_dir);
+                        if (im_plus != null) {
+                            is_im_loaded[0] = true;
+                        } else {
+                            is_im_loaded[0] = false;
+                        }
 
-            int ret = fileopen.showDialog(new JPanel(), "Open file");
+                        set_button_states();
+                        //This is where a real application would open the file.
 
-            if (ret == JFileChooser.APPROVE_OPTION) {
-                File file = fileopen.getSelectedFile();
+                        if (do_debug) {
+                            System.out.println("Opening: " + fpath);
+                        }
 
-                if (file.isFile()) {
-//                    String fname = file.getName();
-                    String fpath = file.getPath();
-//                String fpath = dir + fname;
-                    im_plus = IJ.openImage(fpath);
-
-                    im_plus.show();
-
-                    if (im_plus != null) {
-                        is_im_loaded[0] = true;
                     } else {
-                        is_im_loaded[0] = false;
+
+                        if (do_debug) {
+                            System.out.println("Open command cancelled by user.");
+                        }
+
                     }
 
-                    set_button_states();
-                    //This is where a real application would open the file.
+                } else if (ret == JFileChooser.CANCEL_OPTION) {
 
                     if (do_debug) {
-                        System.out.println("Opening: " + fpath);
+                        System.out.print("user cancelled from 'open' dialog box");
                     }
 
                 } else {
-
                     if (do_debug) {
-                        System.out.println("Open command cancelled by user.");
+                        System.out.print("not approved or cancelled... sweet");
                     }
-
                 }
+                break;
+            case "Save As...":
+                break;
+            case "Close":
+                break;
+            case "Exit":
+                this.setVisible(false);
+                this.dispose();
 
-            } else if (ret == JFileChooser.CANCEL_OPTION) {
-
-                if (do_debug) {
-                    System.out.print("user cancelled from 'open' dialog box");
-                }
-
-            } else {
-                if (do_debug) {
-                    System.out.print("not approved or cancelled... sweet");
-                }
-            }
-        } else if (s_mnu.equals("Save As...")) {
-        } else if (s_mnu.equals("Close")) {
-        } else if (s_mnu.equals("Exit")) {
-            this.setVisible(false);
-            this.dispose();
-
-//            instance = null;
+                //            instance = null;
+                break;
         }
-
-
-//
     }
     // </editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Key Listeners">

@@ -1490,7 +1490,7 @@ public class LiveStreamerWindow extends JFrame
         //        try {
 
         pointer[0] = 0;
-        ArrayList<JLabel> labs = new ArrayList<JLabel>();
+        ArrayList<JLabel> labs = new ArrayList<>();
         labs.add(l_inspector);
         labs.add(l_mid);
         labs.add(l_date);
