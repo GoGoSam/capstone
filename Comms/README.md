@@ -11,3 +11,6 @@ Comm System Overview
         -This is as close to "live" as possible
         -Hardware video H.264 encoding
         -Video streaming using GStreamer
+
+    Barracuda - This is the code for handling Servo controls
+    	- TO DO
