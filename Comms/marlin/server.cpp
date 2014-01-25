@@ -101,7 +101,7 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
                           std::size_t bytes)
         {
             //TODO: Handle return from write
-            std::cout << error << std::endl;
+            std::cout << error.message() << std::endl;
             std::cout << bytes << std::endl;
         }
 
@@ -117,15 +117,16 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
         char data_[max_length];
 };
 
+serial_connection::pointer serial;
+
 class session : public boost::enable_shared_from_this<session>
 {
     public:
         typedef boost::shared_ptr<session> pointer;
 
-        static pointer create(boost::asio::io_service& io_service,
-                              serial_connection::pointer serial_connection)
+        static pointer create(boost::asio::io_service& io_service)
         {
-            return pointer(new session(io_service, serial_connection));
+            return pointer(new session(io_service));
         }
 
         tcp::socket& socket()
@@ -139,9 +140,8 @@ class session : public boost::enable_shared_from_this<session>
         }
 
     private:
-        session(boost::asio::io_service& io_service, serial_connection::pointer serial_connection)
-            : socket_(io_service),
-              serial_connection_(serial_connection)
+        session(boost::asio::io_service& io_service)
+            : socket_(io_service)
         {
         }
 
@@ -202,13 +202,12 @@ class session : public boost::enable_shared_from_this<session>
                 std::cout << (int)test[i] << " ";
             }
             std::cout << std::endl;
-            serial_connection_->write(test, req.base().cmd().length());
+            serial->write(test, req.base().cmd().length());
         }
 
         static const int max_length = 5120;
         char data_[max_length];
         tcp::socket socket_;
-        serial_connection::pointer serial_connection_;
 };
 
 class server
@@ -216,8 +215,7 @@ class server
     public:
         server(boost::asio::io_service& io_service, int port, const char* device)
             : io_service_(io_service),
-              acceptor_(io_service, tcp::endpoint(tcp::v4(), port)),
-              serial_connection_(serial_connection::create(io_service, device))
+              acceptor_(io_service, tcp::endpoint(tcp::v4(), port))
         {
             listen();
         }
@@ -225,7 +223,7 @@ class server
     private:
         void listen()
         {
-            session::pointer new_session = session::create(io_service_, serial_connection_);
+            session::pointer new_session = session::create(io_service_);
             acceptor_.async_accept(new_session->socket(),
                     boost::bind(&server::accept, this, new_session,
                         boost::asio::placeholders::error));
@@ -244,7 +242,6 @@ class server
 
         boost::asio::io_service& io_service_;
         tcp::acceptor acceptor_;
-        serial_connection::pointer serial_connection_;
 };
 
 int main(int argc, const char* argv[])
@@ -262,6 +259,7 @@ int main(int argc, const char* argv[])
         const char* device = argv[2];
         std::cout << "Serving on port " << port << std::endl;
         std::cout << "Controlling device " << device << std::endl;
+        serial = serial_connection::create(io_service, device);
         server s(io_service, port, device);
         io_service.run();
     }
