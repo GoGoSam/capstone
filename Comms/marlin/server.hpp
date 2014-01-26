@@ -52,7 +52,7 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
     private:
         serial_connection(boost::asio::io_service& io_service,
             const std::string name,
-            const unsigned int baud_rate = 19200,
+            const unsigned int baud_rate = 38400,
             const unsigned int char_size = 8,
             const enum boost::asio::serial_port_base::flow_control::type flow_control =
                 boost::asio::serial_port_base::flow_control::none,
