@@ -45,7 +45,10 @@ public class MobileDirectionDisplayKeyboard extends JFrame
      */
     @Override
     public void keyTyped(KeyEvent e) {
+    }
 
+    public JPanel getPanelDisplay() {
+        return this.p_directionals;
     }
 
     /**
@@ -161,30 +164,30 @@ public class MobileDirectionDisplayKeyboard extends JFrame
         p_directionalsLayout.setHorizontalGroup(
                 p_directionalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(p_directionalsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(icon_left, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(p_directionalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(icon_up, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(icon_down))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(icon_right)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                .addContainerGap()
+                .addComponent(icon_left, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(p_directionalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(icon_up, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(icon_down))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(icon_right)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
         p_directionalsLayout.setVerticalGroup(
                 p_directionalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(p_directionalsLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(p_directionalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(p_directionalsLayout.createSequentialGroup()
-                                        .addComponent(icon_up)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(icon_down))
-                                .addGroup(p_directionalsLayout.createSequentialGroup()
-                                        .addGap(41, 41, 41)
-                                        .addGroup(p_directionalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(icon_right)
-                                                .addComponent(icon_left))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                .addContainerGap()
+                .addGroup(p_directionalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(p_directionalsLayout.createSequentialGroup()
+                .addComponent(icon_up)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(icon_down))
+                .addGroup(p_directionalsLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(p_directionalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(icon_right)
+                .addComponent(icon_left))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         icon_up.getAccessibleContext().setAccessibleName("U");
         icon_left.getAccessibleContext().setAccessibleName("Up");
