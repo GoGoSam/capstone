@@ -21,13 +21,13 @@ public class Swordfish {
      */
     public static void main(String[] args) {
 
-        boolean do_robot_controller = true,
+        boolean do_robot_controller = false,
                 do_video_streamer = false,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
                 do_inspector_robot = false,
-                do_media_streamer_ui = false,
-                do_image_processor = false;
+                do_media_streamer_ui = true,
+                do_image_processor = true;
 
         String addr = "192.168.1.101";
         int video_port = 6789;
