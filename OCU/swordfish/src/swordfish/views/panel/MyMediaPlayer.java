@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swordfish.views.live_streamer;
+package swordfish.views.panel;
 
 //import com.sun.jna.Native;
 //import com.sun.jna.NativeLibrary;

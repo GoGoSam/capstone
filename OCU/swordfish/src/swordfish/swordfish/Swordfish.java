@@ -1,12 +1,13 @@
-package swordfish.controllers;
+package swordfish.swordfish;
 
 import javax.swing.*;
+import swordfish.controllers.RobotController;
+import swordfish.controllers.VideoStreamer;
 
-import swordfish.views.InspectorRobot;
 import swordfish.views.MobileDirectionDisplayKeyboard;
 import swordfish.views.XBox360_DirectionDisplay;
-import swordfish.views.image_processor.ImageAnalyzerWindow;
-import swordfish.views.live_streamer.LiveStreamerWindow;
+import swordfish.views.window.ImageAnalyzerWindow;
+import swordfish.views.window.LiveStreamerWindow;
 
 /**
  *
@@ -52,10 +53,6 @@ public class Swordfish {
         if (do_mobile_dis_keyboard) {
             MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
             mddk.setVisible(true);
-        }
-        if (do_inspector_robot) {
-            InspectorRobot ir = new InspectorRobot();
-            ir.setVisible(true);
         }
         if (do_media_streamer_ui) {
             LiveStreamerWindow lsw = new LiveStreamerWindow();

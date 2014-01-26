@@ -1,4 +1,4 @@
-package swordfish.views.live_streamer;
+package swordfish.views.window;
 
 //import swordfish.ui_develop.*;
 //import swordfish.*;
@@ -27,7 +27,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.border.TitledBorder;
 import swordfish.controllers.RobotController;
-import swordfish.views.LogIn;
+import swordfish.views.dialog.LogIn;
 import swordfish.views.MobileDirectionDisplayKeyboard;
 
 //import java.io.*;
@@ -1118,7 +1118,7 @@ public class LiveStreamerWindow extends JFrame
                 .addContainerGap()
                 .addGroup(pan_rootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pan_vision_utils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pan_north, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(pan_north, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(pan_systam_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pan_rootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

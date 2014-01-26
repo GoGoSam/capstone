@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swordfish.views;
+package swordfish.views.dialog;
 
 import java.awt.event.*;
 import java.util.ArrayList;

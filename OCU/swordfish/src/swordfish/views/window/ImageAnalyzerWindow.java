@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package swordfish.views.image_processor;
+package swordfish.views.window;
 
 import ij.IJ;
 import ij.ImagePlus;
