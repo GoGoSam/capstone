@@ -35,7 +35,10 @@ public class Swordfish {
 
         if (do_robot_controller) {
             RobotController rc = new RobotController();
-            rc.connect(addr, controller_port, ui);
+            rc.connect_locally(ui);
+//            while (true) {
+//            }
+//            rc.connect(addr, controller_port, ui);
 //            rc.testCommand();
         }
         if (do_video_streamer) {

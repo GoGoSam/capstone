@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.border.TitledBorder;
+import swordfish.controllers.RobotController;
 import swordfish.views.LogIn;
 import swordfish.views.MobileDirectionDisplayKeyboard;
 
@@ -247,8 +248,8 @@ public class LiveStreamerWindow extends JFrame
         b_reset5 = new javax.swing.JButton();
         b_logout5 = new javax.swing.JButton();
         b_connect5 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        tf_ip2 = new javax.swing.JTextField();
+        tf_ip3 = new javax.swing.JTextField();
         pan_directionals = new javax.swing.JPanel();
         pb_image_load = new javax.swing.JProgressBar();
         l_logo_icon = new javax.swing.JLabel();
@@ -599,6 +600,7 @@ public class LiveStreamerWindow extends JFrame
                                 .addComponent(b_vid_pause, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(b_vid_ff, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
                                 .addComponent(b_vid_mute, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pan_media_controlLayout.createSequentialGroup()
                                 .addComponent(b_load)
@@ -898,19 +900,19 @@ public class LiveStreamerWindow extends JFrame
         tf_ip1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         tf_ip1.setText("192.168.1.2");
 
-        l_ip1.setFont(new java.awt.Font("Lucida Grande", 2, 11)); // NOI18N
+        l_ip1.setFont(new java.awt.Font("Lucida Grande", 2, 13)); // NOI18N
         l_ip1.setText("IP: ");
 
-        l_remote_ip1.setFont(new java.awt.Font("Lucida Grande", 2, 11)); // NOI18N
+        l_remote_ip1.setFont(new java.awt.Font("Lucida Grande", 2, 13)); // NOI18N
         l_remote_ip1.setText("Remote IP: ");
 
         tf_r_id1.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         tf_r_id1.setText("Barracuda");
 
-        l_r_id1.setFont(new java.awt.Font("Lucida Grande", 2, 11)); // NOI18N
+        l_r_id1.setFont(new java.awt.Font("Lucida Grande", 2, 13)); // NOI18N
         l_r_id1.setText("R-ID:");
 
-        l_source_ip1.setFont(new java.awt.Font("Lucida Grande", 2, 11)); // NOI18N
+        l_source_ip1.setFont(new java.awt.Font("Lucida Grande", 2, 13)); // NOI18N
         l_source_ip1.setText("Source IP: ");
 
         b_reset5.setBackground(new java.awt.Color(255, 102, 102));
@@ -935,9 +937,11 @@ public class LiveStreamerWindow extends JFrame
             }
         });
 
-        jLabel3.setText("LocalHost");
+        tf_ip2.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        tf_ip2.setText("192.168.1.2");
 
-        jLabel4.setText("Pi");
+        tf_ip3.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        tf_ip3.setText("192.168.1.2");
 
         javax.swing.GroupLayout pan_systam_statusLayout = new javax.swing.GroupLayout(pan_systam_status);
         pan_systam_status.setLayout(pan_systam_statusLayout);
@@ -960,22 +964,6 @@ public class LiveStreamerWindow extends JFrame
                             .addComponent(l_battery_per1)
                             .addComponent(l_robo_connect_per1))
                         .addGap(6, 6, 6))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_systam_statusLayout.createSequentialGroup()
-                        .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pan_systam_statusLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(l_r_id1))
-                            .addGroup(pan_systam_statusLayout.createSequentialGroup()
-                                .addGap(43, 43, 43)
-                                .addComponent(l_ip1))
-                            .addComponent(l_remote_ip1)
-                            .addComponent(l_source_ip1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_r_id1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(tf_ip1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pan_systam_statusLayout.createSequentialGroup()
                         .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(l_battery1)
@@ -994,9 +982,34 @@ public class LiveStreamerWindow extends JFrame
                                         .addGap(0, 0, 0)
                                         .addComponent(b_logout5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(cb_output_log))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pan_systam_statusLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(l_remote_ip1)
+                            .addGroup(pan_systam_statusLayout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(l_r_id1))
+                            .addComponent(l_source_ip1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_r_id1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_ip3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_ip2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_systam_statusLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_systam_statusLayout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(tf_ip1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pan_systam_statusLayout.createSequentialGroup()
+                                .addComponent(l_ip1)
+                                .addGap(150, 150, 150)))))
                 .addContainerGap())
         );
+
+        pan_systam_statusLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {tf_ip1, tf_ip2, tf_ip3, tf_r_id1});
+
         pan_systam_statusLayout.setVerticalGroup(
             pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_systam_statusLayout.createSequentialGroup()
@@ -1015,36 +1028,39 @@ public class LiveStreamerWindow extends JFrame
                         .addComponent(l_robo_connect_per1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tf_r_id1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(l_r_id1))
-                .addGap(6, 6, 6)
-                .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(pan_systam_statusLayout.createSequentialGroup()
-                        .addComponent(l_source_ip1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(l_remote_ip1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(l_ip1))
-                    .addGroup(pan_systam_statusLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addGap(4, 4, 4)
-                        .addComponent(tf_ip1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(l_r_id1)
+                            .addComponent(tf_r_id1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_systam_statusLayout.createSequentialGroup()
+                        .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(l_source_ip1)
+                            .addComponent(tf_ip3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(tf_ip2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(l_remote_ip1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(l_ip1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_ip1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(b_logout5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(b_reset5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(b_connect5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pan_systam_statusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_log_fpath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(l_log_file))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cb_output_log, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pan_systam_statusLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tf_ip1, tf_ip2, tf_ip3, tf_r_id1});
 
         pb_image_load.setValue(30);
         pb_image_load.setEnabled(false);
@@ -1688,8 +1704,6 @@ public class LiveStreamerWindow extends JFrame
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -1769,6 +1783,8 @@ public class LiveStreamerWindow extends JFrame
     private javax.swing.JScrollBar sb_vid_play;
     private javax.swing.JSeparator seperator1;
     private javax.swing.JTextField tf_ip1;
+    private javax.swing.JTextField tf_ip2;
+    private javax.swing.JTextField tf_ip3;
     private javax.swing.JTextField tf_log_fpath;
     private javax.swing.JTextField tf_r_id1;
     // End of variables declaration//GEN-END:variables

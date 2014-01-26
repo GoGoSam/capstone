@@ -16,10 +16,8 @@ public class RobotController {
     private JInputXboxController controller;
     private RobotControllerListener listener;
     private TCPClient client;
-
     //Packet mode
     private static final byte ADDRESS = (byte) 128;
-
     //Standard commands
     private static final byte FM1 = 0;
     private static final byte BM1 = 1;
@@ -27,7 +25,6 @@ public class RobotController {
     private static final byte BM2 = 5;
     private static final byte FBM1 = 6;
     private static final byte FBM2 = 7;
-
     //Mixed-mode commands
     private static final byte FM = 8;
     private static final byte BM = 9;
@@ -42,7 +39,19 @@ public class RobotController {
     }
 
     public void connect(String addr, int port, JFrame ui) {
-        if (!client.connect(addr, port)) System.out.println("Unable to Connect to Robot");
+        if (!client.connect(addr, port)) {
+            System.out.println("Unable to Connect to Robot");
+        }
+        List<XboxController> controllerList = XboxController.getAll();
+        if (controllerList.size() == 0) {
+            System.out.println("No Xbox Controller Found");
+        }
+        controller = (JInputXboxController) XboxController.getAll().get(0);
+        controller.addListener(listener);
+        startPolling();
+    }
+
+    public void connect_locally(JFrame ui) {
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.size() == 0) {
             System.out.println("No Xbox Controller Found");
@@ -53,7 +62,7 @@ public class RobotController {
     }
 
     public void testCommand() {
-        byte[] test = {ADDRESS, FM1, 127, checksum(ADDRESS, FM1, (byte)127)};
+        byte[] test = {ADDRESS, FM1, 127, checksum(ADDRESS, FM1, (byte) 127)};
         RoboReq.Builder req = RoboReq.newBuilder();
         req.setType(RoboReq.Type.MBASE);
         RoboReq.MoveBaseCmd.Builder mreq = RoboReq.MoveBaseCmd.newBuilder();
@@ -150,6 +159,7 @@ public class RobotController {
     }
 
     private class PollerThread extends Thread {
+
         JInputXboxController controller;
         boolean running;
 
