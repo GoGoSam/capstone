@@ -1,4 +1,4 @@
-package swordfish.swordfish;
+package swordfish.controllers;
 
 import javax.swing.*;
 import swordfish.controllers.RobotController;
