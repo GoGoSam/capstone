@@ -51,16 +51,7 @@ public class RobotController {
         startPolling();
     }
 
-    public void connect_locally(JFrame ui) {
-        List<XboxController> controllerList = XboxController.getAll();
-        if (controllerList.size() == 0) {
-            System.out.println("No Xbox Controller Found");
-        }
-        controller = (JInputXboxController) XboxController.getAll().get(0);
-        controller.addListener(listener);
-        startPolling();
-    }
-
+    //TODO: Delete after testing
     public void testCommand() {
         byte[] test = {ADDRESS, FM1, 127, checksum(ADDRESS, FM1, (byte) 127)};
         RoboReq.Builder req = RoboReq.newBuilder();
