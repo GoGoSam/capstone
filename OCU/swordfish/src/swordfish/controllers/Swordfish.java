@@ -1,4 +1,4 @@
-package swordfish.swordfish;
+package swordfish.controllers;
 
 import javax.swing.*;
 import swordfish.controllers.RobotController;
@@ -25,9 +25,8 @@ public class Swordfish {
                 do_video_streamer = false,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
-                do_inspector_robot = false,
-                do_media_streamer_ui = true,
-                do_image_processor = true;
+                do_media_streamer_ui = false,
+                do_image_processor = false;
 
         String addr = "192.168.1.101";
         int video_port = 6789;
@@ -36,11 +35,7 @@ public class Swordfish {
 
         if (do_robot_controller) {
             RobotController rc = new RobotController();
-            rc.connect_locally(ui);
-//            while (true) {
-//            }
-//            rc.connect(addr, controller_port, ui);
-//            rc.testCommand();
+            rc.connect(addr, controller_port, ui);
         }
         if (do_video_streamer) {
             VideoStreamer vs = new VideoStreamer();
@@ -56,7 +51,6 @@ public class Swordfish {
         }
         if (do_media_streamer_ui) {
             LiveStreamerWindow lsw = new LiveStreamerWindow();
-
             lsw.setVisible(true);
         }
         if (do_image_processor) {
