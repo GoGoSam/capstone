@@ -43,12 +43,7 @@ public class JInputXboxController extends XboxController {
         Identifier.Button id = null;
         switch (button) {
             case up:
-
-                System.out.println(" 1;");
-
-
                 return (dpadDirection & DPAD_UP) == DPAD_UP;
-
             case down:
                 return (dpadDirection & DPAD_DOWN) == DPAD_DOWN;
             case left:
@@ -58,7 +53,7 @@ public class JInputXboxController extends XboxController {
             case start:
             case guide:
             // The Xbox controller driver doesn't expose these buttons!
-//                return false;
+                return false;
             case a:
                 id = Identifier.Button._0;
                 break;
@@ -80,8 +75,6 @@ public class JInputXboxController extends XboxController {
             case back:
                 id = Identifier.Button._6;
                 break;
-//            case start :
-//                id = Identifier.Button._7;
             case leftStick:
                 id = Identifier.Button._8;
                 break;
@@ -113,7 +106,6 @@ public class JInputXboxController extends XboxController {
                 }
                 return value;
             case leftStickX:
-
                 id = Identifier.Axis.X;
                 break;
             case leftStickY:
@@ -206,9 +198,7 @@ public class JInputXboxController extends XboxController {
     }
 
     private Button getButton(Identifier.Button id) {
-
         if (id == Identifier.Button._0) {
-
             return Button.a;
         }
         if (id == Identifier.Button._1) {
