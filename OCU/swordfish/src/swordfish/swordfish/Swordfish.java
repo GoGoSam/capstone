@@ -27,19 +27,19 @@ public class Swordfish {
                 do_mobile_dis_keyboard = false,
                 do_inspector_robot = false,
                 do_media_streamer_ui = true,
-                do_image_processor = true;
+                do_image_processor = false;
 
-        String addr = "192.168.1.101";
+        String addr = "192.168.1.69";
         int video_port = 6789;
         int controller_port = 5555;
         JFrame ui = new JFrame();
 
         if (do_robot_controller) {
             RobotController rc = new RobotController();
-            rc.connect_locally(ui);
+//            rc.connect_locally();
 //            while (true) {
 //            }
-//            rc.connect(addr, controller_port, ui);
+            rc.connect(addr, controller_port, ui);
 //            rc.testCommand();
         }
         if (do_video_streamer) {
