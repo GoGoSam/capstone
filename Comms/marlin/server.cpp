@@ -139,6 +139,7 @@ void session::handle_write(const boost::system::error_code& error)
 
 void session::process_request(RoboComms::RoboReq req)
 {
+    /*
     //TODO: Implement
     std::cout << req.type() << std::endl;
     unsigned char *test = (unsigned char*) req.base().cmd().c_str();
@@ -146,7 +147,32 @@ void session::process_request(RoboComms::RoboReq req)
         std::cout << (int)test[i] << " ";
     }
     std::cout << std::endl;
-    serial->write(test, req.base().cmd().length());
+    */
+    switch(req.type()) {
+        case 0:
+            //Robot base move command
+            //unsigned char *cmd = (unsigned char*) req.base().cmd().c_str();
+            serial->write((unsigned char*) req.base().cmd().c_str(),
+                    req.base().cmd().length());
+            break;
+        case 1:
+            //Robot lift move command
+            //This should send the command to the arduino
+            //serial2->write((unsigned char*) req.base().cmd().c_str(),
+            //        req.base().cmd().length());
+            break;
+        case 2:
+            //Robot sensor move command
+            //Using servoblaster this should write commands to /dev/servoblaster file
+            //f.write(req.sens().cmd();
+            break;
+        case 3:
+            //Robot data request command
+            break;
+        default:
+            //Shouldn't ever get here
+            break;
+    }
 }
 
 serial_connection::pointer serial_connection::create(boost::asio::io_service& io_service,
