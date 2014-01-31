@@ -1,6 +1,10 @@
 package swordfish.controllers;
 
 import com.google.protobuf.ByteString;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import swordfish.models.device.Axis;
 import swordfish.models.device.Button;
 import swordfish.models.input.XboxController;
@@ -52,7 +56,13 @@ public class RobotController {
         startPolling();
     }
 
+    public void connect(JFrame ui) {
+        controller = (JInputXboxController) XboxController.getAll().get(0);
+        controller.addListener(listener);
+        startPolling();
+    }
     //TODO: Delete after testing
+
     public void testCommand() {
         byte[] test = {ADDRESS, FM1, 127, checksum(ADDRESS, FM1, (byte) 127)};
         RoboReq.Builder req = RoboReq.newBuilder();
@@ -107,19 +117,70 @@ public class RobotController {
     private void buildCommand(Axis axis, float state) {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
-        switch (axis) {
-            case leftTrigger:
-                break;
-            case rightTrigger:
-                break;
-            case leftStickX:
-                break;
-            case leftStickY:
-                break;
-            case rightStickX:
-                break;
-            case rightStickY:
-                break;
+        String joystick_name = axis.toString();
+        System.out.println("1\n" + axis.toString() + "\n");
+        if (joystick_name.contains("Left")) {
+            // left joystick
+            /**
+             * Need to make seperate class
+             */
+            String instr = "echo > 0=150";
+            File outfile = new File("/Users/jrob/Desktop/test.txt");
+            boolean append = false;
+            try {
+
+                FileWriter fout = new FileWriter(outfile, append);
+                PrintWriter fileout = new PrintWriter(fout, true);
+                fileout.println(instr);
+                fileout.flush();
+
+            } catch (IOException e) {
+                if (do_debug) {
+                    System.out.println(e.getMessage());
+
+                }
+            }
+
+            if (joystick_name.equals("leftstick")) { // trigger was pushed
+            } else if (joystick_name.contains("axis")) {
+                // Left Stick Y axis
+                // Left Stick X axis
+            }
+        } else if (joystick_name.contains("Right Stick")) {
+        }
+
+
+        /*
+         switch (axis) {
+         case leftTrigger:
+         break;
+         case rightTrigger:
+         break;
+         case leftStickX:
+
+         if (do_debug) {
+         System.out.println("1\n" + axis.toString() + "\n");
+         }
+         break;
+         case leftStickY:
+
+         if (do_debug) {
+         System.out.println("1.a\n" + axis.toString() + "\n");
+         }
+         break;
+         case rightStickX:
+
+         if (do_debug) {
+         System.out.println("2\n");
+         }
+         break;
+         case rightStickY:
+
+         if (do_debug) {
+         System.out.println("2.a\n");
+         }
+         break;
+         }*/ {
         }
     }
 
