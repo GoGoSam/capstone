@@ -217,15 +217,15 @@ public class ImageProcesser extends JFrame
         p_media_playerLayout.setHorizontalGroup(
                 p_media_playerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(p_media_playerLayout.createSequentialGroup()
-                        .addGap(146, 146, Short.MAX_VALUE)
-                        .addComponent(l_vid_player)
-                        .addGap(146, 146, Short.MAX_VALUE)));
+                .addGap(146, 146, Short.MAX_VALUE)
+                .addComponent(l_vid_player)
+                .addGap(146, 146, Short.MAX_VALUE)));
         p_media_playerLayout.setVerticalGroup(
                 p_media_playerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(p_media_playerLayout.createSequentialGroup()
-                        .addGap(146, 146, Short.MAX_VALUE)
-                        .addComponent(l_vid_player)
-                        .addGap(146, 146, 146)));
+                .addGap(146, 146, Short.MAX_VALUE)
+                .addComponent(l_vid_player)
+                .addGap(146, 146, 146)));
 
         p_video_buttons.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -263,33 +263,33 @@ public class ImageProcesser extends JFrame
         p_video_buttonsLayout.setHorizontalGroup(
                 p_video_buttonsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(GroupLayout.Alignment.TRAILING, p_video_buttonsLayout.createSequentialGroup()
-                        //                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(121, 121, 121)
-                        .addComponent(b_take_image)
-                        .addGap(0, 0, 0)
-                        .addComponent(lab_record)
-                        //                .addPreferredGap(LayoutStyle.RELATED)
-                        .addComponent(lab_pause)
-                        //                .addPreferredGap(LayoutStyle.RELATED)
-                        .addComponent(lab_stop)
-                        .addGap(130, 130, 130)));
+                //                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(121, 121, 121)
+                .addComponent(b_take_image)
+                .addGap(0, 0, 0)
+                .addComponent(lab_record)
+                //                .addPreferredGap(LayoutStyle.RELATED)
+                .addComponent(lab_pause)
+                //                .addPreferredGap(LayoutStyle.RELATED)
+                .addComponent(lab_stop)
+                .addGap(130, 130, 130)));
 
         p_video_buttonsLayout.setVerticalGroup(
                 p_video_buttonsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(GroupLayout.Alignment.TRAILING, p_video_buttonsLayout.createSequentialGroup()
-                        .addGroup(p_video_buttonsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                //                .addGroup(p_video_buttonsLayout.createParallelGroup(Alignment.LEADING)
-                                //                .addGap(0, 0, 0)
-                                //                .addComponent(Alignment.LEADING, lab_stop, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                //                .addComponent(Alignment.LEADING, lab_record, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                //                .addComponent(Alignment.LEADING, lab_pause, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                //                .addComponent(Alignment.LEADING, b_take_image, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))//)
-                                .addComponent(lab_stop, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lab_record, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lab_pause, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(b_take_image, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))//)
+                .addGroup(p_video_buttonsLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                //                .addGroup(p_video_buttonsLayout.createParallelGroup(Alignment.LEADING)
+                //                .addGap(0, 0, 0)
+                //                .addComponent(Alignment.LEADING, lab_stop, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                //                .addComponent(Alignment.LEADING, lab_record, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                //                .addComponent(Alignment.LEADING, lab_pause, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                //                .addComponent(Alignment.LEADING, b_take_image, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))//)
+                .addComponent(lab_stop, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lab_record, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lab_pause, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(b_take_image, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))//)
 
-                        .addContainerGap()));
+                .addContainerGap()));
 
         GroupLayout p_live_streamingLayout = new GroupLayout(p_live_streaming);
         p_live_streaming.setLayout(p_live_streamingLayout);
@@ -318,17 +318,17 @@ public class ImageProcesser extends JFrame
         p_live_streamingLayout.setVerticalGroup(
                 p_live_streamingLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(p_live_streamingLayout.createSequentialGroup()
-                        .addComponent(p_media_player, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        ///   .add(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        //////   .add(0, 0, 0)
-                        ///.add(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        //.add(0, 0, 0)
-                        //.add(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        //.add(0, 0, 0)
-                        .addComponent(p_video_buttons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        //                .addGap(0, 0 0));
-                        .addContainerGap()));
+                .addComponent(p_media_player, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                ///   .add(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                //////   .add(0, 0, 0)
+                ///.add(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                //.add(0, 0, 0)
+                //.add(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                //.add(0, 0, 0)
+                .addComponent(p_video_buttons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                //                .addGap(0, 0 0));
+                .addContainerGap()));
 
         // </editor-fold>
         // <editor-fold defaultstate="collapsed" desc="File Handling Panel">
@@ -358,19 +358,19 @@ public class ImageProcesser extends JFrame
         p_file_handlingLayout.setHorizontalGroup(
                 p_file_handlingLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(p_file_handlingLayout.createSequentialGroup()
-                        .addComponent(b_load, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(b_save, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)));
+                .addComponent(b_load, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(b_save, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)));
         p_file_handlingLayout.linkSize(SwingConstants.HORIZONTAL, new Component[]{b_load, b_save});
 
         p_file_handlingLayout.setVerticalGroup(
                 p_file_handlingLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(p_file_handlingLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(p_file_handlingLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(b_load, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(b_save))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                .addGap(15, 15, 15)
+                .addGroup(p_file_handlingLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(b_load, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(b_save))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         b_load.getAccessibleContext().setAccessibleName("b_load");
         // </editor-fold>
@@ -383,25 +383,25 @@ public class ImageProcesser extends JFrame
         jPanel5Layout.setHorizontalGroup(
                 jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
-                        //       .addGap(19, 19, 19)//
-                        .addContainerGap() //235
-                        .addComponent(lab_imageIcon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(canvas2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        //.addContainerGap(262, Short.MAX_VALUE)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                //       .addGap(19, 19, 19)//
+                .addContainerGap() //235
+                .addComponent(lab_imageIcon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(canvas2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                //.addContainerGap(262, Short.MAX_VALUE)
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         jPanel5Layout.setVerticalGroup(
                 jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
-                        //  .addContainerGap()
-                        .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                //  .addGap(0, 206, Short.MAX_VALUE)
-                                .addComponent(lab_imageIcon)
-                                //               .addComponent(kk)
-                                .addComponent(canvas2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                // .addContainerGap(276, Short.MAX_VALUE))
-                                .addGap(6, 6, 6))));
+                //  .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                //  .addGap(0, 206, Short.MAX_VALUE)
+                .addComponent(lab_imageIcon)
+                //               .addComponent(kk)
+                .addComponent(canvas2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                // .addContainerGap(276, Short.MAX_VALUE))
+                .addGap(6, 6, 6))));
 
 //       p_image_disp.setM
         p_image_disp.setMaximumSize(p_image_disp.getSize());
@@ -460,38 +460,38 @@ public class ImageProcesser extends JFrame
         p_inspect_toolsLayout.setHorizontalGroup(
                 p_inspect_toolsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(p_inspect_toolsLayout.createSequentialGroup()
-                        .addGroup(p_inspect_toolsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(l_brightness1)
-                                .addComponent(l_brightness))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(p_inspect_toolsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(l_brightness1)
+                .addComponent(l_brightness))
+                .addGap(0, 0, Short.MAX_VALUE))
                 .addGroup(p_inspect_toolsLayout.createSequentialGroup()
-                        .addGroup(p_inspect_toolsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(p_inspect_toolsLayout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addGroup(p_inspect_toolsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addComponent(slide_brightness, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(slide_contrast, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(p_inspect_toolsLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(rb_gray_scale)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(rb_rgb)))
-                        .addContainerGap(63, Short.MAX_VALUE)));
+                .addGroup(p_inspect_toolsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(p_inspect_toolsLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(p_inspect_toolsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(slide_brightness, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(slide_contrast, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                .addGroup(p_inspect_toolsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rb_gray_scale)
+                .addGap(18, 18, 18)
+                .addComponent(rb_rgb)))
+                .addContainerGap(63, Short.MAX_VALUE)));
         p_inspect_toolsLayout.setVerticalGroup(
                 p_inspect_toolsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(p_inspect_toolsLayout.createSequentialGroup()
-                        .addGroup(p_inspect_toolsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                .addComponent(rb_gray_scale)
-                                .addComponent(rb_rgb))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(l_brightness)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(slide_brightness, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(l_brightness1)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(slide_contrast, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(9, Short.MAX_VALUE)));
+                .addGroup(p_inspect_toolsLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(rb_gray_scale)
+                .addComponent(rb_rgb))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(l_brightness)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(slide_brightness, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(l_brightness1)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(slide_contrast, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE)));
 
 //        slide_contrast.addChangeListener(null);
 //        slide_contrast.addChangeListener(new ChangeListener() {
@@ -575,21 +575,21 @@ public class ImageProcesser extends JFrame
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(p_title, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE) //
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(p_directional, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)//
-                                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(p_file_handling, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(p_live_streaming, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                                .addComponent(p_image_disp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(p_inspect_tools, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(p_title, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE) //
+                .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                .addComponent(p_directional, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)//
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(p_file_handling, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(p_live_streaming, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(p_image_disp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(p_inspect_tools, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         //layout.linkSize(new Component[] {jPanel5, p_inspect_tools}, SwingConstants.HORIZONTAL);
         layout.linkSize(SwingConstants.HORIZONTAL, new Component[]{p_image_disp, p_inspect_tools});
@@ -597,21 +597,21 @@ public class ImageProcesser extends JFrame
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                        .addComponent(p_title, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addComponent(p_live_streaming, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(p_image_disp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        //                  .addGroup(panel_allLayout.createParallelGroup()
-                        ///                    .addComponent(panel_fly, GroupLayout.DEFAULT_SIZE,
-                        //				  GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(p_title, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addComponent(p_live_streaming, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(p_image_disp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                //                  .addGroup(panel_allLayout.createParallelGroup()
+                ///                    .addComponent(panel_fly, GroupLayout.DEFAULT_SIZE,
+                //				  GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(p_directional, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(p_file_handling, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(p_inspect_tools, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                .addComponent(p_directional, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(p_file_handling, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(p_inspect_tools, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         layout.linkSize(SwingConstants.VERTICAL, new Component[]{p_image_disp, p_live_streaming});
         // </editor-fold>
