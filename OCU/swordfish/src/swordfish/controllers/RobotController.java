@@ -16,6 +16,7 @@ public class RobotController {
     private JInputXboxController controller;
     private RobotControllerListener listener;
     private TCPClient client;
+    private boolean do_debug = true;
     //Packet mode
     private static final byte ADDRESS = (byte) 128;
     //Standard commands
@@ -96,6 +97,10 @@ public class RobotController {
                 break;
             case rightStick:
                 break;
+        }
+
+        if (do_debug) {
+            System.out.println(button.name());
         }
     }
 

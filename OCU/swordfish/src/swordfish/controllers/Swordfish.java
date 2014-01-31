@@ -1,8 +1,6 @@
 package swordfish.controllers;
 
 import javax.swing.*;
-import swordfish.controllers.RobotController;
-import swordfish.controllers.VideoStreamer;
 
 import swordfish.views.MobileDirectionDisplayKeyboard;
 import swordfish.views.XBox360_DirectionDisplay;
@@ -21,7 +19,7 @@ public class Swordfish {
      */
     public static void main(String[] args) {
 
-        boolean do_robot_controller = false,
+        boolean do_robot_controller = true,
                 do_video_streamer = false,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
@@ -35,8 +33,7 @@ public class Swordfish {
 
         if (do_robot_controller) {
             RobotController rc = new RobotController();
-
-//            rc.connect(addr, controller_port, ui);
+            rc.connect(addr, controller_port, ui);
         }
         if (do_video_streamer) {
             VideoStreamer vs = new VideoStreamer();
