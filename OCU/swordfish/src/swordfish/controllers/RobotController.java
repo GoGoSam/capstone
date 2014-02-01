@@ -34,7 +34,6 @@ public class RobotController {
     private static final byte FBM = 12;
     private static final byte LRM = 13;
     //Keep track of controller state
-    private static final float THIRD = (float) (1.0/3.0);
     private int LX = 0;
     private int LY = 0;
 
@@ -116,7 +115,7 @@ public class RobotController {
             case leftStickX:
             case leftStickY:
                 //Round to 0, 2 or 3
-                int rState = Math.round(state/THIRD);
+                int rState = Math.round(state * 3);
                 if (rState == 1 || rState == -1) rState = 0;
                 //If LX or RX already is equal to rState then no need send another cmd
                 if (axis == Axis.leftStickX && LX != rState) LX = rState;
