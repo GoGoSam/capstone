@@ -50,10 +50,6 @@ public class JInputXboxController extends XboxController {
                 return (dpadDirection & DPAD_LEFT) == DPAD_LEFT;
             case right:
                 return (dpadDirection & DPAD_RIGHT) == DPAD_RIGHT;
-            case start:
-            case guide:
-            // The Xbox controller driver doesn't expose these buttons!
-                return false;
             case a:
                 id = Identifier.Button._0;
                 break;
@@ -72,14 +68,20 @@ public class JInputXboxController extends XboxController {
             case rightShoulder:
                 id = Identifier.Button._5;
                 break;
-            case back:
+            case leftStick:
                 id = Identifier.Button._6;
                 break;
-            case leftStick:
+            case rightStick:
+                id = Identifier.Button._7;
+                break;
+            case start:
                 id = Identifier.Button._8;
                 break;
-            case rightStick:
+            case back:
                 id = Identifier.Button._9;
+                break;
+            case guide:
+                id = Identifier.Button._10;
                 break;
 
         }
@@ -201,47 +203,46 @@ public class JInputXboxController extends XboxController {
         if (id == Identifier.Button._0) {
             return Button.a;
         }
-        if (id == Identifier.Button._1) {
-
+        else if (id == Identifier.Button._1) {
             return Button.b;
         }
-        if (id == Identifier.Button._2) {
+        else if (id == Identifier.Button._2) {
             return Button.x;
         }
-        if (id == Identifier.Button._3) {
+        else if (id == Identifier.Button._3) {
             return Button.y;
         }
-        if (id == Identifier.Button._4) {
+        else if (id == Identifier.Button._4) {
             return Button.leftShoulder;
         }
-        if (id == Identifier.Button._5) {
+        else if (id == Identifier.Button._5) {
             return Button.rightShoulder;
         }
-        if (id == Identifier.Button._6) {
+        else if (id == Identifier.Button._6) {
             return Button.leftStick;
         }
-        if (id == Identifier.Button._7) {
+        else if (id == Identifier.Button._7) {
             return Button.rightStick;
         }
-        if (id == Identifier.Button._8) {
+        else if (id == Identifier.Button._8) {
             return Button.start;
         }
-        if (id == Identifier.Button._9) {
+        else if (id == Identifier.Button._9) {
             return Button.back;
         }
-        if (id == Identifier.Button._10) {
+        else if (id == Identifier.Button._10) {
             return Button.guide;
         }
-        if (id == Identifier.Button._11) {
+        else if (id == Identifier.Button._11) {
             return Button.up;
         }
-        if (id == Identifier.Button._12) {
+        else if (id == Identifier.Button._12) {
             return Button.down;
         }
-        if (id == Identifier.Button._13) {
+        else if (id == Identifier.Button._13) {
             return Button.left;
         }
-        if (id == Identifier.Button._14) {
+        else if (id == Identifier.Button._14) {
             return Button.right;
         }
         throw new IllegalArgumentException("Unknown button ID: " + id);

@@ -1,6 +1,7 @@
 package swordfish.controllers;
 
 import com.google.protobuf.ByteString;
+import swordfish.models.RoboComms;
 import swordfish.models.device.Axis;
 import swordfish.models.device.Button;
 import swordfish.models.input.XboxController;
@@ -32,6 +33,10 @@ public class RobotController {
     private static final byte LM = 11;
     private static final byte FBM = 12;
     private static final byte LRM = 13;
+    //Keep track of controller state
+    private static final float THIRD = (float) (1.0/3.0);
+    private int LX = 0;
+    private int LY = 0;
 
     public RobotController() {
         client = new TCPClient();
@@ -101,19 +106,76 @@ public class RobotController {
 
     private void buildCommand(Axis axis, float state) {
         //TODO: Determine if this needs to be done asynch
-        //TODO: Implement this function
+        RoboReq.Builder req = RoboReq.newBuilder();
+
         switch (axis) {
             case leftTrigger:
-                break;
             case rightTrigger:
+                req.setType(RoboReq.Type.MLIFT);
                 break;
             case leftStickX:
-                break;
             case leftStickY:
+                //Round to 0, 2 or 3
+                int rState = Math.round(state/THIRD);
+                if (rState == 1 || rState == -1) rState = 0;
+                //If LX or RX already is equal to rState then no need send another cmd
+                if (axis == Axis.leftStickX && LX != rState) LX = rState;
+                else if (axis == Axis.leftStickY && LY != rState) LY = rState;
+                else break;
+                req.setType(RoboReq.Type.MBASE);
+                byte cmd = 0;
+                byte val = 0;
+                //TODO: build cmd and val based on LX and LY
+                if (LX == 0 && LY == 0) {
+                    //TODO: Stop cmd
+                    System.out.println("STOP");
+                } else if (LX == 0 && LY > 0) {
+                    //TODO: Backward cmd
+                    //LY can be 2 or 3
+                    System.out.println("BACKWARD");
+                } else if (LX == 0 && LY < 0) {
+                    //TODO: Forward cmd
+                    //LY can be -2 or -3
+                    System.out.println("FORWARD");
+                } else if (LX > 0 && LY == 0) {
+                    //TODO: Right cmd
+                    //LX can be 2 or 3
+                    System.out.println("RIGHT");
+                } else if (LX < 0 && LY == 0) {
+                    //TODO: Left cmd
+                    //LX can be -2/3 or 1
+                    System.out.println("LEFT");
+                } else if (LX > 0 && LY < 0) {
+                    //TODO: Forward Right cmd
+                    //LX can be 2 or 3
+                    //LY can be -2 or -3
+                    System.out.println("FORWARD RIGHT");
+                } else if (LX < 0 && LY < 0) {
+                    //TODO: Forward Left cmd
+                    //LX can be -2 or -3
+                    //LY can be -2 or -3
+                    System.out.println("FORWARD LEFT");
+                } else if (LX > 0 && LY > 0) {
+                    //TODO: Backward Right cmd
+                    //LX can be 2 or 3
+                    //LY can be 2 or 3
+                    System.out.println("BACKWARD RIGHT");
+                } else if (LX < 0 && LY > 0) {
+                    //TODO: Backward Left cmd
+                    //LX can be -2 or -3
+                    //LY can be 2 or 3
+                    System.out.println("BACKWARD LEFT");
+                }
+
+                byte[] t = {ADDRESS, cmd, val, checksum(ADDRESS, cmd, val)};
+                RoboReq.MoveBaseCmd.Builder mreq = RoboReq.MoveBaseCmd.newBuilder();
+                mreq.setCmd(ByteString.copyFrom(t));
+                req.setBase(mreq);
+                sendCommand(req.build());
                 break;
             case rightStickX:
-                break;
             case rightStickY:
+                req.setType(RoboReq.Type.MSENS);
                 break;
         }
     }
