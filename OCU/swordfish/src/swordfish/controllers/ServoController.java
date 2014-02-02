@@ -12,6 +12,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,12 +32,6 @@ class ServoController {
     private int current_position;
 
     public ServoController() {
-
-        try {
-            default_position();
-        } catch (JSchException | IOException ee) {
-            System.out.println(ee.getMessage());
-        }
 //        default_commands[0] = "echo 0=50% > /dev/servoblaster;";
 //        default_commands[1] = "echo 1=50% > /dev/servoblaster;";
 
@@ -90,7 +86,7 @@ class ServoController {
     /**
      * set back to default position
      */
-    public void default_position() throws JSchException, IOException {
+    public void default_position() throws JSchException, IOException, InterruptedException {
         BufferedReader in;
         String msg;
         for (int ind = 0; ind < 2; ind++) {
@@ -103,12 +99,18 @@ class ServoController {
             while ((msg = in.readLine()) != null) {
                 System.out.println(msg);
             }
+            wait(200);
+            channel.disconnect();
         }
         current_position = default_val;
     }
 
-    public void exit() throws JSchException, IOException {
-        this.default_position();
+    public void exit() {
+        try {
+            this.default_position();
+        } catch (JSchException | InterruptedException | IOException ex) {
+            Logger.getLogger(ServoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         channel.disconnect();
         session.disconnect();
     }

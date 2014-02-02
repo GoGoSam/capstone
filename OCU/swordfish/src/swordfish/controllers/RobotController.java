@@ -2,10 +2,7 @@ package swordfish.controllers;
 
 import com.google.protobuf.ByteString;
 import com.jcraft.jsch.JSchException;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import swordfish.models.device.Axis;
 import swordfish.models.device.Button;
 import swordfish.models.input.XboxController;
@@ -65,6 +62,26 @@ public class RobotController {
         startPolling();
     }
 
+    public void connect(JFrame ui) {
+        if (!servo.connect()) {
+            System.out.println("Warning: Unable to SSH onto Pi for Servoblaster\n");
+        }
+
+        try {
+            servo.default_position();
+        } catch (JSchException | IOException | InterruptedException ex) {
+            Logger.getLogger(RobotController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        List<XboxController> controllerList = XboxController.getAll();
+        if (controllerList.isEmpty()) {
+            System.out.println("Warning: No Xbox Controller Found\n");
+        }
+        controller = (JInputXboxController) XboxController.getAll().get(0);
+        controller.addListener(listener);
+        startPolling();
+    }
+
     //TODO: Delete after testing
     public void testCommand() {
         byte[] test = {ADDRESS, FM1, 127, checksum(ADDRESS, FM1, (byte) 127)};
@@ -76,46 +93,52 @@ public class RobotController {
         sendCommand(req.build());
     }
 
-    private void buildCommand(Button button, boolean pressed) throws JSchException, IOException {
+    private void buildCommand(Button button, boolean pressed) {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
-        switch (button) {
-            case up:
-                servo.execute("echo 1=" + Integer.toString(100) + " > /dev/servoblaster;");
-                break;
-            case down:
-                servo.execute("echo 1=" + Integer.toString(150) + " > /dev/servoblaster;");
-                break;
-            case left:
-                servo.execute("echo 0=" + Integer.toString(100) + " > /dev/servoblaster;");
-                break;
-            case right:
-                servo.execute("echo 0=150 > /dev/servoblaster;");
-                break;
-            case guide:
-                servo.default_position();
-                break;
-            case start:
-                servo.exit();
-                break;
-            case a:
-                break;
-            case b:
-                break;
-            case x:
-                break;
-            case y:
-                break;
-            case leftShoulder:
-                break;
-            case rightShoulder:
-                break;
-            case back:
-                break;
-            case leftStick:
-                break;
-            case rightStick:
-                break;
+        try {
+
+
+            switch (button) {
+                case up:
+                    servo.execute("echo 1=" + Integer.toString(100) + " > /dev/servoblaster;");
+                    break;
+                case down:
+                    servo.execute("echo 1=" + Integer.toString(150) + " > /dev/servoblaster;");
+                    break;
+                case left:
+                    servo.execute("echo 0=" + Integer.toString(100) + " > /dev/servoblaster;");
+                    break;
+                case right:
+                    servo.execute("echo 0=150 > /dev/servoblaster;");
+                    break;
+                case guide:
+                    break;
+                case start:
+                    servo.exit();
+                    break;
+                case a:
+                    break;
+                case b:
+                    break;
+                case x:
+                    break;
+                case y:
+                    break;
+                case leftShoulder:
+                    break;
+                case rightShoulder:
+                    break;
+                case back:
+                    break;
+                case leftStick:
+                    break;
+                case rightStick:
+                    servo.default_position();
+                    break;
+            }
+        } catch (JSchException | IOException | InterruptedException ee) {
+            System.out.println(ee.getMessage());
         }
 
         if (do_debug) {
@@ -158,38 +181,39 @@ public class RobotController {
          } else if (joystick_name.contains("Right Stick")) {
          }
          */
+//
+//        axis.getStick().getAxisX().
+        switch (axis) {
+            case leftTrigger:
+                break;
+            case rightTrigger:
+                break;
+            case leftStickX:
 
-        /*
-         switch (axis) {
-         case leftTrigger:
-         break;
-         case rightTrigger:
-         break;
-         case leftStickX:
+                if (do_debug) {
+                    System.out.println("1\n" + axis.toString() + "\n");
+                }
+                break;
+            case leftStickY:
 
-         if (do_debug) {
-         System.out.println("1\n" + axis.toString() + "\n");
-         }
-         break;
-         case leftStickY:
+                if (do_debug) {
+                    System.out.println("1.a\n" + axis.toString() + "\n");
+                }
+                break;
+            case rightStickX:
 
-         if (do_debug) {
-         System.out.println("1.a\n" + axis.toString() + "\n");
-         }
-         break;
-         case rightStickX:
+                if (do_debug) {
+                    System.out.println("2\n");
+                }
+                break;
+            case rightStickY:
 
-         if (do_debug) {
-         System.out.println("2\n");
-         }
-         break;
-         case rightStickY:
-
-         if (do_debug) {
-         System.out.println("2.a\n");
-         }
-         break;
-         }*/ {
+                if (do_debug) {
+                    System.out.println("2.a\n");
+                }
+                break;
+        }
+        {
         }
     }
 
@@ -259,11 +283,7 @@ public class RobotController {
 
         @Override
         public void buttonChanged(Button button, boolean pressed) {
-            try {
-                buildCommand(button, pressed);
-            } catch (JSchException | IOException ex) {
-                Logger.getLogger(RobotController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            buildCommand(button, pressed);
             updateUI(button, pressed);
         }
 
