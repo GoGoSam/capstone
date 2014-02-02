@@ -1,6 +1,7 @@
 package swordfish.controllers;
 
 import com.google.protobuf.ByteString;
+import com.jcraft.jsch.JSchException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +14,9 @@ import swordfish.models.RoboComms.RoboReq;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static swordfish.models.device.Button.guide;
 
 public class RobotController {
 
@@ -20,6 +24,7 @@ public class RobotController {
     private JInputXboxController controller;
     private RobotControllerListener listener;
     private TCPClient client;
+    private ServoController servo;     // SSH connection for servoblaster
     private boolean do_debug = true;
     //Packet mode
     private static final byte ADDRESS = (byte) 128;
@@ -40,29 +45,27 @@ public class RobotController {
 
     public RobotController() {
         client = new TCPClient();
+        servo = new ServoController();
         listener = new RobotControllerListener();
     }
 
     public void connect(String addr, int port, JFrame ui) {
         if (!client.connect(addr, port)) {
-            System.out.println("Unable to Connect to Robot");
+            System.out.println("Warning: Unable to Connect to Robot\n");
+        }
+        if (!servo.connect()) {
+            System.out.println("Warning: Unable to SSH onto Pi for Servoblaster\n");
         }
         List<XboxController> controllerList = XboxController.getAll();
-        if (controllerList.size() == 0) {
-            System.out.println("No Xbox Controller Found");
+        if (controllerList.isEmpty()) {
+            System.out.println("Warning: No Xbox Controller Found\n");
         }
         controller = (JInputXboxController) XboxController.getAll().get(0);
         controller.addListener(listener);
         startPolling();
     }
 
-    public void connect(JFrame ui) {
-        controller = (JInputXboxController) XboxController.getAll().get(0);
-        controller.addListener(listener);
-        startPolling();
-    }
     //TODO: Delete after testing
-
     public void testCommand() {
         byte[] test = {ADDRESS, FM1, 127, checksum(ADDRESS, FM1, (byte) 127)};
         RoboReq.Builder req = RoboReq.newBuilder();
@@ -73,21 +76,27 @@ public class RobotController {
         sendCommand(req.build());
     }
 
-    private void buildCommand(Button button, boolean pressed) {
+    private void buildCommand(Button button, boolean pressed) throws JSchException, IOException {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
         switch (button) {
             case up:
+                servo.execute("echo 1=" + Integer.toString(100) + " > /dev/servoblaster;");
                 break;
             case down:
+                servo.execute("echo 1=" + Integer.toString(150) + " > /dev/servoblaster;");
                 break;
             case left:
+                servo.execute("echo 0=" + Integer.toString(100) + " > /dev/servoblaster;");
                 break;
             case right:
-                break;
-            case start:
+                servo.execute("echo 0=150 > /dev/servoblaster;");
                 break;
             case guide:
+                servo.default_position();
+                break;
+            case start:
+                servo.exit();
                 break;
             case a:
                 break;
@@ -117,38 +126,38 @@ public class RobotController {
     private void buildCommand(Axis axis, float state) {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
-        String joystick_name = axis.toString();
-        System.out.println("1\n" + axis.toString() + "\n");
-        if (joystick_name.contains("Left")) {
-            // left joystick
-            /**
-             * Need to make seperate class
-             */
-            String instr = "echo > 0=150";
-            File outfile = new File("/Users/jrob/Desktop/test.txt");
-            boolean append = false;
-            try {
+        /*
+         String joystick_name = axis.toString();
+         System.out.println("1\n" + axis.toString() + "\n");
+         if (joystick_name.contains("Left")) {
+         // left joystick
+         //                      Need to make seperate class
 
-                FileWriter fout = new FileWriter(outfile, append);
-                PrintWriter fileout = new PrintWriter(fout, true);
-                fileout.println(instr);
-                fileout.flush();
+         String instr = "echo > 0=150";
+         File outfile = new File("/Users/jrob/Desktop/test.txt");
+         boolean append = false;
+         try {
 
-            } catch (IOException e) {
-                if (do_debug) {
-                    System.out.println(e.getMessage());
+         FileWriter fout = new FileWriter(outfile, append);
+         PrintWriter fileout = new PrintWriter(fout, true);
+         fileout.println(instr);
+         fileout.flush();
 
-                }
-            }
+         } catch (IOException e) {
+         if (do_debug) {
+         System.out.println(e.getMessage());
 
-            if (joystick_name.equals("leftstick")) { // trigger was pushed
-            } else if (joystick_name.contains("axis")) {
-                // Left Stick Y axis
-                // Left Stick X axis
-            }
-        } else if (joystick_name.contains("Right Stick")) {
-        }
+         }
+         }
 
+         if (joystick_name.equals("leftstick")) { // trigger was pushed
+         } else if (joystick_name.contains("axis")) {
+         // Left Stick Y axis
+         // Left Stick X axis
+         }
+         } else if (joystick_name.contains("Right Stick")) {
+         }
+         */
 
         /*
          switch (axis) {
@@ -250,7 +259,11 @@ public class RobotController {
 
         @Override
         public void buttonChanged(Button button, boolean pressed) {
-            buildCommand(button, pressed);
+            try {
+                buildCommand(button, pressed);
+            } catch (JSchException | IOException ex) {
+                Logger.getLogger(RobotController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             updateUI(button, pressed);
         }
 
