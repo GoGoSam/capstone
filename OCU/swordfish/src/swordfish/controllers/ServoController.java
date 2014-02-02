@@ -86,29 +86,31 @@ class ServoController {
     /**
      * set back to default position
      */
-    public void default_position() throws JSchException, IOException, InterruptedException {
-        BufferedReader in;
-        String msg;
-        for (int ind = 0; ind < 2; ind++) {
-            channel = (ChannelExec) session.openChannel("exec");
-            in = new BufferedReader(new InputStreamReader(channel.getInputStream()));
-            channel.setCommand(default_commands[ind]);
-            channel.connect();
+    public void default_position() throws JSchException, IOException {
 
-            msg = null;
-            while ((msg = in.readLine()) != null) {
-                System.out.println(msg);
-            }
-            wait(200);
-            channel.disconnect();
+//        for (int ind = 0; ind < 2; ind++) {
+
+        channel = (ChannelExec) session.openChannel("exec");
+        BufferedReader in = new BufferedReader(new InputStreamReader(channel.getInputStream()));
+        channel.setCommand(default_commands[0]);
+        channel.connect();
+
+        String msg = null;
+        while ((msg = in.readLine()) != null) {
+            System.out.println(msg);
         }
+
+
+
+//            channel.disconnect();
+//        }
         current_position = default_val;
     }
 
     public void exit() {
         try {
             this.default_position();
-        } catch (JSchException | InterruptedException | IOException ex) {
+        } catch (JSchException | IOException ex) {
             Logger.getLogger(ServoController.class.getName()).log(Level.SEVERE, null, ex);
         }
         channel.disconnect();

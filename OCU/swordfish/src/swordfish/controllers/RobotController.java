@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static swordfish.models.device.Button.guide;
+import swordfish.models.input.InputDevice;
+import swordfish.models.input.JInputJoystick;
 
 public class RobotController {
 
@@ -67,11 +69,11 @@ public class RobotController {
             System.out.println("Warning: Unable to SSH onto Pi for Servoblaster\n");
         }
 
-        try {
-            servo.default_position();
-        } catch (JSchException | IOException | InterruptedException ex) {
-            Logger.getLogger(RobotController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            servo.default_position();
+//        } catch (JSchException | IOException ex) {
+//            Logger.getLogger(RobotController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.isEmpty()) {
@@ -98,7 +100,8 @@ public class RobotController {
         //TODO: Implement this function
         try {
 
-
+            if (button.isDpad()) {
+            }
             switch (button) {
                 case up:
                     servo.execute("echo 1=" + Integer.toString(100) + " > /dev/servoblaster;");
@@ -134,10 +137,10 @@ public class RobotController {
                 case leftStick:
                     break;
                 case rightStick:
-                    servo.default_position();
+//                    servo.default_position();
                     break;
             }
-        } catch (JSchException | IOException | InterruptedException ee) {
+        } catch (JSchException | IOException ee) {
             System.out.println(ee.getMessage());
         }
 
@@ -209,7 +212,7 @@ public class RobotController {
             case rightStickY:
 
                 if (do_debug) {
-                    System.out.println("2.a\n");
+                    System.out.println(axis.rightStickY);
                 }
                 break;
         }
@@ -289,7 +292,10 @@ public class RobotController {
 
         @Override
         public void axisChanged(Axis axis, float state) {
+
+            System.out.println("\n");
             buildCommand(axis, state);
+
             updateUI(axis, state);
         }
     }
