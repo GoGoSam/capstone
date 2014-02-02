@@ -45,6 +45,8 @@ public class RobotController {
     //Keep track of controller state
     private int LX = 0;
     private int LY = 0;
+    private int RX = 0;
+    private int RY = 0;
 
     public RobotController() {
         client = new TCPClient();
@@ -191,7 +193,7 @@ public class RobotController {
 //
 //        axis.getStick().getAxisX().
         RoboReq.Builder req = RoboReq.newBuilder();
-        int rState;
+
         switch (axis) {
             case leftTrigger:
             case rightTrigger:
@@ -202,7 +204,7 @@ public class RobotController {
 
             case leftStickY:
                 //Round to 0, 2 or 3
-                rState = Math.round(state * 3);
+                int rState = Math.round(state * 3);
                 if (rState == 1 || rState == -1) {
                     rState = 0;
                 }
@@ -266,64 +268,107 @@ public class RobotController {
                 sendCommand(req.build());
                 break;
             case rightStickX:
-                break;
-            case rightStickY:
                 try {
                     //Round to 0, 2 or 3
-                    rState = Math.round(state * 3);
-                    if (rState == 1 || rState == -1) {
-                        rState = 0;
+                    int lState = Math.round(state * 3);
+                    if (lState == 1 || lState == -1) {
+                        lState = 0;
                     }
-                    //If LX or RX already is equal to rState then no need send another cmd
-                    if (axis == Axis.rightStickX && LX != rState) {
-                        LX = rState;
-                    } else if (axis == Axis.rightStickY && LY != rState) {
-                        LY = rState;
+                    //If RX or LX already is equal to rState then no need send another cmd
+                    if (axis == Axis.rightStickX && RX != lState) {
+                        RX = lState;
+                    } else if (axis == Axis.rightStickY && LY != lState) {
+                        RY = lState;
                     } else {
                         break;
                     }
                     req.setType(RoboReq.Type.MSENS);
 
                     //TODO: build cmd and val based on LX and LY
-                    if (LX == 0 && LY == 0) {
-                        //TODO: Stop cmd
+                    if (RX == 0 && RY == 0) {
                         System.out.println("STOP");
-                    } else if (LX == 0 && LY > 0) {
-                        //TODO: Backward cmd
-                        //LY can be 2 or 3
+                    } else if (RX == 0 && RY > 0) {
+                        servo.execute(1, 0);
                         System.out.println("DOWN");
-                    } else if (LX == 0 && LY < 0) {
-                        //TODO: Forward cmd
-                        //LY can be -2 or -3
-                        System.out.println("UP");
-                    } else if (LX > 0 && LY == 0) {
-                        //TODO: Right cmd
-                        //LX can be 2 or 3
+                    } else if (RX == 0 && RY < 0) {
                         servo.execute(1, 1);
+                        System.out.println("UP");
+                    } else if (RX > 0 && RY == 0) {
+                        servo.execute(0, 1);
                         System.out.println("RIGHT");
-                    } else if (LX < 0 && LY == 0) {
-                        //TODO: Left cmd
-                        //LX can be -2/3 or 1
+                    } else if (RX < 0 && RY == 0) {
+                        servo.execute(0, 0);
                         System.out.println("LEFT");
-                    } else if (LX > 0 && LY < 0) {
-                        //TODO: Forward Right cmd
-                        //LX can be 2 or 3
-                        //LY can be -2 or -3
-                        System.out.println("FORWARD RIGHT");
-                    } else if (LX < 0 && LY < 0) {
-                        //TODO: Forward Left cmd
-                        //LX can be -2 or -3
-                        //LY can be -2 or -3
+                    } else if (RX > 0 && RY < 0) {
+                        servo.execute(0, 1);
+                        servo.execute(1, 1);
+
+                        System.out.println("UP RIGHT");
+                    } else if (RX < 0 && RY < 0) {
+                        servo.execute(1, 1);
+                        servo.execute(0, 0);
                         System.out.println("FORWARD LEFT");
-                    } else if (LX > 0 && LY > 0) {
-                        //TODO: Backward Right cmd
-                        //LX can be 2 or 3
-                        //LY can be 2 or 3
-                        System.out.println("BACKWARD RIGHT");
-                    } else if (LX < 0 && LY > 0) {
-                        //TODO: Backward Left cmd
-                        //LX can be -2 or -3
-                        //LY can be 2 or 3
+                    } else if (RX > 0 && RY > 0) {
+                        servo.execute(1, 0);
+                        servo.execute(0, 1);
+                        System.out.println("DOWN RIGHT");
+                    } else if (RX < 0 && RY > 0) {
+                        servo.execute(1, 0);
+                        servo.execute(0, 0);
+                        System.out.println("BACKWARD LEFT");
+                    }
+                } catch (JSchException | IOException ee) {
+                    System.out.println(ee.getMessage());
+                }
+                break;
+            case rightStickY:
+                try {
+                    //Round to 0, 2 or 3
+                    int lState = Math.round(state * 3);
+                    if (lState == 1 || lState == -1) {
+                        lState = 0;
+                    }
+                    //If RX or LX already is equal to rState then no need send another cmd
+                    if (axis == Axis.rightStickX && RX != lState) {
+                        RX = lState;
+                    } else if (axis == Axis.rightStickY && RY != lState) {
+                        RY = lState;
+                    } else {
+                        break;
+                    }
+                    req.setType(RoboReq.Type.MSENS);
+
+                    //TODO: build cmd and val based on LX and LY
+                    if (RX == 0 && RY == 0) {
+                        System.out.println("STOP");
+                    } else if (RX == 0 && RY > 0) {
+                        servo.execute(1, 0);
+                        System.out.println("DOWN");
+                    } else if (RX == 0 && RY < 0) {
+                        servo.execute(1, 1);
+                        System.out.println("UP");
+                    } else if (RX > 0 && RY == 0) {
+                        servo.execute(0, 1);
+                        System.out.println("RIGHT");
+                    } else if (RX < 0 && RY == 0) {
+                        servo.execute(0, 0);
+                        System.out.println("LEFT");
+                    } else if (RX > 0 && RY < 0) {
+                        servo.execute(0, 1);
+                        servo.execute(1, 1);
+
+                        System.out.println("UP RIGHT");
+                    } else if (RX < 0 && RY < 0) {
+                        servo.execute(1, 1);
+                        servo.execute(0, 0);
+                        System.out.println("FORWARD LEFT");
+                    } else if (RX > 0 && RY > 0) {
+                        servo.execute(1, 0);
+                        servo.execute(0, 1);
+                        System.out.println("DOWN RIGHT");
+                    } else if (RX < 0 && RY > 0) {
+                        servo.execute(1, 0);
+                        servo.execute(0, 0);
                         System.out.println("BACKWARD LEFT");
                     }
                 } catch (JSchException | IOException ee) {
