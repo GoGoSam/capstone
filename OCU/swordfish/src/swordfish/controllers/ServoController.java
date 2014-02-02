@@ -22,12 +22,29 @@ class ServoController {
     private ChannelExec channel;
     private JSch jsch;
     private Session session;
-    String[] default_vals = new String[2];
+    String[] default_commands = new String[2];
+    String[][] commands = new String[2][15];
+    private static final int lower_limit = 50;
+    private static final int upper_limit = 220;
+    private static final int default_val = 150;
+    private int current_position;
 
     public ServoController() {
 
-        default_vals[0] = "echo 0=50% > /dev/servoblaster;";
-        default_vals[1] = "echo 1=50% > /dev/servoblaster;";
+        try {
+            default_position();
+        } catch (JSchException | IOException ee) {
+            System.out.println(ee.getMessage());
+        }
+//        default_commands[0] = "echo 0=50% > /dev/servoblaster;";
+//        default_commands[1] = "echo 1=50% > /dev/servoblaster;";
+
+        commands[0][0] = "echo 0=-10 > /dev/servoblaster;";
+        commands[0][1] = "echo 0=+10 > /dev/servoblaster;";
+
+        commands[1][0] = "echo 1=-10 > /dev/servoblaster;";
+        commands[1][1] = "echo 1=+10 > /dev/servoblaster;";
+
     }
 
     /**
@@ -79,7 +96,7 @@ class ServoController {
         for (int ind = 0; ind < 2; ind++) {
             channel = (ChannelExec) session.openChannel("exec");
             in = new BufferedReader(new InputStreamReader(channel.getInputStream()));
-            channel.setCommand(default_vals[ind]);
+            channel.setCommand(default_commands[ind]);
             channel.connect();
 
             msg = null;
@@ -87,6 +104,7 @@ class ServoController {
                 System.out.println(msg);
             }
         }
+        current_position = default_val;
     }
 
     public void exit() throws JSchException, IOException {
