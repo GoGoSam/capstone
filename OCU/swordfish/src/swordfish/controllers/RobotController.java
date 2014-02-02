@@ -268,58 +268,58 @@ public class RobotController {
                 sendCommand(req.build());
                 break;
             case rightStickX:
-                try {
-                    //Round to 0, 2 or 3
-                    int lState = Math.round(state * 3);
-                    if (lState == 1 || lState == -1) {
-                        lState = 0;
-                    }
-                    //If RX or LX already is equal to rState then no need send another cmd
-                    if (axis == Axis.rightStickX && RX != lState) {
-                        RX = lState;
-                    } else if (axis == Axis.rightStickY && LY != lState) {
-                        RY = lState;
-                    } else {
-                        break;
-                    }
-                    req.setType(RoboReq.Type.MSENS);
+                /*   try {
+                 //Round to 0, 2 or 3
+                 int lState = Math.round(state * 3);
+                 if (lState == 1 || lState == -1) {
+                 lState = 0;
+                 }
+                 //If RX or LX already is equal to rState then no need send another cmd
+                 if (axis == Axis.rightStickX && RX != lState) {
+                 RX = lState;
+                 } else if (axis == Axis.rightStickY && LY != lState) {
+                 RY = lState;
+                 } else {
+                 break;
+                 }
+                 req.setType(RoboReq.Type.MSENS);
 
-                    //TODO: build cmd and val based on LX and LY
-                    if (RX == 0 && RY == 0) {
-                        System.out.println("STOP");
-                    } else if (RX == 0 && RY > 0) {
-                        servo.execute(1, 0);
-                        System.out.println("DOWN");
-                    } else if (RX == 0 && RY < 0) {
-                        servo.execute(1, 1);
-                        System.out.println("UP");
-                    } else if (RX > 0 && RY == 0) {
-                        servo.execute(0, 1);
-                        System.out.println("RIGHT");
-                    } else if (RX < 0 && RY == 0) {
-                        servo.execute(0, 0);
-                        System.out.println("LEFT");
-                    } else if (RX > 0 && RY < 0) {
-                        servo.execute(0, 1);
-                        servo.execute(1, 1);
+                 //TODO: build cmd and val based on LX and LY
+                 if (RX == 0 && RY == 0) {
+                 System.out.println("STOP");
+                 } else if (RX == 0 && RY > 0) {
+                 servo.execute(1, 0);
+                 System.out.println("DOWN");
+                 } else if (RX == 0 && RY < 0) {
+                 servo.execute(1, 1);
+                 System.out.println("UP");
+                 } else if (RX > 0 && RY == 0) {
+                 servo.execute(0, 1);
+                 System.out.println("RIGHT");
+                 } else if (RX < 0 && RY == 0) {
+                 servo.execute(0, 0);
+                 System.out.println("LEFT");
+                 } else if (RX > 0 && RY < 0) {
+                 servo.execute(0, 1);
+                 servo.execute(1, 1);
 
-                        System.out.println("UP RIGHT");
-                    } else if (RX < 0 && RY < 0) {
-                        servo.execute(1, 1);
-                        servo.execute(0, 0);
-                        System.out.println("FORWARD LEFT");
-                    } else if (RX > 0 && RY > 0) {
-                        servo.execute(1, 0);
-                        servo.execute(0, 1);
-                        System.out.println("DOWN RIGHT");
-                    } else if (RX < 0 && RY > 0) {
-                        servo.execute(1, 0);
-                        servo.execute(0, 0);
-                        System.out.println("BACKWARD LEFT");
-                    }
-                } catch (JSchException | IOException ee) {
-                    System.out.println(ee.getMessage());
-                }
+                 System.out.println("UP RIGHT");
+                 } else if (RX < 0 && RY < 0) {
+                 servo.execute(1, 1);
+                 servo.execute(0, 0);
+                 System.out.println("FORWARD LEFT");
+                 } else if (RX > 0 && RY > 0) {
+                 servo.execute(1, 0);
+                 servo.execute(0, 1);
+                 System.out.println("DOWN RIGHT");
+                 } else if (RX < 0 && RY > 0) {
+                 servo.execute(1, 0);
+                 servo.execute(0, 0);
+                 System.out.println("BACKWARD LEFT");
+                 }
+                 } catch (JSchException | IOException ee) {
+                 System.out.println(ee.getMessage());
+                 }*/
                 break;
             case rightStickY:
                 try {
