@@ -83,6 +83,18 @@ class ServoController {
         }
     }
 
+    public void execute(int servo_id, int command) throws JSchException, IOException {
+        channel = (ChannelExec) session.openChannel("exec");
+        BufferedReader in = new BufferedReader(new InputStreamReader(channel.getInputStream()));
+        channel.setCommand(commands[servo_id][command]);
+        channel.connect();
+
+        String msg = null;
+        while ((msg = in.readLine()) != null) {
+            System.out.println(msg);
+        }
+    }
+
     /**
      * set back to default position
      */
