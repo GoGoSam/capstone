@@ -1,5 +1,6 @@
 package swordfish.controllers;
 
+import com.jcraft.jsch.JSchException;
 import javax.swing.*;
 
 import swordfish.views.MobileDirectionDisplayKeyboard;
@@ -17,7 +18,7 @@ public class Swordfish {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JSchException {
 
         boolean do_robot_controller = true,
                 do_video_streamer = false,
@@ -56,5 +57,6 @@ public class Swordfish {
             ImageAnalyzerWindow iaw = new ImageAnalyzerWindow();
             iaw.setVisible(true);
         }
+
     }
 }

@@ -52,7 +52,7 @@ public class LiveStreamerWindow extends JFrame
     private JPanel p_directionals;
     private boolean do_debug = true;
     boolean[] f_video_loaded = new boolean[1];
-    MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
+//    MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
 //    MyMediaPlayer media_pan;
     String icon_path = System.getProperty("user.dir") + "/resources/";
 
