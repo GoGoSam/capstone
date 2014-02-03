@@ -110,21 +110,22 @@ public class RobotController {
             }
             switch (button) {
                 case up:
-                    servo.execute("echo 1=" + Integer.toString(100) + " > /dev/servoblaster;");
+//                    servo.execute("echo 1=" + Integer.toString(100) + " > /dev/servoblaster;");
                     break;
                 case down:
-                    servo.execute("echo 1=" + Integer.toString(150) + " > /dev/servoblaster;");
+//                    servo.execute("echo 1=" + Integer.toString(150) + " > /dev/servoblaster;");
                     break;
                 case left:
-                    servo.execute("echo 0=" + Integer.toString(100) + " > /dev/servoblaster;");
+//                    servo.execute("echo 0=" + Integer.toString(100) + " > /dev/servoblaster;");
                     break;
                 case right:
-                    servo.execute("echo 0=150 > /dev/servoblaster;");
+//                    servo.execute("echo 0=150 > /dev/servoblaster;");
                     break;
                 case guide:
                     break;
                 case start:
-                    servo.exit();
+//                    servo.default_position();
+//                    servo.exit();
                     break;
                 case a:
                     break;
@@ -143,7 +144,9 @@ public class RobotController {
                 case leftStick:
                     break;
                 case rightStick:
-//                    servo.default_position();
+                    System.out.println("clicked");
+                    servo.default_position(0);
+                    servo.default_position(1);
                     break;
             }
         } catch (JSchException | IOException ee) {

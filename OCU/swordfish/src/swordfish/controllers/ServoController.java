@@ -29,17 +29,18 @@ class ServoController {
     private static final int lower_limit = 50;
     private static final int upper_limit = 220;
     private static final int default_val = 150;
-    private int current_position;
+    private int[] current_position = new int[2];
 
     public ServoController() {
-//        default_commands[0] = "echo 0=50% > /dev/servoblaster;";
-//        default_commands[1] = "echo 1=50% > /dev/servoblaster;";
+        default_commands[0] = "echo 0=50% > /dev/servoblaster;";
+        default_commands[1] = "echo 1=50% > /dev/servoblaster;";
 
         commands[0][0] = "echo 0=-10 > /dev/servoblaster;";
         commands[0][1] = "echo 0=+10 > /dev/servoblaster;";
 
         commands[1][0] = "echo 1=-10 > /dev/servoblaster;";
         commands[1][1] = "echo 1=+10 > /dev/servoblaster;";
+
 
     }
 
@@ -98,34 +99,48 @@ class ServoController {
     /**
      * set back to default position
      */
-    public void default_position() throws JSchException, IOException {
+    public void default_position(int servo_id) throws JSchException, IOException {
 
 //        for (int ind = 0; ind < 2; ind++) {
 
-        channel = (ChannelExec) session.openChannel("exec");
-        BufferedReader in = new BufferedReader(new InputStreamReader(channel.getInputStream()));
-        channel.setCommand(default_commands[0]);
-        channel.connect();
+        if (servo_id == 0) {
+            channel = (ChannelExec) session.openChannel("exec");
+            BufferedReader in = new BufferedReader(new InputStreamReader(channel.getInputStream()));
+            channel.setCommand(default_commands[0]);
+            channel.connect();
 
-        String msg = null;
-        while ((msg = in.readLine()) != null) {
-            System.out.println(msg);
+            String msg = null;
+            while ((msg = in.readLine()) != null) {
+                System.out.println(msg);
+            }
+            current_position[0] = default_val;
+        } else if (servo_id == 1) {
+            channel = (ChannelExec) session.openChannel("exec");
+            BufferedReader in = new BufferedReader(new InputStreamReader(channel.getInputStream()));
+            channel.setCommand(default_commands[1]);
+            channel.connect();
+
+            String msg = null;
+            while ((msg = in.readLine()) != null) {
+                System.out.println(msg);
+            }
+            current_position[1] = default_val;
         }
-
 
 
 //            channel.disconnect();
 //        }
-        current_position = default_val;
+
     }
 
     public void exit() {
-        try {
-            this.default_position();
-        } catch (JSchException | IOException ex) {
-            Logger.getLogger(ServoController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            this.default_position();
+//        } catch (JSchException | IOException ex) {
+//            Logger.getLogger(ServoController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         channel.disconnect();
         session.disconnect();
+        System.out.println("Servo has been disconnected");
     }
 }
