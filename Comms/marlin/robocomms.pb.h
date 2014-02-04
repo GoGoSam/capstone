@@ -311,14 +311,14 @@ class RoboReq_MoveSensCmd : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional bytes cmd = 1;
+  // optional string cmd = 1;
   inline bool has_cmd() const;
   inline void clear_cmd();
   static const int kCmdFieldNumber = 1;
   inline const ::std::string& cmd() const;
   inline void set_cmd(const ::std::string& value);
   inline void set_cmd(const char* value);
-  inline void set_cmd(const void* value, size_t size);
+  inline void set_cmd(const char* value, size_t size);
   inline ::std::string* mutable_cmd();
   inline ::std::string* release_cmd();
   inline void set_allocated_cmd(::std::string* cmd);
@@ -951,7 +951,7 @@ inline void RoboReq_MoveLiftCmd::set_allocated_cmd(::std::string* cmd) {
 
 // RoboReq_MoveSensCmd
 
-// optional bytes cmd = 1;
+// optional string cmd = 1;
 inline bool RoboReq_MoveSensCmd::has_cmd() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -984,7 +984,7 @@ inline void RoboReq_MoveSensCmd::set_cmd(const char* value) {
   }
   cmd_->assign(value);
 }
-inline void RoboReq_MoveSensCmd::set_cmd(const void* value, size_t size) {
+inline void RoboReq_MoveSensCmd::set_cmd(const char* value, size_t size) {
   set_has_cmd();
   if (cmd_ == &::google::protobuf::internal::kEmptyString) {
     cmd_ = new ::std::string;
