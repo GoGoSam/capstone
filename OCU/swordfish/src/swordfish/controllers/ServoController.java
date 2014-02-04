@@ -29,6 +29,7 @@ class ServoController {
     private static final int lower_limit = 50;
     private static final int upper_limit = 220;
     private static final int default_val = 150;
+    int aa;
     private int[] current_position = new int[2];
 
     public ServoController() {
@@ -97,7 +98,7 @@ class ServoController {
     }
 
     /**
-     * set back to default position
+     * set back to default position TODO: slow down (see below)
      */
     public void default_position(int servo_id) throws JSchException, IOException {
 
@@ -106,7 +107,23 @@ class ServoController {
         if (servo_id == 0) {
             channel = (ChannelExec) session.openChannel("exec");
             BufferedReader in = new BufferedReader(new InputStreamReader(channel.getInputStream()));
+            /*
+             if (current_position[0] > 10) {
+             int abs_diff = Math.abs(default_val - current_position[0]);
+
+             int step_size = abs_diff / 2;
+             if ((5 % 2) == 1) {
+             // round up to nearest tens place
+             step_size += 5;
+             }
+             // need to devise unique position, according to the halfway point
+             for (int i = 0; i < 2; i++) {
+
+             }
+             }*/
             channel.setCommand(default_commands[0]);
+
+//            channel.
             channel.connect();
 
             String msg = null;
