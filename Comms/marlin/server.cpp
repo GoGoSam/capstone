@@ -35,7 +35,7 @@ int main(int argc, const char* argv[])
         int port = std::atoi(argv[1]);
         const char* device = argv[2];
         if(strcmp(device, "/dev/servoblaster")) {
-            servos.open(device);
+            servos.open(device, std::ofstream::out | std::ofstream::trunc);
         } else {
             serial = serial_connection::create(io_service, device);
         }
@@ -171,7 +171,7 @@ void session::process_request(RoboComms::RoboReq req)
             break;
         case 2:
             //Robot sensor move command
-            servos << req.sens().cmd();
+            servos << req.sens().cmd() << std::endl;
             break;
         case 3:
             //Robot data request command
