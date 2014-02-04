@@ -28,18 +28,20 @@ public class Swordfish {
                 do_media_streamer_ui = false,
                 do_image_processor = false;
 
-        String addr = "192.168.1.101";
+        String p1_addr = "192.168.1.101";
+        String p2_addr = "192.168.1.101";
+        int p1_port = 5555;
+        int p2_port = 5555;
         int video_port = 6789;
-        int controller_port = 5555;
         JFrame ui = new JFrame();
 
         if (do_robot_controller) {
             RobotController rc = new RobotController();
-            rc.connect(addr, controller_port, ui);
+            rc.connect(p1_addr, p2_addr, p1_port, p2_port, ui);
         }
         if (do_video_streamer) {
             VideoStreamer vs = new VideoStreamer();
-            vs.connect(addr, video_port, ui);
+            vs.connect(p1_addr, video_port, ui);
         }
         if (do_xbox_dir_diplay) {
             XBox360_DirectionDisplay xboxDD = new XBox360_DirectionDisplay();

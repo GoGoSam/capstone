@@ -1,7 +1,6 @@
 package swordfish.controllers;
 
 import com.google.protobuf.ByteString;
-import swordfish.models.RoboComms;
 import swordfish.models.device.Axis;
 import swordfish.models.device.Button;
 import swordfish.models.input.XboxController;
@@ -16,7 +15,8 @@ public class RobotController {
     private volatile PollerThread thread;
     private JInputXboxController controller;
     private RobotControllerListener listener;
-    private TCPClient client;
+    private TCPClient p1_client;
+    private TCPClient p2_client;
     //Packet mode
     private static final byte ADDRESS = (byte) 128;
     //Standard commands
@@ -38,13 +38,17 @@ public class RobotController {
     private int LY = 0;
 
     public RobotController() {
-        client = new TCPClient();
+        p1_client = new TCPClient();
+        p2_client = new TCPClient();
         listener = new RobotControllerListener();
     }
 
-    public void connect(String addr, int port, JFrame ui) {
-        if (!client.connect(addr, port)) {
-            System.out.println("Unable to Connect to Robot");
+    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, JFrame ui) {
+        if (!p1_client.connect(p1_addr, p1_port)) {
+            System.out.format("Unable to Connect to %s at %d\n", p1_addr, p1_port);
+        }
+        if (!p2_client.connect(p2_addr, p2_port)) {
+            System.out.format("Unable to Connect to %s at %d\n", p2_addr, p2_port);
         }
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.size() == 0) {
@@ -53,17 +57,6 @@ public class RobotController {
         controller = (JInputXboxController) XboxController.getAll().get(0);
         controller.addListener(listener);
         startPolling();
-    }
-
-    //TODO: Delete after testing
-    public void testCommand() {
-        byte[] test = {ADDRESS, FM1, 127, checksum(ADDRESS, FM1, (byte) 127)};
-        RoboReq.Builder req = RoboReq.newBuilder();
-        req.setType(RoboReq.Type.MBASE);
-        RoboReq.MoveBaseCmd.Builder mreq = RoboReq.MoveBaseCmd.newBuilder();
-        mreq.setCmd(ByteString.copyFrom(test));
-        req.setBase(mreq);
-        sendCommand(req.build());
     }
 
     private void buildCommand(Button button, boolean pressed) {
@@ -170,11 +163,12 @@ public class RobotController {
                 RoboReq.MoveBaseCmd.Builder mreq = RoboReq.MoveBaseCmd.newBuilder();
                 mreq.setCmd(ByteString.copyFrom(t));
                 req.setBase(mreq);
-                sendCommand(req.build());
+                sendCommand(req.build(), p1_client);
                 break;
             case rightStickX:
             case rightStickY:
                 req.setType(RoboReq.Type.MSENS);
+                sendCommand(req.build(), p2_client);
                 break;
         }
     }
@@ -183,7 +177,7 @@ public class RobotController {
         return (byte) ((addr + command + data) & 0x7F);
     }
 
-    private void sendCommand(RoboReq req) {
+    private void sendCommand(RoboReq req, TCPClient client) {
         //TODO: Determine if this needs to be done asynch
         client.send(req);
     }
