@@ -3,6 +3,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
 #include <google/protobuf/io/coded_stream.h>
@@ -16,7 +17,10 @@ using google::protobuf::io::ArrayInputStream;
 using google::protobuf::io::OstreamOutputStream;
 
 serial_connection::pointer serial;
+std::ofstream servos;
 
+//TODO: Handle cleanup when killed
+//Close servos and serial
 int main(int argc, const char* argv[])
 {
     try
@@ -30,9 +34,13 @@ int main(int argc, const char* argv[])
         boost::asio::io_service io_service;
         int port = std::atoi(argv[1]);
         const char* device = argv[2];
+        if(strcmp(device, "/dev/servoblaster")) {
+            servos.open(device, std::ofstream::out | std::ofstream::trunc);
+        } else {
+            serial = serial_connection::create(io_service, device);
+        }
         std::cout << "Serving on port " << port << std::endl;
         std::cout << "Controlling device " << device << std::endl;
-        serial = serial_connection::create(io_service, device);
         server s(io_service, port);
         io_service.run();
     }
@@ -163,8 +171,7 @@ void session::process_request(RoboComms::RoboReq req)
             break;
         case 2:
             //Robot sensor move command
-            //Using servoblaster this should write commands to /dev/servoblaster file
-            //f.write(req.sens().cmd();
+            servos << req.sens().cmd() << std::endl;
             break;
         case 3:
             //Robot data request command

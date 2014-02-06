@@ -29,7 +29,7 @@ message RoboReq {
     }
 
     message MoveSensCmd {
-        optional bytes cmd = 1;
+        optional string cmd = 1;
 
     }
 

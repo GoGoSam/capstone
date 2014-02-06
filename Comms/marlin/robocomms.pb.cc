@@ -227,7 +227,7 @@ void protobuf_AddDesc_robocomms_2eproto() {
     "boReq.MoveSensCmd\022(\n\004data\030\005 \001(\0132\032.RoboCo"
     "mms.RoboReq.DataReq\032\032\n\013MoveBaseCmd\022\013\n\003cm"
     "d\030\001 \001(\014\032\032\n\013MoveLiftCmd\022\013\n\003cmd\030\001 \001(\014\032\032\n\013M"
-    "oveSensCmd\022\013\n\003cmd\030\001 \001(\014\032\026\n\007DataReq\022\013\n\003cm"
+    "oveSensCmd\022\013\n\003cmd\030\001 \001(\t\032\026\n\007DataReq\022\013\n\003cm"
     "d\030\001 \001(\t\"2\n\004Type\022\t\n\005MBASE\020\000\022\t\n\005MLIFT\020\001\022\t\n"
     "\005MSENS\020\002\022\t\n\005RDATA\020\003\"\205\001\n\007RoboRes\022%\n\004type\030"
     "\001 \002(\0162\027.RoboComms.RoboRes.Type\022(\n\004data\030\002"
@@ -794,12 +794,15 @@ bool RoboReq_MoveSensCmd::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional bytes cmd = 1;
+      // optional string cmd = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_cmd()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->cmd().data(), this->cmd().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -825,9 +828,12 @@ bool RoboReq_MoveSensCmd::MergePartialFromCodedStream(
 
 void RoboReq_MoveSensCmd::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional bytes cmd = 1;
+  // optional string cmd = 1;
   if (has_cmd()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->cmd().data(), this->cmd().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
       1, this->cmd(), output);
   }
 
@@ -839,10 +845,13 @@ void RoboReq_MoveSensCmd::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* RoboReq_MoveSensCmd::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional bytes cmd = 1;
+  // optional string cmd = 1;
   if (has_cmd()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->cmd().data(), this->cmd().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         1, this->cmd(), target);
   }
 
@@ -857,10 +866,10 @@ int RoboReq_MoveSensCmd::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional bytes cmd = 1;
+    // optional string cmd = 1;
     if (has_cmd()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->cmd());
     }
 

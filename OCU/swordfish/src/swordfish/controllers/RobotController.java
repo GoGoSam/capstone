@@ -26,6 +26,8 @@ public class RobotController {
     private TCPClient client;
     private ServoController servo;     // SSH connection for servoblaster
     private boolean do_debug = true;
+    private TCPClient p1_client;
+    private TCPClient p2_client;
     //Packet mode
     private static final byte ADDRESS = (byte) 128;
     //Standard commands
@@ -52,15 +54,17 @@ public class RobotController {
     public RobotController() {
         client = new TCPClient();
         servo = new ServoController();
+        p1_client = new TCPClient();
+        p2_client = new TCPClient();
         listener = new RobotControllerListener();
     }
 
-    public void connect(String addr, int port, JFrame ui) {
-        if (!client.connect(addr, port)) {
-            System.out.println("Warning: Unable to Connect to Robot\n");
+    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, JFrame ui) {
+        if (!p1_client.connect(p1_addr, p1_port)) {
+            System.out.format("Unable to Connect to %s at %d\n", p1_addr, p1_port);
         }
-        if (!servo.connect()) {
-            System.out.println("Warning: Unable to SSH onto Pi for Servoblaster\n");
+        if (!p2_client.connect(p2_addr, p2_port)) {
+            System.out.format("Unable to Connect to %s at %d\n", p2_addr, p2_port);
         }
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.isEmpty()) {
@@ -208,22 +212,14 @@ public class RobotController {
                 req.setType(RoboReq.Type.MLIFT);
                 break;
             case leftStickX:
-
-
             case leftStickY:
                 //Round to 0, 2 or 3
                 int rState = Math.round(state * 3);
-                if (rState == 1 || rState == -1) {
-                    rState = 0;
-                }
+                if (rState == 1 || rState == -1) rState = 0;
                 //If LX or RX already is equal to rState then no need send another cmd
-                if (axis == Axis.leftStickX && LX != rState) {
-                    LX = rState;
-                } else if (axis == Axis.leftStickY && LY != rState) {
-                    LY = rState;
-                } else {
-                    break;
-                }
+                if (axis == Axis.leftStickX && LX != rState) LX = rState;
+                else if (axis == Axis.leftStickY && LY != rState) LY = rState;
+                else break;
                 req.setType(RoboReq.Type.MBASE);
                 byte cmd = 0;
                 byte val = 0;
@@ -273,7 +269,7 @@ public class RobotController {
                 RoboReq.MoveBaseCmd.Builder mreq = RoboReq.MoveBaseCmd.newBuilder();
                 mreq.setCmd(ByteString.copyFrom(t));
                 req.setBase(mreq);
-                sendCommand(req.build());
+                sendCommand(req.build(), p1_client);
                 break;
             case rightStickX:
                 try {
@@ -472,9 +468,9 @@ public class RobotController {
 //                mreq.setCmd(ByteString.copyFrom(t));
 //                req.setBase(mreq);
 //                sendCommand(req.build());
+                req.setType(RoboReq.Type.MSENS);
+                sendCommand(req.build(), p2_client);
                 break;
-        }
-        {
         }
     }
 
@@ -482,7 +478,7 @@ public class RobotController {
         return (byte) ((addr + command + data) & 0x7F);
     }
 
-    private void sendCommand(RoboReq req) {
+    private void sendCommand(RoboReq req, TCPClient client) {
         //TODO: Determine if this needs to be done asynch
         client.send(req);
     }
