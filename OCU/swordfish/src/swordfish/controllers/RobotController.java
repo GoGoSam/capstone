@@ -98,17 +98,6 @@ public class RobotController {
         startPolling();
     }
 
-    //TODO: Delete after testing
-    public void testCommand() {
-        byte[] test = {ADDRESS, FM1, 127, checksum(ADDRESS, FM1, (byte) 127)};
-        RoboReq.Builder req = RoboReq.newBuilder();
-        req.setType(RoboReq.Type.MBASE);
-        RoboReq.MoveBaseCmd.Builder mreq = RoboReq.MoveBaseCmd.newBuilder();
-        mreq.setCmd(ByteString.copyFrom(test));
-        req.setBase(mreq);
-        sendCommand(req.build());
-    }
-
     private void buildCommand(Button button, boolean pressed) {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
@@ -215,11 +204,17 @@ public class RobotController {
             case leftStickY:
                 //Round to 0, 2 or 3
                 int rState = Math.round(state * 3);
-                if (rState == 1 || rState == -1) rState = 0;
+                if (rState == 1 || rState == -1) {
+                    rState = 0;
+                }
                 //If LX or RX already is equal to rState then no need send another cmd
-                if (axis == Axis.leftStickX && LX != rState) LX = rState;
-                else if (axis == Axis.leftStickY && LY != rState) LY = rState;
-                else break;
+                if (axis == Axis.leftStickX && LX != rState) {
+                    LX = rState;
+                } else if (axis == Axis.leftStickY && LY != rState) {
+                    LY = rState;
+                } else {
+                    break;
+                }
                 req.setType(RoboReq.Type.MBASE);
                 byte cmd = 0;
                 byte val = 0;
