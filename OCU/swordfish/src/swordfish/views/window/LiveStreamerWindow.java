@@ -31,6 +31,7 @@ import java.util.logging.Logger;
 import swordfish.views.dialog.LogIn;
 import swordfish.views.MobileDirectionDisplayKeyboard;
 import swordfish.applications.LiveStreamer;
+import swordfish.controllers.RobotController;
 //import java.io.*;
 
 /**
@@ -40,7 +41,7 @@ import swordfish.applications.LiveStreamer;
 public class LiveStreamerWindow extends JFrame
         implements KeyListener, WindowListener {
 
-    private JFrame frmLiveStreamerDisplay;
+//    private JFrame frmLiveStreamerDisplay;
     /**
      * Creates new form LiveStreamerWindow
      */
@@ -52,6 +53,7 @@ public class LiveStreamerWindow extends JFrame
     private JPanel p_directionals;
     private boolean do_debug = true;
     boolean[] f_video_loaded = new boolean[1];
+    private RobotController rc;
 //    MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
 //    MyMediaPlayer media_pan;
     String icon_path = System.getProperty("user.dir") + "/resources/";
@@ -63,9 +65,10 @@ public class LiveStreamerWindow extends JFrame
         initMediaPlayer();
         init();
         initContainer();
-        frmLiveStreamerDisplay = this;
+//        frmLiveStreamerDisplay = this;
         f_video_loaded[0] = false;
-
+        rc = new RobotController();
+        rc.connect(this);
         set_button_states();
         setResizable(false);
 //        JPanel p_directionals = new MobileDirectionDisplayKeyboard().getPanelDisplay();
@@ -83,6 +86,8 @@ public class LiveStreamerWindow extends JFrame
 //        b_vid_rw.setEnabled(f_video_loaded[0]);
         b_vid_stop.setEnabled(f_video_loaded[0]);
         b_capture_moment.setEnabled(f_video_loaded[0]);
+
+        cb_controller_connected.setSelected(rc.isConnected());
 
     }
 
@@ -1663,49 +1668,23 @@ public class LiveStreamerWindow extends JFrame
             icon_down.setEnabled(false);
         }
     }
-
     // </editor-fold>
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-     * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-     */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//        } catch (Exception ee) {
-//        }
-    //InstantiationException
-//        catch (IllegalAccessException) {
-//        } catch (UnsupportedLookAndFeelException ex) {
-//            Logger.getLogger(LiveStreamerWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-    //</editor-fold>
     /* Create and display the form */
     /**
      * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    LiveStreamerWindow window = new LiveStreamerWindow();
-                    window.frmLiveStreamerDisplay.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+     *//*
+     public static void main(String[] args) {
+     EventQueue.invokeLater(new Runnable() {
+     public void run() {
+     try {
+     LiveStreamerWindow window = new LiveStreamerWindow();
+     window.frmLiveStreamerDisplay.setVisible(true);
+     } catch (Exception e) {
+     e.printStackTrace();
+     }
+     }
+     });
+     }*/
 //        java.awt.EventQueue.invokeLater(
 //                new Runnable() {
 //            @Override
@@ -1714,6 +1693,7 @@ public class LiveStreamerWindow extends JFrame
 ////                new MobileDirectionDisplay().setVisible(true);
 //            }
 //        });
+
     private ArrayList<JButton> logger;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_analyze_anchor;

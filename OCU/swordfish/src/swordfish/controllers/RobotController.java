@@ -98,6 +98,11 @@ public class RobotController {
         startPolling();
     }
 
+    public boolean isConnected() {
+        return controller.poll();
+
+    }
+
     private void buildCommand(Button button, boolean pressed) {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
