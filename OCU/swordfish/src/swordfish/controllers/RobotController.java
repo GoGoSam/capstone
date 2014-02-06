@@ -534,11 +534,14 @@ public class RobotController {
         @Override
         public void connected() {
             //Handle what happens when a controller is connected
+            System.out.println("Connected!");
         }
 
         @Override
         public void disconnected() {
             //Handle what happens when a controller is disconnected
+            System.out.println("Disconnected!");
+
             stopPolling();
         }
 
