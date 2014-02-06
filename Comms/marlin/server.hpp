@@ -20,12 +20,12 @@ class session : public boost::enable_shared_from_this<session>
         session(boost::asio::io_service&);
         void read();
         void handle_read(const boost::system::error_code&);
-        void write(RoboComms::RoboRes);
+        void write(const RoboComms::RoboRes&);
         void handle_write(const boost::system::error_code&);
-        void process_request(RoboComms::RoboReq);
+        void process_request(const RoboComms::RoboReq&);
 
-        static const int max_length = 5120;
-        char data_[max_length];
+        static const int max_length_ = 5120;
+        char data_[max_length_];
         boost::asio::ip::tcp::socket socket_;
 };
 
@@ -74,8 +74,8 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
         const enum boost::asio::serial_port_base::flow_control::type flow_control_;
         const enum boost::asio::serial_port_base::parity::type parity_;
         const enum boost::asio::serial_port_base::stop_bits::type stop_bits_;
-        static const int max_length = 512;
-        char data_[max_length];
+        static const int max_length_ = 512;
+        char data_[max_length_];
 };
 
 #endif

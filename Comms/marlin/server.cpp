@@ -109,7 +109,7 @@ void session::read()
 void session::handle_read(const boost::system::error_code& error)
 {
     if (!error) {
-        ArrayInputStream arrayInputStream(data_, max_length);
+        ArrayInputStream arrayInputStream(data_, max_length_);
         CodedInputStream codedInputStream(&arrayInputStream);
         uint32_t messageSize;
         if(codedInputStream.ReadVarint32(&messageSize)) {
@@ -123,7 +123,7 @@ void session::handle_read(const boost::system::error_code& error)
     }
 }
 
-void session::write(RoboComms::RoboRes res)
+void session::write(const RoboComms::RoboRes& res)
 {
     boost::asio::streambuf request;
     std::ostream request_stream(&request);
@@ -145,7 +145,7 @@ void session::handle_write(const boost::system::error_code& error)
     //TODO: Handle return from write
 }
 
-void session::process_request(RoboComms::RoboReq req)
+void session::process_request(const RoboComms::RoboReq& req)
 {
     /*
     //TODO: Implement
