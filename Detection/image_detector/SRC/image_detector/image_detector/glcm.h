@@ -20,29 +20,29 @@ void reduceDepth(
 
 	
 void glcm(
-	Mat,
-	Mat,
+	Mat&,
+	Mat&,
 	int
 	);
 	
 	
 float glcmUniformity(
-	Mat
+	Mat&
 	);
 	
 	
 float glcmContrast(
-	Mat
+	Mat&
 	);
 	
 	
 float glcmEntropy(
-	Mat
+	Mat&
 	);
 	
 	
 float glcmHomogeneity(
-	Mat
+	Mat&
 	);
 
 

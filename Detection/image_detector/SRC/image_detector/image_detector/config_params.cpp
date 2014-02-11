@@ -33,7 +33,12 @@ int cd_binary_threshold;
 double cd_circularity_threshold;
 int cd_perimeter_threshold;
 int cd_aspect_ratio_threshold;
-
+int cd_medianHsize;
+int cd_gausHsize;
+double cd_gausSigma;
+double cd_gausScale;
+int cd_gausSteps;
+double cd_eigAlpha;
 
 //////////////////////////////////////////////
 /// Rust Detector Configuration Parameters ///
@@ -81,6 +86,15 @@ void store_line(
 	else if ( "cd_perimeter_threshold" == key) {cd_perimeter_threshold = atoi(value);}
 	else if ( "cd_aspect_ratio_threshold" == key) {cd_aspect_ratio_threshold = atoi(value);}
 
+	
+	
+	else if ( "cd_medianHsize" == key) {cd_medianHsize = atoi(value);}
+	else if ( "cd_gausHsize" == key) {cd_gausHsize = atoi(value);}
+	else if ( "cd_gausSigma" == key) {cd_gausSigma = atof(value);}
+	else if ( "cd_gausScale" == key) {cd_gausScale = atof(value);}
+	else if ( "cd_gausSteps" == key) {cd_gausSteps = atoi(value);}
+	else if ( "cd_eigAlpha" == key) {cd_eigAlpha = atof(value);}
+	
 	/// Rust Detector Parameters
 	else if ( "rd_det_folder" == key) {rd_det_folder = value;}
 	else if ( "rd_inp_folder" == key) {rd_inp_folder = value;}
@@ -109,14 +123,14 @@ void systemConfig(){
 	}
 }
 
-void get_timestamp(
-	char * outstr
-	) {
+string get_timestamp() {
+	string outstr;
 	time_t rawtime;
 	struct tm * timeptr;
 	time (&rawtime);
 	timeptr = gmtime (&rawtime);
-	static char datestr[14];
+	static char datestr[16];
+	cout << cd_disp_images;
 	sprintf(datestr, "%.4d%.2d%.2d%.2d%.2d%.2d",
 		timeptr->tm_year + 1990,
 		timeptr->tm_mon + 1,
@@ -125,6 +139,7 @@ void get_timestamp(
 		timeptr->tm_min,
 		timeptr->tm_sec);
 	for (int i = 0; i < 14; i++) {
-		outstr[i] = datestr[i];
+		outstr.push_back(datestr[i]);
 	}
+	return outstr;
 }
