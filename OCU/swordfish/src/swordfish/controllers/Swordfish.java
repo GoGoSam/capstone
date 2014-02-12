@@ -2,8 +2,8 @@ package swordfish.controllers;
 
 import com.jcraft.jsch.JSchException;
 import javax.swing.*;
-import swordfish.controllers.RobotController;
-import swordfish.controllers.VideoStreamer;
+//import swordfish.controllers.RobotController;
+//import swordfish.controllers.VideoStreamer;
 
 import swordfish.views.MobileDirectionDisplayKeyboard;
 import swordfish.views.XBox360_DirectionDisplay;
@@ -22,26 +22,39 @@ public class Swordfish {
      */
     public static void main(String[] args) throws JSchException {
 
-        boolean do_robot_controller = false,
+        boolean do_robot_controller = true,
                 do_video_streamer = false,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
-                do_media_streamer_ui = false,
+                do_media_streamer_ui = true,
                 do_image_processor = false;
 
-        String p1_addr = "192.168.1.101";
-        String p2_addr = "192.168.1.101";
+        String p1_addr = "192.168.1.101"; // marlin connection
+        String p2_addr = "192.168.1.69"; // servo controller
         int p1_port = 5555;
         int p2_port = 5555;
         int video_port = 6789;
+
+        int controller_port = 5555;
+
         JFrame ui = new JFrame();
 
-        if (do_robot_controller) {
-            RobotController rc = new RobotController();
-            rc.connect(ui);
+//        if (do_media_streamer_ui) {
+        LiveStreamerWindow lsw = new LiveStreamerWindow();
+//        ui = lsw.getFrame();
+//        lsw.setVisible(true);
+        lsw.setVisible(true);
+
+//        }
+
+//        if (do_robot_controller) {
+
+
+        RobotController rc = new RobotController();
+//            rc.connect(ui);
 //            rc.connect(addr, controller_port, ui);
-            rc.connect(p1_addr, p2_addr, p1_port, p2_port, ui);
-        }
+        rc.connect(p1_addr, p2_addr, p1_port, p2_port, lsw);
+//        }
         if (do_video_streamer) {
             VideoStreamer vs = new VideoStreamer();
             vs.connect(p1_addr, video_port, ui);
@@ -54,10 +67,7 @@ public class Swordfish {
             MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
             mddk.setVisible(true);
         }
-        if (do_media_streamer_ui) {
-            LiveStreamerWindow lsw = new LiveStreamerWindow();
-            lsw.setVisible(true);
-        }
+
         if (do_image_processor) {
             ImageAnalyzerWindow iaw = new ImageAnalyzerWindow();
             iaw.setVisible(true);

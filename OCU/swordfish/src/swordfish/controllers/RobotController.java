@@ -17,9 +17,11 @@ import java.util.logging.Logger;
 import static swordfish.models.device.Button.guide;
 import swordfish.models.input.InputDevice;
 import swordfish.models.input.JInputJoystick;
+import swordfish.views.window.LiveStreamerWindow;
 
 public class RobotController {
 
+    private LiveStreamerWindow ui;
     private volatile PollerThread thread;
     private JInputXboxController controller;
     private RobotControllerListener listener;
@@ -59,20 +61,38 @@ public class RobotController {
         listener = new RobotControllerListener();
     }
 
-    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, JFrame ui) {
+    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, LiveStreamerWindow ui) {
+        this.ui = ui;
         if (!p1_client.connect(p1_addr, p1_port)) {
             System.out.format("Unable to Connect to %s at %d\n", p1_addr, p1_port);
         }
         if (!p2_client.connect(p2_addr, p2_port)) {
             System.out.format("Unable to Connect to %s at %d\n", p2_addr, p2_port);
         }
+        if (!servo.connect()) {
+            System.out.println("Warning: Unable to SSH onto Pi for Servoblaster\n");
+//                        servo.default_position(0);
+            servo_positions[0] = 150;
+//            servo.default_position(1);
+            servo_positions[1] = 150;
+        } else {
+            servo.default_position(0);
+            servo_positions[0] = 150;
+            servo.default_position(1);
+            servo_positions[1] = 150;
+        }
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.isEmpty()) {
             System.out.println("Warning: No Xbox Controller Found\n");
+        } else {
+            System.out.println("Xbox Controller Found\n");
+            this.ui.cb_controller_connected.setSelected(true);
+
+            controller = (JInputXboxController) XboxController.getAll().get(0);
+            controller.addListener(listener);
+            startPolling();
         }
-        controller = (JInputXboxController) XboxController.getAll().get(0);
-        controller.addListener(listener);
-        startPolling();
+
     }
 
     public void connect(JFrame ui) {
@@ -80,22 +100,20 @@ public class RobotController {
             System.out.println("Warning: Unable to SSH onto Pi for Servoblaster\n");
         }
 
-        try {
-            servo.default_position(0);
-            servo_positions[0] = 150;
-            servo.default_position(1);
-            servo_positions[1] = 150;
-        } catch (JSchException | IOException ex) {
-            Logger.getLogger(RobotController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        servo.default_position(0);
+        servo_positions[0] = 150;
+        servo.default_position(1);
+        servo_positions[1] = 150;
 
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.isEmpty()) {
             System.out.println("Warning: No Xbox Controller Found\n");
+        } else {
+            controller = (JInputXboxController) XboxController.getAll().get(0);
+            controller.addListener(listener);
+            startPolling();
         }
-        controller = (JInputXboxController) XboxController.getAll().get(0);
-        controller.addListener(listener);
-        startPolling();
     }
 
     public boolean isConnected() {
@@ -106,55 +124,53 @@ public class RobotController {
     private void buildCommand(Button button, boolean pressed) {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
-        try {
 
-            if (button.isDpad()) {
-            }
-            switch (button) {
-                case up:
+
+        if (button.isDpad()) {
+        }
+        switch (button) {
+            case up:
 //                    servo.execute("echo 1=" + Integer.toString(100) + " > /dev/servoblaster;");
-                    break;
-                case down:
+                break;
+            case down:
 //                    servo.execute("echo 1=" + Integer.toString(150) + " > /dev/servoblaster;");
-                    break;
-                case left:
+                break;
+            case left:
 //                    servo.execute("echo 0=" + Integer.toString(100) + " > /dev/servoblaster;");
-                    break;
-                case right:
+                break;
+            case right:
 //                    servo.execute("echo 0=150 > /dev/servoblaster;");
-                    break;
-                case guide:
-                    break;
-                case start:
+                break;
+            case guide:
+                break;
+            case start:
 //                    servo.default_position();
 //                    servo.exit();
-                    break;
-                case a:
-                    break;
-                case b:
-                    break;
-                case x:
-                    break;
-                case y:
-                    break;
-                case leftShoulder:
-                    break;
-                case rightShoulder:
-                    break;
-                case back:
-                    break;
-                case leftStick:
-                    break;
-                case rightStick:
-                    servo.default_position(0);
-                    servo.default_position(1);
-                    servo_positions[0] = 150;
-                    servo_positions[1] = 150;
-                    break;
-            }
-        } catch (JSchException | IOException ee) {
-            System.out.println(ee.getMessage());
+                break;
+            case a:
+                break;
+            case b:
+                break;
+            case x:
+                break;
+            case y:
+                break;
+            case leftShoulder:
+                break;
+            case rightShoulder:
+                break;
+            case back:
+                break;
+            case leftStick:
+                break;
+            case rightStick:
+                servo.default_position(0);
+                servo.default_position(1);
+                servo_positions[0] = 150;
+                servo_positions[1] = 150;
+                break;
         }
+
 
         if (do_debug) {
             System.out.println(button.name());
@@ -199,8 +215,9 @@ public class RobotController {
 //
 //        axis.getStick().getAxisX().
         RoboReq.Builder req = RoboReq.newBuilder();
-
+        int lState;
         switch (axis) {
+
             case leftTrigger:
             case rightTrigger:
                 req.setType(RoboReq.Type.MLIFT);
@@ -272,197 +289,199 @@ public class RobotController {
                 sendCommand(req.build(), p1_client);
                 break;
             case rightStickX:
-                try {
-                    //Round to 0, 2 or 3
-                    int lState = Math.round(state * 3);
-                    if (lState == 1 || lState == -1) {
-                        lState = 0;
-                    }
-                    //If RX or LX already is equal to rState then no need send another cmd
-                    if (axis == Axis.rightStickX && RX != lState) {
-                        RX = lState;
-                    } else if (axis == Axis.rightStickY && RY != lState) {
-                        RY = lState;
-                    } else {
-                        break;
-                    }
-                    req.setType(RoboReq.Type.MSENS);
-                    System.out.println("0 - " + Integer.toString(servo_positions[0]));
-                    System.out.println(" - 1 - " + Integer.toString(servo_positions[1]));
-                    //TODO: build cmd and val based on LX and LY
-                    // conditions validate servo is within its range [50 220]
-                    if (RX == 0 && RY == 0) {
-//                        System.out.println("STOP");
-                    } else if (RX == 0 && RY > 0) {
-                        if (servo_positions[1] > 50) {
-                            servo.execute(1, 0);
-                            servo_positions[1] -= 10;
-                            System.out.println("DOWN");
-                        }
 
-                    } else if (RX == 0 && RY < 0) {
-                        if (servo_positions[1] < 220) {
-                            servo.execute(1, 1);
-                            servo_positions[1] += 10;
-                            System.out.println("UP");
-                        }
-
-                    } else if (RX > 0 && RY == 0) {
-                        if (servo_positions[0] < 220) {
-                            servo.execute(0, 1);
-                            servo_positions[0] += 10;
-                            System.out.println("RIGHT");
-                        }
-
-                    } else if (RX < 0 && RY == 0) {
-                        if (servo_positions[0] > 50) {
-                            servo.execute(0, 0);
-                            servo_positions[1] -= 10;
-                            System.out.println("LEFT");
-                        }
-
-
-                    } else if (RX > 0 && RY < 0) {
-                        if (servo_positions[1] < 220) {
-                            servo.execute(1, 1);
-                            servo_positions[1] += 10;
-                        }
-                        if (servo_positions[0] < 220) {
-                            servo.execute(0, 1);
-                            servo_positions[0] += 10;
-                        }
-
-                        System.out.println("UP RIGHT");
-                    } else if (RX < 0 && RY < 0) {
-                        if (servo_positions[1] < 220) {
-                            servo.execute(1, 1);
-                            servo_positions[1] += 10;
-                        }
-                        if (servo_positions[0] > 50) {
-                            servo.execute(0, 0);
-                            servo_positions[0] -= 10;
-                        }
-                        System.out.println("UP LEFT");
-                    } else if (RX > 0 && RY > 0) {
-                        if (servo_positions[1] > 50) {
-                            servo.execute(1, 0);
-                            servo_positions[1] -= 10;
-                        }
-                        if (servo_positions[0] < 220) {
-                            servo.execute(0, 1);
-                            servo_positions[0] += 10;
-                        }
-                        System.out.println("DOWN RIGHT");
-                    } else if (RX < 0 && RY > 0) {
-                        if (servo_positions[1] > 50) {
-                            servo.execute(1, 0);
-                            servo_positions[1] -= 10;
-                        }
-                        if (servo_positions[0] > 50) {
-                            servo.execute(0, 0);
-                            servo_positions[0] -= 10;
-                        }
-                        System.out.println("DOWN LEFT");
-                    }
-                } catch (JSchException | IOException ee) {
-                    System.out.println(ee.getMessage());
+                //Round to 0, 2 or 3
+                lState = Math.round(state * 3);
+                if (lState == 1 || lState == -1) {
+                    lState = 0;
                 }
+                //If RX or LX already is equal to rState then no need send another cmd
+                if (axis == Axis.rightStickX && RX != lState) {
+                    RX = lState;
+                } else if (axis == Axis.rightStickY && RY != lState) {
+                    RY = lState;
+                } else {
+                    break;
+                }
+                req.setType(RoboReq.Type.MSENS);
+                System.out.println("0 - " + Integer.toString(servo_positions[0]));
+                System.out.println(" - 1 - " + Integer.toString(servo_positions[1]));
+                //TODO: build cmd and val based on LX and LY
+                // conditions validate servo is within its range [50 220]
+                if (RX == 0 && RY == 0) {
+//                        System.out.println("STOP");
+                } else if (RX == 0 && RY > 0) {
+                    if (servo_positions[1] > 50) {
+                        this.ui.icon_dArrow.setEnabled(true);
+                        servo.execute(1, 0);
+                        servo_positions[1] -= 10;
+                        System.out.println("DOWN");
+                        this.ui.icon_dArrow.setEnabled(false);
+                    }
+
+
+                } else if (RX == 0 && RY < 0) {
+                    this.ui.icon_dArrow.setEnabled(true);
+                    if (servo_positions[1] < 220) {
+                        servo.execute(1, 1);
+                        servo_positions[1] += 10;
+                        System.out.println("UP");
+
+                    }
+                    this.ui.icon_uArrow.setEnabled(false);
+
+                } else if (RX > 0 && RY == 0) {
+                    if (servo_positions[0] < 220) {
+                        servo.execute(0, 1);
+                        servo_positions[0] += 10;
+                        System.out.println("RIGHT");
+                    }
+
+                } else if (RX < 0 && RY == 0) {
+                    if (servo_positions[0] > 50) {
+                        servo.execute(0, 0);
+                        servo_positions[1] -= 10;
+                        System.out.println("LEFT");
+                    }
+
+
+                } else if (RX > 0 && RY < 0) {
+                    if (servo_positions[1] < 220) {
+                        servo.execute(1, 1);
+                        servo_positions[1] += 10;
+                    }
+                    if (servo_positions[0] < 220) {
+                        servo.execute(0, 1);
+                        servo_positions[0] += 10;
+                    }
+
+                    System.out.println("UP RIGHT");
+                } else if (RX < 0 && RY < 0) {
+                    if (servo_positions[1] < 220) {
+                        servo.execute(1, 1);
+                        servo_positions[1] += 10;
+                    }
+                    if (servo_positions[0] > 50) {
+                        servo.execute(0, 0);
+                        servo_positions[0] -= 10;
+                    }
+                    System.out.println("UP LEFT");
+                } else if (RX > 0 && RY > 0) {
+                    if (servo_positions[1] > 50) {
+                        servo.execute(1, 0);
+                        servo_positions[1] -= 10;
+                    }
+                    if (servo_positions[0] < 220) {
+                        servo.execute(0, 1);
+                        servo_positions[0] += 10;
+                    }
+                    System.out.println("DOWN RIGHT");
+                } else if (RX < 0 && RY > 0) {
+                    if (servo_positions[1] > 50) {
+                        servo.execute(1, 0);
+                        servo_positions[1] -= 10;
+                    }
+                    if (servo_positions[0] > 50) {
+                        servo.execute(0, 0);
+                        servo_positions[0] -= 10;
+                    }
+                    System.out.println("DOWN LEFT");
+                }
+
                 break;
             case rightStickY:
-                try {
-                    //Round to 0, 2 or 3
-                    int lState = Math.round(state * 3);
-                    if (lState == 1 || lState == -1) {
-                        lState = 0;
-                    }
-                    //If RX or LX already is equal to rState then no need send another cmd
-                    if (axis == Axis.rightStickX && RX != lState) {
-                        RX = lState;
-                    } else if (axis == Axis.rightStickY && RY != lState) {
-                        RY = lState;
-                    } else {
-                        break;
-                    }
-                    req.setType(RoboReq.Type.MSENS);
-                    System.out.println("0 - " + Integer.toString(servo_positions[0]));
-                    System.out.println("1 - " + Integer.toString(servo_positions[1]));
-                    //TODO: build cmd and val based on LX and LY
-                    if (RX == 0 && RY == 0) {
-//                        System.out.println("STOP");
-                    } else if (RX == 0 && RY > 0) {
-                        if (servo_positions[1] > 50) {
-                            servo.execute(1, 0);
-                            servo_positions[1] -= 10;
-                            System.out.println("DOWN");
-                        }
 
-                    } else if (RX == 0 && RY < 0) {
-                        if (servo_positions[1] < 220) {
-                            servo.execute(1, 1);
-                            servo_positions[1] += 10;
-                            System.out.println("UP");
-                        }
-
-                    } else if (RX > 0 && RY == 0) {
-                        if (servo_positions[0] < 220) {
-                            servo.execute(0, 1);
-                            servo_positions[0] += 10;
-                            System.out.println("RIGHT");
-                        }
-
-                    } else if (RX < 0 && RY == 0) {
-                        if (servo_positions[0] > 50) {
-                            servo.execute(0, 0);
-                            servo_positions[1] -= 10;
-                            System.out.println("LEFT");
-                        }
-
-
-                    } else if (RX > 0 && RY < 0) {
-                        if (servo_positions[1] < 220) {
-                            servo.execute(1, 1);
-                            servo_positions[1] += 10;
-                        }
-                        if (servo_positions[0] < 220) {
-                            servo.execute(0, 1);
-                            servo_positions[0] += 10;
-                        }
-
-                        System.out.println("UP RIGHT");
-                    } else if (RX < 0 && RY < 0) {
-                        if (servo_positions[1] < 220) {
-                            servo.execute(1, 1);
-                            servo_positions[1] += 10;
-                        }
-                        if (servo_positions[0] > 50) {
-                            servo.execute(0, 0);
-                            servo_positions[0] -= 10;
-                        }
-                        System.out.println("UP LEFT");
-                    } else if (RX > 0 && RY > 0) {
-                        if (servo_positions[1] > 50) {
-                            servo.execute(1, 0);
-                            servo_positions[1] -= 10;
-                        }
-                        if (servo_positions[0] < 220) {
-                            servo.execute(0, 1);
-                            servo_positions[0] += 10;
-                        }
-                        System.out.println("DOWN RIGHT");
-                    } else if (RX < 0 && RY > 0) {
-                        if (servo_positions[1] > 50) {
-                            servo.execute(1, 0);
-                            servo_positions[1] -= 10;
-                        }
-                        if (servo_positions[0] > 50) {
-                            servo.execute(0, 0);
-                            servo_positions[0] -= 10;
-                        }
-                        System.out.println("DOWN LEFT");
-                    }
-                } catch (JSchException | IOException ee) {
-                    System.out.println(ee.getMessage());
+                //Round to 0, 2 or 3
+                lState = Math.round(state * 3);
+                if (lState == 1 || lState == -1) {
+                    lState = 0;
                 }
+                //If RX or LX already is equal to rState then no need send another cmd
+                if (axis == Axis.rightStickX && RX != lState) {
+                    RX = lState;
+                } else if (axis == Axis.rightStickY && RY != lState) {
+                    RY = lState;
+                } else {
+                    break;
+                }
+                req.setType(RoboReq.Type.MSENS);
+                System.out.println("0 - " + Integer.toString(servo_positions[0]));
+                System.out.println("1 - " + Integer.toString(servo_positions[1]));
+                //TODO: build cmd and val based on LX and LY
+                if (RX == 0 && RY == 0) {
+//                        System.out.println("STOP");
+                } else if (RX == 0 && RY > 0) {
+                    if (servo_positions[1] > 50) {
+                        servo.execute(1, 0);
+                        servo_positions[1] -= 10;
+                        System.out.println("DOWN");
+                    }
+
+                } else if (RX == 0 && RY < 0) {
+                    if (servo_positions[1] < 220) {
+                        servo.execute(1, 1);
+                        servo_positions[1] += 10;
+                        System.out.println("UP");
+                    }
+
+                } else if (RX > 0 && RY == 0) {
+                    if (servo_positions[0] < 220) {
+                        servo.execute(0, 1);
+                        servo_positions[0] += 10;
+                        System.out.println("RIGHT");
+                    }
+
+                } else if (RX < 0 && RY == 0) {
+                    if (servo_positions[0] > 50) {
+                        servo.execute(0, 0);
+                        servo_positions[1] -= 10;
+                        System.out.println("LEFT");
+                    }
+
+
+                } else if (RX > 0 && RY < 0) {
+                    if (servo_positions[1] < 220) {
+                        servo.execute(1, 1);
+                        servo_positions[1] += 10;
+                    }
+                    if (servo_positions[0] < 220) {
+                        servo.execute(0, 1);
+                        servo_positions[0] += 10;
+                    }
+
+                    System.out.println("UP RIGHT");
+                } else if (RX < 0 && RY < 0) {
+                    if (servo_positions[1] < 220) {
+                        servo.execute(1, 1);
+                        servo_positions[1] += 10;
+                    }
+                    if (servo_positions[0] > 50) {
+                        servo.execute(0, 0);
+                        servo_positions[0] -= 10;
+                    }
+                    System.out.println("UP LEFT");
+                } else if (RX > 0 && RY > 0) {
+                    if (servo_positions[1] > 50) {
+                        servo.execute(1, 0);
+                        servo_positions[1] -= 10;
+                    }
+                    if (servo_positions[0] < 220) {
+                        servo.execute(0, 1);
+                        servo_positions[0] += 10;
+                    }
+                    System.out.println("DOWN RIGHT");
+                } else if (RX < 0 && RY > 0) {
+                    if (servo_positions[1] > 50) {
+                        servo.execute(1, 0);
+                        servo_positions[1] -= 10;
+                    }
+                    if (servo_positions[0] > 50) {
+                        servo.execute(0, 0);
+                        servo_positions[0] -= 10;
+                    }
+                    System.out.println("DOWN LEFT");
+                }
+
 //                byte[] t = {ADDRESS, cmd, val, checksum(ADDRESS, cmd, val)};
 //                RoboReq.MoveBaseCmd.Builder mreq = RoboReq.MoveBaseCmd.newBuilder();
 //                mreq.setCmd(ByteString.copyFrom(t));
@@ -494,6 +513,8 @@ public class RobotController {
         if (thread != null && thread.running) {
             thread.running = false;
             thread = null;
+
+
         }
     }
 
@@ -531,6 +552,7 @@ public class RobotController {
         public void connected() {
             //Handle what happens when a controller is connected
             System.out.println("Connected!");
+//            startPolling();
         }
 
         @Override
