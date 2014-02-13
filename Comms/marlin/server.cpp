@@ -171,6 +171,7 @@ void session::process_request(const RoboComms::RoboReq& req)
             //Shouldn't ever get here
             break;
     }
+    read();
 }
 
 serial_connection::pointer serial_connection::create(boost::asio::io_service& io_service,
