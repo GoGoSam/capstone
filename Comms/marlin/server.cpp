@@ -34,7 +34,7 @@ int main(int argc, const char* argv[])
         boost::asio::io_service io_service;
         int port = std::atoi(argv[1]);
         const char* device = argv[2];
-        if(strcmp(device, "/dev/servoblaster")) {
+        if(strcmp(device, "/dev/servoblaster") == 0) {
             servos.open(device, std::ofstream::out | std::ofstream::trunc);
         } else {
             serial = serial_connection::create(io_service, device);
@@ -147,15 +147,6 @@ void session::handle_write(const boost::system::error_code& error)
 
 void session::process_request(const RoboComms::RoboReq& req)
 {
-    /*
-    //TODO: Implement
-    std::cout << req.type() << std::endl;
-    unsigned char *test = (unsigned char*) req.base().cmd().c_str();
-    for (int i = 0; i < req.base().cmd().length(); i++) {
-        std::cout << (int)test[i] << " ";
-    }
-    std::cout << std::endl;
-    */
     switch(req.type()) {
         case 0:
             //Robot base move command
