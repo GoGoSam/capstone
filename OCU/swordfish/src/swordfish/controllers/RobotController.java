@@ -33,9 +33,18 @@ public class RobotController {
     private static final byte LM = 11;
     private static final byte FBM = 12;
     private static final byte LRM = 13;
+    //Servo commands
+    private static final String SD0 = "0=150";
+    private static final String SD1 = "1=150";
+    private static final String SR = "0=-10";
+    private static final String SL = "0=+10";
+    private static final String SD = "1=-10";
+    private static final String SU = "1=+10";
     //Keep track of controller state
     private int LX = 0;
     private int LY = 0;
+    private int RX = 0;
+    private int RY = 0;
 
     public RobotController() {
         p1_client = new TCPClient();
@@ -108,34 +117,38 @@ public class RobotController {
             case leftStickX:
             case leftStickY:
                 //Round to 0, 2 or 3
-                int rState = Math.round(state * 3);
-                if (rState == 1 || rState == -1) rState = 0;
-                //If LX or RX already is equal to rState then no need send another cmd
-                if (axis == Axis.leftStickX && LX != rState) LX = rState;
-                else if (axis == Axis.leftStickY && LY != rState) LY = rState;
+                int lState = Math.round(state * 3);
+                if (lState == 1 || lState == -1) lState = 0;
+                //If LX or LY already is equal to rState then no need send another cmd
+                if (axis == Axis.leftStickX && LX != lState) LX = lState;
+                else if (axis == Axis.leftStickY && LY != lState) LY = lState;
                 else break;
                 req.setType(RoboReq.Type.MBASE);
-                byte cmd = 0;
-                byte val = 0;
-                //TODO: build cmd and val based on LX and LY
+                byte cmd = -1;
+                byte val = -1;
                 if (LX == 0 && LY == 0) {
-                    //TODO: Stop cmd
+                    cmd = FM;
+                    val = 0;
                     System.out.println("STOP");
                 } else if (LX == 0 && LY > 0) {
-                    //TODO: Backward cmd
                     //LY can be 2 or 3
+                    cmd = BM;
+                    val = LY == 2 ? (byte) 64 : (byte) 127;
                     System.out.println("BACKWARD");
                 } else if (LX == 0 && LY < 0) {
-                    //TODO: Forward cmd
                     //LY can be -2 or -3
+                    cmd = FM;
+                    val = LY == -2 ? (byte) 64 : (byte) 127;
                     System.out.println("FORWARD");
                 } else if (LX > 0 && LY == 0) {
-                    //TODO: Right cmd
                     //LX can be 2 or 3
+                    cmd = RM;
+                    val = LX == 2 ? (byte) 64 : (byte) 127;
                     System.out.println("RIGHT");
                 } else if (LX < 0 && LY == 0) {
-                    //TODO: Left cmd
-                    //LX can be -2/3 or 1
+                    //LX can be -2 or -3
+                    cmd = LM;
+                    val = LX == -2 ? (byte) 64 : (byte) 127;
                     System.out.println("LEFT");
                 } else if (LX > 0 && LY < 0) {
                     //TODO: Forward Right cmd
@@ -167,7 +180,64 @@ public class RobotController {
                 break;
             case rightStickX:
             case rightStickY:
+                //Round to 0, 2 or 3
+                int rState = Math.round(state * 3);
+                if (rState == 1 || rState == -1) rState = 0;
+                //If RX or RY already is equal to rState then no need send another cmd
+                //TODO: This may need to be modified to continue to send commands while controller is being held in a direction
+                if (axis == Axis.rightStickX && RX != rState) RX = rState;
+                else if (axis == Axis.rightStickY && RY != rState) RY = rState;
+                else break;
                 req.setType(RoboReq.Type.MSENS);
+                String sCmd = "";
+                if (RX == 0 && RY == 0) {
+                    System.out.println("STOP");
+                    break;
+                } else if (RX == 0 && RY > 0) {
+                    //RY can be 2 or 3
+                    sCmd = SD;
+                    System.out.println("DOWN");
+                } else if (RX == 0 && RY < 0) {
+                    //RY can be -2 or -3
+                    sCmd = SU;
+                    System.out.println("UP");
+                } else if (RX > 0 && RY == 0) {
+                    //RX can be 2 or 3
+                    sCmd = SR;
+                    System.out.println("RIGHT");
+                } else if (RX < 0 && RY == 0) {
+                    //RX can be -2 or -3
+                    sCmd = SL;
+                    System.out.println("LEFT");
+                } else if (RX > 0 && RY < 0) {
+                    //TODO: Up Right cmd
+                    //RX can be 2 or 3
+                    //RY can be -2 or -3
+                    System.out.println("UP RIGHT");
+                    break;
+                } else if (RX < 0 && RY < 0) {
+                    //TODO: Up Left cmd
+                    //RX can be -2 or -3
+                    //RY can be -2 or -3
+                    System.out.println("UP LEFT");
+                    break;
+                } else if (RX > 0 && RY > 0) {
+                    //TODO: Down Right cmd
+                    //RX can be 2 or 3
+                    //RY can be 2 or 3
+                    System.out.println("DOWN RIGHT");
+                    break;
+                } else if (RX < 0 && RY > 0) {
+                    //TODO: Down Left cmd
+                    //RX can be -2 or -3
+                    //RY can be 2 or 3
+                    System.out.println("DOWN LEFT");
+                    break;
+                }
+
+                RoboReq.MoveSensCmd.Builder sreq = RoboReq.MoveSensCmd.newBuilder();
+                sreq.setCmd(sCmd);
+                req.setSens(sreq);
                 sendCommand(req.build(), p2_client);
                 break;
         }
