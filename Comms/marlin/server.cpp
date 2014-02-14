@@ -162,6 +162,7 @@ void session::process_request(const RoboComms::RoboReq& req)
             break;
         case 2:
             //Robot sensor move command
+	    std::cout << req.sens().cmd() << std::endl;
             servos << req.sens().cmd() << std::endl;
             break;
         case 3:
