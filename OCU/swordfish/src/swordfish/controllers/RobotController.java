@@ -58,9 +58,21 @@ public class RobotController {
         }
         if (!p2_client.connect(p2_addr, p2_port)) {
             System.out.format("Unable to Connect to %s at %d\n", p2_addr, p2_port);
+        } else {
+            String[] sCmd = new String[2];
+            sCmd[0] = SD0;
+            sCmd[1] = SD1;
+            for (int i = 0; i < 2; i++) {
+                RoboReq.Builder req = RoboReq.newBuilder();
+                req.setType(RoboReq.Type.MSENS);
+                RoboReq.MoveSensCmd.Builder sreq = RoboReq.MoveSensCmd.newBuilder();
+                sreq.setCmd(sCmd[i]);
+                req.setSens(sreq);
+                sendCommand(req.build(), p2_client);
+            }
         }
         List<XboxController> controllerList = XboxController.getAll();
-        if (controllerList.size() == 0) {
+        if (controllerList.isEmpty()) {
             System.out.println("No Xbox Controller Found");
         }
         controller = (JInputXboxController) XboxController.getAll().get(0);
@@ -101,13 +113,12 @@ public class RobotController {
             case leftStick:
                 break;
             case rightStick:
+                // set servo to default position for both axices
                 String[] sCmd = new String[2];
                 sCmd[0] = SD0;
                 sCmd[1] = SD1;
                 for (int i = 0; i < 2; i++) {
                     RoboReq.Builder req = RoboReq.newBuilder();
-
-
                     req.setType(RoboReq.Type.MSENS);
                     RoboReq.MoveSensCmd.Builder sreq = RoboReq.MoveSensCmd.newBuilder();
                     sreq.setCmd(sCmd[i]);
