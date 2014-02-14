@@ -101,6 +101,20 @@ public class RobotController {
             case leftStick:
                 break;
             case rightStick:
+                String[] sCmd = new String[2];
+                sCmd[0] = SD0;
+                sCmd[1] = SD1;
+                for (int i = 0; i < 2; i++) {
+                    RoboReq.Builder req = RoboReq.newBuilder();
+
+
+                    req.setType(RoboReq.Type.MSENS);
+                    RoboReq.MoveSensCmd.Builder sreq = RoboReq.MoveSensCmd.newBuilder();
+                    sreq.setCmd(sCmd[i]);
+                    req.setSens(sreq);
+                    sendCommand(req.build(), p2_client);
+                }
+
                 break;
         }
     }
@@ -118,11 +132,17 @@ public class RobotController {
             case leftStickY:
                 //Round to 0, 2 or 3
                 int lState = Math.round(state * 3);
-                if (lState == 1 || lState == -1) lState = 0;
+                if (lState == 1 || lState == -1) {
+                    lState = 0;
+                }
                 //If LX or LY already is equal to rState then no need send another cmd
-                if (axis == Axis.leftStickX && LX != lState) LX = lState;
-                else if (axis == Axis.leftStickY && LY != lState) LY = lState;
-                else break;
+                if (axis == Axis.leftStickX && LX != lState) {
+                    LX = lState;
+                } else if (axis == Axis.leftStickY && LY != lState) {
+                    LY = lState;
+                } else {
+                    break;
+                }
                 req.setType(RoboReq.Type.MBASE);
                 byte cmd = -1;
                 byte val = -1;
@@ -182,12 +202,18 @@ public class RobotController {
             case rightStickY:
                 //Round to 0, 2 or 3
                 int rState = Math.round(state * 3);
-                if (rState == 1 || rState == -1) rState = 0;
+                if (rState == 1 || rState == -1) {
+                    rState = 0;
+                }
                 //If RX or RY already is equal to rState then no need send another cmd
                 //TODO: This may need to be modified to continue to send commands while controller is being held in a direction
-                if (axis == Axis.rightStickX && RX != rState) RX = rState;
-                else if (axis == Axis.rightStickY && RY != rState) RY = rState;
-                else break;
+                if (axis == Axis.rightStickX && RX != rState) {
+                    RX = rState;
+                } else if (axis == Axis.rightStickY && RY != rState) {
+                    RY = rState;
+                } else {
+                    break;
+                }
                 req.setType(RoboReq.Type.MSENS);
                 String sCmd = "";
                 if (RX == 0 && RY == 0) {
