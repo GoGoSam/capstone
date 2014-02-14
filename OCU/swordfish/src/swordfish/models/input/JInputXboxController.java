@@ -200,37 +200,37 @@ public class JInputXboxController extends XboxController {
     }
 
     private Button getButton(Identifier.Button id) {
-        if (id == Identifier.Button._0) {
+        if (id == Identifier.Button._0 || id == Identifier.Button.A) {
             return Button.a;
         }
-        else if (id == Identifier.Button._1) {
+        else if (id == Identifier.Button._1 || id == Identifier.Button.B) {
             return Button.b;
         }
-        else if (id == Identifier.Button._2) {
+        else if (id == Identifier.Button._2 || id == Identifier.Button.X) {
             return Button.x;
         }
-        else if (id == Identifier.Button._3) {
+        else if (id == Identifier.Button._3 || id == Identifier.Button.Y) {
             return Button.y;
         }
-        else if (id == Identifier.Button._4) {
+        else if (id == Identifier.Button._4 || id == Identifier.Button.LEFT_THUMB) {
             return Button.leftShoulder;
         }
-        else if (id == Identifier.Button._5) {
+        else if (id == Identifier.Button._5 || id == Identifier.Button.RIGHT_THUMB) {
             return Button.rightShoulder;
         }
-        else if (id == Identifier.Button._6) {
+        else if (id == Identifier.Button._6 || id == Identifier.Button.LEFT_THUMB3) {
             return Button.leftStick;
         }
-        else if (id == Identifier.Button._7) {
+        else if (id == Identifier.Button._7 || id == Identifier.Button.RIGHT_THUMB3) {
             return Button.rightStick;
         }
-        else if (id == Identifier.Button._8) {
+        else if (id == Identifier.Button._8 || id == Identifier.Button.START) {
             return Button.start;
         }
-        else if (id == Identifier.Button._9) {
+        else if (id == Identifier.Button._9 || id == Identifier.Button.SELECT) {
             return Button.back;
         }
-        else if (id == Identifier.Button._10) {
+        else if (id == Identifier.Button._10 || id == Identifier.Button.MODE) {
             return Button.guide;
         }
         else if (id == Identifier.Button._11) {
