@@ -9,10 +9,12 @@ import swordfish.models.RoboComms.RoboReq;
 
 import javax.swing.*;
 import java.util.List;
+import swordfish.views.window.LiveStreamerWindow;
 
 public class RobotController {
 
     private volatile PollerThread thread;
+    private LiveStreamerWindow ui;
     private JInputXboxController controller;
     private RobotControllerListener listener;
     private TCPClient p1_client;
@@ -52,7 +54,8 @@ public class RobotController {
         listener = new RobotControllerListener();
     }
 
-    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, JFrame ui) {
+    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, LiveStreamerWindow ui) {
+        this.ui = ui;
         if (!p1_client.connect(p1_addr, p1_port)) {
             System.out.format("Unable to Connect to %s at %d\n", p1_addr, p1_port);
         }
@@ -238,6 +241,14 @@ public class RobotController {
                     //RY can be -2 or -3
                     sCmd = SU;
                     System.out.println("UP");
+                    this.ui.icon_dArrow.setEnabled(true);
+//                    if (servo_positions[1] < 220) {
+//                        servo.execute(1, 1);
+//                        servo_positions[1] += 10;
+//                        System.out.println("UP");
+
+//                    }
+//                    this.ui.icon_uArrow.setEnabled(false);
                 } else if (RX > 0 && RY == 0) {
                     //RX can be 2 or 3
                     sCmd = SR;
