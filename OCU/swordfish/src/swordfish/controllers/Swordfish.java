@@ -56,8 +56,8 @@ public class Swordfish {
             mddk.setVisible(true);
         }
         if (do_media_streamer_ui) {
-            LiveStreamerWindow lsw = new LiveStreamerWindow();
-            lsw.setVisible(true);
+//            LiveStreamerWindow lsw = new LiveStreamerWindow();
+//            lsw.setVisible(true);
         }
         if (do_image_processor) {
             ImageAnalyzerWindow iaw = new ImageAnalyzerWindow();
