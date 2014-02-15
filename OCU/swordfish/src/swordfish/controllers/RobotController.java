@@ -77,10 +77,13 @@ public class RobotController {
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.isEmpty()) {
             System.out.println("No Xbox Controller Found");
+        }else
+        {
+            System.out.println("Xbox Controller Found");
+            controller = (JInputXboxController) XboxController.getAll().get(0);
+            controller.addListener(listener);
+            startPolling();
         }
-        controller = (JInputXboxController) XboxController.getAll().get(0);
-        controller.addListener(listener);
-        startPolling();
     }
 
     private void buildCommand(Button button, boolean pressed) {

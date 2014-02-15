@@ -22,7 +22,7 @@ public class Swordfish {
     public static void main(String[] args) {
 
         boolean do_robot_controller = true,
-                do_video_streamer = false,
+                do_video_streamer = true,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
                 do_media_streamer_ui = true,
@@ -45,7 +45,8 @@ public class Swordfish {
         }
         if (do_video_streamer) {
             VideoStreamer vs = new VideoStreamer();
-            vs.connect(p1_addr, video_port, ui);
+            vs.connect(p1_addr, video_port, lsw);
+            
         }
         if (do_xbox_dir_diplay) {
             XBox360_DirectionDisplay xboxDD = new XBox360_DirectionDisplay();

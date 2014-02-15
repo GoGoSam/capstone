@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 //import swordfish.controllers.RobotController;
 import swordfish.views.dialog.LogIn;
 import swordfish.views.MobileDirectionDisplayKeyboard;
-import swordfish.applications.LiveStreamer;
+//import swordfish.applications.LiveStreamer;
 import swordfish.controllers.RobotController;
 //import java.io.*;
 
@@ -1638,7 +1638,7 @@ public class LiveStreamerWindow extends JFrame
     private void b_connectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_connectActionPerformed
 
 
-        LiveStreamer.connect_ip(tf_source_ip.getText(), tf_video_port.getText());
+//        LiveStreamer.connect_ip(tf_source_ip.getText(), tf_video_port.getText());
     }//GEN-LAST:event_b_connectActionPerformed
 
     private void tf_source_ipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_source_ipActionPerformed
