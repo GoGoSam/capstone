@@ -21,8 +21,8 @@ public class Swordfish {
      */
     public static void main(String[] args) {
 
-        boolean do_robot_controller = true,
-                do_video_streamer = false,
+        boolean do_robot_controller = false,
+                do_video_streamer = true,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
                 do_media_streamer_ui = true,

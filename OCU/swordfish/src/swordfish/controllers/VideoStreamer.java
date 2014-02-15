@@ -5,13 +5,16 @@ import org.gstreamer.swing.VideoComponent;
 
 import javax.swing.*;
 import java.awt.*;
+import swordfish.views.window.LiveStreamerWindow;
 
 public class VideoStreamer {
     private Pipeline pipe;
-
-    public void connect(final String addr, final int port, final JFrame ui) {
+    private LiveStreamerWindow ui;
+JPanel pan = new JPanel();
+    public void connect(final String addr, final int port, final LiveStreamerWindow ui) {
         /* init */
         String[] args = {};
+        this.ui = ui;
         Gst.init("VideoStreamer", args);
         pipe = new Pipeline("VideoStreamer");
 
@@ -40,14 +43,36 @@ public class VideoStreamer {
                 /* create a JFrame to display the video output */
                 /* TODO: Change this to be an inputed JFrame instead of being created */
                 JFrame frame = new JFrame("VideoStreamer");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.add(videoComponent, BorderLayout.CENTER);
-                videoComponent.setPreferredSize(new Dimension(720, 576));
+                JInternalFrame frame2 = new JInternalFrame("VideoStreamer");
+                pan = new JPanel();
+//                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                frame.add(videoComponent, BorderLayout.CENTER);
+//                videoComponent.setPreferredSize(new Dimension(720, 576));
+//                frame.pack();
+                pan.add(videoComponent, BorderLayout.CENTER);
+                videoComponent.setPreferredSize(new Dimension(330,350));
+//                frame2.add(pan);
+                frame.add(pan);
                 frame.pack();
-                frame.setVisible(true);
+//                pan.pack();
+//                frame2.p 
+//                frame.setVisible(true);
 
                 /* start the pipeline */
                 pipe.setState(State.PLAYING);
+                ui.p_mediaPlayer.add(frame.getContentPane());
+                Component [] cc;
+                
+//                System.out.println(ui.p_mediaPlayer);
+               
+//                frame.setVisible(true);
+//                ui.p_media_player.add(frame.getContentPane());
+//                pan.setVisible(true);
+//                ui.p_media_player = pan;
+//                  ui.p_media_player.setVisible(true);
+                cc = ui.p_mediaPlayer.getComponents();
+                
+                System.out.println(cc[0].getLocation());
             }
         });
     }
