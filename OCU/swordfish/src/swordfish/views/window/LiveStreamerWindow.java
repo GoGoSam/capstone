@@ -26,12 +26,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.gstreamer.swing.VideoPlayer;
 //import javax.swing.border.TitledBorder;
 //import swordfish.controllers.RobotController;
 import swordfish.views.dialog.LogIn;
 import swordfish.views.MobileDirectionDisplayKeyboard;
 //import swordfish.applications.LiveStreamer;
 import swordfish.controllers.RobotController;
+import swordfish.controllers.VideoStreamer;
 //import java.io.*;
 
 /**
@@ -62,7 +64,7 @@ public class LiveStreamerWindow extends JFrame
 //        super("ddd");
 
         initComponents();
-        initMediaPlayer();
+//        initMediaPlayer();
         init();
         initContainer();
         frmLiveStreamerDisplay = this;
@@ -82,7 +84,7 @@ public class LiveStreamerWindow extends JFrame
 //        super("ddd");
 
         initComponents();
-        initMediaPlayer();
+//        initMediaPlayer();
         init();
         initContainer();
 
@@ -133,13 +135,15 @@ public class LiveStreamerWindow extends JFrame
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="initMediaPlayer">
-    private void initMediaPlayer() {
-        p_mediaPlayer.setBackground(new Color(51, 51, 51));
-        p_mediaPlayer.setForeground(new Color(102, 102, 102));
-        p_mediaPlayer.setMaximumSize(new Dimension(350, 32767));
+    public void initMediaPlayer(VideoStreamer vp) {
+//        p_mediaPlayer.setBackground(new Color(51, 51, 51));
+//        p_mediaPlayer.setForeground(new Color(102, 102, 102));
+//        p_mediaPlayer.setMaximumSize(new Dimension(350, 32767));
 
 //x        pp = new Player();
 //        pp = new Player();
+//        p_mediaPlayer.add(vp.getPanel());
+        p_mediaPlayer = vp.getPanel();
         GroupLayout p_media_playerLayout = new GroupLayout(p_mediaPlayer);
         p_mediaPlayer.setLayout(p_media_playerLayout);
         p_media_playerLayout.setHorizontalGroup(
@@ -180,7 +184,10 @@ public class LiveStreamerWindow extends JFrame
                 .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+                ));
+//                      .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+        
+        
 //        media_pan = new MyMediaPlayer();
 //        JPanel mediaFrame = media_pan.getF();
 //        mediaFrame.setSize(p_media_player.getSize());

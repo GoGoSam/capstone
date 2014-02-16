@@ -10,7 +10,9 @@ import swordfish.views.window.LiveStreamerWindow;
 public class VideoStreamer {
     private Pipeline pipe;
     private LiveStreamerWindow ui;
-JPanel pan = new JPanel();
+
+    JPanel pan = new JPanel();
+    
     public void connect(final String addr, final int port, final LiveStreamerWindow ui) {
         /* init */
         String[] args = {};
@@ -51,7 +53,10 @@ JPanel pan = new JPanel();
 //                videoComponent.setPreferredSize(new Dimension(720, 576));
 //                frame.pack();
                 pan.add(videoComponent, BorderLayout.CENTER);
-                videoComponent.setPreferredSize(new Dimension(330,350));
+                
+                videoComponent.setPreferredSize(new Dimension(ui.pan_live_streaming.getSize()));//550,355));
+                
+                
 //                frame2.add(pan);
                 frame.add(pan);
                 frame.pack();
@@ -61,6 +66,7 @@ JPanel pan = new JPanel();
 
                 /* start the pipeline */
                 pipe.setState(State.PLAYING);
+                
                 ui.p_mediaPlayer.add(frame.getContentPane());
                 /*Component [] cc;
                 
@@ -77,7 +83,10 @@ JPanel pan = new JPanel();
             }
         });
     }
-
+public JPanel getPanel()
+{
+    return pan;
+}
     public void disconnect() {
         //TODO: Figure out if I need to remove elements from pipeline
         pipe.setState(State.NULL);
