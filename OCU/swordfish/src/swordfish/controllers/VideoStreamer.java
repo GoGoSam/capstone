@@ -13,10 +13,10 @@ public class VideoStreamer {
 
     JPanel pan = new JPanel();
     
-    public void connect(final String addr, final int port, final LiveStreamerWindow ui) {
+    public void connect(final String addr, final int port, final LiveStreamerWindow lsw) {
         /* init */
         String[] args = {};
-        this.ui = ui;
+        this.ui = lsw;
         Gst.init("VideoStreamer", args);
         pipe = new Pipeline("VideoStreamer");
 
@@ -49,7 +49,7 @@ public class VideoStreamer {
                 pan = new JPanel();
                 pan.add(videoComponent, BorderLayout.CENTER);
                 
-                videoComponent.setPreferredSize(new Dimension(435,240));
+                videoComponent.setPreferredSize(new Dimension(lsw.p_mediaPlayer.getSize()));// 533,400));
                 
                 
                 frame.add(pan);
@@ -57,7 +57,7 @@ public class VideoStreamer {
 
 
                 /* start the pipeline */
-                ui.p_mediaPlayer.add(frame.getContentPane());
+                lsw.p_mediaPlayer.add(frame.getContentPane());
                 pipe.setState(State.PLAYING);
             }
         });
@@ -66,6 +66,12 @@ public class VideoStreamer {
     {
         pipe.setState(State.PLAYING);
     }
+        
+    public void pause()
+    {
+        pipe.setState(State.PAUSED);
+    }
+        
 public JPanel getPanel()
 {
     return pan;
