@@ -25,29 +25,29 @@ public class Swordfish {
                 do_video_streamer = true,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
-                do_media_streamer_ui = true,
+//                do_media_streamer_ui = true,
                 do_image_processor = false;
 
-        String p1_addr = "192.168.1.101";
-        String p2_addr = "192.168.1.101";
+        String p1_addr = "192.168.1.69";
+        String p2_addr = "192.168.1.69";
         int p1_port = 5555;
-        int p2_port = 5555;
+        int p2_port = 5555; 
         int video_port = 6789;
+        
+        VideoStreamer vs = null;
         JFrame ui = new JFrame();
-        LiveStreamerWindow lsw = null;
-        if (do_media_streamer_ui) {
-            lsw = new LiveStreamerWindow();
-            lsw.setVisible(true);
-        }
+        LiveStreamerWindow lsw = new LiveStreamerWindow();       
+        lsw.setVisible(true);
+
         if (do_robot_controller) {
             RobotController rc = new RobotController();
             rc.connect(p1_addr, p2_addr, p1_port, p2_port, lsw);
         }
         if (do_video_streamer) {
-            VideoStreamer vs = new VideoStreamer();
-            vs.connect(p1_addr, video_port, lsw);
-            
+            vs = new VideoStreamer();
+            vs.connect(p1_addr, video_port, lsw);       
         }
+        
         if (do_xbox_dir_diplay) {
             XBox360_DirectionDisplay xboxDD = new XBox360_DirectionDisplay();
             xboxDD.setVisible(true);
@@ -55,10 +55,6 @@ public class Swordfish {
         if (do_mobile_dis_keyboard) {
             MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
             mddk.setVisible(true);
-        }
-        if (do_media_streamer_ui) {
-//            LiveStreamerWindow lsw = new LiveStreamerWindow();
-//            lsw.setVisible(true);
         }
         if (do_image_processor) {
             ImageAnalyzerWindow iaw = new ImageAnalyzerWindow();

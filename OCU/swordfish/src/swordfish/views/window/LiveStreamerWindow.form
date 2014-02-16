@@ -282,14 +282,17 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel1" linkSize="31" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jPanel2" linkSize="31" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jPanel3" linkSize="31" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel3" max="32767" attributes="0"/>
+                      <Component id="jPanel1" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                          <Component id="jPanel2" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -313,10 +316,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Component id="pan_robo_tracker" pref="312" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pan_south_east" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="pan_robo_tracker" min="-2" pref="313" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Component id="pan_south_east" pref="102" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -526,7 +528,7 @@
                                   <Component id="icon_dArrow" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                                  <EmptySpace pref="35" max="32767" attributes="0"/>
                                   <Component id="l_dArrow" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -910,6 +912,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="b_logon">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="13" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Login"/>
                     <Property name="actionCommand" type="java.lang.String" value="b_logon"/>
                     <Property name="enabled" type="boolean" value="false"/>
@@ -922,6 +927,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="b_logon1">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="13" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Logout"/>
                     <Property name="actionCommand" type="java.lang.String" value="b_logon"/>
                   </Properties>
@@ -938,20 +946,19 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                      <Component id="pan_north" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="pan_media_control" min="-2" pref="368" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="pan_media_control" alignment="1" min="-2" pref="368" max="-2" attributes="0"/>
+                  <Component id="pan_north" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="pan_north" min="-2" pref="296" max="-2" attributes="0"/>
+                      <Component id="pan_north" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pan_media_control" min="-2" pref="138" max="-2" attributes="0"/>
+                      <Component id="pan_media_control" pref="143" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -988,13 +995,15 @@
                               </Group>
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="sb_vid_play" max="32767" attributes="0"/>
+                                          <Component id="sb_vid_play" min="-2" pref="189" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           <Component id="b_vid_rw" linkSize="14" min="-2" pref="40" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="b_vid_play" linkSize="14" min="-2" pref="40" max="-2" attributes="0"/>
@@ -1008,7 +1017,7 @@
                                           <Component id="b_vid_mute" linkSize="14" min="-2" pref="40" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="b_capture_moment" min="-2" pref="59" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -1023,15 +1032,15 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="b_capture_moment" min="-2" pref="40" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="b_capture_moment" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
                                               <Component id="sb_vid_play" min="-2" pref="17" max="-2" attributes="0"/>
                                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace pref="11" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                                   <Component id="b_vid_rw" linkSize="13" min="-2" pref="40" max="-2" attributes="0"/>
@@ -1044,7 +1053,7 @@
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="2" attributes="0">
                                       <Component id="b_load" linkSize="15" alignment="2" min="-2" pref="20" max="-2" attributes="0"/>
                                       <Component id="b_archive" linkSize="15" alignment="2" min="-2" pref="19" max="-2" attributes="0"/>
@@ -1063,11 +1072,17 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="b_archive">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="13" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Archive"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_load">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="13" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Load"/>
                   </Properties>
                   <Events>
@@ -1076,8 +1091,15 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="b_set_flag">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Set Flag"/>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="13" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Flag"/>
+                    <Property name="actionCommand" type="java.lang.String" value="Flag"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_set_flagActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JScrollBar" name="sb_vid_play">
                   <Properties>
@@ -1104,6 +1126,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="b_close">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="13" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Close"/>
                   </Properties>
                   <Events>
@@ -1247,15 +1272,14 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="pan_live_streaming" alignment="0" pref="356" max="32767" attributes="0"/>
+                      <Component id="pan_live_streaming" alignment="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
                           <Component id="pan_live_streaming" min="-2" pref="273" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1270,6 +1294,9 @@
                       <Font name="Lucida Grande" size="13" style="1"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
 
                   <Layout>
                     <DimensionLayout dim="0">
@@ -1304,9 +1331,8 @@
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                               <Component id="p_mediaPlayer" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1342,7 +1368,7 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="268" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="274" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -1387,12 +1413,12 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="pan_systam_status" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pan_systam_status" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                      <Component id="pan_vision_utils" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="pan_vision_utils" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1414,21 +1440,20 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="cb_object_aware" min="-2" max="-2" attributes="0"/>
-                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jButton1" linkSize="8" min="-2" pref="163" max="-2" attributes="0"/>
+                              <Component id="b_scan_hanger" linkSize="8" min="-2" pref="138" max="-2" attributes="0"/>
+                              <Component id="b_analyze_anchor" linkSize="8" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                                      <Component id="b_inspect_ceiling" linkSize="8" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="cb_object_aware" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="b_scan_hanger" linkSize="8" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                              <Component id="b_analyze_anchor" linkSize="8" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton1" linkSize="8" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
-                              <Component id="b_inspect_ceiling" linkSize="8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1438,7 +1463,7 @@
                           <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cb_object_aware" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           <Component id="b_inspect_ceiling" linkSize="22" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="b_analyze_anchor" linkSize="22" min="-2" max="-2" attributes="0"/>
@@ -1446,6 +1471,7 @@
                           <Component id="b_scan_hanger" linkSize="22" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jButton1" linkSize="22" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1453,11 +1479,17 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="b_scan_hanger">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="13" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Scan Hanger"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_inspect_ceiling">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="13" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Inspect Ceiling"/>
                   </Properties>
                   <Events>
@@ -1466,6 +1498,9 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="b_analyze_anchor">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="13" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Analyze Anchors"/>
                   </Properties>
                   <Events>
@@ -1474,6 +1509,9 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="cb_object_aware">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="12" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Object Aware"/>
                   </Properties>
                   <Events>
@@ -1482,12 +1520,18 @@
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCheckBox1">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="12" style="0"/>
+                    </Property>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Directionals On"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton1">
                   <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Andale Mono" size="13" style="0"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Launch Image Viewer"/>
                   </Properties>
                   <Events>
@@ -1502,7 +1546,14 @@
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="b_connect" linkSize="34" min="-2" pref="78" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
+                          <Component id="b_reset5" linkSize="34" min="-2" pref="66" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -1522,15 +1573,8 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="tf_video_port" linkSize="24" min="-2" pref="94" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="b_connect" min="-2" pref="66" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                  <Component id="b_reset5" min="-2" pref="66" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                  <Component id="b_logout5" min="-2" pref="66" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1563,13 +1607,10 @@
                               <Component id="tf_video_port" linkSize="23" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="l_ip1" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="63" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="b_logout5" alignment="0" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="b_reset5" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="b_connect" alignment="3" max="32767" attributes="0"/>
-                              </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" max="-2" attributes="0">
+                              <Component id="b_reset5" linkSize="35" alignment="3" max="32767" attributes="0"/>
+                              <Component id="b_connect" linkSize="35" alignment="3" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -1631,24 +1672,10 @@
                       <Color blue="66" green="66" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Lucida Grande" size="10" style="0"/>
+                      <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Reset"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="b_logout5">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="33" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Lucida Grande" size="10" style="0"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Logout"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_logout5b_logoutActionPerformed"/>
-                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_connect">
                   <Properties>
@@ -1656,7 +1683,7 @@
                       <Color blue="33" green="cc" red="0" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Lucida Grande" size="10" style="0"/>
+                      <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Connect"/>
                   </Properties>

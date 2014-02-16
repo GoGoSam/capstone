@@ -20,6 +20,7 @@ JPanel pan = new JPanel();
 
         /* create and run video streaming in seperate thread */
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 /* create elements */
                 Element source = ElementFactory.make("tcpclientsrc", "source");
@@ -61,7 +62,7 @@ JPanel pan = new JPanel();
                 /* start the pipeline */
                 pipe.setState(State.PLAYING);
                 ui.p_mediaPlayer.add(frame.getContentPane());
-                Component [] cc;
+                /*Component [] cc;
                 
 //                System.out.println(ui.p_mediaPlayer);
                
@@ -72,7 +73,7 @@ JPanel pan = new JPanel();
 //                  ui.p_media_player.setVisible(true);
                 cc = ui.p_mediaPlayer.getComponents();
                 
-                System.out.println(cc[0].getLocation());
+                System.out.println(cc[0].getLocation());*/
             }
         });
     }
