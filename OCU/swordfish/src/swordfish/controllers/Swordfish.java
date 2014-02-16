@@ -55,7 +55,7 @@ public class Swordfish {
             lsw.initMediaPlayer(vs);
 
             vs.connect(p1_addr, video_port, lsw);            
-            
+            lsw.setVideoStreamer(vs);
 //            vs.startPlaying();
         }
         

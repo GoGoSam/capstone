@@ -8,7 +8,7 @@ import java.awt.*;
 import swordfish.views.window.LiveStreamerWindow;
 
 public class VideoStreamer {
-    private Pipeline pipe;
+    public static Pipeline pipe;
     private LiveStreamerWindow ui;
 
     JPanel pan = new JPanel();
@@ -16,7 +16,7 @@ public class VideoStreamer {
     public void connect(final String addr, final int port, final LiveStreamerWindow lsw) {
         /* init */
         String[] args = {};
-        this.ui = lsw;
+         this.ui = lsw;
         Gst.init("VideoStreamer", args);
         pipe = new Pipeline("VideoStreamer");
 
@@ -58,18 +58,29 @@ public class VideoStreamer {
 
                 /* start the pipeline */
                 lsw.p_mediaPlayer.add(frame.getContentPane());
-                pipe.setState(State.PLAYING);
+//                startPlaying();
+                    pipe.setState(State.PLAYING);
+        lsw.b_vid_pause.setEnabled(true);
+        lsw.b_vid_play.setEnabled(false);
+//                pipe.setState(State.PLAYING);
+//                lsw.tf_video_port.setText(Integer.toString(port));
+//                lsw.tf_source2_ip.setText(addr);
+               
+                
             }
         });
     }
     public void startPlaying()
     {
         pipe.setState(State.PLAYING);
+
     }
         
     public void pause()
     {
         pipe.setState(State.PAUSED);
+                
+
     }
         
 public JPanel getPanel()

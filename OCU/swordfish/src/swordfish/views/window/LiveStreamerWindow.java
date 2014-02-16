@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.gstreamer.State;
 import org.gstreamer.swing.VideoPlayer;
 //import javax.swing.border.TitledBorder;
 //import swordfish.controllers.RobotController;
@@ -55,6 +56,7 @@ public class LiveStreamerWindow extends JFrame
     private JPanel p_directionals;
     private boolean do_debug = true;
     boolean[] f_video_loaded = new boolean[1];
+    private VideoStreamer vs;
 //    private RobotController rc;
 //    MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
 //    MyMediaPlayer media_pan;
@@ -100,6 +102,10 @@ public class LiveStreamerWindow extends JFrame
 //        pack();
     }
 
+    public void setVideoStreamer(VideoStreamer instance)
+    {
+        vs = instance;
+    }
     public void checkCC(boolean checkit) {
         if (checkit) {
             cb_controller_connected.setSelected(true);
@@ -1595,7 +1601,11 @@ public class LiveStreamerWindow extends JFrame
     }//GEN-LAST:event_b_inspect_ceilingActionPerformed
 
     private void b_vid_pauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_pauseActionPerformed
-        //        media_pan.pause();
+        
+//        vs.pipe.setState(State.PAUSED);        
+        vs.pause();     
+        b_vid_pause.setEnabled(false);
+        b_vid_play.setEnabled(true);
     }//GEN-LAST:event_b_vid_pauseActionPerformed
 
     private void b_vid_ffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_ffActionPerformed
@@ -1607,7 +1617,11 @@ public class LiveStreamerWindow extends JFrame
     }//GEN-LAST:event_b_vid_stopActionPerformed
 
     private void b_vid_playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_playActionPerformed
-        //        media_pan.playz();
+     
+       vs.startPlaying();
+             
+       b_vid_pause.setEnabled(true);      
+       b_vid_play.setEnabled(false);
     }//GEN-LAST:event_b_vid_playActionPerformed
 
     private void b_vid_rwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_rwActionPerformed
@@ -1866,8 +1880,8 @@ public class LiveStreamerWindow extends JFrame
     private javax.swing.JButton b_set_flag;
     private javax.swing.JButton b_vid_ff;
     private javax.swing.JToggleButton b_vid_mute;
-    private javax.swing.JButton b_vid_pause;
-    private javax.swing.JButton b_vid_play;
+    public javax.swing.JButton b_vid_pause;
+    public javax.swing.JButton b_vid_play;
     private javax.swing.JButton b_vid_rw;
     private javax.swing.JButton b_vid_stop;
     private java.awt.Canvas canvas1;
