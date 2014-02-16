@@ -54,7 +54,7 @@ public class VideoStreamer {
 //                frame.pack();
                 pan.add(videoComponent, BorderLayout.CENTER);
                 
-                videoComponent.setPreferredSize(new Dimension(ui.pan_live_streaming.getSize()));//550,355));
+                videoComponent.setPreferredSize(new Dimension(435,240));
                 
                 
 //                frame2.add(pan);
