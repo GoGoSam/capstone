@@ -65,9 +65,9 @@ public class VideoStreamer {
 //                frame.setVisible(true);
 
                 /* start the pipeline */
+                ui.p_mediaPlayer.add(frame.getContentPane());
                 pipe.setState(State.PLAYING);
                 
-                ui.p_mediaPlayer.add(frame.getContentPane());
                 /*Component [] cc;
                 
 //                System.out.println(ui.p_mediaPlayer);
@@ -82,6 +82,10 @@ public class VideoStreamer {
                 System.out.println(cc[0].getLocation());*/
             }
         });
+    }
+    public void startPlaying()
+    {
+        pipe.setState(State.PLAYING);
     }
 public JPanel getPanel()
 {

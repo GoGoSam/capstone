@@ -270,11 +270,11 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" pref="460" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -285,14 +285,22 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel3" max="32767" attributes="0"/>
-                      <Component id="jPanel1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                          <Component id="jPanel2" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jPanel3" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="308" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -304,7 +312,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pan_robo_tracker" min="-2" pref="207" max="-2" attributes="0"/>
-                  <Component id="pan_south_east" pref="0" max="32767" attributes="0"/>
+                  <Component id="pan_south_east" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -353,9 +361,9 @@
                                       <Component id="l_robot_connection1" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="pb_robo_connect1" linkSize="26" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="pb_cam_sig_per" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="pb_logging_per" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="pb_vid_sig_per" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="pb_cam_sig_per" linkSize="26" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="pb_logging_per" linkSize="26" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="pb_vid_sig_per" linkSize="26" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
@@ -704,7 +712,6 @@
                 <Component class="javax.swing.JProgressBar" name="pb_vid_sig_per">
                   <Properties>
                     <Property name="value" type="int" value="82"/>
-                    <Property name="borderPainted" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="l_robot_connection1">
@@ -927,6 +934,7 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Logout"/>
                     <Property name="actionCommand" type="java.lang.String" value="b_logon"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_logon1ActionPerformed"/>
@@ -955,8 +963,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="pan_north" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="pan_media_control" min="-2" pref="143" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="pan_media_control" min="-2" pref="173" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1060,7 +1068,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="42" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1074,6 +1082,7 @@
                       <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Save"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_load">
@@ -1082,6 +1091,7 @@
                       <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Load"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_loadActionPerformed"/>
@@ -1093,6 +1103,7 @@
                       <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Flag"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_set_flagActionPerformed"/>
@@ -1127,6 +1138,7 @@
                       <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Close"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_closeActionPerformed"/>
@@ -1157,6 +1169,7 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="2" name="/home/sabertooth/capstone/OCU/swordfish/resources/media_control_icons/rewind_icon.jpg"/>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="focusable" type="boolean" value="false"/>
                     <Property name="horizontalTextPosition" type="int" value="0"/>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1411,11 +1424,10 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="pan_systam_status" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pan_vision_utils" pref="0" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
+                      <Component id="pan_vision_utils" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1480,6 +1492,7 @@
                       <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Scan Hanger"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_inspect_ceiling">
@@ -1488,6 +1501,7 @@
                       <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Inspect Ceiling"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_inspect_ceilingActionPerformed"/>
@@ -1499,6 +1513,7 @@
                       <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Analyze Anchors"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_analyze_anchorActionPerformed"/>
@@ -1510,6 +1525,7 @@
                       <Font name="Andale Mono" size="12" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Object Aware"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_object_awareActionPerformed"/>
@@ -1530,6 +1546,7 @@
                       <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Image Viewer"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -1607,7 +1624,7 @@
                               <Component id="tf_video_port" linkSize="23" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="l_ip1" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="54" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" max="-2" attributes="0">
                               <Component id="b_reset5" linkSize="35" alignment="3" max="32767" attributes="0"/>
                               <Component id="b_connect" linkSize="35" alignment="3" max="32767" attributes="0"/>
@@ -1668,24 +1685,20 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="b_reset5">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="66" green="66" red="ff" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Reset"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="b_connect">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="33" green="cc" red="0" type="rgb"/>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Andale Mono" size="13" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Connect"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b_connectActionPerformed"/>

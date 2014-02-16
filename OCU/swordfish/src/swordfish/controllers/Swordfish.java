@@ -21,7 +21,7 @@ public class Swordfish {
      */
     public static void main(String[] args) {
         
-        boolean do_robot_controller = false,
+        boolean do_robot_controller = true,
               do_video_streamer = true,
               do_xbox_dir_diplay = false,
               do_mobile_dis_keyboard = false,
@@ -36,17 +36,27 @@ public class Swordfish {
         
         VideoStreamer vs = null;
         JFrame ui = new JFrame();
-        LiveStreamerWindow lsw = new LiveStreamerWindow();        
+        final LiveStreamerWindow lsw = new LiveStreamerWindow();  
+        
         lsw.setVisible(true);
+        RobotController rc;
+//           if (do_video_streamer) {
+//            vs = new VideoStreamer();
+//            vs.connect(p1_addr, video_port, lsw);            
+//            lsw.initMediaPlayer(vs);
+//        }
         
         if (do_robot_controller) {
-            RobotController rc = new RobotController();
+            rc = new RobotController();
             rc.connect(p1_addr, p2_addr, p1_port, p2_port, lsw);
         }
-        if (do_video_streamer) {
+      if (do_video_streamer) {
             vs = new VideoStreamer();
-            vs.connect(p1_addr, video_port, lsw);            
             lsw.initMediaPlayer(vs);
+
+            vs.connect(p1_addr, video_port, lsw);            
+            
+//            vs.startPlaying();
         }
         
         if (do_xbox_dir_diplay) {
