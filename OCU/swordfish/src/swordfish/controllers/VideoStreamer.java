@@ -3,6 +3,7 @@ package swordfish.controllers;
 import org.gstreamer.*;
 import org.gstreamer.swing.VideoComponent;
 
+      
 import javax.swing.*;
 import java.awt.*;
 import swordfish.views.window.LiveStreamerWindow;
@@ -55,13 +56,13 @@ public class VideoStreamer {
                 frame.add(pan);
                 frame.pack();
 
-
                 /* start the pipeline */
                 lsw.p_mediaPlayer.add(frame.getContentPane());
 //                startPlaying();
                 pipe.setState(State.PLAYING);
                 lsw.b_vid_pause.setEnabled(true);
                 lsw.b_vid_play.setEnabled(false);
+                lsw.b_capture_moment.setEnabled(true);
 //                pipe.setState(State.PLAYING);
 //                lsw.tf_video_port.setText(Integer.toString(port));
 //                lsw.tf_source2_ip.setText(addr);

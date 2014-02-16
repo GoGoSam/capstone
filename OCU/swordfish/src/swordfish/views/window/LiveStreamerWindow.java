@@ -1864,7 +1864,7 @@ public class LiveStreamerWindow extends JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_analyze_anchor;
     private javax.swing.JButton b_archive;
-    private javax.swing.JButton b_capture_moment;
+    public javax.swing.JButton b_capture_moment;
     private javax.swing.JButton b_close;
     private javax.swing.JButton b_connect;
     private javax.swing.JButton b_inspect_ceiling;
