@@ -58,10 +58,17 @@ public class RobotController {
         this.ui = ui;
         if (!p1_client.connect(p1_addr, p1_port)) {
             System.out.format("Unable to Connect to %s at %d\n", p1_addr, p1_port);
+        } else {
+            ui.tf_source1_ip.setText(p1_addr);
+            ui.tf_motor_port.setText(Integer.toString(p1_port));
+
         }
         if (!p2_client.connect(p2_addr, p2_port)) {
             System.out.format("Unable to Connect to %s at %d\n", p2_addr, p2_port);
         } else {
+            ui.tf_source2_ip.setText(p2_addr);
+            ui.tf_controller_port.setText(Integer.toString(p2_port));
+
             String[] sCmd = new String[2];
             sCmd[0] = SD0;
             sCmd[1] = SD1;
@@ -77,8 +84,7 @@ public class RobotController {
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.isEmpty()) {
             System.out.println("No Xbox Controller Found");
-        }else
-        {
+        } else {
             System.out.println("Xbox Controller Found");
             controller = (JInputXboxController) XboxController.getAll().get(0);
             controller.addListener(listener);

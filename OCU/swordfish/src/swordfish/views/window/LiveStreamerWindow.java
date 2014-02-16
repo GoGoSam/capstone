@@ -42,7 +42,7 @@ import swordfish.controllers.VideoStreamer;
  * @author jrob
  */
 public class LiveStreamerWindow extends JFrame
-        implements KeyListener, WindowListener {
+      implements KeyListener, WindowListener {
 
 //    private JFrame frmLiveStreamerDisplay;
     /**
@@ -102,10 +102,10 @@ public class LiveStreamerWindow extends JFrame
 //        pack();
     }
 
-    public void setVideoStreamer(VideoStreamer instance)
-    {
+    public void setVideoStreamer(VideoStreamer instance) {
         vs = instance;
     }
+
     public void checkCC(boolean checkit) {
         if (checkit) {
             cb_controller_connected.setSelected(true);
@@ -126,7 +126,6 @@ public class LiveStreamerWindow extends JFrame
         b_capture_moment.setEnabled(f_video_loaded[0]);
 
 //        cb_controller_connected.setSelected(rc.isConnected());
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="initContainer">
@@ -153,51 +152,49 @@ public class LiveStreamerWindow extends JFrame
         GroupLayout p_media_playerLayout = new GroupLayout(p_mediaPlayer);
         p_mediaPlayer.setLayout(p_media_playerLayout);
         p_media_playerLayout.setHorizontalGroup(
-                p_media_playerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGap(0, 0, Short.MAX_VALUE));
+              p_media_playerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+              .addGap(0, 0, Short.MAX_VALUE));
         p_media_playerLayout.setVerticalGroup(
-                p_media_playerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGap(0, 464, Short.MAX_VALUE));
+              p_media_playerLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+              .addGap(0, 464, Short.MAX_VALUE));
 
         GroupLayout pan_video_streamLayout = new GroupLayout(pan_live_streaming);
         pan_live_streaming.setLayout(pan_video_streamLayout);
         pan_video_streamLayout.setHorizontalGroup(
-                pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGap(152, 152, 152)
-                .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 356, Short.MAX_VALUE))
-                .addComponent(p_mediaPlayer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap()));
+              pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+              .addGroup(pan_video_streamLayout.createSequentialGroup()
+                    .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                          .addGroup(pan_video_streamLayout.createSequentialGroup()
+                                .addGroup(pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                      .addGroup(pan_video_streamLayout.createSequentialGroup()
+                                            .addGap(177, 177, 177)
+                                            .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                      .addGroup(pan_video_streamLayout.createSequentialGroup()
+                                            .addGap(166, 166, 166)
+                                            .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                      .addGroup(pan_video_streamLayout.createSequentialGroup()
+                                            .addGap(152, 152, 152)
+                                            .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 356, Short.MAX_VALUE))
+                          .addComponent(p_mediaPlayer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap()));
         pan_video_streamLayout.setVerticalGroup(
-                pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(pan_video_streamLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(p_mediaPlayer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                ));
+              pan_video_streamLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+              .addGroup(pan_video_streamLayout.createSequentialGroup()
+                    .addGap(0, 0, 0)
+                    .addComponent(p_mediaPlayer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, 0)
+                    .addComponent(canvas1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, 0)
+                    .addComponent(canvas4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, 0)
+                    .addComponent(canvas3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+              ));
 //                      .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-        
-        
+
 //        media_pan = new MyMediaPlayer();
 //        JPanel mediaFrame = media_pan.getF();
 //        mediaFrame.setSize(p_media_player.getSize());
-
 //        p_media_player.add(mediaFrame);
     }
 
@@ -1601,9 +1598,9 @@ public class LiveStreamerWindow extends JFrame
     }//GEN-LAST:event_b_inspect_ceilingActionPerformed
 
     private void b_vid_pauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_pauseActionPerformed
-        
+
 //        vs.pipe.setState(State.PAUSED);        
-        vs.pause();     
+        vs.pause();
         b_vid_pause.setEnabled(false);
         b_vid_play.setEnabled(true);
     }//GEN-LAST:event_b_vid_pauseActionPerformed
@@ -1617,11 +1614,11 @@ public class LiveStreamerWindow extends JFrame
     }//GEN-LAST:event_b_vid_stopActionPerformed
 
     private void b_vid_playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_playActionPerformed
-     
-       vs.startPlaying();
-             
-       b_vid_pause.setEnabled(true);      
-       b_vid_play.setEnabled(false);
+
+        vs.startPlaying();
+
+        b_vid_pause.setEnabled(true);
+        b_vid_play.setEnabled(false);
     }//GEN-LAST:event_b_vid_playActionPerformed
 
     private void b_vid_rwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_rwActionPerformed
@@ -1715,7 +1712,6 @@ public class LiveStreamerWindow extends JFrame
     }//GEN-LAST:event_b_logonActionPerformed
 
     private void b_connectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_connectActionPerformed
-
 
 //        LiveStreamer.connect_ip(tf_source_ip.getText(), tf_video_port.getText());
     }//GEN-LAST:event_b_connectActionPerformed

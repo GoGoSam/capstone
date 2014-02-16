@@ -36,7 +36,7 @@ public class Swordfish {
         
         VideoStreamer vs = null;
         JFrame ui = new JFrame();
-        final LiveStreamerWindow lsw = new LiveStreamerWindow();  
+        final LiveStreamerWindow lsw = new LiveStreamerWindow();        
         
         lsw.setVisible(true);
         RobotController rc;
@@ -50,10 +50,10 @@ public class Swordfish {
             rc = new RobotController();
             rc.connect(p1_addr, p2_addr, p1_port, p2_port, lsw);
         }
-      if (do_video_streamer) {
+        if (do_video_streamer) {
             vs = new VideoStreamer();
             lsw.initMediaPlayer(vs);
-
+            
             vs.connect(p1_addr, video_port, lsw);            
             lsw.setVideoStreamer(vs);
 //            vs.startPlaying();
