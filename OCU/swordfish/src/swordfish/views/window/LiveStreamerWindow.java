@@ -43,7 +43,7 @@ import swordfish.controllers.VideoStreamer;
 public class LiveStreamerWindow extends JFrame
         implements KeyListener, WindowListener {
 
-    private JFrame frmLiveStreamerDisplay;
+//    private JFrame frmLiveStreamerDisplay;
     /**
      * Creates new form LiveStreamerWindow
      */
@@ -67,7 +67,7 @@ public class LiveStreamerWindow extends JFrame
 //        initMediaPlayer();
         init();
         initContainer();
-        frmLiveStreamerDisplay = this;
+//        frmLiveStreamerDisplay = this;
         f_video_loaded[0] = false;
 //        rc = new RobotController();
 //        rc.connect(this);
@@ -940,8 +940,6 @@ public class LiveStreamerWindow extends JFrame
         pan_live_streaming.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         pan_live_streaming.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
 
-        p_mediaPlayer.setBackground(new java.awt.Color(51, 51, 51));
-        p_mediaPlayer.setForeground(new java.awt.Color(102, 102, 102));
         p_mediaPlayer.setMaximumSize(new java.awt.Dimension(350, 32767));
         p_mediaPlayer.setPreferredSize(new java.awt.Dimension(450, 250));
 
