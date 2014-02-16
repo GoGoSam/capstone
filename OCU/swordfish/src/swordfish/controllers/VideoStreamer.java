@@ -46,40 +46,19 @@ public class VideoStreamer {
                 /* create a JFrame to display the video output */
                 /* TODO: Change this to be an inputed JFrame instead of being created */
                 JFrame frame = new JFrame("VideoStreamer");
-                JInternalFrame frame2 = new JInternalFrame("VideoStreamer");
                 pan = new JPanel();
-//                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                frame.add(videoComponent, BorderLayout.CENTER);
-//                videoComponent.setPreferredSize(new Dimension(720, 576));
-//                frame.pack();
                 pan.add(videoComponent, BorderLayout.CENTER);
                 
                 videoComponent.setPreferredSize(new Dimension(435,240));
                 
                 
-//                frame2.add(pan);
                 frame.add(pan);
                 frame.pack();
-//                pan.pack();
-//                frame2.p 
-//                frame.setVisible(true);
+
 
                 /* start the pipeline */
                 ui.p_mediaPlayer.add(frame.getContentPane());
                 pipe.setState(State.PLAYING);
-                
-                /*Component [] cc;
-                
-//                System.out.println(ui.p_mediaPlayer);
-               
-//                frame.setVisible(true);
-//                ui.p_media_player.add(frame.getContentPane());
-//                pan.setVisible(true);
-//                ui.p_media_player = pan;
-//                  ui.p_media_player.setVisible(true);
-                cc = ui.p_mediaPlayer.getComponents();
-                
-                System.out.println(cc[0].getLocation());*/
             }
         });
     }
