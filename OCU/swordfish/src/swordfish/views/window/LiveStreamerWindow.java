@@ -565,7 +565,7 @@ public class LiveStreamerWindow extends JFrame
 
         l_date.setText("518");
 
-        b_logon.setFont(new java.awt.Font("Andale Mono", 0, 13)); // NOI18N
+        b_logon.setFont(new java.awt.Font("Andale Mono", 0, 12)); // NOI18N
         b_logon.setText("Login");
         b_logon.setActionCommand("b_logon");
         b_logon.setEnabled(false);
@@ -575,7 +575,7 @@ public class LiveStreamerWindow extends JFrame
             }
         });
 
-        b_logon1.setFont(new java.awt.Font("Andale Mono", 0, 13)); // NOI18N
+        b_logon1.setFont(new java.awt.Font("Andale Mono", 0, 12)); // NOI18N
         b_logon1.setText("Logout");
         b_logon1.setActionCommand("b_logon");
         b_logon1.setEnabled(false);
@@ -606,17 +606,15 @@ public class LiveStreamerWindow extends JFrame
                                 .addGap(33, 33, 33)
                                 .addComponent(l_mid__static)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(l_date))))
+                                .addComponent(l_date)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pan_loginLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(b_logon, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addComponent(b_logon, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b_logon1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(b_logon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
-
-        pan_loginLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {b_logon, b_logon1});
-
         pan_loginLayout.setVerticalGroup(
             pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_loginLayout.createSequentialGroup()
@@ -1224,9 +1222,14 @@ public class LiveStreamerWindow extends JFrame
         mnu_close.setActionCommand("mnu_file");
         menu_file.add(mnu_close);
 
-        mnu_exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.META_MASK));
+        mnu_exit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         mnu_exit.setText("Exit");
-        mnu_exit.setActionCommand("mnu_file");
+        mnu_exit.setActionCommand("mnu_exit");
+        mnu_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnu_exitActionPerformed(evt);
+            }
+        });
         menu_file.add(mnu_exit);
 
         jMenuBar1.add(menu_file);
@@ -1362,13 +1365,13 @@ public class LiveStreamerWindow extends JFrame
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void mnu_inspect_robotActionPerformed(ActionEvent evt) {//GEN-FIRST:event_mnu_inspect_robotActionPerformed
-        try {
-            //        media_pan.playz("debris_robo_view.mov");
-            Desktop.getDesktop().open(new File("~/Desktop/go.mpg"));
-//        open();
-        } catch (IOException ex) {
-            Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            //        media_pan.playz("debris_robo_view.mov");
+//            Desktop.getDesktop().open(new File("~/Desktop/go.mpg"));
+////        open();
+//        } catch (IOException ex) {
+//            Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_mnu_inspect_robotActionPerformed
 
     private void jMenuItem9ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -1424,7 +1427,7 @@ public class LiveStreamerWindow extends JFrame
     }//GEN-LAST:event_b_closeActionPerformed
 
     private void b_capture_momentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_capture_momentActionPerformed
-it.captureImage(p_mediaPlayer); 
+        it.captureImage(p_mediaPlayer); 
     }//GEN-LAST:event_b_capture_momentActionPerformed
 
     private void b_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_loadActionPerformed
@@ -1520,6 +1523,12 @@ it.captureImage(p_mediaPlayer);
     private void cb_directionalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_directionalsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_directionalsActionPerformed
+
+    private void mnu_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_exitActionPerformed
+        // TODO add your handling code here:
+        vs.disconnect();
+        System.exit(0);
+    }//GEN-LAST:event_mnu_exitActionPerformed
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">

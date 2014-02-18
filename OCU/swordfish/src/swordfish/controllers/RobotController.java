@@ -120,7 +120,8 @@ public class RobotController {
             case b:
                 break;
             case x:
-                break;
+                ui.b_capture_moment.doClick();
+               break;
             case y:
                 break;
             case leftShoulder:
