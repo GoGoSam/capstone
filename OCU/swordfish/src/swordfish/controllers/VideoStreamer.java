@@ -82,11 +82,8 @@ public class VideoStreamer {
     }
 
     private void updateGUI() {
-        if (pipe.isPlaying()) {
-            ui.setVideoFlag(true);
-        } else {
-            ui.setVideoFlag(false);
-        }
+                 
+        ui.setVideoFlag(pipe.isPlaying());
         ui.set_button_states();
     }
 
