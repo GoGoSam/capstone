@@ -955,13 +955,8 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="l_dArrow" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="l_rArrow" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                                      <Component id="l_lArrow" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="l_rArrow" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="l_lArrow" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cb_directionals" min="-2" max="-2" attributes="0"/>
