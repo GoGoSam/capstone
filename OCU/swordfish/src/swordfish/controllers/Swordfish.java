@@ -31,8 +31,10 @@ public class Swordfish {
         String p1_addr = "192.168.1.69";
         String p2_addr = "192.168.1.69";
         int p1_port = 5555;
-        int p2_port = 5555;        
+        int p2_port = 45678;        
         int video_port = 6789;
+        
+        
         
         VideoStreamer vs = null;
         JFrame ui = new JFrame();
