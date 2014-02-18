@@ -16,9 +16,11 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FileDialog;
+import java.awt.Graphics2D;
 //import java.awt.Font;
 //import java.awt.LayoutManager;
 import java.awt.event.KeyEvent.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 //import java.net.MalformedURLException;
@@ -26,6 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import org.gstreamer.State;
 import org.gstreamer.swing.VideoPlayer;
 //import javax.swing.border.TitledBorder;
@@ -57,11 +60,12 @@ public class LiveStreamerWindow extends JFrame
     private boolean do_debug = true;
     boolean[] f_video_loaded = new boolean[1];
     private VideoStreamer vs;
+    ImageTaker it;
 //    private RobotController rc;
 //    MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
 //    MyMediaPlayer media_pan;
     String icon_path = System.getProperty("user.dir") + "/resources/";
-
+    String image_out_path = System.getProperty("user.home") + "/Desktop/";
     public LiveStreamerWindow() {
 //        super("ddd");
 
@@ -75,6 +79,7 @@ public class LiveStreamerWindow extends JFrame
 //        rc.connect(this);
         set_button_states();
         setResizable(false);
+        it = new ImageTaker(image_out_path);
 //        JPanel p_directionals = new MobileDirectionDisplayKeyboard().getPanelDisplay();
 //        p_directionals.setVisible(true);
 
@@ -1646,13 +1651,7 @@ public class LiveStreamerWindow extends JFrame
     }//GEN-LAST:event_b_closeActionPerformed
 
     private void b_capture_momentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_capture_momentActionPerformed
-        /*
-         boolean tmp = media_pan.save_snap_shot();
-         if (tmp) {
-         System.out.println("Yupp, Snap!\n\n");
-         } else {
-         System.out.println("No Snap!\n\n");
-         }*/
+it.captureImage(p_mediaPlayer); 
     }//GEN-LAST:event_b_capture_momentActionPerformed
 
     private void b_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_loadActionPerformed
@@ -1865,6 +1864,34 @@ public class LiveStreamerWindow extends JFrame
 ////                new MobileDirectionDisplay().setVisible(true);
 //            }
 //        });
+    
+    
+    
+    class ImageTaker    
+    {
+        String dir_out;
+        public ImageTaker(String dir_path){  
+            dir_out = dir_path;
+        }
+
+        private void captureImage(JPanel p_in) {
+            BufferedImage im = new BufferedImage(p_in.getWidth(),p_in.getHeight(), BufferedImage.TYPE_INT_RGB);
+            
+            Graphics2D g2 = im.createGraphics();
+            p_in.paint(g2);
+            String fname = dir_out.concat("test.jpg");
+            im = im.getSubimage(10, 10, im.getWidth() - 10, im.getHeight() - 10);
+            try {
+                ImageIO.write(im, "JPG", new File(fname));
+                
+            } catch (IOException ex) {
+                Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+        
+    }
     private ArrayList<JButton> logger;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_analyze_anchor;
