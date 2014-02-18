@@ -1880,8 +1880,10 @@ it.captureImage(p_mediaPlayer);
             Graphics2D g2 = im.createGraphics();
             p_in.paint(g2);
             String fname = dir_out.concat("test.jpg");
+            im = im.getSubimage(10, 10, im.getWidth() - 10, im.getHeight() - 10);
             try {
                 ImageIO.write(im, "JPG", new File(fname));
+                
             } catch (IOException ex) {
                 Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
