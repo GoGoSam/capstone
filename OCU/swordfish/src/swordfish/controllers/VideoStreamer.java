@@ -3,7 +3,6 @@ package swordfish.controllers;
 import org.gstreamer.*;
 import org.gstreamer.swing.VideoComponent;
 
-      
 import javax.swing.*;
 import java.awt.*;
 import swordfish.views.window.LiveStreamerWindow;
@@ -60,20 +59,17 @@ public class VideoStreamer {
                 lsw.p_mediaPlayer.add(frame.getContentPane());
 //                startPlaying();
                 pipe.setState(State.PLAYING);
-                lsw.b_vid_pause.setEnabled(true);
-                lsw.b_vid_play.setEnabled(false);
-                lsw.b_capture_moment.setEnabled(true);
+                updateGUI();
 //                pipe.setState(State.PLAYING);
 //                lsw.tf_video_port.setText(Integer.toString(port));
 //                lsw.tf_source2_ip.setText(addr);
-
             }
         });
     }
 
     public void startPlaying() {
         pipe.setState(State.PLAYING);
-
+        updateGUI();
     }
 
     public void pause() {
@@ -85,8 +81,15 @@ public class VideoStreamer {
         return pan;
     }
 
+    private void updateGUI() {
+                 
+        ui.setVideoFlag(pipe.isPlaying());
+        ui.set_button_states();
+    }
+
     public void disconnect() {
         //TODO: Figure out if I need to remove elements from pipeline
         pipe.setState(State.NULL);
+        updateGUI();
     }
 }

@@ -9,6 +9,9 @@ import swordfish.models.RoboComms.RoboReq;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import swordfish.views.window.LiveStreamerWindow;
 
 public class RobotController {
@@ -48,6 +51,8 @@ public class RobotController {
     private int RX = 0;
     private int RY = 0;
 
+    public JLabel cur;
+    
     public RobotController() {
         p1_client = new TCPClient();
         p2_client = new TCPClient();
@@ -89,7 +94,9 @@ public class RobotController {
             controller = (JInputXboxController) XboxController.getAll().get(0);
             controller.addListener(listener);
             startPolling();
+//            listener.setDirectionals(this.ui.l_dArrow);
         }
+
     }
 
     private void buildCommand(Button button, boolean pressed) {
@@ -220,6 +227,8 @@ public class RobotController {
                 mreq.setCmd(ByteString.copyFrom(t));
                 req.setBase(mreq);
                 sendCommand(req.build(), p1_client);
+                
+                ui.set_button_states();
                 break;
             case rightStickX:
             case rightStickY:
@@ -251,6 +260,8 @@ public class RobotController {
                     sCmd = SU;
                     System.out.println("UP");
                     this.ui.icon_dArrow.setEnabled(true);
+                         
+//            DirectionalThread dt = new DirectionalThread(ui.l_dArrow);
 //                    if (servo_positions[1] < 220) {
 //                        servo.execute(1, 1);
 //                        servo_positions[1] += 10;
@@ -325,10 +336,17 @@ public class RobotController {
 
     private void updateUI(Axis axis, float state) {
         //TODO: Implement this function
+//        try {
+//            ui.l_lArrow.setEnabled(true);
+//           Thread.sleep(2000);
+//            ui.l_lArrow.setEnabled(false);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(RobotController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     private void updateUI(Button button, boolean pressed) {
-        //TODO: Implement this function
+            //TODO: Implement this function
     }
 
     private class PollerThread extends Thread {
@@ -374,6 +392,56 @@ public class RobotController {
         public void axisChanged(Axis axis, float state) {
             buildCommand(axis, state);
             updateUI(axis, state);
+
+            
+        }
+
+    }
+    
+    private class DirectionalThread extends Thread {
+
+       JLabel directional;
+        
+//        boolean running;
+
+        public DirectionalThread(JLabel in) {
+           this.directional = in;
+//            this.controller = c;
+//            running = true;
+        }
+
+        @Override
+        public void run() {
+            try {
+                directional.setEnabled(true);
+                Thread.sleep(2000);
+                directional.setEnabled(false);
+                
+            } catch (InterruptedException ex) {
+                Logger.getLogger(RobotController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }
+
+     
+    private class DirectionalTask extends SwingWorker<Void, JLabel> {
+        
+        JLabel directional;
+//                protected void doInBackground(JLabel directional) {
+//            this.directional = directional;
+//
+//
+//        }
+
+        @Override
+        protected Void doInBackground() throws Exception {
+            directional.setEnabled(true);
+            
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+ 
+    }
+ 
+    
 }
