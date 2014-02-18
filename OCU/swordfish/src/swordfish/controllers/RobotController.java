@@ -51,7 +51,7 @@ public class RobotController {
     private int RX = 0;
     private int RY = 0;
 
-    public JLabel cur;
+//    public JLabel cur;
     
     public RobotController() {
         p1_client = new TCPClient();
@@ -391,13 +391,12 @@ public class RobotController {
         @Override
         public void axisChanged(Axis axis, float state) {
             buildCommand(axis, state);
-            updateUI(axis, state);
-
-            
+            updateUI(axis, state);        
         }
 
     }
     
+    /*
     private class DirectionalThread extends Thread {
 
        JLabel directional;
@@ -443,5 +442,5 @@ public class RobotController {
  
     }
  
-    
+    */
 }

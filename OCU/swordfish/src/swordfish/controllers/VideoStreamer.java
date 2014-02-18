@@ -50,7 +50,7 @@ public class VideoStreamer {
                 pan = new JPanel();
                 pan.add(videoComponent, BorderLayout.CENTER);
 
-                videoComponent.setPreferredSize(new Dimension(lsw.p_mediaPlayer.getSize()));// 533,400));
+                videoComponent.setPreferredSize(lsw.p_mediaPlayer.getSize());// 533,400));
 
                 frame.add(pan);
                 frame.pack();
