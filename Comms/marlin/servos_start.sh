@@ -1,6 +1,6 @@
 #!/bin/bash
 
-port=5555
+port=45678
 device="/dev/servoblaster"
 
 #sudo servod
