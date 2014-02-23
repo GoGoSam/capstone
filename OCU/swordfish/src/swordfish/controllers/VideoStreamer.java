@@ -12,12 +12,10 @@ public class VideoStreamer {
     public static Pipeline pipe;
     private LiveStreamerWindow ui;
 
-    JPanel pan = new JPanel();
-
     public void connect(final String addr, final int port, final LiveStreamerWindow lsw) {
         /* init */
+        ui = lsw;
         String[] args = {};
-        this.ui = lsw;
         Gst.init("VideoStreamer", args);
         pipe = new Pipeline("VideoStreamer");
 
@@ -45,51 +43,38 @@ public class VideoStreamer {
                 Element.linkMany(source, depayloader, decoder, parser, converter, sink);
 
                 /* create a JFrame to display the video output */
-                /* TODO: Change this to be an inputed JFrame instead of being created */
                 JFrame frame = new JFrame("VideoStreamer");
-                pan = new JPanel();
+                JPanel pan = new JPanel();
                 pan.add(videoComponent, BorderLayout.CENTER);
-
-                videoComponent.setPreferredSize(lsw.p_mediaPlayer.getSize());// 533,400));
-
+                videoComponent.setPreferredSize(lsw.p_mediaPlayer.getSize());
                 frame.add(pan);
                 frame.pack();
+                lsw.p_mediaPlayer.add(frame.getContentPane());
 
                 /* start the pipeline */
-                lsw.p_mediaPlayer.add(frame.getContentPane());
-//                startPlaying();
-                pipe.setState(State.PLAYING);
-                updateGUI();
-//                pipe.setState(State.PLAYING);
-//                lsw.tf_video_port.setText(Integer.toString(port));
-//                lsw.tf_source2_ip.setText(addr);
+                start();
             }
         });
     }
 
-    public void startPlaying() {
+    public void start() {
         pipe.setState(State.PLAYING);
         updateGUI();
     }
 
     public void pause() {
         pipe.setState(State.PAUSED);
-
-    }
-
-    public JPanel getPanel() {
-        return pan;
-    }
-
-    private void updateGUI() {
-                 
-        ui.setVideoFlag(pipe.isPlaying());
-        ui.set_button_states();
+        updateGUI();
     }
 
     public void disconnect() {
         //TODO: Figure out if I need to remove elements from pipeline
         pipe.setState(State.NULL);
         updateGUI();
+    }
+
+    private void updateGUI() {
+        ui.setVideoFlag(pipe.isPlaying());
+        ui.set_button_states();
     }
 }
