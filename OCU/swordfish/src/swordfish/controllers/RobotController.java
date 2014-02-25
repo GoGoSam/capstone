@@ -7,11 +7,7 @@ import swordfish.models.input.XboxController;
 import swordfish.models.input.JInputXboxController;
 import swordfish.models.RoboComms.RoboReq;
 
-import javax.swing.*;
 import java.util.List;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import swordfish.views.window.LiveStreamerWindow;
 
 public class RobotController {
@@ -51,40 +47,25 @@ public class RobotController {
     private int RX = 0;
     private int RY = 0;
 
-//    public JLabel cur;
-    
     public RobotController() {
         p1_client = new TCPClient();
         p2_client = new TCPClient();
         listener = new RobotControllerListener();
     }
 
-    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, LiveStreamerWindow ui) {
-        this.ui = ui;
+    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, LiveStreamerWindow lsw) {
+        ui = lsw;
         if (!p1_client.connect(p1_addr, p1_port)) {
             System.out.format("Unable to Connect to %s at %d\n", p1_addr, p1_port);
         } else {
             ui.tf_source1_ip.setText(p1_addr);
             ui.tf_motor_port.setText(Integer.toString(p1_port));
-
         }
         if (!p2_client.connect(p2_addr, p2_port)) {
             System.out.format("Unable to Connect to %s at %d\n", p2_addr, p2_port);
         } else {
             ui.tf_source2_ip.setText(p2_addr);
             ui.tf_controller_port.setText(Integer.toString(p2_port));
-
-            String[] sCmd = new String[2];
-            sCmd[0] = SD0;
-            sCmd[1] = SD1;
-            for (int i = 0; i < 2; i++) {
-                RoboReq.Builder req = RoboReq.newBuilder();
-                req.setType(RoboReq.Type.MSENS);
-                RoboReq.MoveSensCmd.Builder sreq = RoboReq.MoveSensCmd.newBuilder();
-                sreq.setCmd(sCmd[i]);
-                req.setSens(sreq);
-                sendCommand(req.build(), p2_client);
-            }
         }
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.isEmpty()) {
@@ -94,9 +75,7 @@ public class RobotController {
             controller = (JInputXboxController) XboxController.getAll().get(0);
             controller.addListener(listener);
             startPolling();
-//            listener.setDirectionals(this.ui.l_dArrow);
         }
-
     }
 
     private void buildCommand(Button button, boolean pressed) {
@@ -121,7 +100,7 @@ public class RobotController {
                 break;
             case x:
                 ui.b_capture_moment.doClick();
-               break;
+                break;
             case y:
                 break;
             case leftShoulder:
@@ -133,7 +112,7 @@ public class RobotController {
             case leftStick:
                 break;
             case rightStick:
-                // set servo to default position for both axices
+                // set servo to default position for both axes
                 String[] sCmd = new String[2];
                 sCmd[0] = SD0;
                 sCmd[1] = SD1;
@@ -260,16 +239,6 @@ public class RobotController {
                     //RY can be -2 or -3
                     sCmd = SU;
                     System.out.println("UP");
-                    this.ui.icon_dArrow.setEnabled(true);
-                         
-//            DirectionalThread dt = new DirectionalThread(ui.l_dArrow);
-//                    if (servo_positions[1] < 220) {
-//                        servo.execute(1, 1);
-//                        servo_positions[1] += 10;
-//                        System.out.println("UP");
-
-//                    }
-//                    this.ui.icon_uArrow.setEnabled(false);
                 } else if (RX > 0 && RY == 0) {
                     //RX can be 2 or 3
                     sCmd = SR;
@@ -337,17 +306,10 @@ public class RobotController {
 
     private void updateUI(Axis axis, float state) {
         //TODO: Implement this function
-//        try {
-//            ui.l_lArrow.setEnabled(true);
-//           Thread.sleep(2000);
-//            ui.l_lArrow.setEnabled(false);
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(RobotController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 
     private void updateUI(Button button, boolean pressed) {
-            //TODO: Implement this function
+        //TODO: Implement this function
     }
 
     private class PollerThread extends Thread {
@@ -394,54 +356,5 @@ public class RobotController {
             buildCommand(axis, state);
             updateUI(axis, state);        
         }
-
     }
-    
-    /*
-    private class DirectionalThread extends Thread {
-
-       JLabel directional;
-        
-//        boolean running;
-
-        public DirectionalThread(JLabel in) {
-           this.directional = in;
-//            this.controller = c;
-//            running = true;
-        }
-
-        @Override
-        public void run() {
-            try {
-                directional.setEnabled(true);
-                Thread.sleep(2000);
-                directional.setEnabled(false);
-                
-            } catch (InterruptedException ex) {
-                Logger.getLogger(RobotController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
-    }
-
-     
-    private class DirectionalTask extends SwingWorker<Void, JLabel> {
-        
-        JLabel directional;
-//                protected void doInBackground(JLabel directional) {
-//            this.directional = directional;
-//
-//
-//        }
-
-        @Override
-        protected Void doInBackground() throws Exception {
-            directional.setEnabled(true);
-            
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
- 
-    }
- 
-    */
 }

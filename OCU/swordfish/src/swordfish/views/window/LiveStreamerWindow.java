@@ -108,15 +108,12 @@ public class LiveStreamerWindow extends JFrame
     }
     public void set_button_states() {
 //        b_vid_ff.setEnabled(f_video_loaded[0]);
-
         b_vid_mute.setEnabled(f_video_loaded[0]);
         b_vid_pause.setEnabled(f_video_loaded[0]);
         b_vid_play.setEnabled(f_video_loaded[0]);
 //        b_vid_rw.setEnabled(f_video_loaded[0]);
         b_vid_stop.setEnabled(f_video_loaded[0]);
         b_capture_moment.setEnabled(f_video_loaded[0]);
-        
-
 //        cb_controller_connected.setSelected(rc.isConnected());
     }
 
@@ -1408,7 +1405,7 @@ public class LiveStreamerWindow extends JFrame
 
     private void b_vid_playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_playActionPerformed
 
-        vs.startPlaying();
+        vs.start();
 
         b_vid_pause.setEnabled(true);
         b_vid_play.setEnabled(false);
