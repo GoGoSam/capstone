@@ -7,12 +7,13 @@ import swordfish.models.input.XboxController;
 import swordfish.models.input.JInputXboxController;
 import swordfish.models.RoboComms.RoboReq;
 
-import javax.swing.*;
 import java.util.List;
+import swordfish.views.window.LiveStreamerWindow;
 
 public class RobotController {
 
     private volatile PollerThread thread;
+    private LiveStreamerWindow ui;
     private JInputXboxController controller;
     private RobotControllerListener listener;
     private TCPClient p1_client;
@@ -52,20 +53,29 @@ public class RobotController {
         listener = new RobotControllerListener();
     }
 
-    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, JFrame ui) {
+    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, LiveStreamerWindow lsw) {
+        ui = lsw;
         if (!p1_client.connect(p1_addr, p1_port)) {
             System.out.format("Unable to Connect to %s at %d\n", p1_addr, p1_port);
+        } else {
+            ui.tf_source1_ip.setText(p1_addr);
+            ui.tf_motor_port.setText(Integer.toString(p1_port));
         }
         if (!p2_client.connect(p2_addr, p2_port)) {
             System.out.format("Unable to Connect to %s at %d\n", p2_addr, p2_port);
+        } else {
+            ui.tf_source2_ip.setText(p2_addr);
+            ui.tf_controller_port.setText(Integer.toString(p2_port));
         }
         List<XboxController> controllerList = XboxController.getAll();
-        if (controllerList.size() == 0) {
+        if (controllerList.isEmpty()) {
             System.out.println("No Xbox Controller Found");
+        } else {
+            System.out.println("Xbox Controller Found");
+            controller = (JInputXboxController) XboxController.getAll().get(0);
+            controller.addListener(listener);
+            startPolling();
         }
-        controller = (JInputXboxController) XboxController.getAll().get(0);
-        controller.addListener(listener);
-        startPolling();
     }
 
     private void buildCommand(Button button, boolean pressed) {
@@ -89,6 +99,7 @@ public class RobotController {
             case b:
                 break;
             case x:
+                ui.b_capture_moment.doClick();
                 break;
             case y:
                 break;
@@ -101,6 +112,19 @@ public class RobotController {
             case leftStick:
                 break;
             case rightStick:
+                // set servo to default position for both axes
+                String[] sCmd = new String[2];
+                sCmd[0] = SD0;
+                sCmd[1] = SD1;
+                for (int i = 0; i < 2; i++) {
+                    RoboReq.Builder req = RoboReq.newBuilder();
+                    req.setType(RoboReq.Type.MSENS);
+                    RoboReq.MoveSensCmd.Builder sreq = RoboReq.MoveSensCmd.newBuilder();
+                    sreq.setCmd(sCmd[i]);
+                    req.setSens(sreq);
+                    sendCommand(req.build(), p2_client);
+                }
+
                 break;
         }
     }
@@ -118,11 +142,17 @@ public class RobotController {
             case leftStickY:
                 //Round to 0, 2 or 3
                 int lState = Math.round(state * 3);
-                if (lState == 1 || lState == -1) lState = 0;
+                if (lState == 1 || lState == -1) {
+                    lState = 0;
+                }
                 //If LX or LY already is equal to rState then no need send another cmd
-                if (axis == Axis.leftStickX && LX != lState) LX = lState;
-                else if (axis == Axis.leftStickY && LY != lState) LY = lState;
-                else break;
+                if (axis == Axis.leftStickX && LX != lState) {
+                    LX = lState;
+                } else if (axis == Axis.leftStickY && LY != lState) {
+                    LY = lState;
+                } else {
+                    break;
+                }
                 req.setType(RoboReq.Type.MBASE);
                 byte cmd = -1;
                 byte val = -1;
@@ -177,17 +207,25 @@ public class RobotController {
                 mreq.setCmd(ByteString.copyFrom(t));
                 req.setBase(mreq);
                 sendCommand(req.build(), p1_client);
+                
+                ui.set_button_states();
                 break;
             case rightStickX:
             case rightStickY:
                 //Round to 0, 2 or 3
                 int rState = Math.round(state * 3);
-                if (rState == 1 || rState == -1) rState = 0;
+                if (rState == 1 || rState == -1) {
+                    rState = 0;
+                }
                 //If RX or RY already is equal to rState then no need send another cmd
                 //TODO: This may need to be modified to continue to send commands while controller is being held in a direction
-                if (axis == Axis.rightStickX && RX != rState) RX = rState;
-                else if (axis == Axis.rightStickY && RY != rState) RY = rState;
-                else break;
+                if (axis == Axis.rightStickX && RX != rState) {
+                    RX = rState;
+                } else if (axis == Axis.rightStickY && RY != rState) {
+                    RY = rState;
+                } else {
+                    break;
+                }
                 req.setType(RoboReq.Type.MSENS);
                 String sCmd = "";
                 if (RX == 0 && RY == 0) {
@@ -316,7 +354,7 @@ public class RobotController {
         @Override
         public void axisChanged(Axis axis, float state) {
             buildCommand(axis, state);
-            updateUI(axis, state);
+            updateUI(axis, state);        
         }
     }
 }
