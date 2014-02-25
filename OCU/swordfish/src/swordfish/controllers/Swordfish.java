@@ -17,14 +17,16 @@ public class Swordfish {
      */
     public static void main(String[] args) {
         
-        boolean do_robot_controller = true,
+        boolean do_robot_controller = false,
                 do_video_streamer = true,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
                 do_image_processor = false;
         
-        String p1_addr = "192.168.1.69";
-        String p2_addr = "192.168.1.69";
+        String p1_addr = "192.168.1.9";
+        String p2_addr = "192.168.1.9";        
+//        String p1_addr = "192.168.1.69";
+//        String p2_addr = "192.168.1.69";
         int p1_port = 5555;
         int p2_port = 45678;        
         int video_port = 6789;
