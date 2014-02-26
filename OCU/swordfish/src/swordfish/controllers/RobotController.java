@@ -46,6 +46,8 @@ public class RobotController {
     private int LY = 0;
     private int RX = 0;
     private int RY = 0;
+    private int LT = 0;
+    private int RT = 0;
 
     public RobotController() {
         p1_client = new TCPClient();
@@ -135,8 +137,54 @@ public class RobotController {
 
         switch (axis) {
             case leftTrigger:
-            case rightTrigger:
+                int ltState = Math.round(state);
+                if (LT != ltState) {
+                    LT = ltState;
+                } else {
+                    break;
+                }
                 req.setType(RoboReq.Type.MLIFT);
+                byte lcmd = BM;
+                byte lval = -1;
+                if (ltState == 1) {
+                    //Go Down
+                    lval = 127;
+                    System.out.println("DOWN");
+                } else {
+                    //Stop
+                    lval = 0;
+                    System.out.println("STOP");
+                }
+                byte[] l = {ADDRESS, lcmd, lval, checksum(ADDRESS, lcmd, lval)};
+                RoboReq.MoveLiftCmd.Builder lreq = RoboReq.MoveLiftCmd.newBuilder();
+                lreq.setCmd(ByteString.copyFrom(l));
+                req.setLift(lreq);
+                sendCommand(req.build(), p1_client);
+                break;
+            case rightTrigger:
+                int rtState = Math.round(state);
+                if (RT != rtState) {
+                    RT = rtState;
+                } else {
+                    break;
+                }
+                req.setType(RoboReq.Type.MLIFT);
+                byte rcmd = FM;
+                byte rval = -1;
+                if (rtState == 1) {
+                    //Go Up
+                    rval = 127;
+                    System.out.println("UP");
+                } else {
+                    //Stop
+                    rval = 0;
+                    System.out.println("STOP");
+                }
+                byte[] r = {ADDRESS, rcmd, rval, checksum(ADDRESS, rcmd, rval)};
+                RoboReq.MoveLiftCmd.Builder rreq = RoboReq.MoveLiftCmd.newBuilder();
+                rreq.setCmd(ByteString.copyFrom(r));
+                req.setLift(rreq);
+                sendCommand(req.build(), p1_client);
                 break;
             case leftStickX:
             case leftStickY:

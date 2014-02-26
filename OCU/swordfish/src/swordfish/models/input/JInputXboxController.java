@@ -188,7 +188,10 @@ public class JInputXboxController extends XboxController {
                     axis = Axis.rightStickY;
                 }
                 if (id == Identifier.Axis.Z) {
-                    axis = value < 0 ? Axis.leftTrigger : Axis.rightTrigger;
+                    axis = Axis.leftTrigger;
+                }
+                if (id == Identifier.Axis.RZ) {
+                    axis = Axis.rightTrigger;
                 }
                 if (axis != null) {
                     notifyListeners(axis, value);
