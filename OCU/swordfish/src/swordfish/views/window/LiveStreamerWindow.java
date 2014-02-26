@@ -38,6 +38,7 @@ public class LiveStreamerWindow extends JFrame
     private final boolean do_debug = true;
     boolean[] f_video_loaded = new boolean[1];
     private VideoStreamer vs;
+    ImageAnalyzerWindow iaw;
     ImageTaker it;
 //    private RobotController rc;
 //    MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
@@ -1402,7 +1403,18 @@ public class LiveStreamerWindow extends JFrame
     }//GEN-LAST:event_b_closeActionPerformed
 
     private void b_capture_momentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_capture_momentActionPerformed
-        it.captureImage(p_mediaPlayer); 
+       
+        
+        if (it.captureImage(p_mediaPlayer))
+        {
+            iaw = new ImageAnalyzerWindow(it.getImagePath());
+            iaw.setVisible(true);
+        }else{
+            
+        }
+        
+        
+        
     }//GEN-LAST:event_b_capture_momentActionPerformed
 
     private void b_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_loadActionPerformed
@@ -1629,25 +1641,44 @@ public class LiveStreamerWindow extends JFrame
     class ImageTaker    
     {
         String dir_out;
+                String fname_out;
+
         public ImageTaker(String dir_path){  
             dir_out = dir_path;
         }
 
-        private void captureImage(JPanel p_in) {
+        
+        private boolean captureImage(JPanel p_in) {
             BufferedImage im = new BufferedImage(p_in.getWidth(),p_in.getHeight(), BufferedImage.TYPE_INT_RGB);
             
             Graphics2D g2 = im.createGraphics();
             p_in.paint(g2);
-            String fname = dir_out.concat("test.jpg");
+            fname_out = "test.jpg";
+            String fname = dir_out.concat(fname_out);
             im = im.getSubimage(10, 10, im.getWidth() - 10, im.getHeight() - 10);
             try {
                 ImageIO.write(im, "JPG", new File(fname));
+                return true;
                 
             } catch (IOException ex) {
                 Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
+                 return false;
             }
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
+            
+        public String getImagePath()
+           
+        {
+             
+           
+            return dir_out +"/" + fname_out;
+          
+        }
+            
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        
         
         
     }

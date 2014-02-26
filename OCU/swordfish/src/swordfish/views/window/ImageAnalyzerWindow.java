@@ -63,6 +63,33 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         set_button_states();
     }
+    
+        /**
+     * Creates new form ImageAnalyzerWindow with image of fname opened on panel
+     */
+    public ImageAnalyzerWindow(String fname) {
+        super("Image Analyzer and Processor");
+
+        initComponents();
+image_name = fname;
+        configureComponents();
+        this.setResizable(false);
+        // set flags
+        is_im_loaded[0] = false;
+
+        color_scaler[0] = false;
+        color_scaler[1] = false;
+        
+is_im_loaded[0] = load_image(fname);
+im_plus_gray = im_plus.duplicate();
+  IJ.run(im_plus_gray, "32-bit", "");
+          lab_image.setIcon(new ImageIcon(im_plus_gray.getImage()));
+        set_button_states();        
+    
+    }                                      
+                                    
+
+
 
     /**
      * Method added to configure the components not handled in (code -
@@ -497,7 +524,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
      */
     private boolean load_image(String fpath) {
 
-        im_plus = IJ.openImage(image_name);
+        im_plus = IJ.openImage(fpath);
         //    im_plus.show();   uncomment to open image in seperate window **
 
         if (im_plus == null) {

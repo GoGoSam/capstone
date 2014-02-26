@@ -43,7 +43,6 @@ public class VideoStreamer {
 
                 /* link elements */
                 Element.linkMany(source, depayloader, decoder, parser, converter, sink);
-
                 /* create a JFrame to display the video output */
                 JFrame frame = new JFrame("VideoStreamer");
 
@@ -51,6 +50,7 @@ public class VideoStreamer {
 
                 pan.add(videoComponent, BorderLayout.CENTER);
                 videoComponent.setPreferredSize(lsw.p_mediaPlayer.getSize());
+                
                 frame.add(pan);
                 frame.pack();
 
@@ -88,6 +88,7 @@ public class VideoStreamer {
 
     public JPanel getPanel() {
         return pan;
+ 
     }
 
     private void updateGUI() {
