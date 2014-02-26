@@ -147,13 +147,9 @@ public class RobotController {
                 byte lcmd = BM;
                 byte lval = -1;
                 if (ltState == 1) {
-                    //Go Down
                     lval = 127;
-                    System.out.println("DOWN");
                 } else {
-                    //Stop
                     lval = 0;
-                    System.out.println("STOP");
                 }
                 byte[] l = {ADDRESS, lcmd, lval, checksum(ADDRESS, lcmd, lval)};
                 RoboReq.MoveLiftCmd.Builder lreq = RoboReq.MoveLiftCmd.newBuilder();
@@ -172,13 +168,9 @@ public class RobotController {
                 byte rcmd = FM;
                 byte rval = -1;
                 if (rtState == 1) {
-                    //Go Up
                     rval = 127;
-                    System.out.println("UP");
                 } else {
-                    //Stop
                     rval = 0;
-                    System.out.println("STOP");
                 }
                 byte[] r = {ADDRESS, rcmd, rval, checksum(ADDRESS, rcmd, rval)};
                 RoboReq.MoveLiftCmd.Builder rreq = RoboReq.MoveLiftCmd.newBuilder();
@@ -207,27 +199,22 @@ public class RobotController {
                 if (LX == 0 && LY == 0) {
                     cmd = FM;
                     val = 0;
-                    System.out.println("STOP");
                 } else if (LX == 0 && LY > 0) {
                     //LY can be 2 or 3
                     cmd = BM;
                     val = LY == 2 ? (byte) 64 : (byte) 127;
-                    System.out.println("BACKWARD");
                 } else if (LX == 0 && LY < 0) {
                     //LY can be -2 or -3
                     cmd = FM;
                     val = LY == -2 ? (byte) 64 : (byte) 127;
-                    System.out.println("FORWARD");
                 } else if (LX > 0 && LY == 0) {
                     //LX can be 2 or 3
                     cmd = RM;
                     val = LX == 2 ? (byte) 64 : (byte) 127;
-                    System.out.println("RIGHT");
                 } else if (LX < 0 && LY == 0) {
                     //LX can be -2 or -3
                     cmd = LM;
                     val = LX == -2 ? (byte) 64 : (byte) 127;
-                    System.out.println("LEFT");
                 } else if (LX > 0 && LY < 0) {
                     //TODO: Forward Right cmd
                     //LX can be 2 or 3
@@ -277,24 +264,19 @@ public class RobotController {
                 req.setType(RoboReq.Type.MSENS);
                 String sCmd = "";
                 if (RX == 0 && RY == 0) {
-                    System.out.println("STOP");
                     break;
                 } else if (RX == 0 && RY > 0) {
                     //RY can be 2 or 3
                     sCmd = SD;
-                    System.out.println("DOWN");
                 } else if (RX == 0 && RY < 0) {
                     //RY can be -2 or -3
                     sCmd = SU;
-                    System.out.println("UP");
                 } else if (RX > 0 && RY == 0) {
                     //RX can be 2 or 3
                     sCmd = SR;
-                    System.out.println("RIGHT");
                 } else if (RX < 0 && RY == 0) {
                     //RX can be -2 or -3
                     sCmd = SL;
-                    System.out.println("LEFT");
                 } else if (RX > 0 && RY < 0) {
                     //TODO: Up Right cmd
                     //RX can be 2 or 3

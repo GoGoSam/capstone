@@ -22,11 +22,14 @@ public class Swordfish {
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
                 do_image_processor = false;
-        
+
+        //Pi 1 controls driving and lift system
         String p1_addr = "192.168.1.69";
-        String p2_addr = "192.168.1.69";
         int p1_port = 5555;
-        int p2_port = 45678;        
+        //Pi 2 controls servos
+        String p2_addr = "192.168.1.69";
+        int p2_port = 45678;
+        //Each Pi uses video streaming
         int video_port = 6789;
 
         VideoStreamer vs;
