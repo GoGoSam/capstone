@@ -15,9 +15,9 @@ public class RobotController {
     private volatile PollerThread thread;
     private LiveStreamerWindow ui;
     private JInputXboxController controller;
-    private RobotControllerListener listener;
-    private TCPClient p1_client;
-    private TCPClient p2_client;
+    private final RobotControllerListener listener;
+    private final TCPClient p1_client;
+    private final TCPClient p2_client;
     //Packet mode
     private static final byte ADDRESS = (byte) 128;
     //Standard commands
@@ -66,8 +66,8 @@ public class RobotController {
         } else {
             ui.tf_source2_ip.setText(p2_addr);
             ui.tf_controller_port.setText(Integer.toString(p2_port));
-            
-                      String[] sCmd = new String[2];
+
+            String[] sCmd = new String[2];
             sCmd[0] = SD0;
             sCmd[1] = SD1;
             for (int i = 0; i < 2; i++) {
@@ -88,6 +88,9 @@ public class RobotController {
             controller.addListener(listener);
             startPolling();
         }
+
+        ui.tf_source2_ip.setText(p2_addr);
+        ui.tf_controller_port.setText(Integer.toString(p2_port));
     }
 
     private void buildCommand(Button button, boolean pressed) {
@@ -219,7 +222,7 @@ public class RobotController {
                 mreq.setCmd(ByteString.copyFrom(t));
                 req.setBase(mreq);
                 sendCommand(req.build(), p1_client);
-                
+
                 ui.set_button_states();
                 break;
             case rightStickX:
@@ -250,6 +253,7 @@ public class RobotController {
                 } else if (RX == 0 && RY < 0) {
                     //RY can be -2 or -3
                     sCmd = SU;
+//                    this.ui.icon_dArrow.setEnabled(true);
                     System.out.println("UP");
                 } else if (RX > 0 && RY == 0) {
                     //RX can be 2 or 3
@@ -366,7 +370,7 @@ public class RobotController {
         @Override
         public void axisChanged(Axis axis, float state) {
             buildCommand(axis, state);
-            updateUI(axis, state);        
+            updateUI(axis, state);
         }
     }
 }

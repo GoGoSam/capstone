@@ -1,44 +1,22 @@
 package swordfish.views.window;
 
-//import swordfish.ui_develop.*;
-//import swordfish.*;
-//import ij.IJ;
-//import java.awt.BorderLayout;
-//import java.awt.Canvas;
-import java.awt.Color;
-//import java.awt.Component;
+
 import java.awt.event.KeyListener;
 import javax.swing.*;
 import java.awt.event.*; 
 import java.awt.Container.*;
-//import java.awt.Cursor;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FileDialog;
 import java.awt.Graphics2D;
-//import java.awt.Font;
-//import java.awt.LayoutManager;
 import java.awt.event.KeyEvent.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-//import java.net.MalformedURLException;
-//import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import org.gstreamer.State;
-import org.gstreamer.swing.VideoPlayer;
-//import javax.swing.border.TitledBorder;
-//import swordfish.controllers.RobotController;
 import swordfish.views.dialog.LogIn;
-import swordfish.views.MobileDirectionDisplayKeyboard;
-//import swordfish.applications.LiveStreamer;
-import swordfish.controllers.RobotController;
 import swordfish.controllers.VideoStreamer;
-//import java.io.*;
 
 /**
  *
@@ -57,7 +35,7 @@ public class LiveStreamerWindow extends JFrame
     private JLabel icon_right;
     private JLabel icon_up;
     private JPanel p_directionals;
-    private boolean do_debug = true;
+    private final boolean do_debug = true;
     boolean[] f_video_loaded = new boolean[1];
     private VideoStreamer vs;
     ImageTaker it;
@@ -1453,7 +1431,7 @@ public class LiveStreamerWindow extends JFrame
         //        try {
 
         pointer[0] = 0;
-        ArrayList<JLabel> labs = new ArrayList<JLabel>();
+        ArrayList<JLabel> labs = new ArrayList<>();
         labs.add(l_inspector);
         labs.add(l_mid);
         labs.add(l_date);
@@ -1542,20 +1520,16 @@ public class LiveStreamerWindow extends JFrame
     }
 
     @Override
-    public void windowIconified(WindowEvent e) {
-    }
+    public void windowIconified(WindowEvent e) { }
 
     @Override
-    public void windowDeiconified(WindowEvent e) {
-    }
+    public void windowDeiconified(WindowEvent e) { }
 
     @Override
-    public void windowActivated(WindowEvent e) {
-    }
+    public void windowActivated(WindowEvent e) { }
 
     @Override
-    public void windowDeactivated(WindowEvent e) {
-    }
+    public void windowDeactivated(WindowEvent e) { }
 
 //    public void windowGainedFocus(WindowEvent e) {    }
 //    public void windowLostFocus(WindowEvent e) {
@@ -1573,6 +1547,7 @@ public class LiveStreamerWindow extends JFrame
      * Handle the key pressed event from the text field. The function checks if
      * event was triggered via arrow keys on keypad. If so, the corresponding
      * arrow icon will be enabled, i.e., will display its true color.
+     * @param e
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -1600,6 +1575,7 @@ public class LiveStreamerWindow extends JFrame
      * event was triggered via arrow keys on keypad. If so, the corresponding
      * arrow icon will be disabled, i.e., will lose its true color set when key
      * was pressed.
+     * @param e
      */
     @Override
     public void keyReleased(KeyEvent e) {
