@@ -9,7 +9,7 @@ import java.awt.Color;
 //import java.awt.Component;
 import java.awt.event.KeyListener;
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.*; 
 import java.awt.Container.*;
 //import java.awt.Cursor;
 import java.awt.Desktop;
@@ -1405,7 +1405,7 @@ public class LiveStreamerWindow extends JFrame
 
     private void b_vid_playActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_vid_playActionPerformed
 
-        vs.start();
+        vs.startPlaying();
 
         b_vid_pause.setEnabled(true);
         b_vid_play.setEnabled(false);

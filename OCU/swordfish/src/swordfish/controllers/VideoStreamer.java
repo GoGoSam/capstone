@@ -12,6 +12,8 @@ public class VideoStreamer {
     public static Pipeline pipe;
     private LiveStreamerWindow ui;
 
+    JPanel pan;
+
     public void connect(final String addr, final int port, final LiveStreamerWindow lsw) {
         /* init */
         ui = lsw;
@@ -44,33 +46,48 @@ public class VideoStreamer {
 
                 /* create a JFrame to display the video output */
                 JFrame frame = new JFrame("VideoStreamer");
-                JPanel pan = new JPanel();
+
+                pan = new JPanel();
+
                 pan.add(videoComponent, BorderLayout.CENTER);
                 videoComponent.setPreferredSize(lsw.p_mediaPlayer.getSize());
                 frame.add(pan);
                 frame.pack();
-                lsw.p_mediaPlayer.add(frame.getContentPane());
 
-                /* start the pipeline */
-                start();
+                lsw.p_mediaPlayer.add(frame.getContentPane());
+                
+                
+//                lsw.p_mediaPlayer.add(frame.getContentPane());
+//                startPlaying();
+                pipe.setState(State.PLAYING);
+                updateGUI();
+//                pipe.setState(State.PLAYING);
+//                lsw.tf_video_port.setText(Integer.toString(port));
+//                lsw.tf_source2_ip.setText(addr);
+
+//                ui.b_vid_play.doClick();
             }
         });
     }
 
-    public void start() {
+    public void startPlaying() {
         pipe.setState(State.PLAYING);
         updateGUI();
     }
 
     public void pause() {
         pipe.setState(State.PAUSED);
-        updateGUI();
+//        updateGUI();
     }
 
     public void disconnect() {
         //TODO: Figure out if I need to remove elements from pipeline
         pipe.setState(State.NULL);
         updateGUI();
+    }
+
+    public JPanel getPanel() {
+        return pan;
     }
 
     private void updateGUI() {
