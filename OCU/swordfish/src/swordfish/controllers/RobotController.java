@@ -66,6 +66,18 @@ public class RobotController {
         } else {
             ui.tf_source2_ip.setText(p2_addr);
             ui.tf_controller_port.setText(Integer.toString(p2_port));
+            
+                      String[] sCmd = new String[2];
+            sCmd[0] = SD0;
+            sCmd[1] = SD1;
+            for (int i = 0; i < 2; i++) {
+                RoboReq.Builder req = RoboReq.newBuilder();
+                req.setType(RoboReq.Type.MSENS);
+                RoboReq.MoveSensCmd.Builder sreq = RoboReq.MoveSensCmd.newBuilder();
+                sreq.setCmd(sCmd[i]);
+                req.setSens(sreq);
+                sendCommand(req.build(), p2_client);
+            }
         }
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.isEmpty()) {

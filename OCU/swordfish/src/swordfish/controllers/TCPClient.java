@@ -17,7 +17,8 @@ public class TCPClient {
             sock.connect(new InetSocketAddress(addr, port), 5000);
             out = new DataOutputStream(sock.getOutputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         }
 
