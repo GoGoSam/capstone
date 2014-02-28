@@ -69,7 +69,8 @@ public class RobotController {
         
         
     }
-
+    
+    // <editor-fold defaultstate="collapsed" desc="connect">
     public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, LiveStreamerWindow lsw) {
         ui = lsw;
         if (!p1_client.connect(p1_addr, p1_port)) {
@@ -113,7 +114,9 @@ public class RobotController {
         ui.tf_source2_ip.setText(p2_addr);
         ui.tf_controller_port.setText(Integer.toString(p2_port));
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="buildCommand">
     private void buildCommand(Button button, boolean pressed) {
         //TODO: Determine if this needs to be done asynch
         //TODO: Implement this function
@@ -167,6 +170,8 @@ public class RobotController {
         }
     }
 
+    
+    
     private void buildCommand(Axis axis, float state) {
         //TODO: Determine if this needs to be done asynch
         RoboReq.Builder req = RoboReq.newBuilder();
@@ -267,35 +272,28 @@ public class RobotController {
                 req.setType(RoboReq.Type.MSENS);
                 String sCmd = "";
                 if (RX == 0 && RY == 0) {
-                    System.out.println("STOP");
+//                    System.out.println("STOP");
                     break;
-                } else if (RX == 0 && RY > 0) {
-                    //RY can be 2 or 3
                     
+                } else if (RX == 0 && RY > 0) {
+                    //RY can be 2 or 3                  
                     if (servo_position[0] > (servo_bounds[0] + 50)){
                         sCmd = SD;
                         servo_position[0] -= 10;
                         System.out.println("DOWN");
                     }
-                                      
-                    
+                                                         
                 } else if (RX == 0 && RY < 0) {
                     //RY can be -2 or -3
-//                    this.ui.icon_dArrow.setEnabled(true);
-                    
-                                        
-                    if (servo_position[0] < (servo_bounds[1] - 20)
-//                          && Math.abs(servo_bounds[1] - servo_position[1])<
-                          ){
+//                    this.ui.icon_dArrow.setEnabled(true);                                                         
+                    if (servo_position[0] < (servo_bounds[1] - 20)){
                         sCmd = SU;
                         servo_position[0] += 10;
                         System.out.println("UP");
-                    }
-                                        
+                    }                                      
                                         
                 } else if (RX > 0 && RY == 0) {
-                    //RX can be 2 or 3
-                                     
+                    //RX can be 2 or 3                                 
                     if (servo_position[1] > servo_bounds[0]){
                                       
                         if (servo_position[0] > 180 || servo_position[0] < 50
@@ -308,11 +306,8 @@ public class RobotController {
                         System.out.println("RIGHT");
                     }
                 } else if (RX < 0 && RY == 0) {
-                    //RX can be -2 or -3
-                                            
-                    if (servo_position[1] < servo_bounds[1]){
-                        
-
+                    //RX can be -2 or -3                                          
+                    if (servo_position[1] < servo_bounds[1]){                       
                         sCmd = SL;
                         servo_position[1] += 10;
                         System.out.println("LEFT");
@@ -351,7 +346,10 @@ public class RobotController {
                 break;
         }
     }
-
+    // </editor-fold>
+    
+    
+    
     private byte checksum(byte addr, byte command, byte data) {
         return (byte) ((addr + command + data) & 0x7F);
     }
@@ -375,14 +373,12 @@ public class RobotController {
         }
     }
 
-    private void updateUI(Axis axis, float state) {
-        //TODO: Implement this function
-    }
+    
+    private void updateUI(Axis axis, float state) { }
+    private void updateUI(Button button, boolean pressed) { }
 
-    private void updateUI(Button button, boolean pressed) {
-        //TODO: Implement this function
-    }
-
+    
+    
     private class PollerThread extends Thread {
 
         JInputXboxController controller;
@@ -402,12 +398,15 @@ public class RobotController {
         }
     }
 
+
+    
     private class RobotControllerListener extends XboxController.Listener {
         //TODO: Determine if these functions get called in the poller thread
 
         @Override
         public void connected() {
             //Handle what happens when a controller is connected
+            System.out.println("CONNECTED!!");
         }
 
         @Override
