@@ -1,26 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package swordfish.views.window;
 
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.ImageCanvas;
-//import ij.measure.Calibration;
 import ij.process.ImageProcessor;
-//import ij.process.ImageStatistics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.ButtonGroup;
-//import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-//import javax.swing.JLabel;
-//import javax.swing.JScrollPane;
+
 
 /**
  *
@@ -38,11 +29,15 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
     double[] orig_min_max = new double[2];
     String icon_path = System.getProperty("user.dir") + "/resources/";
+    
 //    String imagej_app_fpath =
 //            "/Applications/ImageJ/ImageJ64.app/Contents/MacOS/JavaApplicationStub";
+    
+    
     String image_name = icon_path + "test_images_n_template_im/hanger_test_image.jpg";
-    int IMG_WIDTH = 340;    // pixels
-    int IMG_HEIGHT = 357;   // pixels
+    
+    int IMG_WIDTH = 540;    // pixels
+    int IMG_HEIGHT = 310;   // pixels
     boolean do_debug = true;
 
     /**
@@ -137,6 +132,8 @@ im_plus_gray = im_plus.duplicate();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        pan_image.setPreferredSize(new java.awt.Dimension(450, 250));
+
         lab_image.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lab_image.setText(".");
         lab_image.setVerticalAlignment(javax.swing.SwingConstants.TOP);
@@ -147,13 +144,13 @@ im_plus_gray = im_plus.duplicate();
             pan_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_imageLayout.createSequentialGroup()
                 .addComponent(lab_image)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(535, Short.MAX_VALUE))
         );
         pan_imageLayout.setVerticalGroup(
             pan_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_imageLayout.createSequentialGroup()
                 .addComponent(lab_image)
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
 
         b_save.setText("Save");
@@ -191,7 +188,7 @@ im_plus_gray = im_plus.duplicate();
         pan_utilsLayout.setVerticalGroup(
             pan_utilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_utilsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(b_save)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(b_load, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,18 +214,18 @@ im_plus_gray = im_plus.duplicate();
         });
 
         slider_brightness.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 slider_brightnessCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
         slider_contrast.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 slider_brightnessCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -252,7 +249,7 @@ im_plus_gray = im_plus.duplicate();
                             .addGap(88, 88, 88)
                             .addComponent(rb_grayscale32))
                         .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pan_toolsLayout.setVerticalGroup(
             pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,19 +325,23 @@ im_plus_gray = im_plus.duplicate();
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pan_image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(pan_utils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jSeparator1))
-                .addGap(6, 6, 6))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pan_image, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pan_utils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pan_image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(2, 2, 2)
+                .addComponent(pan_image, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -510,6 +511,7 @@ im_plus_gray = im_plus.duplicate();
         // size of image is resized
         ImageProcessor ip_big = im_plus.getProcessor();
         ip_big.setInterpolate(true);
+        
         ImageProcessor ip_small = ip_big.resize(IMG_WIDTH, IMG_HEIGHT);
         ImagePlus small = new ImagePlus("small", ip_small);
         im_plus = small;
