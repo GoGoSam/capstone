@@ -1653,11 +1653,11 @@ public class LiveStreamerWindow extends JFrame
             
             Graphics2D g2 = im.createGraphics();
             p_in.paint(g2);
-            fname_out = "test.jpg";
+            fname_out = "test.png";
             String fname = dir_out.concat(fname_out);
             im = im.getSubimage(10, 10, im.getWidth() - 10, im.getHeight() - 10);
             try {
-                ImageIO.write(im, "JPG", new File(fname));
+                ImageIO.write(im, "PNG", new File(fname));
                 return true;
                 
             } catch (IOException ex) {
