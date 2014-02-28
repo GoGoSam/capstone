@@ -10,6 +10,7 @@ import swordfish.views.window.LiveStreamerWindow;
  * @author Sam Coe and Joe Robinson
  *
  */
+
 public class Swordfish {
 
     /**
@@ -23,8 +24,8 @@ public class Swordfish {
               do_mobile_dis_keyboard = false,
               do_image_processor = false;
 
-        String p1_addr = "192.168.1.9";
-        String p2_addr = "192.168.1.9";
+        String p1_addr = "192.168.1.69";
+        String p2_addr = "192.168.1.69";
 
 //        String p1_addr = "192.168.1.69";
 //        String p2_addr = "192.168.1.69";

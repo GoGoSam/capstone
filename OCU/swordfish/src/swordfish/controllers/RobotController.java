@@ -35,12 +35,22 @@ public class RobotController {
     private static final byte FBM = 12;
     private static final byte LRM = 13;
     //Servo commands
-    private static final String SD0 = "0=150";
-    private static final String SD1 = "1=150";
+    private static final String SD0 = "0=150";  // default - tilt
+    private static final String SD1 = "1=160";  // default - pan
     private static final String SR = "0=-10";
     private static final String SL = "0=+10";
     private static final String SD = "1=-10";
     private static final String SU = "1=+10";
+    
+    
+    /**
+     * 0 - index corresponds to up and down     [50 220]
+     * 1 - index corresponds to left and right  [50 220]
+     */
+   private static final int [] servo_bounds = new int[2];   
+   private int [] servo_position = new int[2];
+   
+       
     //Keep track of controller state
     private int LX = 0;
     private int LY = 0;
@@ -51,6 +61,13 @@ public class RobotController {
         p1_client = new TCPClient();
         p2_client = new TCPClient();
         listener = new RobotControllerListener();
+        
+        
+        servo_bounds[0] = 30;    // lower bound
+        servo_bounds[1] = 220;  // upper bound
+        
+        
+        
     }
 
     public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, LiveStreamerWindow lsw) {
@@ -76,8 +93,12 @@ public class RobotController {
                 RoboReq.MoveSensCmd.Builder sreq = RoboReq.MoveSensCmd.newBuilder();
                 sreq.setCmd(sCmd[i]);
                 req.setSens(sreq);
-                sendCommand(req.build(), p2_client);
-            }
+                sendCommand(req.build(), p2_client);                              
+            }                          
+            servo_position[0] = 150;    // set position trackers to default                      
+            servo_position[1] = 160;    // set position trackers to default
+
+
         }
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.isEmpty()) {
@@ -138,8 +159,10 @@ public class RobotController {
                     sreq.setCmd(sCmd[i]);
                     req.setSens(sreq);
                     sendCommand(req.build(), p2_client);
+                                                                                
                 }
-
+                servo_position[0] = 150;    // set position trackers to default
+                servo_position[1] = 160;    // set position trackers to default
                 break;
         }
     }
@@ -248,21 +271,53 @@ public class RobotController {
                     break;
                 } else if (RX == 0 && RY > 0) {
                     //RY can be 2 or 3
-                    sCmd = SD;
-                    System.out.println("DOWN");
+                    
+                    if (servo_position[0] > (servo_bounds[0] + 50)){
+                        sCmd = SD;
+                        servo_position[0] -= 10;
+                        System.out.println("DOWN");
+                    }
+                                      
+                    
                 } else if (RX == 0 && RY < 0) {
                     //RY can be -2 or -3
-                    sCmd = SU;
 //                    this.ui.icon_dArrow.setEnabled(true);
-                    System.out.println("UP");
+                    
+                                        
+                    if (servo_position[0] < (servo_bounds[1] - 20)
+//                          && Math.abs(servo_bounds[1] - servo_position[1])<
+                          ){
+                        sCmd = SU;
+                        servo_position[0] += 10;
+                        System.out.println("UP");
+                    }
+                                        
+                                        
                 } else if (RX > 0 && RY == 0) {
                     //RX can be 2 or 3
-                    sCmd = SR;
-                    System.out.println("RIGHT");
+                                     
+                    if (servo_position[1] > servo_bounds[0]){
+                                      
+                        if (servo_position[0] > 180 || servo_position[0] < 50
+                              && servo_position[1] > 180)
+                              break;
+                        
+                        sCmd = SR;
+                        servo_position[1] -= 10;
+                        
+                        System.out.println("RIGHT");
+                    }
                 } else if (RX < 0 && RY == 0) {
                     //RX can be -2 or -3
-                    sCmd = SL;
-                    System.out.println("LEFT");
+                                            
+                    if (servo_position[1] < servo_bounds[1]){
+                        
+
+                        sCmd = SL;
+                        servo_position[1] += 10;
+                        System.out.println("LEFT");
+                    }
+
                 } else if (RX > 0 && RY < 0) {
                     //TODO: Up Right cmd
                     //RX can be 2 or 3
