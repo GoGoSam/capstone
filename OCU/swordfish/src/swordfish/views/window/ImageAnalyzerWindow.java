@@ -80,13 +80,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         is_im_loaded[0] = load_image(fname);
 
-        im_plus_rgb = im_plus.duplicate();
-  
-//        IJ.run(im_plus_gray, "32-bit", "");         
-        lab_image.setIcon(new ImageIcon(im_plus_rgb.getImage()));
-    
-          
-        rb_rgb32.setSelected(true);
+
         
         set_button_states();        
     
@@ -401,6 +395,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     private void rb_rgb32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_rgb32ActionPerformed
         if (do_debug) {
             System.out.println("RGB RadioButton was pressed");
+
         }
         im_plus_rgb = im_plus.duplicate();
 //            IJ.run(im_plus_gray, "8-bit", "");
@@ -409,6 +404,8 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         lab_image.setIcon(new ImageIcon(im_plus_rgb.getImage())); // NOI18N
 
+
+    
 //            im_plus_gray.show();
         /*
          int autoThreshold = 0;
@@ -445,10 +442,21 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
     private void slider_brightnessCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_slider_brightnessCaretPositionChanged
         // TODO add your handling code here:
+        
+        int val = slider_brightness.getValue();
+        
+        IJ.run(im_plus_gray, "in","");
+        im_plus_gray.updateAndDraw(); 
+        
     }//GEN-LAST:event_slider_brightnessCaretPositionChanged
 
     private void b_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_closeActionPerformed
         // TODO add your handling code here:
+                  
+        IJ.run(im_plus_rgb, "Enhance Contrast", "saturated=4 normalize");
+im_plus_rgb.repaintWindow();
+im_plus_rgb.updateAndDraw(); 
+            
     }//GEN-LAST:event_b_closeActionPerformed
 
     private void mnu_saveasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_saveasActionPerformed
@@ -557,6 +565,11 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         orig_min_max[0] = proc.getMin();
         orig_min_max[1] = proc.getMax();
 
+          
+        im_plus_rgb = im_plus.duplicate();         
+        lab_image.setIcon(new ImageIcon(im_plus_rgb.getImage()));            
+        rb_rgb32.setSelected(true);
+        
         return true;
     }
 
