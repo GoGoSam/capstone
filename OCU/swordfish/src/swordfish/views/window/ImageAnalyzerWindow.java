@@ -49,10 +49,11 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         initComponents();
 
         configureComponents();
+        
         this.setResizable(false);
+        
         // set flags
         is_im_loaded[0] = false;
-
         color_scaler[0] = false;
         color_scaler[1] = false;
 
@@ -66,19 +67,27 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         super("Image Analyzer and Processor");
 
         initComponents();
-image_name = fname;
+
+        image_name = fname;
         configureComponents();
         this.setResizable(false);
         // set flags
         is_im_loaded[0] = false;
-
+        
         color_scaler[0] = false;
         color_scaler[1] = false;
         
-is_im_loaded[0] = load_image(fname);
-im_plus_gray = im_plus.duplicate();
-  IJ.run(im_plus_gray, "32-bit", "");
-          lab_image.setIcon(new ImageIcon(im_plus_gray.getImage()));
+
+        is_im_loaded[0] = load_image(fname);
+
+        im_plus_rgb = im_plus.duplicate();
+  
+//        IJ.run(im_plus_gray, "32-bit", "");         
+        lab_image.setIcon(new ImageIcon(im_plus_rgb.getImage()));
+    
+          
+        rb_rgb32.setSelected(true);
+        
         set_button_states();        
     
     }                                      
@@ -362,12 +371,15 @@ im_plus_gray = im_plus.duplicate();
                 System.out.println("set_button_states(): Image loaded");
             }
 
+
             rb_grayscale32.setEnabled(true);
             rb_rgb32.setEnabled(true);
+            
             slider_contrast.setEnabled(true);
 
             slider_brightness.setEnabled(true);
             b_save.setEnabled(true);
+            
 
         } else {
 
@@ -558,7 +570,9 @@ im_plus_gray = im_plus.duplicate();
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ImageAnalyzerWindow().setVisible(true);
+                String imagepath = "/home/sabertooth/Desktop/test.png";
+                
+                new ImageAnalyzerWindow(imagepath).setVisible(true);
             }
         });
     }// </editor-fold>
