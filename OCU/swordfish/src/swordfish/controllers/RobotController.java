@@ -63,11 +63,9 @@ public class RobotController {
         listener = new RobotControllerListener();
         
         
+        // TO DO - [50, 250]
         servo_bounds[0] = 30;    // lower bound
-        servo_bounds[1] = 220;  // upper bound
-        
-        
-        
+        servo_bounds[1] = 220;  // upper bound                       
     }
     
     // <editor-fold defaultstate="collapsed" desc="connect">
@@ -134,6 +132,16 @@ public class RobotController {
             case guide:
                 break;
             case a:
+                      
+                /*
+                System.out.println("a");
+                RoboReq.Builder req1 = RoboReq.newBuilder();               
+                req1.setType(RoboReq.Type.RDATA);
+                RoboReq.MoveSensCmd.Builder sreq1 = RoboReq.MoveSensCmd.newBuilder();
+                sreq1.setCmd("raspistill -v -o ~/testrrr.jpg");
+                req1.setSens(sreq1);
+                sendCommand(req1.build(), p2_client);     */
+
                 break;
             case b:
                 break;

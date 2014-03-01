@@ -1609,34 +1609,7 @@ public class LiveStreamerWindow extends JFrame
         }
     }
     // </editor-fold>
-    /* Create and display the form */
 
-    /**
-     * Launch the application.
-     */
-    /*
-     public static void main(String[] args) {
-     EventQueue.invokeLater(new Runnable() {
-     public void run() {
-     try {
-     LiveStreamerWindow window = new LiveStreamerWindow();
-     window.frmLiveStreamerDisplay.setVisible(true);
-     } catch (Exception e) {
-     e.printStackTrace();
-     }
-     }
-     });
-     }*/
-//        java.awt.EventQueue.invokeLater(
-//                new Runnable() {
-//            @Override
-//            public void run() {
-//                new LiveStreamerWindow().setVisible(true);
-////                new MobileDirectionDisplay().setVisible(true);
-//            }
-//        });
-    
-    
     
     class ImageTaker    
     {
@@ -1800,7 +1773,5 @@ public class LiveStreamerWindow extends JFrame
     public javax.swing.JTextField tf_source2_ip;
     public javax.swing.JTextField tf_video_port;
     // End of variables declaration//GEN-END:variables
-//    private void printn(String property) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+
 }

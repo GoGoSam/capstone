@@ -60,6 +60,7 @@ public class VideoStreamer {
 //                lsw.p_mediaPlayer.add(frame.getContentPane());
 //                startPlaying();
                 pipe.setState(State.PLAYING);
+
                 updateGUI();
 //                pipe.setState(State.PLAYING);
 //                lsw.tf_video_port.setText(Integer.toString(port));
