@@ -23,14 +23,12 @@ public class Swordfish {
                 do_mobile_dis_keyboard = false,
                 do_image_processor = false;
 
-        //Pi 1 controls driving and lift system
+        //Pi 1 controls driving
         String p1_addr = "192.168.1.69";
-        int p1_port = 5555;
-        //Pi 2 controls servos
+        //Pi 2 controls servos and lift system
         String p2_addr = "192.168.1.69";
-        int p2_port = 45678;
-        //Each Pi uses video streaming
-        int video_port = 6789;
+        int marlin_port = 5555;
+        int tuna_port = 6789;
 
         VideoStreamer vs;
         RobotController rc;
@@ -38,13 +36,12 @@ public class Swordfish {
         lsw.setVisible(true);
         if (do_robot_controller) {
             rc = new RobotController();
-            rc.connect(p1_addr, p2_addr, p1_port, p2_port, lsw);
+            rc.connect(p1_addr, p2_addr, marlin_port, lsw);
         }
         if (do_video_streamer) {
             vs = new VideoStreamer();
-            vs.connect(p1_addr, video_port, lsw);
+            vs.connect(p1_addr, tuna_port, lsw);
             lsw.setVideoStreamer(vs);
-            vs.start();
         }
         if (do_xbox_dir_diplay) {
             XBox360_DirectionDisplay xboxDD = new XBox360_DirectionDisplay();

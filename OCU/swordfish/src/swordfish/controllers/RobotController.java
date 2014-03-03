@@ -55,19 +55,19 @@ public class RobotController {
         listener = new RobotControllerListener();
     }
 
-    public void connect(String p1_addr, String p2_addr, int p1_port, int p2_port, LiveStreamerWindow lsw) {
+    public void connect(String p1_addr, String p2_addr, int port, LiveStreamerWindow lsw) {
         ui = lsw;
-        if (!p1_client.connect(p1_addr, p1_port)) {
-            System.out.format("Unable to Connect to %s at %d\n", p1_addr, p1_port);
+        if (!p1_client.connect(p1_addr, port)) {
+            System.out.format("Unable to Connect to %s at %d\n", p1_addr, port);
         } else {
             ui.tf_source1_ip.setText(p1_addr);
-            ui.tf_motor_port.setText(Integer.toString(p1_port));
+            ui.tf_motor_port.setText(Integer.toString(port));
         }
-        if (!p2_client.connect(p2_addr, p2_port)) {
-            System.out.format("Unable to Connect to %s at %d\n", p2_addr, p2_port);
+        if (!p2_client.connect(p2_addr, port)) {
+            System.out.format("Unable to Connect to %s at %d\n", p2_addr, port);
         } else {
             ui.tf_source2_ip.setText(p2_addr);
-            ui.tf_controller_port.setText(Integer.toString(p2_port));
+            ui.tf_controller_port.setText(Integer.toString(port));
         }
         List<XboxController> controllerList = XboxController.getAll();
         if (controllerList.isEmpty()) {
@@ -145,7 +145,7 @@ public class RobotController {
                 }
                 req.setType(RoboReq.Type.MLIFT);
                 byte lcmd = BM;
-                byte lval = -1;
+                byte lval;
                 if (ltState == 1) {
                     lval = 127;
                 } else {
@@ -166,7 +166,7 @@ public class RobotController {
                 }
                 req.setType(RoboReq.Type.MLIFT);
                 byte rcmd = FM;
-                byte rval = -1;
+                byte rval;
                 if (rtState == 1) {
                     rval = 127;
                 } else {
@@ -242,8 +242,6 @@ public class RobotController {
                 mreq.setCmd(ByteString.copyFrom(t));
                 req.setBase(mreq);
                 sendCommand(req.build(), p1_client);
-                
-                ui.set_button_states();
                 break;
             case rightStickX:
             case rightStickY:
@@ -336,6 +334,7 @@ public class RobotController {
 
     private void updateUI(Axis axis, float state) {
         //TODO: Implement this function
+        //ui.set_button_states();
     }
 
     private void updateUI(Button button, boolean pressed) {
@@ -384,7 +383,7 @@ public class RobotController {
         @Override
         public void axisChanged(Axis axis, float state) {
             buildCommand(axis, state);
-            updateUI(axis, state);        
+            updateUI(axis, state);
         }
     }
 }
