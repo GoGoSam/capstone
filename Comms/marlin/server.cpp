@@ -16,7 +16,8 @@ using google::protobuf::io::CodedOutputStream;
 using google::protobuf::io::ArrayInputStream;
 using google::protobuf::io::OstreamOutputStream;
 
-serial_connection::pointer serial;
+serial_connection::pointer base_serial;
+serial_connection::pointer lift_serial;
 std::ofstream servos;
 
 //TODO: Handle cleanup when killed
@@ -27,20 +28,24 @@ int main(int argc, const char* argv[])
     {
         if (argc != 3)
         {
-            std::cerr << "Usage: <port> <device>\n";
+            std::cerr << "Usage: <port> <base/lift>" << std::endl;
             return 1;
         }
 
         boost::asio::io_service io_service;
         int port = std::atoi(argv[1]);
-        const char* device = argv[2];
-        if(strcmp(device, "/dev/servoblaster") == 0) {
-            servos.open(device, std::ofstream::out | std::ofstream::trunc);
+        const char* component = argv[2];
+        if(strcmp(component, "lift") == 0) {
+            const char* s = "/dev/servoblaster";
+            const char* d = "/dev/ttyUSB0";
+            servos.open(s, std::ofstream::out | std::ofstream::trunc);
+            lift_serial = serial_connection::create(io_service, d);
         } else {
-            serial = serial_connection::create(io_service, device);
+            const char* d = "/dev/ttyUSB0";
+            base_serial = serial_connection::create(io_service, d);
         }
         std::cout << "Serving on port " << port << std::endl;
-        std::cout << "Controlling device " << device << std::endl;
+        std::cout << "Controlling " << component << std::endl;
         server s(io_service, port);
         io_service.run();
     }
@@ -150,19 +155,16 @@ void session::process_request(const RoboComms::RoboReq& req)
     switch(req.type()) {
         case 0:
             //Robot base move command
-            //unsigned char *cmd = (unsigned char*) req.base().cmd().c_str();
-            serial->write((unsigned char*) req.base().cmd().c_str(),
-                    req.base().cmd().length());
+            base_serial->write((unsigned char*) req.base().cmd().c_str(),
+                         req.base().cmd().length());
             break;
         case 1:
             //Robot lift move command
-            //This should send the command to the arduino
-            //serial2->write((unsigned char*) req.base().cmd().c_str(),
-            //        req.base().cmd().length());
+            lift_serial->write((unsigned char*) req.lift().cmd().c_str(),
+                         req.lift().cmd().length());
             break;
         case 2:
             //Robot sensor move command
-	    std::cout << req.sens().cmd() << std::endl;
             servos << req.sens().cmd() << std::endl;
             break;
         case 3:
