@@ -366,3 +366,4 @@ void binaryMorph(Mat &src, Mat &dst) {
 
 	dst = image_t;
 }
+

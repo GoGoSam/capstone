@@ -13,9 +13,10 @@ using namespace cv;
 using namespace std;
 
 
-
-int crack_det(
-	string filename
+int crackDetection(
+	char * input_directory,
+	string filename,
+	char * output_directory
 	)
 {
 
@@ -25,10 +26,10 @@ int crack_det(
 
 
 	/// Put together some filenames
-	string inp_filename = cd_inp_folder + filename + ".jpg";
-	string det_filename = cd_det_folder + "IMG/" + filename + "." + time_stamp + ".det.jpg";
-	string log_filename = cd_det_folder + "CSV/" + filename + "." + time_stamp + ".det.csv";
-	string prm_filename = cd_det_folder + "PRM/" + filename + "." + time_stamp + ".det.prm.csv";
+	string inp_filename = string(input_directory) + "/" + filename + ".jpg";
+	string det_filename = string(output_directory) + "/IMG/" + filename + "." + time_stamp + ".det.jpg";
+	string log_filename = string(output_directory) + "/CSV/" + filename + "." + time_stamp + ".det.csv";
+	string prm_filename = string(output_directory) + "/PRM/" + filename + "." + time_stamp + ".det.prm.csv";
 
 	const char* inp_filename_ptr = inp_filename.data();
 	const char* det_filename_ptr = det_filename.data();
@@ -276,17 +277,23 @@ int texture_disp(
 }
 
 
-int rust_det(
-	string filename
-	) {
-	
+int rustDetection(
+	char * input_directory,
+	string filename,
+	char * output_directory
+	)
+{
+
+	/// Get Timestamp
 	string time_stamp;
 	time_stamp = get_timestamp();
 
-	string inp_filename = rd_inp_folder + filename + ".jpg";
-	string det_filename = rd_det_folder + "IMG/" + filename + "." + time_stamp + ".det.jpg";
-	string log_filename = rd_det_folder + "CSV/" + filename + "." + time_stamp + ".det.csv";
-	string prm_filename = rd_det_folder + "PRM/" + filename + "." + time_stamp + ".det.prm.csv";
+
+	/// Put together some filenames
+	string inp_filename = string(input_directory) + "/" + filename + ".jpg";
+	string det_filename = string(output_directory) + "/IMG/" + filename + "." + time_stamp + ".det.jpg";
+	string log_filename = string(output_directory) + "/CSV/" + filename + "." + time_stamp + ".det.csv";
+	string prm_filename = string(output_directory) + "/PRM/" + filename + "." + time_stamp + ".det.prm.csv";
 
 	const char* inp_filename_ptr = inp_filename.data();
 	const char* det_filename_ptr = det_filename.data();
@@ -305,74 +312,189 @@ int rust_det(
 	return 0;
 }
 
-int obj_det(
-	string filename
-	) {
-	
+
+int hangerStraightDetection(
+	char * input_directory,
+	vector<string> file_list,
+	char * output_directory
+	)
+{
+
+	/// Get Timestamp
 	string time_stamp;
 	time_stamp = get_timestamp();
 
-	string inp_filename = od_inp_folder + filename + ".jpg";
-	string det_filename = od_det_folder + "IMG/" + filename + "." + time_stamp + ".det.jpg";
-	string log_filename = od_det_folder + "CSV/" + filename + "." + time_stamp + ".det.csv";
-	string prm_filename = od_det_folder + "PRM/" + filename + "." + time_stamp + ".det.prm.csv";
-	cout << od_inp_folder << endl;
-	cout << od_det_folder << endl;
+
+	/// Put together some filenames
+	string inp_filename1 = string(input_directory) + "/" + file_list[0] + ".jpg";
+	string inp_filename2 = string(input_directory) + "/" + file_list[1] + ".jpg";
+	string det_filename = string(output_directory) + "/IMG/" + file_list[0] + "_" + file_list[1] + "." + time_stamp + ".det.jpg";
+	string log_filename = string(output_directory) + "/CSV/" + file_list[0] + "_" + file_list[1] + "." + time_stamp + ".det.csv";
+	string prm_filename = string(output_directory) + "/PRM/" + file_list[0] + "_" + file_list[1] + "." + time_stamp + ".det.prm.csv";
+	
+	const char* inp_filename_ptr1 = inp_filename1.data();
+	const char* inp_filename_ptr2 = inp_filename2.data();
+	const char* det_filename_ptr = det_filename.data();
+
+	// Load the images
+	cout << "Loading image 1" << filename << "...";
+	Mat image_raw1 = loadImageMat(inp_filename_ptr1, 1);
+	cout << "Done!" << endl;
+
+	//longestHoughLine();
+
+	cout << "Loading image 2" << filename << "...";
+	Mat image_raw2 = loadImageMat(inp_filename_ptr2, 1);
+	cout << "Done!" << endl;
+
+
+
+	waitKey(0);
+	return 0;
+}
+
+
+
+int hangerCenterDetection(
+	char * input_directory,
+	string filename,
+	char * output_directory
+	)
+{
+
+	/// Get Timestamp
+	string time_stamp;
+	time_stamp = get_timestamp();
+
+
+	/// Put together some filenames
+	string inp_filename = string(input_directory) + "/" + filename + ".jpg";
+	string det_filename = string(output_directory) + "/IMG/" + filename + "." + time_stamp + ".det.jpg";
+	string log_filename = string(output_directory) + "/CSV/" + filename + "." + time_stamp + ".det.csv";
+	string prm_filename = string(output_directory) + "/PRM/" + filename + "." + time_stamp + ".det.prm.csv";
+
 	const char* inp_filename_ptr = inp_filename.data();
 	const char* det_filename_ptr = det_filename.data();
 
 	// Load the image
 	cout << "Loading image " << filename << "...";
-	Mat image_raw = loadImageMat(inp_filename_ptr, 0);
+	Mat image_raw = loadImageMat(inp_filename_ptr, 1);
 	cout << "Done!" << endl;
-	Mat image_ch;
-	cornerHarris(image_raw, image_ch, 21, 3, 0.5, BORDER_REPLICATE);
-
-	double minVal, maxVal;
-	minMaxLoc(image_ch, &minVal, &maxVal); //find minimum and maximum intensities
-	Mat draw;
-	image_ch.convertTo(draw, CV_8U, 255.0/(maxVal - minVal), -minVal * 255.0/(maxVal - minVal));
-	cout << "min: " << minVal << endl << "max: " << maxVal << endl;
+	Mat image_ds;
+	//showHistogram(image,"ori");
+	reduceDepth(image_raw, image_ds, 3);
+	showHistogram(image_ds,"rd");
 	imshow( "image: original", image_raw );
-	imshow( "image: differential", draw);
-    waitKey(0);
+	imshow("image: down sampled", image_ds);
+	waitKey(0);
+	return 0;
+}
+
+int crackDifferenceDetection(
+	char * input_directory,
+	vector<string> file_list,
+	char * output_directory
+	)
+{
+
+	/// Get Timestamp
+	string time_stamp;
+	time_stamp = get_timestamp();
+
+
+	/// Put together some filenames
+	string inp_filename = string(input_directory) + "/" + file_list[0] + ".jpg";
+	string det_filename = string(output_directory) + "/IMG/" + filename + "." + time_stamp + ".det.jpg";
+	string log_filename = string(output_directory) + "/CSV/" + filename + "." + time_stamp + ".det.csv";
+	string prm_filename = string(output_directory) + "/PRM/" + filename + "." + time_stamp + ".det.prm.csv";
+
+	const char* inp_filename_ptr = inp_filename.data();
+	const char* det_filename_ptr = det_filename.data();
+
+	// Load the image
+	cout << "Loading image " << filename << "...";
+	Mat image_raw = loadImageMat(inp_filename_ptr, 1);
+	cout << "Done!" << endl;
+	Mat image_ds;
+	//showHistogram(image,"ori");
+	reduceDepth(image_raw, image_ds, 3);
+	showHistogram(image_ds,"rd");
+	imshow( "image: original", image_raw );
+	imshow("image: down sampled", image_ds);
+	waitKey(0);
 	return 0;
 }
 
 
-//int main( int argc, char** argv )
-int main()
-{
-	systemConfig();
-    //if( argc != 2)
-    //{
-    // cout <<" Usage: display_image ImageToLoadAndDisplay" << endl;
-    // return -1;
-    //}
+int main( int argc, char* argv )
+//int main()
+{	
+    if (argc < 9) { // Check the value of argc. If not enough parameters have been passed, inform user and exit.
+        std::cout << "Usage is  ./image_detector.exe --indir <input directory> --outdir <output directory> --type <test type> --infil <input file>\n"; // Inform the user of how to use the program
+        std::cin.get();
+        exit(0);
+    } else { // if we got enough parameters...   
+		char* input_directory;
+		char* output_directory;
+		int type;
+		vector<string> input_file_list;
+        std::cout << argv[0];
+        for (int i = 1; i < argc; i++) { /* We will iterate over argv[] to get the parameters stored inside.
+                                          * Note that we're starting on 1 because we don't need to know the 
+                                          * path of the program, which is stored in argv[0] */
+            if (i + 1 != argc) // Check that we haven't finished parsing already
+                if (string(&argv[i]) == "--indir") {
+                    // We know the next argument *should* be the filename:
+                    input_directory = &argv[i + 1];
+                } else if (string(&argv[i]) == "--outdir") {
+                    output_directory = &argv[i + 1];
+                } else if (string(&argv[i]) == "--type") {
+					if (string(&argv[i]) == "crack") {
+						type = 1;
+					} else if (string(&argv[i]) == "rust") {
+						type = 2;
+					} else if (string(&argv[i]) == "hangerStraight") {
+						type = 3;
+					} else if (string(&argv[i]) == "hangerCenter") {
+						type = 4;
+					} else if (string(&argv[i]) == "crackDifference") {
+						type = 5;
+					}
+                } else if (string(&argv[i]) == "--infil") {
+					input_file_list.push_back(string(&argv[i+1]));
+                } else {
+                    std::cout << "Not enough or invalid arguments, please try again.\n";
+                    exit(0);
+            }
+            std::cout << argv[i] << " ";
+        }
 
-	if (1) {
-		const char *args[] = {"cracks1", "cracks2", "cracks3", "cracks4", "cracks5", "paper1"};
-		vector<string> inp_fname(args, end(args));
+		// Load detection parameters
+		systemConfig();
+		
 
-		for (int i = 0; i < inp_fname.size(); i++) {
-			crack_det(inp_fname[i]);
-		}
-	}
-	if (0) {
-		const char *args[] = {"rust1", "rust2", "rust3", "rust4", "rust5", "rust1"};
-		vector<string> inp_fname(args, end(args));
+		if (type == 1) { // Crack Detection
+			for (int f = 0; f < input_file_list.size(); f++) {
+				crackDetection(input_directory, input_file_list[f], output_directory);
+			}
+		} else if (type == 2) { // Rust Detection
+			for (int f = 0; f < input_file_list.size(); f++) {
+				rustDetection(input_directory, input_file_list[f], output_directory);
+			}
+		} else if (type == 3) { // Hanger Straight Detection
+			hangerStraightDetection(input_directory, input_file_list, output_directory);
+		} else if (type == 4) { // Hanger Center Detection
+			hangerCenterDetection(input_directory, input_file_list[1], output_directory);
+		} else if (type == 5) { // Crack Difference Detection
+			crackDifferenceDetection(input_directory, input_file_list, output_directory);
+		} else {
+			std::cout << "No or invalid test type, please try again.\n";
+            exit(0);
+        }
 
-		for (int i = 0; i < inp_fname.size(); i++) {
-			texture_disp(inp_fname[i]);
-			//rust_det(inp_fname[i]);
-		}
-	}
-	if (0) {
-		const char *args[] = {"anchor1", "anchor2", "anchor3", "anchor4", "anchor5", "anchor6"};
-		vector<string> inp_fname(args, end(args));
 
-		//for (int i = 0; i < inp_fname.size(); i++) {
-			obj_det(inp_fname[3]);
-		//}
-	}
+        //... some more code
+        std::cin.get();
+        return 0;
+    }
 }
