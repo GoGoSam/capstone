@@ -139,6 +139,9 @@ public class RobotController {
         switch (axis) {
             case leftTrigger:
                 int ltState = Math.round(state);
+                if (ltState == 0) {
+                    ltState = -1;
+                }
                 if (LT != ltState) {
                     LT = ltState;
                 } else {
@@ -160,6 +163,9 @@ public class RobotController {
                 break;
             case rightTrigger:
                 int rtState = Math.round(state);
+                if (rtState == 0) {
+                    rtState = -1;
+                }
                 if (RT != rtState) {
                     RT = rtState;
                 } else {
