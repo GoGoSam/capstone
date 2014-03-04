@@ -157,6 +157,12 @@ void session::process_request(const RoboComms::RoboReq& req)
         case 0:
             //Robot base move command
             if (base_serial) {
+                std::cout << "Base cmd: ";
+                unsigned char *b = (unsigned char*) req.base().cmd().c_str();
+                for (int i = 0; i < req.base().cmd().length(); i++) {
+                        std::cout << (int)b[i] << " ";
+                }
+                std::cout << std::endl;
                 base_serial->write((unsigned char*) req.base().cmd().c_str(),
                              req.base().cmd().length());
             } else {
@@ -166,6 +172,12 @@ void session::process_request(const RoboComms::RoboReq& req)
         case 1:
             //Robot lift move command
             if (lift_serial) {
+                std::cout << "Lift cmd: ";
+                unsigned char *l = (unsigned char*) req.lift().cmd().c_str();
+                for (int i = 0; i < req.lift().cmd().length(); i++) {
+                        std::cout << (int)l[i] << " ";
+                }
+                std::cout << std::endl;
                 lift_serial->write((unsigned char*) req.lift().cmd().c_str(),
                             req.lift().cmd().length());
             } else {
@@ -174,6 +186,7 @@ void session::process_request(const RoboComms::RoboReq& req)
             break;
         case 2:
             //Robot sensor move command
+            std::cout << "Servo cmd: " << req.sens().cmd() << std::endl;
             servos << req.sens().cmd() << std::endl;
             break;
         case 3:

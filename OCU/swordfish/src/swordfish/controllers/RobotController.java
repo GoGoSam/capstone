@@ -115,18 +115,19 @@ public class RobotController {
                 break;
             case rightStick:
                 // set servo to default position for both axes
-                String[] sCmd = new String[2];
-                sCmd[0] = SD0;
-                sCmd[1] = SD1;
-                for (int i = 0; i < 2; i++) {
-                    RoboReq.Builder req = RoboReq.newBuilder();
-                    req.setType(RoboReq.Type.MSENS);
-                    RoboReq.MoveSensCmd.Builder sreq = RoboReq.MoveSensCmd.newBuilder();
-                    sreq.setCmd(sCmd[i]);
-                    req.setSens(sreq);
-                    sendCommand(req.build(), p2_client);
+                if (pressed) {
+                    String[] sCmd = new String[2];
+                    sCmd[0] = SD0;
+                    sCmd[1] = SD1;
+                    for (int i = 0; i < 2; i++) {
+                        RoboReq.Builder req = RoboReq.newBuilder();
+                        req.setType(RoboReq.Type.MSENS);
+                        RoboReq.MoveSensCmd.Builder sreq = RoboReq.MoveSensCmd.newBuilder();
+                        sreq.setCmd(sCmd[i]);
+                        req.setSens(sreq);
+                        sendCommand(req.build(), p2_client);
+                    }
                 }
-
                 break;
         }
     }
