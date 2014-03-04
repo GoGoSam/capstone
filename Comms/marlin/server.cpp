@@ -156,13 +156,21 @@ void session::process_request(const RoboComms::RoboReq& req)
     switch(req.type()) {
         case 0:
             //Robot base move command
-            base_serial->write((unsigned char*) req.base().cmd().c_str(),
-                         req.base().cmd().length());
+            if (base_serial) {
+                base_serial->write((unsigned char*) req.base().cmd().c_str(),
+                             req.base().cmd().length());
+            } else {
+                std::cout << "Request for wrong component" << std::endl;
+            }
             break;
         case 1:
             //Robot lift move command
-            lift_serial->write((unsigned char*) req.lift().cmd().c_str(),
-                         req.lift().cmd().length());
+            if (lift_serial) {
+                lift_serial->write((unsigned char*) req.lift().cmd().c_str(),
+                            req.lift().cmd().length());
+            } else {
+                std::cout << "Request for wrong component" << std::endl;
+            }
             break;
         case 2:
             //Robot sensor move command
