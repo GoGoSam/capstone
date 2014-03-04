@@ -1,12 +1,18 @@
 package swordfish.views.window;
 
+	
+//import net.imglib2.type.numeric.RealType;
+
 import ij.IJ;
 import ij.ImagePlus;
 import ij.gui.ImageCanvas;
+import ij.plugin.ContrastEnhancer;
 import ij.process.ImageProcessor;
+import ij.process.LUT;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -20,9 +26,9 @@ import javax.swing.JPanel;
 public class ImageAnalyzerWindow extends javax.swing.JFrame
         implements ActionListener {
 
-    ImagePlus im_plus = null;           // This will be the original
-    ImagePlus im_plus_rgb = null;       // in the case RGB type is set as conversion
-    ImagePlus im_plus_gray = null;      // --- 8-Bit Gray
+    ImagePlus im_plus = null;       // This will be the original
+    ImagePlus im_plus_orig = null;  // image being viewed (potentially modified)
+    
     ImageCanvas canvas;
     boolean[] is_im_loaded = new boolean[1];
     boolean[] color_scaler = new boolean[2]; /*  0 - RGB; 1 - Gray, 8 Bit    */
@@ -78,10 +84,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         color_scaler[1] = false;
         
 
-        is_im_loaded[0] = load_image(fname);
-
-
-        
+        is_im_loaded[0] = load_image(fname);    
         set_button_states();        
     
     }                                      
@@ -98,6 +101,8 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         bg_image_type = new ButtonGroup();
         bg_image_type.add(rb_grayscale32);
         bg_image_type.add(rb_rgb32);
+        
+        
 
     }
     // <editor-fold defaultstate="collapsed" desc="initComponents">
@@ -218,7 +223,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         slider_brightness.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                slider_brightnessCaretPositionChanged(evt);
+                slider_contrastCaretPositionChanged(evt);
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
@@ -226,7 +231,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         slider_contrast.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                slider_brightnessCaretPositionChanged(evt);
+                slider_contrastCaretPositionChanged(evt);
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
@@ -397,12 +402,12 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             System.out.println("RGB RadioButton was pressed");
 
         }
-        im_plus_rgb = im_plus.duplicate();
+        im_plus = im_plus_orig.duplicate();
 //            IJ.run(im_plus_gray, "8-bit", "");
 //            im_plus.hide();
 //            im_plus_rgb.show();
 
-        lab_image.setIcon(new ImageIcon(im_plus_rgb.getImage())); // NOI18N
+        lab_image.setIcon(new ImageIcon(im_plus.getImage())); // NOI18N
 
 
     
@@ -432,30 +437,40 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         if (do_debug) {
             System.out.println("8 - bit RadioButton was pressed");
         }
-        im_plus_gray = im_plus.duplicate();
-        IJ.run(im_plus_gray, "32-bit", "");
+        
+        im_plus = im_plus_orig.duplicate();
+        IJ.run(im_plus, "32-bit", "");
 //            im_plus.hide();
 //            im_plus_gray.show();
-        lab_image.setIcon(new ImageIcon(im_plus_gray.getImage())); // NOI18N
+        lab_image.setIcon(new ImageIcon(im_plus.getImage())); // NOI18N
 
     }//GEN-LAST:event_rb_grayscale32ActionPerformed
 
-    private void slider_brightnessCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_slider_brightnessCaretPositionChanged
+    private void slider_contrastCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_slider_contrastCaretPositionChanged
         // TODO add your handling code here:
         
-        int val = slider_brightness.getValue();
+//        
+//        int val = slider_brightness.getValue();
+//        
+//        IJ.run(im_plus, "in","");
+//        
+//        IJ.setMinAndMax(val, val);
+//        im_plus.updateAndDraw(); 
+ 
         
-        IJ.run(im_plus_gray, "in","");
-        im_plus_gray.updateAndDraw(); 
+        new ContrastEnhancer().stretchHistogram(im_plus.getProcessor(), slider_contrast.getValue()/100.0); 
         
-    }//GEN-LAST:event_slider_brightnessCaretPositionChanged
+//        im_plus.updateAndDraw();
+        
+        
+    }//GEN-LAST:event_slider_contrastCaretPositionChanged
 
     private void b_closeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_closeActionPerformed
         // TODO add your handling code here:
                   
-        IJ.run(im_plus_rgb, "Enhance Contrast", "saturated=4 normalize");
-im_plus_rgb.repaintWindow();
-im_plus_rgb.updateAndDraw(); 
+        IJ.run(im_plus, "Enhance Contrast", "saturated=4 normalize");
+        im_plus.repaintWindow();
+        im_plus.updateAndDraw(); 
             
     }//GEN-LAST:event_b_closeActionPerformed
 
@@ -529,7 +544,7 @@ im_plus_rgb.updateAndDraw();
      */
     private void setImageDefaultSize() {
         // size of image is resized
-        ImageProcessor ip_big = im_plus.getProcessor();
+        ImageProcessor ip_big = im_plus_orig.getProcessor();
         ip_big.setInterpolate(true);
         
         ImageProcessor ip_small = ip_big.resize(IMG_WIDTH, IMG_HEIGHT);
@@ -546,10 +561,10 @@ im_plus_rgb.updateAndDraw();
      */
     private boolean load_image(String fpath) {
 
-        im_plus = IJ.openImage(fpath);
+        im_plus_orig = IJ.openImage(fpath);
         //    im_plus.show();   uncomment to open image in seperate window **
 
-        if (im_plus == null) {
+        if (im_plus_orig == null) {
             // exit (false) is image pointer is null
             return false;
         }
@@ -560,16 +575,14 @@ im_plus_rgb.updateAndDraw();
         lab_image.setText(""); // initializes with value "." for GUIbuiler edits
         lab_image.setIcon(new ImageIcon(im_plus.getImage()));
 
-        ImageProcessor proc = im_plus.getProcessor();
+        ImageProcessor proc = im_plus_orig.getProcessor();
+ 
 
-        orig_min_max[0] = proc.getMin();
-        orig_min_max[1] = proc.getMax();
-
-          
-        im_plus_rgb = im_plus.duplicate();         
-        lab_image.setIcon(new ImageIcon(im_plus_rgb.getImage()));            
+        im_plus = im_plus_orig.duplicate();         
+        lab_image.setIcon(new ImageIcon(im_plus.getImage()));            
         rb_rgb32.setSelected(true);
         
+
         return true;
     }
 
