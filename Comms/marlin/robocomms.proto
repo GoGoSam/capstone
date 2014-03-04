@@ -1,0 +1,55 @@
+package RoboComms;
+
+option java_package = "swordfish.models";
+option java_outer_classname = "RoboComms";
+
+message RoboReq {
+    enum Type {
+        MBASE = 0;
+        MLIFT = 1;
+        MSENS = 2;
+        RDATA = 3;
+    }
+
+    required Type type = 1;
+
+    optional MoveBaseCmd base = 2;
+    optional MoveLiftCmd lift = 3;
+    optional MoveSensCmd sens = 4;
+    optional DataReq     data = 5;
+
+    message MoveBaseCmd {
+        optional bytes cmd = 1;
+
+    }
+
+    message MoveLiftCmd {
+        optional bytes cmd = 1;
+
+    }
+
+    message MoveSensCmd {
+        optional string cmd = 1;
+
+    }
+
+    message DataReq {
+        optional string cmd = 1;
+
+    }
+}
+
+message RoboRes {
+    enum Type {
+        DATAR = 0;
+    }
+
+    required Type type = 1;
+
+    optional DataRes data = 2;
+
+    message DataRes {
+        optional string res = 1;
+
+    }
+}
