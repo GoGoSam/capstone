@@ -86,10 +86,12 @@
   <ItemGroup>
     <ClInclude Include="config_params.h" />
     <ClInclude Include="det_utils.h" />
+    <ClInclude Include="glcm.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="config_params.cpp" />
     <ClCompile Include="det_utils.cpp" />
+    <ClCompile Include="glcm.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

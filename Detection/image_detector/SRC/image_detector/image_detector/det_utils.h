@@ -10,6 +10,16 @@
 using namespace std;
 using namespace cv;
 
+void fujitaCrackDet(
+	Mat &src,
+	Mat &dst
+	);
+
+void binaryMorph(
+	Mat &src,
+	Mat &dst
+	);
+
 void showHistogram(
 	Mat& img,
 	string disp_name
@@ -21,6 +31,15 @@ Mat drawContourList(
 	vector<Vec4i> hierarchy,
 	Mat image
 	);
+
+
+void binarySpurClean(
+	Mat &src, 
+	Mat &dst);
+
+void binaryBridge(
+	Mat &src,
+	Mat &dst);
 
 
 Mat gradientXY(
@@ -37,6 +56,7 @@ Mat hessian(
 	int ddepth,
 	int gsmooth_n
 	);
+
 
 Mat invertImage(
 	Mat image

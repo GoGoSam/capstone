@@ -35,6 +35,12 @@ extern double cd_circularity_threshold;
 extern int cd_perimeter_threshold;
 extern int cd_aspect_ratio_threshold;
 
+extern int cd_medianHsize;
+extern int cd_gausHsize;
+extern double cd_gausSigma;
+extern double cd_gausScale;
+extern int cd_gausSteps;
+extern double cd_eigAlpha;
 
 //////////////////////////////////////////////
 /// Rust Detector Configuration Parameters ///
@@ -61,8 +67,6 @@ void store_line(
 
 void systemConfig();
 
-void get_timestamp(
-	char * outstr
-	);
+string get_timestamp();
 
 #endif
