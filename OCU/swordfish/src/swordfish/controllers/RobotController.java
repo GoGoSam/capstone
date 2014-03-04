@@ -155,7 +155,7 @@ public class RobotController {
                 RoboReq.MoveLiftCmd.Builder lreq = RoboReq.MoveLiftCmd.newBuilder();
                 lreq.setCmd(ByteString.copyFrom(l));
                 req.setLift(lreq);
-                sendCommand(req.build(), p1_client);
+                sendCommand(req.build(), p2_client);
                 break;
             case rightTrigger:
                 int rtState = Math.round(state);
@@ -176,7 +176,7 @@ public class RobotController {
                 RoboReq.MoveLiftCmd.Builder rreq = RoboReq.MoveLiftCmd.newBuilder();
                 rreq.setCmd(ByteString.copyFrom(r));
                 req.setLift(rreq);
-                sendCommand(req.build(), p1_client);
+                sendCommand(req.build(), p2_client);
                 break;
             case leftStickX:
             case leftStickY:

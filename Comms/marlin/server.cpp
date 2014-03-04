@@ -84,7 +84,8 @@ void server::accept(session::pointer new_session,
 
 session::pointer session::create(boost::asio::io_service& io_service)
 {
-    return pointer(new session(io_service));
+    pointer p(new session(io_service));
+    return p;
 }
 
 session::session(boost::asio::io_service& io_service)
@@ -180,7 +181,8 @@ void session::process_request(const RoboComms::RoboReq& req)
 serial_connection::pointer serial_connection::create(boost::asio::io_service& io_service,
         const std::string name)
 {
-    return pointer(new serial_connection(io_service, name));
+    pointer p(new serial_connection(io_service, name));
+    return p;
 }
 
 serial_connection::serial_connection(boost::asio::io_service& io_service,
@@ -212,8 +214,7 @@ void serial_connection::open()
 
         if (error_code == boost::system::errc::no_such_file_or_directory )
         {
-            //TODO: handle the error somehow
-            //for example you tried to open "COM1" on a linux machine.
+            //TODO: handle the error
         }
 
         serial_port_.set_option(boost::asio::serial_port::baud_rate(baud_rate_));
@@ -237,8 +238,6 @@ void serial_connection::handle_write(const boost::system::error_code& error,
         std::size_t bytes)
 {
     //TODO: Handle return from write
-    std::cout << error.message() << std::endl;
-    std::cout << bytes << std::endl;
 }
 
 void serial_connection::read()
