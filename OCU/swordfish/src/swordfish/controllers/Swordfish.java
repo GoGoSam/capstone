@@ -4,6 +4,8 @@ import swordfish.views.MobileDirectionDisplayKeyboard;
 import swordfish.views.XBox360_DirectionDisplay;
 import swordfish.views.window.ImageAnalyzerWindow;
 import swordfish.views.window.LiveStreamerWindow;
+import swordfish.views.window.LiveStreamerWindow2;
+
 
 /**
  *
