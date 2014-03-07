@@ -1135,20 +1135,12 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="b_vid_play" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
-                                              <Component id="b_vid_stop" min="-2" pref="31" max="-2" attributes="0"/>
-                                              <Component id="b_vid_pause" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="b_capture_moment" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
-                                              <Component id="b_vid_mute" min="-2" pref="31" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="b_vid_play" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Component id="b_vid_stop" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Component id="b_vid_pause" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Component id="b_capture_moment" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
+                                          <Component id="b_vid_mute" min="-2" pref="31" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>

@@ -17,6 +17,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FileDialog;
 import java.awt.Graphics2D;
+import java.awt.Point;
 //import java.awt.Font;
 //import java.awt.LayoutManager;
 import java.awt.event.KeyEvent.*;
@@ -38,6 +39,9 @@ import swordfish.views.MobileDirectionDisplayKeyboard;
 //import swordfish.applications.LiveStreamer;
 import swordfish.controllers.RobotController;
 import swordfish.controllers.VideoStreamer;
+import java.awt.event.ComponentListener;
+import swordfish.views.window.LiveStreamerWindow2;
+
 //import java.io.*;
 
 /**
@@ -45,7 +49,7 @@ import swordfish.controllers.VideoStreamer;
  * @author jrob
  */
 public class LiveStreamerWindow extends JFrame
-      implements KeyListener, WindowListener {
+      implements KeyListener, WindowListener, ComponentListener {
 
 //    private JFrame frmLiveStreamerDisplay;
     /**
@@ -60,6 +64,7 @@ public class LiveStreamerWindow extends JFrame
     private boolean do_debug = true;
     boolean[] f_video_loaded = new boolean[1];
     private VideoStreamer vs;
+    private LiveStreamerWindow2 lsw2;
     ImageTaker it;
 //    private RobotController rc;
 //    MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
@@ -76,21 +81,32 @@ public class LiveStreamerWindow extends JFrame
         it = new ImageTaker(image_out_path);
     }
 
-    public LiveStreamerWindow(JFrame ui) {
+    public LiveStreamerWindow(LiveStreamerWindow2 lsw2) {
 //        super("ddd");
 
+        this.lsw2 = lsw2;
+             
+
+        
         initComponents();
         initContainer();
 
         f_video_loaded[0] = false;
         setResizable(false);
-
+        it = new ImageTaker(image_out_path);
     }
 
     public void setVideoStreamer(VideoStreamer instance) {
         vs = instance;
     }
-
+    public void setMediaWindows()
+    {
+        Point pp = this.getLocationOnScreen();
+        int x = pp.x;
+        int y = pp.y + this.getWidth();
+        lsw2.setLocation(x,y);
+        
+    }
     public void checkCC(boolean checkit) {
         if (checkit) {
             cb_controller_connected.setSelected(true);
@@ -124,6 +140,7 @@ public class LiveStreamerWindow extends JFrame
         setResizable(false);
 //        this.pack();
         addWindowListener(this);
+        addComponentListener(this);
         set_button_states();
     }
 
@@ -1622,6 +1639,35 @@ public class LiveStreamerWindow extends JFrame
     }
     // </editor-fold>
     /* Create and display the form */
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+        
+        System.out.println();
+        Point pp = this.getLocationOnScreen();
+        int x = pp.x+ this.getWidth();
+        int y = pp.y;
+        pp.y = y;
+        pp.x = x;
+        lsw2.setLocation(pp);
+        
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     /**
      * Launch the application.
