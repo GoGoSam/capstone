@@ -218,6 +218,7 @@ public class LiveStreamerWindow extends JFrame
         l_lArrow = new javax.swing.JLabel();
         l_uArrow = new javax.swing.JLabel();
         cb_boundviews = new javax.swing.JCheckBox();
+        cb_sideview_on = new javax.swing.JCheckBox();
         pan_center = new javax.swing.JPanel();
         p_mediaPlayer = new javax.swing.JPanel();
         pan_media_control = new javax.swing.JPanel();
@@ -498,7 +499,7 @@ public class LiveStreamerWindow extends JFrame
         pan_robo_trackerLayout.setVerticalGroup(
             pan_robo_trackerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_robo_trackerLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addGroup(pan_robo_trackerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pan_robo_trackerLayout.createSequentialGroup()
                         .addGroup(pan_robo_trackerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -600,58 +601,6 @@ public class LiveStreamerWindow extends JFrame
             }
         });
 
-        javax.swing.GroupLayout pan_loginLayout = new javax.swing.GroupLayout(pan_login);
-        pan_login.setLayout(pan_loginLayout);
-        pan_loginLayout.setHorizontalGroup(
-            pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pan_loginLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(l_logo_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(pan_loginLayout.createSequentialGroup()
-                .addGroup(pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pan_loginLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pan_loginLayout.createSequentialGroup()
-                                .addComponent(l_inspect_static)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(l_inspector))
-                            .addGroup(pan_loginLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(l_mid__static)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(l_date)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pan_loginLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(b_logon, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(b_logon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        pan_loginLayout.setVerticalGroup(
-            pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pan_loginLayout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addGroup(pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(l_inspect_static)
-                    .addComponent(l_inspector))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(l_mid__static)
-                    .addComponent(l_date, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(b_logon)
-                    .addComponent(b_logon1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(l_logo_icon)
-                .addContainerGap())
-        );
-
-        pan_loginLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {b_logon, b_logon1});
-
         cb_directionals.setFont(new java.awt.Font("Andale Mono", 0, 11)); // NOI18N
         cb_directionals.setSelected(true);
         cb_directionals.setText("Directionals On");
@@ -682,6 +631,15 @@ public class LiveStreamerWindow extends JFrame
             }
         });
 
+        cb_sideview_on.setFont(new java.awt.Font("Andale Mono", 0, 11)); // NOI18N
+        cb_sideview_on.setSelected(true);
+        cb_sideview_on.setText("View2 On");
+        cb_sideview_on.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_sideview_onActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pan_directionalsLayout = new javax.swing.GroupLayout(pan_directionals);
         pan_directionals.setLayout(pan_directionalsLayout);
         pan_directionalsLayout.setHorizontalGroup(
@@ -693,12 +651,14 @@ public class LiveStreamerWindow extends JFrame
                             .addComponent(l_rArrow)
                             .addComponent(cb_directionals))
                         .addGap(6, 6, 6)
-                        .addGroup(pan_directionalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(l_uArrow)
-                            .addComponent(l_dArrow))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(l_lArrow))
-                    .addComponent(cb_boundviews))
+                        .addGroup(pan_directionalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pan_directionalsLayout.createSequentialGroup()
+                                .addComponent(l_uArrow)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(l_lArrow))
+                            .addComponent(l_dArrow)))
+                    .addComponent(cb_boundviews)
+                    .addComponent(cb_sideview_on))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pan_directionalsLayout.setVerticalGroup(
@@ -714,9 +674,66 @@ public class LiveStreamerWindow extends JFrame
                     .addComponent(cb_directionals, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(l_dArrow, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cb_sideview_on)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cb_boundviews)
                 .addGap(6, 6, 6))
         );
+
+        javax.swing.GroupLayout pan_loginLayout = new javax.swing.GroupLayout(pan_login);
+        pan_login.setLayout(pan_loginLayout);
+        pan_loginLayout.setHorizontalGroup(
+            pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pan_loginLayout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(l_logo_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pan_loginLayout.createSequentialGroup()
+                .addGroup(pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pan_loginLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pan_loginLayout.createSequentialGroup()
+                                .addComponent(l_inspect_static)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(l_inspector))
+                            .addGroup(pan_loginLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(l_mid__static)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(l_date)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pan_loginLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(b_logon, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(b_logon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pan_directionals, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pan_loginLayout.setVerticalGroup(
+            pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pan_loginLayout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addGroup(pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(l_inspect_static)
+                    .addComponent(l_inspector))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(l_mid__static)
+                    .addComponent(l_date, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pan_loginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(b_logon)
+                    .addComponent(b_logon1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(l_logo_icon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pan_directionals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pan_loginLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {b_logon, b_logon1});
 
         javax.swing.GroupLayout pan_rightLayout = new javax.swing.GroupLayout(pan_right);
         pan_right.setLayout(pan_rightLayout);
@@ -725,22 +742,19 @@ public class LiveStreamerWindow extends JFrame
             .addGroup(pan_rightLayout.createSequentialGroup()
                 .addGroup(pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pan_rightLayout.createSequentialGroup()
-                        .addGroup(pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pan_robo_tracker, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pan_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pan_robo_tracker, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(pan_directionals, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pan_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pan_rightLayout.setVerticalGroup(
             pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_rightLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(pan_robo_tracker, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pan_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pan_robo_tracker, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pan_directionals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pan_login, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(156, 156, 156))
         );
 
         pan_robo_tracker.getAccessibleContext().setAccessibleName("I-90 East");
@@ -1204,7 +1218,7 @@ public class LiveStreamerWindow extends JFrame
                 .addGroup(pan_rootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pan_right, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pan_center, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pan_left, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)))
+                    .addComponent(pan_left, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)))
         );
 
         getContentPane().add(pan_root, new java.awt.GridBagConstraints());
@@ -1500,23 +1514,6 @@ public class LiveStreamerWindow extends JFrame
                 }
             });
         }
-        //        try {
-        //            instance.wait();
-        ////        while (instance.isVisible()) {
-        ////            System.out.println("Visible");
-        ////            IJ.wait(5);
-        ////
-        ////        }
-        ////        instance.addWindowListener(this);
-        ////
-        ////            System.out.println("Not");
-        //////        instance.setName("Log On");
-        ////        } catch (InterruptedException ex) {
-        ////            Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
-        ////        }
-        //        } catch (InterruptedException ex) {
-        ////            Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
-        //        }
     }//GEN-LAST:event_b_logonActionPerformed
 
     private void b_connectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_connectActionPerformed
@@ -1556,7 +1553,32 @@ public class LiveStreamerWindow extends JFrame
 
     private void cb_boundviewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_boundviewsActionPerformed
         // TODO add your handling code here:
+             
+        if (!cb_sideview_on.isSelected())
+        {
+                       
+            Point pp = this.getLocationOnScreen();
+            int x = pp.x+ this.getWidth();
+            int y = pp.y;
+            pp.y = y;
+            pp.x = x;
+            lsw2.setLocation(pp);
+            lsw2.setVisible(true);
+        }
+        
+        
     }//GEN-LAST:event_cb_boundviewsActionPerformed
+
+    private void cb_sideview_onActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_sideview_onActionPerformed
+        // TODO add your handling code here:
+        if (cb_sideview_on.isSelected())
+        {
+            lsw2.setVisible(true);
+        }else
+        {
+            lsw2.setVisible(false);
+        }
+    }//GEN-LAST:event_cb_sideview_onActionPerformed
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
@@ -1759,6 +1781,7 @@ public class LiveStreamerWindow extends JFrame
     public javax.swing.JCheckBox cb_controller_connected;
     private javax.swing.JCheckBox cb_directionals;
     private javax.swing.JCheckBox cb_object_aware;
+    private javax.swing.JCheckBox cb_sideview_on;
     public javax.swing.JLabel icon_dArrow;
     public javax.swing.JLabel icon_lArrow1;
     public javax.swing.JLabel icon_rArrow1;

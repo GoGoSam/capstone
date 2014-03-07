@@ -65,6 +65,7 @@ public class LiveStreamerWindow2 extends JFrame
     private void initContainer() {
         setResizable(false);
         addWindowListener(this);
+//        this.setDefaultCloseOperation(WIDTH);
     }
 
 
