@@ -100,6 +100,10 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         l_brightness = new javax.swing.JLabel();
         l_contrast = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jToggleButton3 = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         b_open = new javax.swing.JMenuItem();
@@ -126,12 +130,14 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             pan_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_imageLayout.createSequentialGroup()
                 .addComponent(lab_image)
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addContainerGap(310, Short.MAX_VALUE))
         );
 
+        b_save.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         b_save.setText("Save");
         b_save.setEnabled(false);
 
+        b_load.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         b_load.setText("Load");
         b_load.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +145,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             }
         });
 
+        b_close.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         b_close.setText("Close");
         b_close.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -175,6 +182,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         pan_utilsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {b_close, b_load, b_save});
 
+        rb_rgb32.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         rb_rgb32.setText("RGB");
         rb_rgb32.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,6 +190,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             }
         });
 
+        rb_grayscale32.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         rb_grayscale32.setText("Gray-Scale");
         rb_grayscale32.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,24 +198,28 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             }
         });
 
+        slider_brightness.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         slider_brightness.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 slider_brightnessCaretPositionChanged(evt);
             }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
         });
 
+        slider_contrast.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         slider_contrast.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 slider_brightnessCaretPositionChanged(evt);
             }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
         });
 
+        l_brightness.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         l_brightness.setText("Brightness");
 
+        l_contrast.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         l_contrast.setText("Contrast");
 
         javax.swing.GroupLayout pan_toolsLayout = new javax.swing.GroupLayout(pan_tools);
@@ -216,16 +229,21 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             .addGroup(pan_toolsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(l_brightness)
-                    .addComponent(l_contrast)
-                    .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(slider_brightness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(pan_toolsLayout.createSequentialGroup()
-                            .addComponent(rb_rgb32)
-                            .addGap(88, 88, 88)
-                            .addComponent(rb_grayscale32))
+                    .addGroup(pan_toolsLayout.createSequentialGroup()
+                        .addComponent(l_brightness)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(slider_brightness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pan_toolsLayout.createSequentialGroup()
+                        .addComponent(rb_rgb32)
+                        .addGap(88, 88, 88)
+                        .addComponent(rb_grayscale32)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pan_toolsLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(l_contrast)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pan_toolsLayout.setVerticalGroup(
             pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,16 +252,50 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rb_rgb32)
                     .addComponent(rb_grayscale32))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(l_brightness)
-                .addGap(3, 3, 3)
-                .addComponent(slider_brightness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(l_contrast)
-                .addGap(3, 3, 3)
-                .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(l_brightness)
+                    .addComponent(slider_brightness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(l_contrast)
+                    .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62))
         );
+
+        jToggleButton1.setText("Crack");
+
+        jToggleButton2.setText("Rust");
+
+        jToggleButton3.setText("Corrosion");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton2)
+                .addGap(18, 18, 18)
+                .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jToggleButton1, jToggleButton2, jToggleButton3});
+
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton1)
+                    .addComponent(jToggleButton2)
+                    .addComponent(jToggleButton3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jToggleButton1, jToggleButton2, jToggleButton3});
 
         jMenu1.setText("File");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -298,15 +350,16 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pan_image, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pan_image, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(pan_utils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jSeparator1))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
@@ -316,9 +369,11 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 .addGap(2, 2, 2)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pan_utils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pan_utils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pan_tools, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -543,7 +598,11 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JLabel l_brightness;
     private javax.swing.JLabel l_contrast;
     private javax.swing.JLabel lab_image;
