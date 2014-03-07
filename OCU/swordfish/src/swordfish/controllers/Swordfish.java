@@ -49,7 +49,7 @@ public class Swordfish {
         VideoStreamer vs2;
         RobotController rc;
         LiveStreamerWindow2 lsw2 = new LiveStreamerWindow2();
-        lsw.setVisible(true);
+        lsw2.setVisible(true);
         if (do_robot_controller) {
             rc = new RobotController();
             rc.connect(p2_addr, p2_addr, marlin_port, lsw);
@@ -57,7 +57,7 @@ public class Swordfish {
         if (do_video_streamer) {
             vs2 = new VideoStreamer();
             vs2.connect(p2_addr, tuna_port, lsw2);
-            lsw.setVideoStreamer(vs2);
+            lsw2.setVideoStreamer(vs2);
         }
         
         

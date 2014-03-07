@@ -13,9 +13,10 @@ public class VideoStreamer {
     private LiveStreamerWindow ui;
     private LiveStreamerWindow2 ui2;
     public static Pipeline pipe2;
-    public void connect(final String addr, final int port, final LiveStreamerWindow2 lsw) {
+    
+    public void connect(final String addr, final int port, final LiveStreamerWindow2 lsw2) {
         /* init */
-        ui2 = lsw;
+        ui2 = lsw2;
         String[] args = {};
         Gst.init("VideoStreamer", args);
         pipe2 = new Pipeline("VideoStreamer");
@@ -47,13 +48,13 @@ public class VideoStreamer {
                 JFrame frame = new JFrame("VideoStreamer2");
                 JPanel pan = new JPanel();
                 pan.add(videoComponent, BorderLayout.CENTER);
-                videoComponent.setPreferredSize(lsw.p_mediaPlayer.getSize());
+                videoComponent.setPreferredSize(lsw2.p_mediaPlayer.getSize());
                 frame.add(pan);
                 frame.pack();
-                lsw.p_mediaPlayer.add(frame.getContentPane());
+                lsw2.p_mediaPlayer.add(frame.getContentPane());
 
                 /* start the pipeline */
-                start();
+                start2();
             }
         });
     }
@@ -105,7 +106,10 @@ public class VideoStreamer {
         pipe.setState(State.PLAYING);
         updateGUI();
     }
-
+    public void start2() {
+        pipe2.setState(State.PLAYING);
+//        updateGUI2();
+    }
     public void pause() {
         pipe.setState(State.PAUSED);
         updateGUI();
@@ -121,4 +125,8 @@ public class VideoStreamer {
         ui.setVideoFlag(pipe.isPlaying());
         ui.set_button_states();
     }
+     
+//    private void updateGUI2() {
+//        ui2.setVideoFlag(pipe2.isPlaying());
+//    }
 }
