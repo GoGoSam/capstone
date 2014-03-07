@@ -5,8 +5,9 @@ import java.awt.event.*;
 import java.awt.Container.*;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
 
-import java.awt.event.KeyEvent.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,12 +17,13 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import swordfish.controllers.VideoStreamer;
 
+
 /**
  *
  * @author jrob
  */
 public class LiveStreamerWindow2 extends JFrame
-      implements WindowListener {
+      implements WindowListener, ComponentListener {
 
 
     int[] pointer = new int[1];
@@ -29,6 +31,7 @@ public class LiveStreamerWindow2 extends JFrame
     boolean[] f_video_loaded = new boolean[1];
     private VideoStreamer vs;
     ImageTaker it;
+    LiveStreamerWindow lsw;
 
     String icon_path = System.getProperty("user.dir") + "/resources/";
     String image_out_path = System.getProperty("user.home") + "/Desktop/";
@@ -39,6 +42,8 @@ public class LiveStreamerWindow2 extends JFrame
         f_video_loaded[0] = false;
         setResizable(false);
         it = new ImageTaker(image_out_path);
+        
+        
     }
 
     public LiveStreamerWindow2(JFrame ui) {
@@ -48,6 +53,8 @@ public class LiveStreamerWindow2 extends JFrame
 
         f_video_loaded[0] = false;
         setResizable(false);
+        
+        
 
     }
 
@@ -65,7 +72,8 @@ public class LiveStreamerWindow2 extends JFrame
     private void initContainer() {
         setResizable(false);
         addWindowListener(this);
-//        this.setDefaultCloseOperation(WIDTH);
+        this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        addComponentListener(this);
     }
 
 
@@ -169,12 +177,17 @@ public class LiveStreamerWindow2 extends JFrame
     }// </editor-fold>//GEN-END:initComponents
 
 
-
-
     // </editor-fold>
+    
+    
+    public void setWindowLink(LiveStreamerWindow lsw)
+    {
+        this.lsw = lsw;
+    }
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
     @Override
     public void windowClosing(WindowEvent e) {
+        lsw.cb_sideview_on.setSelected(false);
     }
 
     @Override
@@ -199,6 +212,37 @@ public class LiveStreamerWindow2 extends JFrame
 
     @Override
     public void windowDeactivated(WindowEvent e) {
+    }
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+              
+//        if (lsw.cb_boundviews.isSelected())
+//        {
+//                       
+//            Point pp = this.getLocationOnScreen();
+//            int x = pp.x - lsw.getWidth();
+//            int y = pp.y;
+//            pp.y = y;
+//            pp.x = x;
+//            lsw.setLocation(pp);
+//            lsw.setVisible(true);
+//        }
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     class ImageTaker    

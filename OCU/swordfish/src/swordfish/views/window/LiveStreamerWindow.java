@@ -94,6 +94,8 @@ public class LiveStreamerWindow extends JFrame
         f_video_loaded[0] = false;
         setResizable(false);
         it = new ImageTaker(image_out_path);
+        
+        this.lsw2.setWindowLink(this);
     }
 
     public void setVideoStreamer(VideoStreamer instance) {
@@ -1554,7 +1556,7 @@ public class LiveStreamerWindow extends JFrame
     private void cb_boundviewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_boundviewsActionPerformed
         // TODO add your handling code here:
              
-        if (!cb_sideview_on.isSelected())
+        if (cb_boundviews.isSelected() && cb_sideview_on.isSelected()) 
         {
                        
             Point pp = this.getLocationOnScreen();
@@ -1777,11 +1779,11 @@ public class LiveStreamerWindow extends JFrame
     public javax.swing.JButton b_vid_pause;
     public javax.swing.JButton b_vid_play;
     private javax.swing.JButton b_vid_stop;
-    private javax.swing.JCheckBox cb_boundviews;
+    public javax.swing.JCheckBox cb_boundviews;
     public javax.swing.JCheckBox cb_controller_connected;
     private javax.swing.JCheckBox cb_directionals;
     private javax.swing.JCheckBox cb_object_aware;
-    private javax.swing.JCheckBox cb_sideview_on;
+    public javax.swing.JCheckBox cb_sideview_on;
     public javax.swing.JLabel icon_dArrow;
     public javax.swing.JLabel icon_lArrow1;
     public javax.swing.JLabel icon_rArrow1;
