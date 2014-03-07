@@ -18,10 +18,10 @@ using google::protobuf::io::OstreamOutputStream;
 
 serial_connection::pointer base_serial;
 serial_connection::pointer lift_serial;
+serial_connection::pointer sens_serial;
 std::ofstream servos;
 
-//TODO: Handle cleanup when killed
-//Close servos and serial
+//TODO: Handle cleanup when killed close servos and serial
 int main(int argc, const char* argv[])
 {
     try
@@ -41,8 +41,10 @@ int main(int argc, const char* argv[])
             servos.open(s, std::ofstream::out | std::ofstream::trunc);
             lift_serial = serial_connection::create(io_service, d);
         } else {
-            const char* d = "/dev/ttyUSB0";
-            base_serial = serial_connection::create(io_service, d);
+            const char* d0 = "/dev/ttyUSB0";
+            const char* d1 = "/dev/ttyUSB1";
+            base_serial = serial_connection::create(io_service, d0);
+            sens_serial = serial_connection::create(io_service, d1);
         }
         std::cout << "Serving on port " << port << std::endl;
         std::cout << "Controlling " << component << std::endl;
@@ -119,13 +121,14 @@ void session::handle_read(const boost::system::error_code& error)
         CodedInputStream codedInputStream(&arrayInputStream);
         uint32_t messageSize;
         if(codedInputStream.ReadVarint32(&messageSize)) {
-            //TODO: Check that whole message is in buffer
             CodedInputStream::Limit msgLimit = codedInputStream.PushLimit(messageSize);
             RoboComms::RoboReq req;
-            req.ParseFromCodedStream(&codedInputStream);
-            process_request(req);
+            if (req.ParseFromCodedStream(&codedInputStream)) {
+                process_request(req);
+            }
             codedInputStream.PopLimit(msgLimit);
         }
+        read();
     }
 }
 
@@ -148,7 +151,9 @@ void session::write(const RoboComms::RoboRes& res)
 
 void session::handle_write(const boost::system::error_code& error)
 {
-    //TODO: Handle return from write
+    if (error) {
+        std::cout << error.message() << std::endl;
+    }
 }
 
 void session::process_request(const RoboComms::RoboReq& req)
@@ -159,7 +164,8 @@ void session::process_request(const RoboComms::RoboReq& req)
             if (base_serial) {
                 std::cout << "Base cmd: ";
                 unsigned char *b = (unsigned char*) req.base().cmd().c_str();
-                for (int i = 0; i < req.base().cmd().length(); i++) {
+                int len0 = req.base().cmd().length();
+                for (int i = 0; i < len0; i++) {
                         std::cout << (int)b[i] << " ";
                 }
                 std::cout << std::endl;
@@ -174,7 +180,8 @@ void session::process_request(const RoboComms::RoboReq& req)
             if (lift_serial) {
                 std::cout << "Lift cmd: ";
                 unsigned char *l = (unsigned char*) req.lift().cmd().c_str();
-                for (int i = 0; i < req.lift().cmd().length(); i++) {
+                int len1 = req.lift().cmd().length();
+                for (int i = 0; i < len1; i++) {
                         std::cout << (int)l[i] << " ";
                 }
                 std::cout << std::endl;
@@ -185,18 +192,25 @@ void session::process_request(const RoboComms::RoboReq& req)
             }
             break;
         case 2:
-            //Robot sensor move command
+            //Robot servo move command
             std::cout << "Servo cmd: " << req.sens().cmd() << std::endl;
             servos << req.sens().cmd() << std::endl;
             break;
         case 3:
             //Robot data request command
+            if (sens_serial) {
+                std::cout << "Sens cmd: " << req.sens().cmd() << std::endl;
+                sens_serial->write((unsigned char*) req.sens().cmd().c_str(),
+                            req.sens().cmd().length());
+            } else {
+                std::cout << "Request for wrong component" << std::endl;
+            }
+            //TODO: Read response from serial port and send it back to host
             break;
         default:
             //Shouldn't ever get here
             break;
     }
-    read();
 }
 
 serial_connection::pointer serial_connection::create(boost::asio::io_service& io_service,
@@ -235,7 +249,7 @@ void serial_connection::open()
 
         if (error_code == boost::system::errc::no_such_file_or_directory )
         {
-            //TODO: handle the error
+            std::cout << error_code.message() << std::endl;
         }
 
         serial_port_.set_option(boost::asio::serial_port::baud_rate(baud_rate_));
@@ -258,20 +272,27 @@ void serial_connection::write(unsigned char* data, int size)
 void serial_connection::handle_write(const boost::system::error_code& error,
         std::size_t bytes)
 {
-    //TODO: Handle return from write
+    if (error) {
+        std::cout << error.message() << std::endl;
+        std::cout << "Bytes wrote: " << bytes << std::endl;
+    }
 }
 
-void serial_connection::read()
+void serial_connection::read(unsigned char* data, int size)
 {
-    //TODO: Should this be async_read_some
     boost::asio::async_read(serial_port_,
-            boost::asio::buffer(data_),
+            boost::asio::buffer(data, size),
             boost::asio::transfer_at_least(1),
             boost::bind(&serial_connection::handle_read, shared_from_this(),
-                boost::asio::placeholders::error));
+                boost::asio::placeholders::error,
+                boost::asio::placeholders::bytes_transferred));
 }
 
-void serial_connection::handle_read(const boost::system::error_code& error)
+void serial_connection::handle_read(const boost::system::error_code& error,
+        std::size_t bytes)
 {
-    //TODO: Handle return from read
+    if (error) {
+        std::cout << error.message() << std::endl;
+        std::cout << "Bytes read: " << bytes << std::endl;
+    }
 }
