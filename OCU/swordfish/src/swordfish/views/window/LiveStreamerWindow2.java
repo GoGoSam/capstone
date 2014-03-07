@@ -1,73 +1,38 @@
 package swordfish.views.window;
 
-//import swordfish.ui_develop.*;
-//import swordfish.*;
-//import ij.IJ;
-//import java.awt.BorderLayout;
-//import java.awt.Canvas;
-
-//import java.awt.Component;
-import java.awt.event.KeyListener;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Container.*;
-//import java.awt.Cursor;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FileDialog;
+
 import java.awt.Graphics2D;
-//import java.awt.Font;
-//import java.awt.LayoutManager;
+
 import java.awt.event.KeyEvent.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-//import java.net.MalformedURLException;
-//import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import org.gstreamer.State;
-import org.gstreamer.swing.VideoPlayer;
-//import javax.swing.border.TitledBorder;
-//import swordfish.controllers.RobotController;
-import swordfish.views.dialog.LogIn;
-import swordfish.views.MobileDirectionDisplayKeyboard;
-//import swordfish.applications.LiveStreamer;
-import swordfish.controllers.RobotController;
 import swordfish.controllers.VideoStreamer;
-//import java.io.*;
 
 /**
  *
  * @author jrob
  */
 public class LiveStreamerWindow2 extends JFrame
-      implements KeyListener, WindowListener {
+      implements WindowListener {
 
-//    private JFrame frmLiveStreamerDisplay;
-    /**
-     * Creates new form LiveStreamerWindow
-     */
+
     int[] pointer = new int[1];
-    private JLabel icon_down;
-    private JLabel icon_left;
-    private JLabel icon_right;
-    private JLabel icon_up;
-    private JPanel p_directionals;
-    private boolean do_debug = true;
+
     boolean[] f_video_loaded = new boolean[1];
     private VideoStreamer vs;
     ImageTaker it;
-//    private RobotController rc;
-//    MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
-//    MyMediaPlayer media_pan;
+
     String icon_path = System.getProperty("user.dir") + "/resources/";
     String image_out_path = System.getProperty("user.home") + "/Desktop/";
     public LiveStreamerWindow2() {
-//        super("ddd");
 
         initComponents();
         initContainer();
@@ -77,7 +42,6 @@ public class LiveStreamerWindow2 extends JFrame
     }
 
     public LiveStreamerWindow2(JFrame ui) {
-//        super("ddd");
 
         initComponents();
         initContainer();
@@ -91,43 +55,18 @@ public class LiveStreamerWindow2 extends JFrame
         vs = instance;
     }
 
-    public void checkCC(boolean checkit) {
-//        if (checkit) {
-//            cb_controller_connected.setSelected(true);
-//        } else {
-//            cb_controller_connected.setSelected(false);
-//
-//        }
-
-    }
-
     public void setVideoFlag(boolean state)
     { // used for component states to be set
         f_video_loaded[0] = state;
         
     }
-    public void set_button_states() {
-//        b_vid_ff.setEnabled(f_video_loaded[0]);
-//        b_vid_mute.setEnabled(f_video_loaded[0]);
-//        b_vid_pause.setEnabled(f_video_loaded[0]);
-//        b_vid_play.setEnabled(f_video_loaded[0]);
-////        b_vid_rw.setEnabled(f_video_loaded[0]);
-//        b_vid_stop.setEnabled(f_video_loaded[0]);
-//        b_capture_moment.setEnabled(f_video_loaded[0]);
-//        cb_controller_connected.setSelected(rc.isConnected());
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="initContainer">
+
     private void initContainer() {
-//        addKeyListener(IJ.getInstance());
-
         setResizable(false);
-//        this.pack();
         addWindowListener(this);
-        set_button_states();
     }
 
-    // </editor-fold>
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -230,24 +169,7 @@ public class LiveStreamerWindow2 extends JFrame
 
 
 
-    private void logging_on(ActionEvent evt) {
-//        evt.equals(evt);
-        System.out.println(evt.getSource().toString());
-        if (logger.get(0) == evt.getSource()) {
-            if (do_debug) {
-                System.out.println("Login");
-            }
 
-        } else if (logger.get(1) == evt.getSource()) {
-            if (do_debug) {
-                System.out.println("Register");
-            }
-        } else {
-            if (do_debug) {
-                System.out.println("Cancel");
-            }
-        }
-    }
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
     @Override
@@ -278,106 +200,13 @@ public class LiveStreamerWindow2 extends JFrame
     public void windowDeactivated(WindowEvent e) {
     }
 
-//    public void windowGainedFocus(WindowEvent e) {    }
-//    public void windowLostFocus(WindowEvent e) {
-//    }
-//
-//    public void windowStateChanged(WindowEvent e) {
-//    }
-    // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc="KeyListeners">
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
-    /**
-     * Handle the key pressed event from the text field. The function checks if
-     * event was triggered via arrow keys on keypad. If so, the corresponding
-     * arrow icon will be enabled, i.e., will display its true color.
-     */
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-        if (do_debug) {
-            System.out.println("Key Press: " + e.toString());
-        }
-
-        int location = e.getKeyCode();
-
-        if (location == KeyEvent.VK_LEFT) {
-            icon_left.setEnabled(true);
-        } else if (location == KeyEvent.VK_RIGHT) {
-            icon_right.setEnabled(true);
-        } else if (location == KeyEvent.VK_UP) {
-
-            icon_up.setEnabled(true);
-        } else if (location == KeyEvent.VK_DOWN) {
-            icon_down.setEnabled(true);
-        }
-    }
-
-    /**
-     * Handle the key released event from the text field. The function checks if
-     * event was triggered via arrow keys on keypad. If so, the corresponding
-     * arrow icon will be disabled, i.e., will lose its true color set when key
-     * was pressed.
-     */
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (do_debug) {
-            System.out.println("Key Released: " + e.toString());
-        }
-
-        int location = e.getKeyCode();
-
-        if (location == KeyEvent.VK_LEFT) {
-            icon_left.setEnabled(false);
-        } else if (location == KeyEvent.VK_RIGHT) {
-            icon_right.setEnabled(false);
-        } else if (location == KeyEvent.VK_UP) {
-
-            icon_up.setEnabled(false);
-        } else if (location == KeyEvent.VK_DOWN) {
-            icon_down.setEnabled(false);
-        }
-    }
-    // </editor-fold>
-    /* Create and display the form */
-
-    /**
-     * Launch the application.
-     */
-    /*
-     public static void main(String[] args) {
-     EventQueue.invokeLater(new Runnable() {
-     public void run() {
-     try {
-     LiveStreamerWindow window = new LiveStreamerWindow();
-     window.frmLiveStreamerDisplay.setVisible(true);
-     } catch (Exception e) {
-     e.printStackTrace();
-     }
-     }
-     });
-     }*/
-//        java.awt.EventQueue.invokeLater(
-//                new Runnable() {
-//            @Override
-//            public void run() {
-//                new LiveStreamerWindow().setVisible(true);
-////                new MobileDirectionDisplay().setVisible(true);
-//            }
-//        });
-    
-    
-    
     class ImageTaker    
     {
         String dir_out;
         public ImageTaker(String dir_path){  
             dir_out = dir_path;
         }
-
+      
         private void captureImage(JPanel p_in) {
             BufferedImage im = new BufferedImage(p_in.getWidth(),p_in.getHeight(), BufferedImage.TYPE_INT_RGB);
             
@@ -410,7 +239,5 @@ public class LiveStreamerWindow2 extends JFrame
     private javax.swing.JPanel pan_center;
     private javax.swing.JPanel pan_root;
     // End of variables declaration//GEN-END:variables
-//    private void printn(String property) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+
 }
