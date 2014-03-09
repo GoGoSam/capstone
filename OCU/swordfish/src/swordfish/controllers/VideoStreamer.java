@@ -103,13 +103,13 @@ public class VideoStreamer {
             }
         });
     }
-    public void start() {
+    public void start() {        
+        
         pipe.setState(State.PLAYING);
         updateGUI();
     }
     public void start2() {
         pipe2.setState(State.PLAYING);
-//        updateGUI2();
     }
     public void pause() {
         pipe.setState(State.PAUSED);
@@ -118,19 +118,20 @@ public class VideoStreamer {
 
     public void disconnect() {
         //TODO: Figure out if I need to remove elements from pipeline
+           
+        if (ui == null){
+            pipe2.setState(State.NULL);
+            ui2.setVideoFlag(pipe2.isPlaying());          
+            return;
+        }
         pipe.setState(State.NULL);
         updateGUI();
     }
 
-    private void updateGUI() {
-       
-        if (ui == null)
-            return;
+    private void updateGUI() {       
+
         ui.setVideoFlag(pipe.isPlaying());             
         ui.set_button_states();
     }
-     
-//    private void updateGUI2() {
-//        ui2.setVideoFlag(pipe2.isPlaying());
-//    }
+
 }

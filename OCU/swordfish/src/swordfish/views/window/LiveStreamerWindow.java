@@ -1,48 +1,24 @@
 package swordfish.views.window;
 
-//import swordfish.ui_develop.*;
-//import swordfish.*;
-//import ij.IJ;
-//import java.awt.BorderLayout;
-//import java.awt.Canvas;
-import java.awt.Color;
-//import java.awt.Component;
+
 import java.awt.event.KeyListener;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Container.*;
-//import java.awt.Cursor;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FileDialog;
 import java.awt.Graphics2D;
 import java.awt.Point;
-//import java.awt.Font;
-//import java.awt.LayoutManager;
 import java.awt.event.KeyEvent.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-//import java.net.MalformedURLException;
-//import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import org.gstreamer.State;
-import org.gstreamer.swing.VideoPlayer;
-//import javax.swing.border.TitledBorder;
-//import swordfish.controllers.RobotController;
 import swordfish.views.dialog.LogIn;
-import swordfish.views.MobileDirectionDisplayKeyboard;
-//import swordfish.applications.LiveStreamer;
-import swordfish.controllers.RobotController;
 import swordfish.controllers.VideoStreamer;
 import java.awt.event.ComponentListener;
-import swordfish.views.window.LiveStreamerWindow2;
-
-//import java.io.*;
 
 /**
  *
@@ -51,15 +27,11 @@ import swordfish.views.window.LiveStreamerWindow2;
 public class LiveStreamerWindow extends JFrame
       implements KeyListener, WindowListener, ComponentListener {
 
-//    private JFrame frmLiveStreamerDisplay;
-    /**
-     * Creates new form LiveStreamerWindow
-     */
     int[] pointer = new int[1];
-    private JLabel icon_down;
-    private JLabel icon_left;
-    private JLabel icon_right;
-    private JLabel icon_up;
+//    private JLabel icon_down;
+//    private JLabel icon_left;
+//    private JLabel icon_right;
+//    private JLabel icon_up;
     boolean[] f_video_loaded = new boolean[1];
     private VideoStreamer vs;
     private LiveStreamerWindow2 lsw2;
@@ -76,8 +48,9 @@ public class LiveStreamerWindow extends JFrame
         it = new ImageTaker(image_out_path);
     }
 
-    public LiveStreamerWindow(LiveStreamerWindow2 lsw2) {
-        this.lsw2 = lsw2;           
+    @SuppressWarnings("LeakingThisInConstructor")
+    public LiveStreamerWindow(LiveStreamerWindow2 lsw2_in) {
+        lsw2 = lsw2_in;           
         
         initComponents();
         initContainer();
@@ -86,7 +59,7 @@ public class LiveStreamerWindow extends JFrame
         setResizable(false);
         it = new ImageTaker(image_out_path);
         
-        this.lsw2.setWindowLink(this);
+        lsw2.setWindowLink(this);
     }
 
     public void setVideoStreamer(VideoStreamer instance) {
@@ -105,9 +78,7 @@ public class LiveStreamerWindow extends JFrame
             cb_controller_connected.setSelected(true);
         } else {
             cb_controller_connected.setSelected(false);
-
         }
-
     }
 
     public void setVideoFlag(boolean state)
@@ -126,17 +97,16 @@ public class LiveStreamerWindow extends JFrame
 //        cb_controller_connected.setSelected(rc.isConnected());
     }
 
-    // <editor-fold defaultstate="collapsed" desc="initContainer">
+
     private void initContainer() {
 
         setResizable(false);
         addWindowListener(this);
-        addComponentListener(this);
-        
+        addComponentListener(this);       
         set_button_states();
+        
+        
     }
-
-    // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1473,7 +1443,7 @@ public class LiveStreamerWindow extends JFrame
         //        try {
 
         pointer[0] = 0;
-        ArrayList<JLabel> labs = new ArrayList<JLabel>();
+        ArrayList<JLabel> labs = new ArrayList<>();
         labs.add(l_inspector);
         labs.add(l_mid);
         labs.add(l_date);
@@ -1588,6 +1558,7 @@ public class LiveStreamerWindow extends JFrame
     public void windowDeactivated(WindowEvent e) {    }
 
     // </editor-fold>
+    
     // <editor-fold defaultstate="collapsed" desc="KeyListeners">
     @Override
     public void keyTyped(KeyEvent e) {
@@ -1597,6 +1568,7 @@ public class LiveStreamerWindow extends JFrame
      * Handle the key pressed event from the text field. The function checks if
      * event was triggered via arrow keys on keypad. If so, the corresponding
      * arrow icon will be enabled, i.e., will display its true color.
+     * @param e
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -1622,6 +1594,7 @@ public class LiveStreamerWindow extends JFrame
      * event was triggered via arrow keys on keypad. If so, the corresponding
      * arrow icon will be disabled, i.e., will lose its true color set when key
      * was pressed.
+     * @param e
      */
     @Override
     public void keyReleased(KeyEvent e) {
@@ -1642,10 +1615,10 @@ public class LiveStreamerWindow extends JFrame
         }*/
     }
     // </editor-fold>
+    
     /* Create and display the form */
     @Override
-    public void componentMoved(ComponentEvent e) {
-        
+    public void componentMoved(ComponentEvent e) {      
         if(cb_boundviews.isSelected())
         {
             Point pp = this.getLocationOnScreen();
@@ -1654,10 +1627,8 @@ public class LiveStreamerWindow extends JFrame
             pp.y = y;
             pp.x = x;
             lsw2.setLocation(pp);
-        }
-        
-    }
-    
+        }       
+    }   
     @Override
     public void componentResized(ComponentEvent e) {   }
     @Override
@@ -1665,6 +1636,7 @@ public class LiveStreamerWindow extends JFrame
     @Override
     public void componentHidden(ComponentEvent e) {  }
 
+    
     class ImageTaker    
     {
         String dir_out;
@@ -1685,10 +1657,7 @@ public class LiveStreamerWindow extends JFrame
             } catch (IOException ex) {
                 Logger.getLogger(LiveStreamerWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-        
-        
+        }            
     }
     private ArrayList<JButton> logger;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1810,7 +1779,5 @@ public class LiveStreamerWindow extends JFrame
     public javax.swing.JTextField tf_source2_ip;
     public javax.swing.JTextField tf_video_port;
     // End of variables declaration//GEN-END:variables
-//    private void printn(String property) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+
 }
