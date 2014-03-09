@@ -76,6 +76,10 @@ public class LiveStreamerWindow2 extends JFrame
         addComponentListener(this);
     }
 
+    public void disconnect()
+    {
+        vs.disconnect();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -143,6 +143,7 @@ public class LiveStreamerWindow extends JFrame
 //        this.pack();
         addWindowListener(this);
         addComponentListener(this);
+        
         set_button_states();
     }
 
@@ -1549,6 +1550,7 @@ public class LiveStreamerWindow extends JFrame
 
     private void mnu_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_exitActionPerformed
         // TODO add your handling code here:
+        lsw2.disconnect();
         vs.disconnect();
         System.exit(0);
     }//GEN-LAST:event_mnu_exitActionPerformed
@@ -1585,32 +1587,30 @@ public class LiveStreamerWindow extends JFrame
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
     @Override
-    public void windowClosing(WindowEvent e) {
+    public void windowClosing(WindowEvent e) {   
+            lsw2.disconnect();              
+            vs.disconnect();
+            
     }
 
     @Override
     public void windowClosed(WindowEvent e) {
+
     }
+    @Override
+    public void windowOpened(WindowEvent e) {    }
 
     @Override
-    public void windowOpened(WindowEvent e) {
-    }
+    public void windowIconified(WindowEvent e) {    }
 
     @Override
-    public void windowIconified(WindowEvent e) {
-    }
+    public void windowDeiconified(WindowEvent e) {    }
 
     @Override
-    public void windowDeiconified(WindowEvent e) {
-    }
+    public void windowActivated(WindowEvent e) {    }
 
     @Override
-    public void windowActivated(WindowEvent e) {
-    }
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {
-    }
+    public void windowDeactivated(WindowEvent e) {    }
 
 //    public void windowGainedFocus(WindowEvent e) {    }
 //    public void windowLostFocus(WindowEvent e) {
@@ -1677,12 +1677,6 @@ public class LiveStreamerWindow extends JFrame
     }
     // </editor-fold>
     /* Create and display the form */
-
-    @Override
-    public void componentResized(ComponentEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public void componentMoved(ComponentEvent e) {
         
@@ -1696,46 +1690,15 @@ public class LiveStreamerWindow extends JFrame
             lsw2.setLocation(pp);
         }
         
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
-    public void componentShown(ComponentEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    public void componentResized(ComponentEvent e) {   }
     @Override
-    public void componentHidden(ComponentEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void componentShown(ComponentEvent e) {   }
+    @Override
+    public void componentHidden(ComponentEvent e) {  }
 
-    /**
-     * Launch the application.
-     */
-    /*
-     public static void main(String[] args) {
-     EventQueue.invokeLater(new Runnable() {
-     public void run() {
-     try {
-     LiveStreamerWindow window = new LiveStreamerWindow();
-     window.frmLiveStreamerDisplay.setVisible(true);
-     } catch (Exception e) {
-     e.printStackTrace();
-     }
-     }
-     });
-     }*/
-//        java.awt.EventQueue.invokeLater(
-//                new Runnable() {
-//            @Override
-//            public void run() {
-//                new LiveStreamerWindow().setVisible(true);
-////                new MobileDirectionDisplay().setVisible(true);
-//            }
-//        });
-    
-    
-    
     class ImageTaker    
     {
         String dir_out;
