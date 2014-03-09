@@ -278,10 +278,10 @@ void serial_connection::handle_write(const boost::system::error_code& error,
     }
 }
 
-void serial_connection::read(unsigned char* data, int size)
+void serial_connection::read()
 {
     boost::asio::async_read(serial_port_,
-            boost::asio::buffer(data, size),
+            boost::asio::buffer(data_),
             boost::asio::transfer_at_least(1),
             boost::bind(&serial_connection::handle_read, shared_from_this(),
                 boost::asio::placeholders::error,
