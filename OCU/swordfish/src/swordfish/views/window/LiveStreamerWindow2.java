@@ -192,6 +192,7 @@ public class LiveStreamerWindow2 extends JFrame
     @Override
     public void windowClosing(WindowEvent e) {
         lsw.cb_sideview_on.setSelected(false);
+        vs.disconnect();
     }
 
     @Override

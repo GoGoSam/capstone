@@ -17,6 +17,7 @@ public class VideoStreamer {
     public void connect(final String addr, final int port, final LiveStreamerWindow2 lsw2) {
         /* init */
         ui2 = lsw2;
+        ui = null;
         String[] args = {};
         Gst.init("VideoStreamer", args);
         pipe2 = new Pipeline("VideoStreamer");
@@ -122,7 +123,10 @@ public class VideoStreamer {
     }
 
     private void updateGUI() {
-        ui.setVideoFlag(pipe.isPlaying());
+       
+        if (ui == null)
+            return;
+        ui.setVideoFlag(pipe.isPlaying());             
         ui.set_button_states();
     }
      
