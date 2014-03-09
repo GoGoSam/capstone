@@ -15,9 +15,9 @@ public class RobotController {
     private volatile PollerThread thread;
     private LiveStreamerWindow ui;
     private JInputXboxController controller;
-    private RobotControllerListener listener;
-    private TCPClient p1_client;
-    private TCPClient p2_client;
+    private final RobotControllerListener listener;
+    private final TCPClient p1_client;
+    private final TCPClient p2_client;
     //Packet mode
     private static final byte ADDRESS = (byte) 128;
     //Standard commands
@@ -49,7 +49,7 @@ public class RobotController {
     private int LT = 0;
     private int RT = 0;
 
-    public RobotController() {
+    public RobotController()  {
         p1_client = new TCPClient();
         p2_client = new TCPClient();
         listener = new RobotControllerListener();
@@ -358,6 +358,7 @@ public class RobotController {
             running = true;
         }
 
+        @Override
         public void run() {
             controller.poll();
             while (running) {

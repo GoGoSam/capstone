@@ -19,7 +19,7 @@ public class Swordfish {
      */
     public static void main(String[] args) {
         
-        boolean do_robot_controller = false,
+        boolean do_robot_controller = true,
                 do_video_streamer = true,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
@@ -40,6 +40,7 @@ public class Swordfish {
         lsw2.setVisible(true);
 
         if (do_video_streamer) {
+            
             vs2 = new VideoStreamer();
             vs2.connect(p2_addr, tuna_port, lsw2);
             lsw2.setVideoStreamer(vs2);
@@ -48,8 +49,11 @@ public class Swordfish {
               
         VideoStreamer vs;
         LiveStreamerWindow lsw = new LiveStreamerWindow(lsw2);
-        lsw.setVisible(true);
+        
+        
+        
         if (do_video_streamer) {
+            lsw.setVisible(true);
             vs = new VideoStreamer();
             vs.connect(p1_addr, tuna_port, lsw);
             lsw.setVideoStreamer(vs);
