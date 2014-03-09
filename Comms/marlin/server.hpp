@@ -48,6 +48,7 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
         typedef boost::shared_ptr<serial_connection> pointer;
         static pointer create(boost::asio::io_service&, const std::string);
         void write(unsigned char*, int);
+        void read(unsigned char*, int);
 
     private:
         serial_connection(boost::asio::io_service& io_service,
@@ -62,8 +63,7 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
                 boost::asio::serial_port_base::stop_bits::one
             );
         void open();
-        void read();
-        void handle_read(const boost::system::error_code&);
+        void handle_read(const boost::system::error_code&, std::size_t);
         void handle_write(const boost::system::error_code&, std::size_t);
 
         boost::asio::io_service& io_service_;
@@ -74,8 +74,6 @@ class serial_connection : public boost::enable_shared_from_this<serial_connectio
         const enum boost::asio::serial_port_base::flow_control::type flow_control_;
         const enum boost::asio::serial_port_base::parity::type parity_;
         const enum boost::asio::serial_port_base::stop_bits::type stop_bits_;
-        static const int max_length_ = 512;
-        char data_[max_length_];
 };
 
 #endif
