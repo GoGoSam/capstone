@@ -1,64 +1,16 @@
 package swordfish.controllers;
 
-import org.gstreamer.*;
-import org.gstreamer.swing.VideoComponent;
+import swordfish.views.window.LiveStreamerWindow;
 
 import javax.swing.*;
 import java.awt.*;
-import swordfish.views.window.LiveStreamerWindow;
-import swordfish.views.window.LiveStreamerWindow2;
-public class VideoStreamer {
+import org.gstreamer.*;
+import org.gstreamer.swing.VideoComponent;
 
+public class VideoStreamer {
     public static Pipeline pipe;
     private LiveStreamerWindow ui;
-    private LiveStreamerWindow2 ui2;
-    public static Pipeline pipe2;
-    
-    public void connect(final String addr, final int port, final LiveStreamerWindow2 lsw2) {
-        /* init */
-        ui2 = lsw2;
-        ui = null;
-        String[] args = {};
-        Gst.init("VideoStreamer", args);
-        pipe2 = new Pipeline("VideoStreamer");
 
-        /* create and run video streaming in seperate thread */
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                /* create elements */
-                Element source = ElementFactory.make("tcpclientsrc", "source");
-                Element depayloader = ElementFactory.make("gdpdepay", "depayloader");
-                Element decoder = ElementFactory.make("rtph264depay", "decoder");
-                Element parser = ElementFactory.make("ffdec_h264", "parser");
-                Element converter = ElementFactory.make("ffmpegcolorspace", "converter");
-                VideoComponent videoComponent = new VideoComponent();
-                Element sink = videoComponent.getElement();
-
-                /* set element properties */
-                source.set("host", addr);
-                source.set("port", port);
-
-                /* add elements to pipeline before linking them */
-                pipe2.addMany(source, depayloader, decoder, parser, converter, sink);
-
-                /* link elements */
-                Element.linkMany(source, depayloader, decoder, parser, converter, sink);
-
-                /* create a JFrame to display the video output */
-                JFrame frame = new JFrame("VideoStreamer2");
-                JPanel pan = new JPanel();
-                pan.add(videoComponent, BorderLayout.CENTER);
-                videoComponent.setPreferredSize(lsw2.p_mediaPlayer.getSize());
-                frame.add(pan);
-                frame.pack();
-                lsw2.p_mediaPlayer.add(frame.getContentPane());
-
-                /* start the pipeline */
-                start2();
-            }
-        });
-    }
     public void connect(final String addr, final int port, final LiveStreamerWindow lsw) {
         /* init */
         ui = lsw;
@@ -93,45 +45,34 @@ public class VideoStreamer {
                 JFrame frame = new JFrame("VideoStreamer");
                 JPanel pan = new JPanel();
                 pan.add(videoComponent, BorderLayout.CENTER);
-                videoComponent.setPreferredSize(lsw.p_mediaPlayer.getSize());
+                videoComponent.setPreferredSize(ui.p_mediaPlayer.getSize());
                 frame.add(pan);
                 frame.pack();
-                lsw.p_mediaPlayer.add(frame.getContentPane());
+                ui.p_mediaPlayer.add(frame.getContentPane());
 
                 /* start the pipeline */
                 start();
             }
         });
     }
+
     public void start() {        
-        
         pipe.setState(State.PLAYING);
         updateGUI();
     }
-    public void start2() {
-        pipe2.setState(State.PLAYING);
-    }
+
     public void pause() {
         pipe.setState(State.PAUSED);
         updateGUI();
     }
 
     public void disconnect() {
-        //TODO: Figure out if I need to remove elements from pipeline
-           
-        if (ui == null){
-            pipe2.setState(State.NULL);
-            ui2.setVideoFlag(pipe2.isPlaying());          
-            return;
-        }
         pipe.setState(State.NULL);
         updateGUI();
     }
 
     private void updateGUI() {       
-
-        ui.setVideoFlag(pipe.isPlaying());             
+        ui.setVideoFlag(pipe.isPlaying());
         ui.set_button_states();
     }
-
 }

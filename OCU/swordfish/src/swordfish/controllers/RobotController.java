@@ -49,7 +49,7 @@ public class RobotController {
     private int LT = 0;
     private int RT = 0;
 
-    public RobotController()  {
+    public RobotController() {
         p1_client = new TCPClient();
         p2_client = new TCPClient();
         listener = new RobotControllerListener();

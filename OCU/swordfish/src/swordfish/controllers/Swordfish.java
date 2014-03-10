@@ -32,34 +32,24 @@ public class Swordfish {
         int marlin_port = 5555;
         int tuna_port = 6789;
 
-
-            
-        VideoStreamer vs2;
-        RobotController rc;
-        LiveStreamerWindow2 lsw2 = new LiveStreamerWindow2();
-        lsw2.setVisible(true);
-
-        if (do_video_streamer) {
-            
-            vs2 = new VideoStreamer();
-            vs2.connect(p2_addr, tuna_port, lsw2);
-            lsw2.setVideoStreamer(vs2);
-        }
-        
-              
         VideoStreamer vs;
+        VideoStreamer vs2;
+        LiveStreamerWindow2 lsw2 = new LiveStreamerWindow2();
         LiveStreamerWindow lsw = new LiveStreamerWindow(lsw2);
-        
-        
-        
+        RobotController rc;
+
         if (do_video_streamer) {
             lsw.setVisible(true);
+            lsw2.setVisible(true);
             vs = new VideoStreamer();
             vs.connect(p1_addr, tuna_port, lsw);
             lsw.setVideoStreamer(vs);
+            vs2 = new VideoStreamer();
+            //vs2.connect(p2_addr, tuna_port, lsw2);
+            //lsw2.setVideoStreamer(vs2);
+            lsw.setMediaWindows();
         }
-        lsw.setMediaWindows();
-          
+
         if (do_robot_controller) {
             rc = new RobotController();
             rc.connect(p2_addr, p2_addr, marlin_port, lsw);
@@ -69,10 +59,12 @@ public class Swordfish {
             XBox360_DirectionDisplay xboxDD = new XBox360_DirectionDisplay();
             xboxDD.setVisible(true);
         }
+
         if (do_mobile_dis_keyboard) {
             MobileDirectionDisplayKeyboard mddk = new MobileDirectionDisplayKeyboard();
             mddk.setVisible(true);
         }
+
         if (do_image_processor) {
             ImageAnalyzerWindow iaw = new ImageAnalyzerWindow();
             iaw.setVisible(true);
