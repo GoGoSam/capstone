@@ -25,7 +25,7 @@ import java.awt.event.ComponentListener;
  * @author jrob
  */
 public class LiveStreamerWindow extends JFrame
-      implements KeyListener, WindowListener, ComponentListener {
+      implements KeyListener, WindowListener, ComponentListener, streamerInterface {
 
     int[] pointer = new int[1];
 //    private JLabel icon_down;
@@ -81,11 +81,13 @@ public class LiveStreamerWindow extends JFrame
         }
     }
 
+    @Override
     public void setVideoFlag(boolean state)
     { // used for component states to be set
         f_video_loaded[0] = state;
         
     }
+    @Override
     public void set_button_states() {
 //        b_vid_ff.setEnabled(f_video_loaded[0]);
         b_vid_mute.setEnabled(f_video_loaded[0]);
@@ -96,7 +98,10 @@ public class LiveStreamerWindow extends JFrame
         b_capture_moment.setEnabled(f_video_loaded[0]);
 //        cb_controller_connected.setSelected(rc.isConnected());
     }
-
+    @Override
+    public JPanel getMediaPlayer() {
+        return p_mediaPlayer;
+    }
 
     private void initContainer() {
 

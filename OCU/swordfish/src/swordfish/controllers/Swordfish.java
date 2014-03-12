@@ -6,7 +6,6 @@ import swordfish.views.window.ImageAnalyzerWindow;
 import swordfish.views.window.LiveStreamerWindow;
 import swordfish.views.window.LiveStreamerWindow2;
 
-
 /**
  *
  * @author Sam Coe and Joe Robinson
@@ -20,7 +19,7 @@ public class Swordfish {
     public static void main(String[] args) {
         
         boolean do_robot_controller = true,
-                do_video_streamer = true,
+                do_video_streamer = false,
                 do_xbox_dir_diplay = false,
                 do_mobile_dis_keyboard = false,
                 do_image_processor = false;
@@ -34,21 +33,21 @@ public class Swordfish {
 
         VideoStreamer vs;
         VideoStreamer vs2;
-        LiveStreamerWindow2 lsw2 = new LiveStreamerWindow2();
-        LiveStreamerWindow lsw = new LiveStreamerWindow(lsw2);
+        LiveStreamerWindow2 lsw2 =  new LiveStreamerWindow2();
+        lsw2.setVisible(true);
+        LiveStreamerWindow lsw = new LiveStreamerWindow(lsw2);;
         RobotController rc;
 
         if (do_video_streamer) {
+            vs2 = new VideoStreamer();
+            vs2.connect(p2_addr, tuna_port, lsw2);
+            lsw2.setVideoStreamer(vs2);
             lsw.setVisible(true);
-            lsw2.setVisible(true);
             vs = new VideoStreamer();
             vs.connect(p1_addr, tuna_port, lsw);
             lsw.setVideoStreamer(vs);
-            vs2 = new VideoStreamer();
-            //vs2.connect(p2_addr, tuna_port, lsw2);
-            //lsw2.setVideoStreamer(vs2);
             lsw.setMediaWindows();
-        }
+       }
 
         if (do_robot_controller) {
             rc = new RobotController();

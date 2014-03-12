@@ -1,17 +1,16 @@
 package swordfish.controllers;
 
-import swordfish.views.window.LiveStreamerWindow;
-
 import javax.swing.*;
 import java.awt.*;
 import org.gstreamer.*;
 import org.gstreamer.swing.VideoComponent;
+import swordfish.views.window.streamerInterface;
 
 public class VideoStreamer {
     public static Pipeline pipe;
-    private LiveStreamerWindow ui;
+    private streamerInterface ui;
 
-    public void connect(final String addr, final int port, final LiveStreamerWindow lsw) {
+    public void connect(final String addr, final int port, final streamerInterface lsw) {
         /* init */
         ui = lsw;
         String[] args = {};
@@ -45,10 +44,10 @@ public class VideoStreamer {
                 JFrame frame = new JFrame("VideoStreamer");
                 JPanel pan = new JPanel();
                 pan.add(videoComponent, BorderLayout.CENTER);
-                videoComponent.setPreferredSize(ui.p_mediaPlayer.getSize());
+                videoComponent.setPreferredSize(ui.getMediaPlayer().getSize());
                 frame.add(pan);
                 frame.pack();
-                ui.p_mediaPlayer.add(frame.getContentPane());
+                ui.getMediaPlayer().add(frame.getContentPane());
 
                 /* start the pipeline */
                 start();

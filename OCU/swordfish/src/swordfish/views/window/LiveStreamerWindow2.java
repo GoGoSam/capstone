@@ -20,7 +20,7 @@ import swordfish.controllers.VideoStreamer;
  * @author jrob
  */
 public class LiveStreamerWindow2 extends JFrame
-      implements WindowListener {
+      implements WindowListener, streamerInterface {
 
 
     int[] pointer = new int[1];
@@ -44,6 +44,7 @@ public class LiveStreamerWindow2 extends JFrame
         vs = instance;
     }
 
+    @Override
     public void setVideoFlag(boolean state)
     { // used for component states to be set
         f_video_loaded[0] = state;      
@@ -59,7 +60,18 @@ public class LiveStreamerWindow2 extends JFrame
     public void disconnect() {
         vs.disconnect();
     }
+ 
+    @Override
+    public void set_button_states() {
 
+    }
+    @Override
+    public JPanel getMediaPlayer() {
+        return p_mediaPlayer;
+    }
+    
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -205,9 +217,7 @@ public class LiveStreamerWindow2 extends JFrame
             } catch (IOException ex) {
                 Logger.getLogger(LiveStreamerWindow2.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        
-        
+        }                 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

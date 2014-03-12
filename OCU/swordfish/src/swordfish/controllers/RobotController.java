@@ -81,8 +81,6 @@ public class RobotController {
     }
 
     private void buildCommand(Button button, boolean pressed) {
-        //TODO: Determine if this needs to be done asynch
-        //TODO: Implement this function
         switch (button) {
             case up:
                 break;
@@ -133,7 +131,6 @@ public class RobotController {
     }
 
     private void buildCommand(Axis axis, float state) {
-        //TODO: Determine if this needs to be done asynch
         RoboReq.Builder req = RoboReq.newBuilder();
 
         switch (axis) {
@@ -321,7 +318,6 @@ public class RobotController {
     }
 
     private void sendCommand(RoboReq req, TCPClient client) {
-        //TODO: Determine if this needs to be done asynch
         client.send(req);
     }
 
@@ -369,7 +365,6 @@ public class RobotController {
     }
 
     private class RobotControllerListener extends XboxController.Listener {
-        //TODO: Determine if these functions get called in the poller thread
 
         @Override
         public void connected() {
