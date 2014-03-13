@@ -17,43 +17,63 @@ public class Swordfish {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+        boolean[] do_video_streamer = new boolean[2];
         
+        
+        
+
         boolean do_robot_controller = true,
-                do_video_streamer = false,
-                do_xbox_dir_diplay = false,
-                do_mobile_dis_keyboard = false,
-                do_image_processor = false;
+              do_xbox_dir_diplay = false,
+              do_mobile_dis_keyboard = false,
+              do_image_processor = false;
 
         //Pi 1 controls driving
         String p1_addr = "192.168.1.9";
+        do_video_streamer[0] = true;
+        
+        
         //Pi 2 controls servos and lift system
         String p2_addr = "192.168.1.69";
+        do_video_streamer[1] = false;
+        
+        
         int marlin_port = 5555;
         int tuna_port = 6789;
 
-        VideoStreamer vs;
-        VideoStreamer vs2;
-        LiveStreamerWindow2 lsw2 =  new LiveStreamerWindow2();
-        lsw2.setVisible(true);
-        LiveStreamerWindow lsw = new LiveStreamerWindow(lsw2);;
+        VideoStreamer vs, vs2;
         RobotController rc;
+        
+        
+        LiveStreamerWindow lsw = new LiveStreamerWindow(); 
+        LiveStreamerWindow2 lsw2;            
+              
+        if (do_video_streamer[1]) {
+            // both video streams  
+             lsw2 = new LiveStreamerWindow2();
+             lsw = new LiveStreamerWindow(lsw2);
+             lsw.setVisible(true);
+             lsw2.setVisible(true);
+             vs = new VideoStreamer();
+             vs.connect(p1_addr, tuna_port, lsw);
+             lsw.setVideoStreamer(vs);
+             vs2 = new VideoStreamer();
+             lsw.setMediaWindows();
 
-        if (do_video_streamer) {
-            vs2 = new VideoStreamer();
-            vs2.connect(p2_addr, tuna_port, lsw2);
-            lsw2.setVideoStreamer(vs2);
+        } else {
+            // one video streams  
             lsw.setVisible(true);
             vs = new VideoStreamer();
-            vs.connect(p1_addr, tuna_port, lsw);
+            vs.connect(p2_addr, tuna_port, lsw);
             lsw.setVideoStreamer(vs);
-            lsw.setMediaWindows();
-       }
-
+        }
+             
+        
         if (do_robot_controller) {
             rc = new RobotController();
             rc.connect(p2_addr, p2_addr, marlin_port, lsw);
         }
-        
+
         if (do_xbox_dir_diplay) {
             XBox360_DirectionDisplay xboxDD = new XBox360_DirectionDisplay();
             xboxDD.setVisible(true);

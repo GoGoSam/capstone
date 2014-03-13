@@ -33,9 +33,12 @@ public class LiveStreamerWindow extends JFrame
 //    private JLabel icon_right;
 //    private JLabel icon_up;
     boolean[] f_video_loaded = new boolean[1];
+    boolean[] f_mstream2_on = new boolean[1];
     private VideoStreamer vs;
     private LiveStreamerWindow2 lsw2;
     ImageTaker it;
+    
+    
     String icon_path = System.getProperty("user.dir") + "/resources/";
     String image_out_path = System.getProperty("user.home") + "/Desktop/";
     
@@ -44,6 +47,7 @@ public class LiveStreamerWindow extends JFrame
         initComponents();
         initContainer();
         f_video_loaded[0] = false;
+        f_mstream2_on[0] = false;
         setResizable(false);
         it = new ImageTaker(image_out_path);
     }
@@ -56,17 +60,28 @@ public class LiveStreamerWindow extends JFrame
         initContainer();
 
         f_video_loaded[0] = false;
+        f_mstream2_on[0] = true;
         setResizable(false);
         it = new ImageTaker(image_out_path);
-        
+        addComponentListener(this);
         lsw2.setWindowLink(this);
+    }
+      
+    public void linkCameras(LiveStreamerWindow2 lsw2_in) {
+              
+        lsw2 = lsw2_in;              
+        lsw2.setWindowLink(this);
+        addComponentListener(this);  
+        f_mstream2_on[0] = true;
     }
 
     public void setVideoStreamer(VideoStreamer instance) {
         vs = instance;
     }
     public void setMediaWindows()
-    {
+    {        
+        if(!f_mstream2_on[0]) return;
+        
         Point pp = this.getLocationOnScreen();
         int x = pp.x;
         int y = pp.y + this.getWidth();
@@ -106,8 +121,7 @@ public class LiveStreamerWindow extends JFrame
     private void initContainer() {
 
         setResizable(false);
-        addWindowListener(this);
-        addComponentListener(this);       
+        addWindowListener(this);     
         set_button_states();
         
         
@@ -1501,13 +1515,18 @@ public class LiveStreamerWindow extends JFrame
 
     private void mnu_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnu_exitActionPerformed
         // TODO add your handling code here:
-        lsw2.disconnect();
+        if (f_mstream2_on[0])
+            lsw2.disconnect();
+        
         vs.disconnect();
         System.exit(0);
     }//GEN-LAST:event_mnu_exitActionPerformed
 
     private void cb_boundviewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_boundviewsActionPerformed
-        // TODO add your handling code here:             
+        // TODO add your handling code here: 
+         if (!f_mstream2_on[0])
+                return;
+         
         if (cb_boundviews.isSelected() && cb_sideview_on.isSelected()) 
         {
                        
@@ -1516,7 +1535,8 @@ public class LiveStreamerWindow extends JFrame
             int y = pp.y;
             pp.y = y;
             pp.x = x;
-            lsw2.setLocation(pp);
+           
+            lsw2.setLocation(pp);          
             lsw2.setVisible(true);
         }
         
@@ -1525,6 +1545,10 @@ public class LiveStreamerWindow extends JFrame
 
     private void cb_sideview_onActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_sideview_onActionPerformed
         // TODO add your handling code here:
+        
+        if (!f_mstream2_on[0])
+            return;
+        
         if (cb_sideview_on.isSelected())
         {
             lsw2.setVisible(true);
@@ -1538,8 +1562,11 @@ public class LiveStreamerWindow extends JFrame
     
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
     @Override
-    public void windowClosing(WindowEvent e) {   
-            lsw2.disconnect();
+    public void windowClosing(WindowEvent e) {  
+        
+         if(f_mstream2_on[0])
+                lsw2.disconnect();
+            
             vs.disconnect();           
     }
 
