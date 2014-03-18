@@ -19,9 +19,6 @@ public class Swordfish {
     public static void main(String[] args) {
 
         boolean[] do_video_streamer = new boolean[2];
-        
-        
-        
 
         boolean do_robot_controller = true,
               do_xbox_dir_diplay = false,
@@ -29,22 +26,19 @@ public class Swordfish {
               do_image_processor = false;
 
         //Pi 1 controls driving
-        String p1_addr = "192.168.1.9";
+        String p1_addr = "192.168.1.6";
         do_video_streamer[0] = true;
-        
-        
+
         //Pi 2 controls servos and lift system
         String p2_addr = "192.168.1.69";
         do_video_streamer[1] = false;
-        
-        
+
         int marlin_port = 5555;
         int tuna_port = 6789;
 
         VideoStreamer vs, vs2;
         RobotController rc;
-        
-        
+
         LiveStreamerWindow lsw = new LiveStreamerWindow(); 
         LiveStreamerWindow2 lsw2;            
               
@@ -54,11 +48,17 @@ public class Swordfish {
              lsw = new LiveStreamerWindow(lsw2);
              lsw.setVisible(true);
              lsw2.setVisible(true);
+
              vs = new VideoStreamer();
              vs.connect(p1_addr, tuna_port, lsw);
              lsw.setVideoStreamer(vs);
+             
              vs2 = new VideoStreamer();
-             lsw.setMediaWindows();
+             vs2.connect(p2_addr, tuna_port, lsw2);
+             lsw2.setVideoStreamer(vs2);
+
+             if(!lsw.setMediaWindows())
+                 System.out.println("Error Linking Media Steams!");
 
         } else {
             // one video streams  
@@ -68,10 +68,9 @@ public class Swordfish {
             lsw.setVideoStreamer(vs);
         }
              
-        
         if (do_robot_controller) {
             rc = new RobotController();
-            rc.connect(p2_addr, p2_addr, marlin_port, lsw);
+            rc.connect(p1_addr, p2_addr, marlin_port, lsw);
         }
 
         if (do_xbox_dir_diplay) {

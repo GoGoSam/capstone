@@ -74,18 +74,22 @@ public class LiveStreamerWindow extends JFrame
         addComponentListener(this);  
         f_mstream2_on[0] = true;
     }
-
     public void setVideoStreamer(VideoStreamer instance) {
         vs = instance;
     }
-    public void setMediaWindows()
+    public void setVideoStreamer(VideoStreamer instance,VideoStreamer instance2) {
+        vs = instance;
+        lsw2.setVideoStreamer(instance2);
+    }
+    public boolean setMediaWindows()
     {        
-        if(!f_mstream2_on[0]) return;
+        if(!f_mstream2_on[0]) return false;
         
         Point pp = this.getLocationOnScreen();
         int x = pp.x;
         int y = pp.y + this.getWidth();
         lsw2.setLocation(x,y);
+        return true;
         
     }
     public void checkCC(boolean checkit) {
@@ -1564,8 +1568,8 @@ public class LiveStreamerWindow extends JFrame
     @Override
     public void windowClosing(WindowEvent e) {  
         
-         if(f_mstream2_on[0])
-                lsw2.disconnect();
+//         if(f_mstream2_on[0])
+//                lsw2.disconnect();
             
             vs.disconnect();           
     }

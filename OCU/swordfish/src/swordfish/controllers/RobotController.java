@@ -358,8 +358,12 @@ public class RobotController {
         public void run() {
             controller.poll();
             while (running) {
-                Thread.yield();
                 controller.poll();
+                try {
+                    Thread.sleep(50);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
