@@ -42,9 +42,9 @@ int main(int argc, const char* argv[])
             lift_serial = serial_connection::create(io_service, d);
         } else {
             const char* d0 = "/dev/ttyUSB0";
-            const char* d1 = "/dev/ttyUSB1";
+            //const char* d1 = "/dev/ttyUSB1";
             base_serial = serial_connection::create(io_service, d0);
-            sens_serial = serial_connection::create(io_service, d1);
+            //sens_serial = serial_connection::create(io_service, d1);
         }
         std::cout << "Serving on port " << port << std::endl;
         std::cout << "Controlling " << component << std::endl;
@@ -205,7 +205,6 @@ void session::process_request(const RoboComms::RoboReq& req)
             } else {
                 std::cout << "Request for wrong component" << std::endl;
             }
-            //TODO: Read response from serial port and send it back to host
             break;
         default:
             //Shouldn't ever get here
