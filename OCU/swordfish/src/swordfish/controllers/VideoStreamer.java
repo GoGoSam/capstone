@@ -55,7 +55,8 @@ public class VideoStreamer {
         });
     }
 
-    public void start() {        
+    public void start() {
+        pipe.setState(State.READY);
         pipe.setState(State.PLAYING);
         updateGUI();
     }

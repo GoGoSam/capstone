@@ -18,23 +18,20 @@ public class Swordfish {
      */
     public static void main(String[] args) {
 
-        boolean[] do_video_streamer = new boolean[2];
-
-        boolean do_robot_controller = true,
-              do_xbox_dir_diplay = false,
-              do_mobile_dis_keyboard = false,
-              do_image_processor = false;
+        boolean do_base_video = true,
+                do_lift_video = false,
+                do_robot_controller = true,
+                do_xbox_dir_diplay = false,
+                do_mobile_dis_keyboard = false,
+                do_image_processor = false;
 
         //Pi 1 controls driving
-        String p1_addr = "192.168.1.6";
-        do_video_streamer[0] = true;
-
+        String base_addr = "192.168.1.6";
         //Pi 2 controls servos and lift system
-        String p2_addr = "192.168.1.69";
-        do_video_streamer[1] = false;
+        String lift_addr = "192.168.1.69";
 
-        int marlin_port = 5555;
-        int tuna_port = 6789;
+        int control_port = 5555;
+        int video_port = 6789;
 
         VideoStreamer vs, vs2;
         RobotController rc;
@@ -42,35 +39,41 @@ public class Swordfish {
         LiveStreamerWindow lsw = new LiveStreamerWindow(); 
         LiveStreamerWindow2 lsw2;            
               
-        if (do_video_streamer[1]) {
-            // both video streams  
-             lsw2 = new LiveStreamerWindow2();
-             lsw = new LiveStreamerWindow(lsw2);
-             lsw.setVisible(true);
-             lsw2.setVisible(true);
+        if (do_lift_video && do_base_video) {
+            // both video streams
+            lsw2 = new LiveStreamerWindow2();
+            lsw = new LiveStreamerWindow(lsw2);
+            lsw.setVisible(true);
+            lsw2.setVisible(true);
 
-             vs = new VideoStreamer();
-             vs.connect(p1_addr, tuna_port, lsw);
-             lsw.setVideoStreamer(vs);
-             
-             vs2 = new VideoStreamer();
-             vs2.connect(p2_addr, tuna_port, lsw2);
-             lsw2.setVideoStreamer(vs2);
+            vs = new VideoStreamer();
+            vs.connect(base_addr, video_port, lsw);
+            lsw.setVideoStreamer(vs);
 
-             if(!lsw.setMediaWindows())
-                 System.out.println("Error Linking Media Steams!");
+            vs2 = new VideoStreamer();
+            vs2.connect(lift_addr, video_port, lsw2);
+            lsw2.setVideoStreamer(vs2);
 
-        } else {
-            // one video streams  
+            if (!lsw.setMediaWindows()) {
+                System.out.println("Error Linking Media Steams!");
+            }
+        } else if (do_base_video) {
+            // one video stream
             lsw.setVisible(true);
             vs = new VideoStreamer();
-            vs.connect(p2_addr, tuna_port, lsw);
+            vs.connect(base_addr, video_port, lsw);
+            lsw.setVideoStreamer(vs);
+        } else if (do_lift_video) {
+            // one video stream
+            lsw.setVisible(true);
+            vs = new VideoStreamer();
+            vs.connect(lift_addr, video_port, lsw);
             lsw.setVideoStreamer(vs);
         }
              
         if (do_robot_controller) {
             rc = new RobotController();
-            rc.connect(p1_addr, p2_addr, marlin_port, lsw);
+            rc.connect(base_addr, lift_addr, control_port, lsw);
         }
 
         if (do_xbox_dir_diplay) {
