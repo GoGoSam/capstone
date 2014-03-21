@@ -7,7 +7,9 @@ framerate=25
 bitrate=2500000
 output="-"
 ip=$(hostname -I)
-port=6789
+vport=6789
+cport=5555
+component="lift"
 
 raspivid \
 -t ${timeout} \
@@ -16,4 +18,6 @@ raspivid \
 -fps ${framerate} \
 -b ${bitrate} \
 -o ${output} | \
-./tuna ${ip} ${port}
+./tuna ${ip} ${vport} &
+
+./marlin/marlin ${cport} ${component}
