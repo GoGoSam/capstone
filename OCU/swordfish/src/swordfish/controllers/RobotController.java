@@ -66,7 +66,7 @@ public class RobotController {
         if (!p2_client.connect(p2_addr, port)) {
             System.out.format("Unable to Connect to %s at %d\n", p2_addr, port);
         } else {
-            ui.tf_source2_ip.setText(p2_addr);
+            ui.tf_base_video_port.setText(p2_addr);
             ui.tf_controller_port.setText(Integer.toString(port));
         }
         List<XboxController> controllerList = XboxController.getAll();
