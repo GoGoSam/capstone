@@ -37,12 +37,12 @@ int main(int argc, const char* argv[])
         const char* component = argv[2];
         if(strcmp(component, "lift") == 0) {
             const char* s = "/dev/servoblaster";
-            const char* d = "/dev/ttyUSB0";
+            const char* d = "/dev/ttyAMA0";
             servos.open(s, std::ofstream::out | std::ofstream::trunc);
             lift_serial = serial_connection::create(io_service, d);
         } else {
-            const char* d0 = "/dev/ttyUSB0";
-            //const char* d1 = "/dev/ttyUSB1";
+            const char* d0 = "/dev/ttyAMA0";
+            //const char* d1 = "/dev/ttyUSB0";
             base_serial = serial_connection::create(io_service, d0);
             //sens_serial = serial_connection::create(io_service, d1);
         }
