@@ -360,7 +360,9 @@ public class RobotController {
             while (running) {
                 controller.poll();
                 try {
-                    Thread.sleep(50);
+
+                    Thread.yield();
+                    //Thread.sleep(30);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
