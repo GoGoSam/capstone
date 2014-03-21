@@ -255,7 +255,6 @@ public class RobotController {
                     rState = 0;
                 }
                 //If RX or RY already is equal to rState then no need send another cmd
-                //TODO: This may need to be modified to continue to send commands while controller is being held in a direction
                 if (axis == Axis.rightStickX && RX != rState) {
                     RX = rState;
                 } else if (axis == Axis.rightStickY && RY != rState) {
@@ -337,7 +336,6 @@ public class RobotController {
 
     private void updateUI(Axis axis, float state) {
         //TODO: Implement this function
-        //ui.set_button_states();
     }
 
     private void updateUI(Button button, boolean pressed) {
