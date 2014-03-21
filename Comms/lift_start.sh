@@ -18,6 +18,6 @@ raspivid \
 -fps ${framerate} \
 -b ${bitrate} \
 -o ${output} | \
-./tuna ${ip} ${vport} &
+./tuna/tuna ${ip} ${vport} &
 
 ./marlin/marlin ${cport} ${component}
