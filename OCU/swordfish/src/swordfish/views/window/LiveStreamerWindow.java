@@ -537,6 +537,7 @@ public class LiveStreamerWindow extends JFrame
         pan_media_control.setPreferredSize(new java.awt.Dimension(121, 145));
 
         b_capture_moment.setBackground(new java.awt.Color(153, 255, 255));
+        b_capture_moment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swordfish/resources/media_control_icons/camerabutton.png"))); // NOI18N
         b_capture_moment.setToolTipText("Take Picture");
         b_capture_moment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -544,6 +545,7 @@ public class LiveStreamerWindow extends JFrame
             }
         });
 
+        b_vid_play.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swordfish/resources/media_control_icons/playbutton.png"))); // NOI18N
         b_vid_play.setToolTipText("Play Media Stream");
         b_vid_play.setFocusable(false);
         b_vid_play.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -557,6 +559,7 @@ public class LiveStreamerWindow extends JFrame
             }
         });
 
+        b_vid_pause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swordfish/resources/media_control_icons/pausebutton.png"))); // NOI18N
         b_vid_pause.setToolTipText("Pause Media Stream");
         b_vid_pause.setFocusable(false);
         b_vid_pause.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -570,6 +573,7 @@ public class LiveStreamerWindow extends JFrame
             }
         });
 
+        b_vid_stop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swordfish/resources/media_control_icons/stopbutton.png"))); // NOI18N
         b_vid_stop.setToolTipText("Stop Media Streaming");
         b_vid_stop.setFocusable(false);
         b_vid_stop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -584,6 +588,7 @@ public class LiveStreamerWindow extends JFrame
         });
 
         b_set_flag.setFont(new java.awt.Font("Andale Mono", 0, 13)); // NOI18N
+        b_set_flag.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swordfish/resources/flag.jpg"))); // NOI18N
         b_set_flag.setToolTipText("Flag Current Location");
         b_set_flag.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
