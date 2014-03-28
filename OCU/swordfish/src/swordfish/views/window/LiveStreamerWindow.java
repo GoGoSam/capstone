@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.Container.*;
-import java.awt.FileDialog;
+//import java.awt.FileDialog;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.KeyEvent.*;
@@ -176,6 +176,8 @@ public class LiveStreamerWindow extends JFrame
         jComboBox1 = new javax.swing.JComboBox();
         cb_boundviews = new javax.swing.JCheckBox();
         cb_sideview_on = new javax.swing.JCheckBox();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
         pan_center = new javax.swing.JPanel();
         p_mediaPlayer = new javax.swing.JPanel();
         pan_media_control = new javax.swing.JPanel();
@@ -459,7 +461,7 @@ public class LiveStreamerWindow extends JFrame
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Base View", "Lift View", "Both Views" }));
 
         cb_boundviews.setFont(new java.awt.Font("Andale Mono", 0, 11)); // NOI18N
         cb_boundviews.setSelected(true);
@@ -479,25 +481,44 @@ public class LiveStreamerWindow extends JFrame
             }
         });
 
+        jToggleButton2.setText("Acoustic Sensing");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+
+        jCheckBox1.setText("Lights on");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pan_rightLayout = new javax.swing.GroupLayout(pan_right);
         pan_right.setLayout(pan_rightLayout);
         pan_rightLayout.setHorizontalGroup(
             pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_rightLayout.createSequentialGroup()
                 .addGroup(pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pan_robo_tracker, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pan_robo_tracker, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(pan_rightLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jToggleButton2)
+                            .addComponent(cb_boundviews)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_sideview_on)
                             .addGroup(pan_rightLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
                                 .addComponent(l_controller_connected)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cb_controller_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_boundviews)
-                            .addComponent(cb_sideview_on))))
+                                .addComponent(cb_controller_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(pan_rightLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBox1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pan_rightLayout.setVerticalGroup(
             pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,7 +534,11 @@ public class LiveStreamerWindow extends JFrame
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cb_boundviews)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCheckBox1)
+                .addContainerGap())
         );
 
         pan_robo_tracker.getAccessibleContext().setAccessibleName("I-90 East");
@@ -942,22 +967,25 @@ public class LiveStreamerWindow extends JFrame
         pan_rootLayout.setHorizontalGroup(
             pan_rootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_rootLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pan_systam_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pan_center, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pan_right, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pan_rootLayout.setVerticalGroup(
             pan_rootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_rootLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pan_rootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pan_center, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pan_systam_status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pan_right, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pan_rootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pan_right, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pan_rootLayout.createSequentialGroup()
+                        .addGroup(pan_rootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pan_center, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pan_systam_status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1286,6 +1314,14 @@ public class LiveStreamerWindow extends JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_video_port1ActionPerformed
 
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
     @Override
@@ -1446,6 +1482,7 @@ public class LiveStreamerWindow extends JFrame
     public javax.swing.JLabel icon_dArrow;
     public javax.swing.JLabel icon_lArrow1;
     public javax.swing.JLabel icon_rArrow1;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -1469,6 +1506,7 @@ public class LiveStreamerWindow extends JFrame
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JLabel l_battery_per;
     private javax.swing.JLabel l_button_sig;
     private javax.swing.JLabel l_cam_sig;
