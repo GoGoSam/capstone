@@ -14,30 +14,27 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import swordfish.controllers.VideoStreamer;
 
-
 /**
  *
  * @author jrob
  */
 public class LiveStreamerWindow2 extends JFrame
-      implements WindowListener, streamerInterface {
-
+        implements WindowListener, streamerInterface {
 
     int[] pointer = new int[1];
-
     boolean[] f_video_loaded = new boolean[1];
     private VideoStreamer vs;
     ImageTaker it;
     LiveStreamerWindow lsw;
-
     String icon_path = System.getProperty("user.dir") + "/resources/";
     String image_out_path = System.getProperty("user.home") + "/Desktop/";
+
     public LiveStreamerWindow2() {
         initComponents();
         initContainer();
         f_video_loaded[0] = false;
         setResizable(false);
-        it = new ImageTaker(image_out_path);              
+        it = new ImageTaker(image_out_path);
     }
 
     public void setVideoStreamer(VideoStreamer instance) {
@@ -45,11 +42,9 @@ public class LiveStreamerWindow2 extends JFrame
     }
 
     @Override
-    public void setVideoFlag(boolean state)
-    { // used for component states to be set
-        f_video_loaded[0] = state;      
+    public void setVideoFlag(boolean state) { // used for component states to be set
+        f_video_loaded[0] = state;
     }
-
 
     private void initContainer() {
         setResizable(false);
@@ -60,18 +55,15 @@ public class LiveStreamerWindow2 extends JFrame
     public void disconnect() {
         vs.disconnect();
     }
- 
+
     @Override
     public void set_button_states() {
-
     }
+
     @Override
     public JPanel getMediaPlayer() {
         return p_mediaPlayer;
     }
-    
-    
-    
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -103,7 +95,7 @@ public class LiveStreamerWindow2 extends JFrame
         jScrollPane2.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Inspector Robot");
+        setTitle(".");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         pan_root.setPreferredSize(new java.awt.Dimension(900, 745));
@@ -160,11 +152,10 @@ public class LiveStreamerWindow2 extends JFrame
         setBounds(0, 0, 586, 374);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void setWindowLink(LiveStreamerWindow lsw)
-    {
+    public void setWindowLink(LiveStreamerWindow lsw) {
         this.lsw = lsw;
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
     @Override
     public void windowClosing(WindowEvent e) {
@@ -197,29 +188,29 @@ public class LiveStreamerWindow2 extends JFrame
     }
     // </editor-fold>
 
-    class ImageTaker    
-    {
+    class ImageTaker {
+
         String dir_out;
-        public ImageTaker(String dir_path){  
+
+        public ImageTaker(String dir_path) {
             dir_out = dir_path;
         }
-      
+
         private void captureImage(JPanel p_in) {
-            BufferedImage im = new BufferedImage(p_in.getWidth(),p_in.getHeight(), BufferedImage.TYPE_INT_RGB);
-            
+            BufferedImage im = new BufferedImage(p_in.getWidth(), p_in.getHeight(), BufferedImage.TYPE_INT_RGB);
+
             Graphics2D g2 = im.createGraphics();
             p_in.paint(g2);
             String fname = dir_out.concat("test.jpg");
             im = im.getSubimage(10, 10, im.getWidth() - 10, im.getHeight() - 10);
             try {
                 ImageIO.write(im, "JPG", new File(fname));
-                
+
             } catch (IOException ex) {
                 Logger.getLogger(LiveStreamerWindow2.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }                 
+        }
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -233,5 +224,4 @@ public class LiveStreamerWindow2 extends JFrame
     private javax.swing.JPanel pan_center;
     private javax.swing.JPanel pan_root;
     // End of variables declaration//GEN-END:variables
-
 }

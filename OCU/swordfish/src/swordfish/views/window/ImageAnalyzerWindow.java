@@ -15,7 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
-
 /**
  *
  * @author jrob
@@ -25,20 +24,15 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
     ImagePlus im_plus = null;       // This will be the original
     ImagePlus im_plus_orig = null;  // image being viewed (potentially modified)
-    
     ImageCanvas canvas;
     boolean[] is_im_loaded = new boolean[1];
     boolean[] color_scaler = new boolean[2]; /*  0 - RGB; 1 - Gray, 8 Bit    */
 
     double[] orig_min_max = new double[2];
     String icon_path = System.getProperty("user.dir") + "/resources/";
-    
 //    String imagej_app_fpath =
 //            "/Applications/ImageJ/ImageJ64.app/Contents/MacOS/JavaApplicationStub";
-    
-    
     String image_name = icon_path + "test_images_n_template_im/hanger_test_image.jpg";
-    
     int IMG_WIDTH = 540;    // pixels
     int IMG_HEIGHT = 310;   // pixels
     boolean do_debug = true;
@@ -52,9 +46,9 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         initComponents();
 
         configureComponents();
-        
+
         this.setResizable(false);
-        
+
         // set flags
         is_im_loaded[0] = false;
         color_scaler[0] = false;
@@ -62,9 +56,10 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         set_button_states();
     }
-    
-        /**
+
+    /**
      * Creates new form ImageAnalyzerWindow with image of fname opened on panel
+     *
      * @param fname
      */
     public ImageAnalyzerWindow(String fname) {
@@ -77,18 +72,15 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         this.setResizable(false);
         // set flags
         is_im_loaded[0] = false;
-        
+
         color_scaler[0] = false;
         color_scaler[1] = false;
 
 
-        is_im_loaded[0] = load_image(image_name);    
+        is_im_loaded[0] = load_image(image_name);
         set_button_states();
-    
+
     }
-
-
-
 
     /**
      * Method added to configure the components not handled in (code -
@@ -138,6 +130,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Image Analyzer");
 
         pan_image.setPreferredSize(new java.awt.Dimension(324, 562));
 
@@ -157,7 +150,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             pan_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_imageLayout.createSequentialGroup()
                 .addComponent(lab_image)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
 
         b_save.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
@@ -208,9 +201,9 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_utilsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(b_save)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(b_load, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(b_close)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -235,19 +228,19 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         slider_brightness.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         slider_brightness.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 slider_brightnessCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
         slider_contrast.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         slider_contrast.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 slider_brightnessCaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
 
@@ -258,13 +251,18 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         l_contrast.setText("Contrast");
 
         jToggleButton3.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
-        jToggleButton3.setText("Corrosion");
+        jToggleButton3.setText("Crack");
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
+            }
+        });
 
         jToggleButton2.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jToggleButton2.setText("Rust");
 
         jToggleButton1.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
-        jToggleButton1.setText("Crack");
+        jToggleButton1.setText("Alignment");
 
         javax.swing.GroupLayout pan_toolsLayout = new javax.swing.GroupLayout(pan_tools);
         pan_tools.setLayout(pan_toolsLayout);
@@ -275,17 +273,17 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pan_toolsLayout.createSequentialGroup()
                         .addComponent(rb_rgb32)
-                        .addGap(88, 88, 88)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rb_grayscale32))
                     .addGroup(pan_toolsLayout.createSequentialGroup()
                         .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(l_contrast)
                             .addComponent(l_brightness))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(slider_brightness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(slider_brightness, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                            .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToggleButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -310,14 +308,14 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                             .addComponent(slider_brightness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pan_toolsLayout.createSequentialGroup()
                         .addComponent(jToggleButton3)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jToggleButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToggleButton1)
                     .addComponent(l_contrast)
                     .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62))
+                .addContainerGap())
         );
 
         pan_toolsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jToggleButton1, jToggleButton2, jToggleButton3});
@@ -379,11 +377,11 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
-                    .addComponent(pan_image, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pan_utils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pan_image, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -394,8 +392,8 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pan_tools, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pan_utils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pan_utils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -414,7 +412,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
             rb_grayscale32.setEnabled(true);
             rb_rgb32.setEnabled(true);
-            
+
             slider_contrast.setEnabled(true);
 
             slider_brightness.setEnabled(true);
@@ -476,7 +474,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         if (do_debug) {
             System.out.println("8 - bit RadioButton was pressed");
         }
-        
+
         im_plus = im_plus_orig.duplicate();
         IJ.run(im_plus, "32-bit", "");
 //            im_plus.hide();
@@ -560,6 +558,10 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     private void b_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_saveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_b_saveActionPerformed
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
 // </editor-fold>
 
     /**
@@ -602,10 +604,10 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         orig_min_max[0] = proc.getMin();
         orig_min_max[1] = proc.getMax();
 
-        im_plus = im_plus_orig.duplicate();         
-        lab_image.setIcon(new ImageIcon(im_plus.getImage()));            
+        im_plus = im_plus_orig.duplicate();
+        lab_image.setIcon(new ImageIcon(im_plus.getImage()));
         rb_rgb32.setSelected(true);
-        
+
 
         return true;
     }
