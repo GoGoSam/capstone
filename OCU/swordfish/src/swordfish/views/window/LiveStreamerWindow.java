@@ -172,8 +172,8 @@ public class LiveStreamerWindow extends JFrame
         cb_controller_connected = new javax.swing.JCheckBox();
         l_controller_connected = new javax.swing.JLabel();
         jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
         jSeparator3 = new javax.swing.JSeparator();
+        b_image_analyzer = new javax.swing.JButton();
         pan_center = new javax.swing.JPanel();
         p_mediaPlayer = new javax.swing.JPanel();
         pan_media_control = new javax.swing.JPanel();
@@ -354,10 +354,10 @@ public class LiveStreamerWindow extends JFrame
             }
         });
 
-        jToggleButton3.setText("Image Analyzer");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+        b_image_analyzer.setText("Image Analyzer");
+        b_image_analyzer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
+                b_image_analyzerActionPerformed(evt);
             }
         });
 
@@ -379,16 +379,9 @@ public class LiveStreamerWindow extends JFrame
                     .addComponent(jSeparator3)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pan_rightLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pan_rightLayout.createSequentialGroup()
-                                .addGroup(pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jToggleButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jToggleButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(pan_rightLayout.createSequentialGroup()
-                                .addComponent(l_controller_connected)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cb_controller_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(l_controller_connected)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cb_controller_connected, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pan_rightLayout.createSequentialGroup()
                         .addGroup(pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pan_rightLayout.createSequentialGroup()
@@ -414,8 +407,11 @@ public class LiveStreamerWindow extends JFrame
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pan_rightLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cb_sideview_on)
+                .addGap(15, 15, 15)
+                .addGroup(pan_rightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToggleButton2)
+                    .addComponent(cb_sideview_on)
+                    .addComponent(b_image_analyzer, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -472,10 +468,10 @@ public class LiveStreamerWindow extends JFrame
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cb_sideview_on)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton3)
+                .addComponent(jToggleButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(b_image_analyzer)
                 .addGap(13, 13, 13))
         );
 
@@ -626,11 +622,11 @@ public class LiveStreamerWindow extends JFrame
         pan_centerLayout.setHorizontalGroup(
             pan_centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_centerLayout.createSequentialGroup()
-                .addComponent(p_mediaPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-                .addGap(6, 6, 6))
-            .addGroup(pan_centerLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(pan_media_control, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pan_centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(p_mediaPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pan_centerLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(pan_media_control, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pan_centerLayout.setVerticalGroup(
@@ -1305,9 +1301,14 @@ public class LiveStreamerWindow extends JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_r_id1ActionPerformed
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+    private void b_image_analyzerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_image_analyzerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
+        String imagepath = "/Users/jrob/Google Drive/Capstone/PP_Reports_Posters/PRESENTATION_GRAPHICS/Robot Pictures/cracks.jpg";
+
+        ImageAnalyzerWindow iaw = new ImageAnalyzerWindow(imagepath);
+        iaw.setVisible(true);
+
+    }//GEN-LAST:event_b_image_analyzerActionPerformed
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="WindowListeners">
@@ -1429,6 +1430,24 @@ public class LiveStreamerWindow extends JFrame
     public void componentHidden(ComponentEvent e) {
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Main">
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                String imagepath = "/home/sabertooth/Desktop/test.png";
+                LiveStreamerWindow lsw = new LiveStreamerWindow();
+                lsw.setVisible(true);
+//                new ImageAnalyzerWindow(imagepath).setVisible(true);
+            }
+        });
+    }// </editor-fold>
+
     class ImageTaker {
 
         String dir_out;
@@ -1456,6 +1475,7 @@ public class LiveStreamerWindow extends JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton b_capture_moment;
     private javax.swing.JButton b_connect;
+    private javax.swing.JButton b_image_analyzer;
     private javax.swing.JButton b_logon;
     private javax.swing.JButton b_logon1;
     private javax.swing.JButton b_reset;
@@ -1493,7 +1513,6 @@ public class LiveStreamerWindow extends JFrame
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JLabel l_battery_per;
     private javax.swing.JLabel l_button_sig;
     private javax.swing.JLabel l_cam_sig;

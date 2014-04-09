@@ -10,10 +10,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
+import javafx.scene.control.ProgressBar;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import swordfish.views.dialog.LoadingWindow;
 
 /**
  *
@@ -22,6 +24,11 @@ import javax.swing.JPanel;
 public class ImageAnalyzerWindow extends javax.swing.JFrame
         implements ActionListener {
 
+    String dir_crack = "/Users/jrob/capstoneECE/capstone/OCU/swordfish/resources/image_processed/cracks/";
+    String f_im_clean = "clean.jpg", f_im_cracks = "cracks.jpg", f_im_original = "original.jpg",
+            response = "response.jpg", shadow = "shadow.jpg", thresh = "thresh.jpg";
+    int n_crack_images = 6;
+    String imagepath2 = "/Users/jrob/Google Drive/Capstone/PP_Reports_Posters/PRESENTATION_GRAPHICS/Robot Pictures/cracks(1).jpg";
     ImagePlus im_plus = null;       // This will be the original
     ImagePlus im_plus_orig = null;  // image being viewed (potentially modified)
     ImageCanvas canvas;
@@ -36,6 +43,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     int IMG_WIDTH = 540;    // pixels
     int IMG_HEIGHT = 310;   // pixels
     boolean do_debug = true;
+    ProgressBar progressbar;
 
     /**
      * Creates new form ImageAnalyzerWindow
@@ -47,8 +55,8 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         configureComponents();
 
-        this.setResizable(false);
-
+//        this.setResizable(false);
+//
         // set flags
         is_im_loaded[0] = false;
         color_scaler[0] = false;
@@ -69,7 +77,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
         image_name = fname;
         configureComponents();
-        this.setResizable(false);
+//        this.setResizable(false);
         // set flags
         is_im_loaded[0] = false;
 
@@ -117,9 +125,9 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         slider_contrast = new javax.swing.JSlider();
         l_brightness = new javax.swing.JLabel();
         l_contrast = new javax.swing.JLabel();
-        jToggleButton3 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton1 = new javax.swing.JToggleButton();
+        b_crack = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -183,11 +191,11 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         pan_utilsLayout.setHorizontalGroup(
             pan_utilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pan_utilsLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(6, 6, 6)
                 .addComponent(b_close)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_utilsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
                 .addGroup(pan_utilsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(b_save, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(b_load, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -201,9 +209,9 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_utilsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(b_save)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(9, 9, 9)
                 .addComponent(b_load, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(9, 9, 9)
                 .addComponent(b_close)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -250,19 +258,18 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         l_contrast.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         l_contrast.setText("Contrast");
 
-        jToggleButton3.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
-        jToggleButton3.setText("Crack");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
-            }
-        });
-
         jToggleButton2.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jToggleButton2.setText("Rust");
 
         jToggleButton1.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
         jToggleButton1.setText("Alignment");
+
+        b_crack.setText("Crack");
+        b_crack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_crackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pan_toolsLayout = new javax.swing.GroupLayout(pan_tools);
         pan_tools.setLayout(pan_toolsLayout);
@@ -272,53 +279,56 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pan_toolsLayout.createSequentialGroup()
-                        .addComponent(rb_rgb32)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rb_grayscale32))
-                    .addGroup(pan_toolsLayout.createSequentialGroup()
                         .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(l_contrast)
                             .addComponent(l_brightness))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(slider_brightness, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                            .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(pan_toolsLayout.createSequentialGroup()
+                        .addComponent(rb_rgb32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rb_grayscale32)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(b_crack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        pan_toolsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jToggleButton1, jToggleButton2, jToggleButton3});
+        pan_toolsLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jToggleButton1, jToggleButton2});
 
         pan_toolsLayout.setVerticalGroup(
             pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pan_toolsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pan_toolsLayout.createSequentialGroup()
+                        .addComponent(b_crack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton2))
                     .addGroup(pan_toolsLayout.createSequentialGroup()
                         .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rb_rgb32)
                             .addComponent(rb_grayscale32))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(l_brightness)
-                            .addComponent(slider_brightness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pan_toolsLayout.createSequentialGroup()
-                        .addComponent(jToggleButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jToggleButton2)))
+                        .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(slider_brightness, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(l_brightness))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton1)
-                    .addComponent(l_contrast)
-                    .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pan_toolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(slider_contrast, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(l_contrast))
                 .addContainerGap())
+            .addGroup(pan_toolsLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(jToggleButton1)
+                .addGap(6, 6, 6))
         );
 
-        pan_toolsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jToggleButton1, jToggleButton2, jToggleButton3});
+        pan_toolsLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jToggleButton1, jToggleButton2});
 
         jMenu1.setText("File");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
@@ -375,26 +385,27 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pan_utils, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(pan_image, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
+                    .addComponent(pan_image, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(pan_image, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pan_utils, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pan_tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -466,6 +477,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
 
     private void b_loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_loadActionPerformed
         // method called as "Load" triggers event
+
         is_im_loaded[0] = load_image(image_name);
         set_button_states();    }//GEN-LAST:event_b_loadActionPerformed
 
@@ -516,10 +528,10 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             if (file.isFile()) {
                 String fpath = file.getPath();
                 image_name = fpath;
-                is_im_loaded[0] = load_image(image_name);
-//                im_plus = IJ.openImage(fpath);
+                is_im_loaded[0] = load_image(imagepath2);
+                im_plus = IJ.openImage(fpath);
 
-//                im_plus.show();
+                im_plus.show();
 //                is_im_loaded[0] = im_plus != null;
                 set_button_states();
                 //This is where a real application would open the file.
@@ -529,19 +541,16 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
                 }
 
             } else {
-
                 if (do_debug) {
                     System.out.println("Open command cancelled by user.");
                 }
 
             }
-
         } else if (ret == JFileChooser.CANCEL_OPTION) {
 
             if (do_debug) {
                 System.out.print("user cancelled from 'open' dialog box");
             }
-
         } else {
             if (do_debug) {
                 System.out.print("not approved or cancelled... sweet");
@@ -559,9 +568,41 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_b_saveActionPerformed
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
+    private void b_crackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_crackActionPerformed
+        // TODO add your handling code here:progressBar = new JProgressBar();
+//        progressbar.setVisible(true);
+//        LoadingWindow lw = new LoadingWindow();
+//.setIndeterminate(true);
+//
+//        int bar = 0;
+//        is_im_loaded[0] = load_image(imagepath2);
+//    im_plus_orig = IJ.openImage(fpath);
+        //    im_plus.show();   uncomment to open image in seperate window **
+
+//        if (im_plus_orig == null) {
+        // exit (false) is image pointer is null
+//            return false;
+//        }
+        im_plus_orig = IJ.openImage(imagepath2);
+
+        setImageDefaultSize();  // set to size of panel
+
+        // Set label with ImageIcon
+        lab_image.setText(""); // initializes with value "." for GUIbuiler edits
+        lab_image.setIcon(new ImageIcon(im_plus_orig.getImage()));
+
+        ImageProcessor proc = im_plus_orig.getProcessor();
+
+        orig_min_max[0] = proc.getMin();
+        orig_min_max[1] = proc.getMax();
+
+        im_plus = im_plus_orig.duplicate();
+        lab_image.setIcon(new ImageIcon(im_plus.getImage()));
+        rb_rgb32.setSelected(true);
+
+
+//        progressbar.setValue(bar);
+    }//GEN-LAST:event_b_crackActionPerformed
 // </editor-fold>
 
     /**
@@ -585,6 +626,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
      */
     private boolean load_image(String fpath) {
 
+//        lab_image.setIcon(null);
         im_plus_orig = IJ.openImage(fpath);
         //    im_plus.show();   uncomment to open image in seperate window **
 
@@ -592,6 +634,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
             // exit (false) is image pointer is null
             return false;
         }
+
 
         setImageDefaultSize();  // set to size of panel
 
@@ -622,8 +665,10 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                String imagepath = "/home/sabertooth/Desktop/test.png";
-                ImageAnalyzerWindow iaw = new ImageAnalyzerWindow(imagepath);
+                String imagepath1 = "/Users/jrob/Google Drive/Capstone/PP_Reports_Posters/PRESENTATION_GRAPHICS/Robot Pictures/cracks(1).jpg";
+
+//                String imagepath = "/home/sabertooth/Desktop/test.png";
+                ImageAnalyzerWindow iaw = new ImageAnalyzerWindow(imagepath1);
                 iaw.setVisible(true);
 //                new ImageAnalyzerWindow(imagepath).setVisible(true);
             }
@@ -633,6 +678,7 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     private ButtonGroup bg_image_type;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_close;
+    private javax.swing.JButton b_crack;
     private javax.swing.JButton b_load;
     private javax.swing.JMenuItem b_open;
     private javax.swing.JButton b_save;
@@ -642,7 +688,6 @@ public class ImageAnalyzerWindow extends javax.swing.JFrame
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JLabel l_brightness;
     private javax.swing.JLabel l_contrast;
     private javax.swing.JLabel lab_image;
